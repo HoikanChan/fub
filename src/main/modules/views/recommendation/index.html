@@ -1,0 +1,281 @@
+<div class="main-content width1920 width1600 width1366 width1288 width1024">
+        <div class="container">
+                <div class="page-title">
+                        <h2>智能推荐</h2>
+                        <p>更懂你的律师推荐助手</p>
+                </div>
+                <div class="form-box">
+        <!--登录表单-->
+                <div class="row">
+                       
+                                <div class="page-search col-md-7 group-center">
+                                <p>您好!为了解你对法律事务的需求，我们将从为您筛选出最合适的律师，请帮助我们填写“高级检索”的内容</p>
+                               <div class="fom-div">
+                                <form id="keyword-form" class="form-horizontal" >
+                                        <div class="form-group ">
+                                                
+                                                <div class="input-group">
+                                                        <span class="input-group-addon" id="highSeach">高级检索 <span class="glyphicon glyphicon-menu-left"></span> </span>
+                                                        <input type="text" name="keyword" class="form-control" id="searchbox" placeholder="请输入搜索内容">
+                                                        <div class="input-group-addon" id="searchBtn">搜 索</div>
+                                                </div>
+                                        </div>
+                                </form>              
+         <div class="recommend-form" style="display:none;">
+                 <div class="row">
+                <form  class="form-horizontal " id="recommend-form" >
+                        <div class="col-md-6">
+                        <div class="second-title">
+                        <p>基本资料</p>
+                        </div>
+                        <div class="form-group">
+                                <label for="appellors" class="col-sm-3 control-label">原告姓名：</label>
+                                <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="appellors" id="appellors" placeholder="请输入原告人姓名">
+                                </div>
+                        </div>
+                        <div class="form-group">
+                                <label for="defendant" class="col-sm-3 control-label">被告人：</label>
+                                <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="defendant" id="defendant" placeholder="请输入被告人姓名">
+                                </div>
+                        </div>
+          
+                        <div class="form-group">
+                                <label for="trialDateBegin" class="col-sm-3 control-label">裁判时间开始：</label>
+                                <div class="col-sm-9 ">
+                                        <input id="start-date" name="trialDateBegin" placeholder="请选择裁判时间开始" class="pull-left form-control" type="text" readonly>
+                                </div>
+                        </div>
+                        <div class="form-group">
+                                <label for="trialDateEnd" class="col-sm-3 control-label">裁判时间结束：</label>
+                                <div class="col-sm-9">
+                                        <input id="end-date" name="trialDateEnd" placeholder="请选择裁判时间结束" class="pull-left form-control" type="text" readonly>
+                                </div>
+                        </div>
+
+                        <div class="form-group">
+                                <label for="introduction" class="col-sm-3 control-label"><span class="required">*</span>案情描述：</label>
+                                <div class="col-sm-9">
+                                        <textarea  class="form-control" name="introduction" placeholder="案情描述" id="introduction" rows="3"></textarea>
+                                </div>
+                        </div>
+                        <div class="second-title">
+                                <p>费用要求</p>
+                        </div>
+                        <div class="form-group">
+                                <label for="standardAmount" class="col-sm-3 control-label">标的额：</label>
+                                <div class="col-sm-9">
+                                        <select class="form-control" name="standardAmount">
+                                                <option value="0">全部</option>
+                                                <option value="1">10万元以下</option>
+                                                <option value="2">10－50万元</option>
+                                                <option value="3">50－100万元</option>
+                                                <option value="4">100－500万元</option>
+                                                <option value="5">500－1000万元</option>
+                                                <option value="6">1000－5000万元</option>
+                                                <option value="7">5000万元以上</option>
+                                </select>       
+                                </div>
+                        </div>
+                        <div class="form-group">
+                                <label for="lawyerFeeLimit" class="col-sm-3 control-label">律师费浮动：</label>
+                                <div class="col-sm-9">
+                                        <select class="form-control" name="lawyerFeeLimit">
+                                                <option value="0">全部</option>
+                                                <option value="1">可以上浮20%</option>
+                                                <option value="2">可以上浮10%</option>
+                                                <option value="3">按正常标准即可</option>
+                                                <option value="4">希望按正常标准下浮10%</option>
+                                                <option value="5">希望按正常标准下浮20%</option>
+                                        </select>       
+                                </div>
+                        </div>
+                </div>
+                <div class="col-md-6">
+                        <div class="second-title">
+                                <p>律师要求</p>
+                        </div>
+                        <div class="form-group">
+                                <label for="lawyerSex" class="col-sm-3 control-label">性别：</label>
+                                <div class="col-sm-9">
+                                        <select class="form-control" name="lawyerSex">
+                                                <option value="0">全部</option>
+                                                <option value="1">男</option>
+                                                <option value="2">女</option>
+                                        </select>       
+                                </div>
+                        </div>
+                        <div class="form-group">
+                                <label for="lawyerAge" class="col-sm-3 control-label">年龄：</label>
+                                <div class="col-sm-9">
+                                        <select class="form-control" name="lawyerAge">
+                                                <option value="0">全部</option>
+                                                <option value="1">30岁以下</option>
+                                                <option value="2">31－40岁</option>
+                                                <option value="3">41－50岁</option>
+                                                <option value="4">50岁以上</option>
+                                                <option value="5">没关系</option>
+                                        </select>       
+                                </div>
+                        </div>
+                        <div class="form-group">
+                                <label for="lawyerWorkYears" class="col-sm-3 control-label">执业年限：</label>
+                                <div class="col-sm-9">
+                                        <select class="form-control" name="lawyerWorkYears">
+                                                 <option value="0">全部</option>
+                                                <option value="1">执业三年以内</option>
+                                                <option value="2">执业三年以上五年以内</option>
+                                                <option value="3">执业五年以上八年以内</option>
+                                                <option value="4">执业八年以上</option>
+                                                <option value="5">没关系</option>
+                                        </select>       
+                                </div>
+                        </div>
+                        <div class="form-group">
+                                <label for="lawyerCaseCount" class="col-sm-3 control-label">办理类似案件数量：</label>
+                                <div class="col-sm-9">
+                                        <select class="form-control" name="lawyerCaseCount">
+                                                <option value="0">全部</option>
+                                                <option value="1">办理类似案件三件以上</option>
+                                                <option value="2">办理类似案件五件以上</option>
+                                                <option value="3">办理类似案件10件以上</option>
+                                                <option value="4">办理类似案件30件以上</option>
+                                                <option value="5">办理类似案件50件以上</option>
+                                                <option value="5">办理类似案件100件以上</option>
+                                        </select>       
+                                </div>
+                        </div>
+                        <div class="form-group">
+                                <label for="lawyerLanguage" class="col-sm-3 control-label">语言要求：</label>
+                                <div class="col-sm-9">
+                                        <select class="form-control" name="lawyerLanguage">
+                                                <option value="0">全部</option>
+                                                <option value="1">会英语沟通</option>
+                                                <option value="2">会粤语沟通</option>
+                                                <option value="3">会闽南语</option>
+                                                <option value="4">会上海话</option>
+                                                <option value="5">会江浙话</option>
+                                                <option value="6">会蒙古语</option>
+                                                <option value="7">会藏语</option>
+                                                <option value="8">会维吾尔语</option>
+                                        </select>       
+                                </div>
+                        </div>
+
+                        <div class="form-group">
+                                <label for="lawyerOther" class="col-sm-3 control-label">其他要求：</label>
+                                <div class="col-sm-9">
+                                        <textarea type="text" class="form-control" name="lawyerOther" id="lawyerOther" rows="3" ></textarea>
+                                </div>
+                        </div>
+                </div>
+                </form>
+               
+        </div>  
+        </div>
+</div>
+                                        
+                                        <div class="searchText">
+                                                <span class="serachtext">婚姻继承</span>
+                                                <span class="serachtext">侵权纠纷</span>
+                                                <span class="serachtext">交通事故</span>  
+                                                <span class="serachtext">工伤赔偿</span>
+                                                <span class="serachtext">医疗纠纷</span>
+                                                <span class="serachtext">债权债务</span>
+                                                <span class="serachtext">劳动仲裁</span>
+                                        </div>
+                                </div>
+                       
+                </div>
+                <div class="row">
+                        <div class="group-center col-md-7">
+                                <div class="form-group  col-md-6 ">
+                                        <label for="caseresours" class="col-sm-3 control-label">案由：</label>
+                                        <div class="col-sm-9">
+                                                        <select class="form-control caseresours" name="caseresours">
+                                                                        <option value="全部">全部</option>
+                                                                        <option value="刑事案件">刑事案件</option>
+                                                                        <option value="民事案件">民事案件</option>
+                                                                        <option value="行政案件">行政案件</option>
+                                                                        <option value="赔偿案件">赔偿案件</option>
+                                                                        <option value="执行案件">执行案件</option>
+                                                                </select>       
+                                <!-- <div class="reason-select">
+                                                 <div id="reasonslect" name="caseresours"><span>点击 </span>
+                                              
+                                               <div class="collapse navbar-collapse" id="navbar-menu" style="display:none;">
+
+                                                </div>   
+                                                </div>
+                                        </div> -->
+                                        </div>
+                                </div>
+                                <div class="form-group  col-md-6">
+                                                <label for="courtCityId" class="col-sm-3 control-label">地区：</label>
+                                                <div class="col-sm-9">
+                                                        <input type="area" name="courtCityId" class="form-control city_input"  id="area-select" area-id="0" value="全部" placeholder="地区">
+                                                </div>
+                                </div>
+                         </div>
+                 </div>
+               
+        </div>  
+</div> 
+</div>      
+
+<div class="search-result" style="display: none">
+        <div class="container" id="list-page">
+                <div class="row" id="search-result">
+                       
+                </div>
+                <div class="page-row clear">
+                        <div class="pager pull-right">
+                                
+                        </div>
+                </div>  
+        </div>
+</div>
+
+
+
+
+<script type="text/html" id="search-result-templete">
+        {% each list da %}
+        <div class="col-md-6 col-sm-6">
+                        <div class="result-box">
+                                <img src="dist/assets/image/contact-cion.png" class="col-md-3">
+                                <div class="col-md-9">
+                                        <p><strong>{% da.lawyerName %}</strong></p>
+                                        <p><span>账号：123456789123</span></p>
+                                </div>
+                                <div class="bot-btm">
+                                       <p>已协理过<span>{% da.caseCount %}</span>件类似案件<a href="{% host %}caseQueryLogId={% da.caseQueryLogId %}&name={% da.lawyerName%}" target="_blank">查看</a></p> 
+                                </div>
+                        </div>
+                </div>
+        {% /each %}
+</script>
+<script type="text/html" id="search-reason-templete">
+
+                <ul>
+        {% each data da %}
+               
+                <li class="oneli dropdown">
+                        <a href="javascript:;" onclick="viewcaseone({% da.id %})" id="one{% da.id %}" title="{% da.name %}">{% da.name %}</a>
+
+                </li>
+            {% /each %}            
+                </ul>
+
+</script>
+<script type="text/html" id="search-lidrop-templete">
+                {% each data da %}
+                <li class="twoli dropdown">
+                         <a href="javascript:;" onclick="viewcasetwo({% da.id %})" class="dropdown-toggle" data-toggle="dropdown" title="{% da.name %}" >{% da.name %}</a>
+                  </li>      
+       
+
+            {% /each %}            
+
+</script>

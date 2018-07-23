@@ -1,0 +1,1 @@
+$(function(){$.ajax({url:"http://www.wotudi.com.cn/portal/announcement/list?userName=test1",async:!1,type:"post",dataType:"json",success:function(t){var n="";$.each(t.announcementList,function(t,e){n+=t+1+"、"+e.title+";"}),$("#notice").html(n)}})});

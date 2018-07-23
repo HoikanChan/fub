@@ -1,0 +1,178 @@
+@charset "UTF-8";
+
+
+/*
+* @Author: anchen
+* @Date:   2018-05-28 16:39:52
+* @Last Modified by:   anchen
+* @Last Modified time: 2018-06-04 14:10:57
+*/
+@import '../../public/css/common.scss';
+#top-banner{
+ 
+    position: relative;
+
+  .lawyerinfo{
+    position: absolute;
+    z-index: 9999;
+    top:20%;
+    left:46%;
+    width:120px;
+    h4{
+      color:#fff;
+      font-weight: 600;
+      font-size: 24px;
+      text-align: center;
+    }
+  }
+}
+
+#mainContent{
+ 
+  .col-right{
+    p{
+      span{
+        color:#ed7a39;
+        padding:0 5px;
+        border:none;
+        margin:0;
+      }
+    }
+    span.active{
+      background: #ed7a39;
+      color:#fff;
+      padding:5px 10px;
+    }
+    span{
+      border:1px solid #ed7a39;
+      margin:0 15px;
+      padding:5px 10px;
+      cursor: pointer;
+      &:hover{
+        background: #ed7a39;
+        color:#fff;
+      }
+    }
+    
+    form{
+      width:80%;
+      input{
+        height: 45px;
+      }
+      #searchBtn{
+        color:#fff;
+        background: #ed7a39;
+        border-color:#ed7a39;
+        cursor: pointer;
+      }
+    }
+   
+  }
+  .case-hover{
+    display:block;
+    
+  .case-list-box {
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 25px;
+    cursor: pointer;
+   
+    .case-title{
+      p.title{
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom:5px;
+       
+      }
+      p.tag{
+        text-align: right;
+        span{
+  
+          color:#ed7a39;
+          padding-right:15px;
+        }
+      }
+      p.second-tag{
+        font-size: 14px;
+        span{
+          color:#999;
+          padding-right:20px;
+        }
+      }
+    }
+    &:hover{
+      box-shadow: 0 0 10px rgba(197, 195, 195, 0.6);
+      filter: progid:DXImageTransform.Microsoft.Shadow(color='rgba(197, 195, 195, 0.6)', Direction=135, Strength=10);/*for ie6,7,8*/ 
+      -moz-box-shadow:0px 0px 10px rgba(197, 195, 195, 0.6);/*firefox*/ 
+      -webkit-box-shadow:0px 0px 10px rgba(197, 195, 195, 0.6);/*webkit*/ 
+      color:#333;
+    }
+  }
+  
+}
+}
+.sidenav{
+  position: relative;
+  transform:inherit;
+  -webkit-transform:inherit;
+  -webkit-transition:inherit;
+  background: none;
+  transition:-webkit-transform .3s;
+  transition:transform .3s;
+  transition: transform .3s,-webkit-transform .3s;
+  .ultitle{
+    li{
+      background: #eceaea;
+      span{
+        display: block;
+        padding:15px 20px;
+        font-weight: 600;
+        color:#333;
+      
+      }
+    }
+  }
+  .sidenav-menu{
+   
+      li.oneLevel{
+        margin-bottom: 5px;
+        a{
+          color:#333;
+          background: #eceaea;
+          display: block;
+          padding:15px 20px;
+          font-weight: 600;
+          
+        }
+        span{
+          padding-left:10px;
+        }
+        .sidenav-dropdown{
+          li{
+            background: none;
+            a{
+              background: none;
+            }
+          }
+        }
+
+        ul.threelevel{
+          li{
+            padding:10px 25px;
+            p{
+              font-weight: normal;
+              cursor: pointer;
+              a{
+                padding:0;
+              }
+            }
+          }
+        }
+
+    
+    }
+   
+  }
+}
+
+

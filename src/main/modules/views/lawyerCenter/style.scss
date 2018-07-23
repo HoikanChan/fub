@@ -1,0 +1,361 @@
+/*
+* @Author: anchen
+* @Date:   2017-06-13 14:52:52
+* @Last Modified by:   anchen
+* @Last Modified time: 2017-06-22 18:04:27
+*/
+@import '../../public/css/common.scss';
+
+.banner{
+    position: initial!important;
+    .container{
+        background: #fff!important;
+        #header-logo{
+            background:url("../../assets/image/header2_logo.png") no-repeat!important;
+          }
+          .nav{
+            a{
+            &:hover{
+                color:#fff!important;
+            }
+            }
+            ul{
+                li{
+                    a{
+                        color:#fff!important;
+                    }
+                }
+            }
+        }
+      }
+  }
+  #banner{
+    background: url("../../assets/image/usercenter_banner.jpg") no-repeat;
+    width:100%;
+    height: auto;
+    background-size: 100%;
+    .banner-content {
+        text-align: center;
+        padding: 54px 0 54px 0;
+        color:#fff;
+        h1 {
+            font-size: 26px;
+            letter-spacing:2px;
+        }
+    }
+  }
+  .main-content {
+	background: #f9f9f9;
+	padding-top: 20px;
+    padding-bottom: 40px;
+    .person-info{
+        height: 115px ;
+        background: #fff;
+        ul{
+            li{
+                float: left;
+                width: 400px;
+                padding: 15px 0;
+                p{
+                    color:#999;
+                    line-height: 27px;
+                }
+            }
+            li.textCenter{   
+                #uploadimgHead{
+                    width:83px;
+                    height:70px;
+                    margin-left:70px;
+                }
+                #yanLaiIMG{
+                   background: url("../../assets/image/myhead-img.jpg") no-repeat;
+                   width:83px;
+                   height:70px; 
+                   display:block;
+                   margin-left:70px;
+                }
+            
+            p{
+                color:#333;
+                padding-top:25px;
+                strong{
+                    font-size: 16px;
+                }
+            }
+            }
+        }
+    }
+    .tab-nav {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        li{
+            float: left;
+            width: 399px;
+            background: #fff;
+            text-align: center;
+            padding:5px 0;
+            border-right: 1px solid #ddd;
+            cursor: pointer;
+            div{
+                width:120px ;
+                margin:0 auto;
+                i{
+                    display: block;
+                    width:50px;
+                    height:48px;
+                    float: left;
+                }
+               
+                span{
+                    display: block;
+                    padding-top: 15px;
+                }
+            }
+            &:hover{
+                background: #009bd5;
+                color:#fff;
+
+            }
+            
+        }
+        li.li-first.active{
+            i,i.ihover{
+                background: url("../../assets/image/mycontract-icon.png") no-repeat;
+            }
+           
+        }
+        li.li-first{
+            i{
+                background: url("../../assets/image/mycontractHover.png") no-repeat;
+            }
+            i.ihover{
+                background: url("../../assets/image/mycontract-icon.png") no-repeat;
+            }
+        }
+        li.li-second.active{
+            i, i.ihover{
+                background: url("../../assets/image/mycaseHove.png") no-repeat;
+            } 
+        }
+           
+        
+        li.li-second{
+            i{
+                background: url("../../assets/image/mycase-icon.png") no-repeat;
+            }
+            i.ihover{
+                background: url("../../assets/image/mycaseHove.png") no-repeat;
+            }
+           
+        }
+        
+        li.li-last{
+            border-right:0;
+            i{
+                background: url("../../assets/image/myservice-icon.png") no-repeat;
+            }
+            i.ihover{
+                background: url("../../assets/image/myserviceHover.png") no-repeat;
+            }
+            
+        }
+        li.li-last.active{ 
+            i{
+                background: url("../../assets/image/myserviceHover.png") no-repeat;
+            }
+          
+            
+        }
+        li.active{
+            background: #009bd5;
+            color:#fff;
+        }
+    
+    }
+    .tab-box{
+        div.tab-content-box{
+            display: none;
+        }
+
+        .sendInquery {
+            background: #fff;
+            padding: 30px 50px;
+            .form-box{
+             
+           
+            .form-title {
+                font-size: 18px;
+                font-weight: 600;
+                margin-bottom: 15px;
+            }
+            #inquery-form{
+                .label {
+                    width: 80px;
+                    padding-top: 10px;
+                }
+                input {
+                    margin-bottom: 20px;
+                    line-height: 40px;
+                    width: 730px;
+                    border-radius: 5px;
+                    border: 1px solid #d1cfcf;
+                    padding-left:5px;
+                }
+                textarea {
+                    width: 730px;
+                    height: 300px;
+                    border: 1px solid #d1cfcf;
+                    border-radius: 5px;
+                    padding:5px;
+                }
+                .error-div {
+                    height: 25px;
+                    width: 200px;
+                    float: left;
+                    padding-top: 10px;
+                    margin-left: 15px;
+                    color: #ff0000;
+                }
+            }
+            .inquery-comfirm{
+                .comfirm-btn{
+                    text-align: center;
+                
+                .sumbit-inquery{
+                    background: #009bd5;
+                    padding:8px 50px;
+                    border-radius: 5px;
+                    border: 1px solid #009bd5;
+                    color:#fff;
+                    margin-top:20px;
+                    cursor: pointer;
+                }
+              }
+            }
+        }
+        }
+
+
+
+
+    }
+    .table-title p {
+        font-size: 18px;
+        position: relative;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    
+    .table-title p span {
+        font-size: 14px;
+        background: #009bd5;
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 5px;
+        position: absolute;
+        right: 0;
+        bottom: 0px;
+        cursor: pointer;
+    }
+  table.dataTable{
+      width:1200px;
+      border-spacing: 0;
+        thead{
+            th {
+                border-bottom: 1px solid #ddd;
+                background: #eaeaea;
+                padding: 15px 0;
+                border-right: 1px solid #ddd;
+            }
+            th.noBorder{
+                border-right: 0;
+            }
+        }
+        tbody{
+                tr{
+                    background: #fff;
+                    text-align: center;
+                    td {
+                        padding: 13px;
+                        border-right: 1px solid #ddd;
+                        span{
+                            color:#009bd5;
+                            cursor: pointer;
+                            padding-left:10px;
+                            a{
+                                color:#009bd5;
+                            }
+                        }
+                    }
+                    td.noBorder{
+                        border-right: 0;
+                    }
+                    td.rdWidth{
+                        width:420px;
+                    }
+                }
+                tr.even {
+                    background: #f7f7f7;
+                    
+                } 
+            }
+         
+    }
+//分页
+.page-row{
+    padding-bottom: 16px;
+    .pager{
+        height:86px;
+        line-height: 86px;
+        span{
+            font-size: 12px;
+            color:#999999;
+        }
+        .pager-btn{
+            display: inline-block;
+            width:46px;
+            height:28px;
+            line-height: 28px;
+            text-align: center;
+            border-radius: 3px;
+            margin-left:12px;
+            font-size: 12px;
+            border:1px solid #009bd5;
+            color:#009bd5;
+            &:hover{
+                background:#009bd5;
+                color:#fff;
+            }
+        }
+        .disenable {
+            color:#999999;
+            border:1px solid #dddddd;
+            background-color: #e7e7e7;
+        }
+        #txtToPager,#txtToPagerThree,#txtToPagerOne{
+            margin-left:7px;
+            margin-right: 5px;
+            width:45px;
+            height:27px;
+            line-height: 27px;
+            border:1px solid #dddddd;
+            margin-top: -4px;
+            text-align: center;
+        }
+        #btnJump{
+            width:40px;
+            height:28px;
+            line-height: 28px;
+            border:1px solid #009bd5;
+            color:#fff;
+            background-color: #009bd5;
+            text-align: center;
+            border-radius: 3px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+    }
+}
+  }
+
+

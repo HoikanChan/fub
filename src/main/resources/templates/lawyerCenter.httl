@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<!--manifest="${host}/cache/cache.mainfest"-->
+<html lang="en">
+<head>
+<title>律师用户中心</title>
+<!--#set(String host )-->
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta content="" name="description" />
+<meta content="" name="author" />
+<link rel="stylesheet" href="${host}/public/basic-a300c0880e.css">
+<link rel="stylesheet" href="${host}/views/lawyerCenter/main-45e2631cf2.css">
+<script>
+var api = {
+    //  host:"http://120.24.181.248:8080/",
+    host: "${host}/",
+    //     host:"${host}/",
+    link: "${host}/",
+    //   link:"http://120.24.181.248:8080/",
+    assetsPath: "${host}/assets/",
+    IL: "/IL/",
+    globalImgPath: "image/"
+};
+
+function setCookie(name, value, day)
+{
+    if (day)
+    {
+        var Days = day;
+        var exp = new Date();
+        exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
+        document.cookie = ";expires=" + exp.toGMTString();
+    }
+    document.cookie = name + "=" + escape(value)
+};
+
+function getCookie(name)
+{
+    var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+    if (arr = document.cookie.match(reg)) return unescape(arr[2]);
+    else return null;
+};
+
+function delCookie(name)
+{
+    var exp = new Date();
+    exp.setTime(exp.getTime() - 1);
+    var cval = getCookie(name);
+    if (cval != null) document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
+};
+
+function createXMLHTTPRequest()
+{
+    //1.创建XMLHttpRequest对象
+    //这是XMLHttpReuquest对象无部使用中最复杂的一步
+    //需要针对IE和其他类型的浏览器建立这个对象的不同方式写不同的代码
+    var xmlHttpRequest;
+    if (window.XMLHttpRequest)
+    {
+        //针对FireFox，Mozillar，Opera，Safari，IE7，IE8
+        xmlHttpRequest = new XMLHttpRequest();
+        //针对某些特定版本的mozillar浏览器的BUG进行修正
+        if (xmlHttpRequest.overrideMimeType)
+        {
+            xmlHttpRequest.overrideMimeType("text/xml");
+        }
+    }
+    else if (window.ActiveXObject)
+    {
+        //针对IE6，IE5.5，IE5
+        //两个可以用于创建XMLHTTPRequest对象的控件名称，保存在一个js的数组中
+        //排在前面的版本较新
+        var activexName = ["MSXML2.XMLHTTP", "Microsoft.XMLHTTP"];
+        for (var i = 0; i < activexName.length; i++)
+        {
+            try
+            {
+                //取出一个控件名进行创建，如果创建成功就终止循环
+                //如果创建失败，回抛出异常，然后可以继续循环，继续尝试创建
+                xmlHttpRequest = new ActiveXObject(activexName[i]);
+                if (xmlHttpRequest)
+                {
+                    break;
+                }
+            }
+            catch (e)
+            {}
+        }
+    }
+    return xmlHttpRequest;
+}
+</script>
+<script src="${host}/public/basic-a3e3c983cd.js"></script>
+</head>
+<body>
+<!-- header -->
+<div class="header">
+<div class="header-top">
+<div class="container clear">
+<div class="login-operating pull-right">
+<a class="login-btn" href="${host}/loginPage">【登录】</a>
+<a class="register-btn" id='register-btn' href="${host}/loginPage?reg=1">【注册】</a>
+<a class="lawer-enter" id='lower-btn' href="${host}/lawerLogin">【律所入口】</a>
+</div>
+<div class="checklogin"></div>
+<div class="user-operating pull-right" style="display:none;">
+<a class="user-center" href="${host}/userCenter">【个人中心】</a>
+<a class="user-logout">【退出】</a>
+</div>
+<div class="lawer-operating" pull-right style="display:none;">
+<a class="lawer-center" href="${host}/lawerCenter">【个人中心】</a>
+<a class="user-logout">【退出】</a>
+</div>
+</div>
+</div>
+<div class="header-nav">
+<div class="container">
+<div class="header-content row">
+<div class="col-sm-3 col-md-3">
+<div class="header-logo">
+<img src="${host}/assets/image/logo.png" class="img-responsive" alt="法务宝"> </div>
+</div>
+<div class="col-sm-9 col-md-9">
+<div class="title pull-right" id="header-nav">
+<div class="pull-left nav">
+<a href="${host}" class="index-name">法务贷</a>
+</div>
+<div class="pull-left nav">
+<a href="${host}/recommendation" id="a0101" class="index-name">智能推荐</a>
+</div>
+<div class="pull-left nav">
+<a href="${host}/aboutUs" id="a0102" class="index-name" data-moduleno="1007">关于我们</a>
+</div>
+<div class="pull-left nav">
+<a href="${host}/helpCenter" id="a0103" class="index-name" data-moduleno="1008">帮助中心</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- header end -->
+<!-- container -->
+<div id="banner">
+<div class="banner-content">
+<h1>我的服务</h1>
+</div>
+</div>
+<div class="main-content">
+<div class="container">
+<div class="person-info">
+<ul class="clear"> </ul>
+</div>
+<div class="tab-content">
+<div class="tab-nav">
+<ul class="clear">
+<li class="li-first active" data-moduleid="001">
+<div>
+<i></i>
+<span>我的合同</span>
+</div>
+</li>
+<li class="li-second" data-moduleid="002">
+<div>
+<i></i>
+<span>我的案件</span>
+</div>
+</li>
+<li class="li-last" data-moduleid="003">
+<div>
+<i></i>
+<span>我的咨询</span>
+</div>
+</li>
+</ul>
+</div>
+<div class="tab-box">
+<div class="tab-content-box content-page" id="mycontract" style="display: block">
+<div class="table-title">
+<p>我的合同
+<span class="myRating" data-remodal-target="myarting-modal">我的评价</span>
+</p>
+</div>
+<div class="table-div">
+<table id="contract-table" class="dataTable table table-striped table-hover">
+<thead>
+<tr>
+<th>序号</th>
+<th>合同名称</th>
+<th>合同日期</th>
+<th>起草人</th>
+<th>客服人员</th>
+<th class="noBorder">详情</th>
+</tr>
+</thead>
+<tbody> </tbody>
+</table>
+<div class="page-row clear">
+<div class="pager pull-right"> </div>
+</div>
+</div>
+</div>
+<div class="tab-content-box content-page" id="mycase">
+<div class="table-title">
+<p>我的案例
+<span class="myRating" data-remodal-target="myarting-modal">我的评价</span>
+</p>
+</div>
+<div class="table-div">
+<table id="mycase-table" class="dataTable table table-striped table-hover">
+<thead>
+<tr>
+<th>序号</th>
+<th>案件名称</th>
+<th>开庭时间</th>
+<th>客服人员</th>
+<th>代理律师</th>
+<th class="noBorder">详情</th>
+</tr>
+</thead>
+<tbody> </tbody>
+</table>
+<div class="page-row clear">
+<div class="pager pull-right"> </div>
+</div>
+</div>
+</div>
+<div class="tab-content-box" id="myconsult">
+<div class="table-title">
+<p>我的咨询
+<span class="myRating" data-remodal-target="myarting-modal">我的评价</span>
+</p>
+</div>
+<div class="table-div">
+<table id="myconsult-table" class="dataTable table table-striped table-hover">
+<thead>
+<tr>
+<th>序号</th>
+<th>咨询标题</th>
+<th>咨询日期</th>
+<th>客服人员</th>
+<th>律师</th>
+<th class="noBorder">解决方案</th>
+</tr>
+</thead>
+<tbody> </tbody>
+</table>
+<div class="page-row clear">
+<div class="pager pull-right"> </div>
+</div>
+</div>
+<div class="sendInquery">
+<div class="form-box">
+<div class="form-title">发起咨询</div>
+<form id="inquery-form">
+<div class="row clear">
+<label class="label pull-left">咨询标题：</label>
+<input class="pull-left" type="text" name="title"></input>
+<div class="error-div"></div>
+</div>
+<div class="row clear">
+<label class="label pull-left">咨询内容：</label>
+<textarea class="pull-left" type="text" name="content"></textarea>
+<div class="error-div"></div>
+</div>
+</form>
+<div class="inquery-comfirm">
+<div class="comfirm-btn">
+<button class="sumbit-inquery">提 交</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="myarting-modal" class="remodal" data-remodal-id="myarting-modal">
+<div class="remodal-header">
+<div class="login-res-row">
+<div class="getService-title-btn">评价我们</div>
+<!-- <a class="login-btn register-title-btn pull-left" href="http://192.168.15.40:8080/cas/register?systemId=4e6f5d00-d023-11e7-a9e1-fb16d651f8ad&service=http://127.0.0.1:8090/cas">注册</a> -->
+</div>
+<button class="remodal-close closeModal" data-remodal-action="close" aria-label="Close"></button>
+</div>
+<div class="remodal-content">
+<form id="myarting-form">
+<div class="row clear">
+<label class="label pull-left">评价内容：</label>
+<textarea class="pull-left" type="text" name="content"></textarea>
+</div>
+</form>
+<div class="remodal-footer">
+<div data-remodal-action="confirm" class="remodal-confirm">提交</div>
+<div data-remodal-action="close" class="remodal-close-btn">取消</div>
+</div>
+</div>
+</div>
+<!--我的信息 -->
+<script type="text/html" id="myinfo-template">
+<li class="textCenter">
+<div class="headdiv">
+<img src="" class="fl mr20" id="uploadimgHead">
+<span id="yanLaiIMG" /></span>
+</div> {% if userInfo.realName %}
+<p class="fl">
+<strong>{% userInfo.realName %}</strong>
+</p> {% else%}
+<p class="fl">
+<strong></strong>
+</p> {% /if %} </li>
+<li>
+<p>最后登录日期：
+<span> {% if userInfo.lastLoginTime %} {% userInfo.lastLoginTime %} {% else %} {% /if %}</span>
+</p>
+<p>公司名称：
+<span>{% if userInfo.companyName %} {% userInfo.companyName %} {% else %} {% /if %}</span>
+</p>
+<p>手机号码：
+<span>{% if userInfo.mobilePhone %} {% userInfo.mobilePhone %} {% else %} {% /if %}</span>
+</p>
+</li>
+<li>
+<p>邮箱：
+<span>{% if userInfo.mail %} {% userInfo.mail %} {% else %} {% /if %}</span>
+</p>
+<p>合作年限： {% if(userInfo.cooperationYear) %}
+<span>{% userInfo.cooperationYear %}</span> {% /if %} </p>
+</li>
+</script>
+<!--我的合同 -->
+<script type="text/html" id="mycontract-template"> {% each list da i %} {% if i%2==0 %}
+<tr role="row" class="odd"> {% else %}
+<tr role="row" class="even"> {% /if %}
+<td>{% i+1 %}</td>
+<td class="rdWidth">{% da.contractName %}</td> {% if da.contractDate %}
+<td>{% da.contractDate | dateFormat 'yyyy'%}-{% da.contractDate | dateFormat 'MM'%}-{% da.contractDate | dateFormat 'dd'%}</td> {% else %}
+<td></td> {% /if %} {% if da.drafterName %}
+<td>{% da.drafterName %}</td> {% else %}
+<td>{% da.drafterSysUserName %}</td> {% /if %} {% if da.serviceSysUserName %}
+<td>{% da.serviceSysUserName %}</td> {% else %}
+<td></td> {% /if %}
+<td class="noBorder"> {% if da.detailsUrl %}
+<span class="mycontract-detail-btn">
+<a href="{% da.detailsUrl %}" target="_blank">详情</a>
+</span>
+<span class="download">
+<a href="{% da.detailsUrl %}" target="_blank" download>下载</a>
+</span> {% else %}
+<span class="nodetail-btn">
+<a href="">详情</a>
+</span>
+<span class="nodownload">
+<a href="">下载</a>
+</span> {% /if %} </td>
+</tr> {% /each %} </script>
+<!--我的案件 -->
+<script type="text/html" id="mycase-template"> {% each list da i %} {% if i%2==0 %}
+<tr role="row" class="odd"> {% else %}
+<tr role="row" class="even"> {% /if %}
+<td>{% i+1 %}</td>
+<td class="rdWidth">{% da.caseName %}</td> {% if da.caseDate %}
+<td>{% da.caseDate | dateFormat 'yyyy'%}-{% da.caseDate | dateFormat 'MM'%}-{% da.caseDate | dateFormat 'dd'%}</td> {% else %}
+<td></td> {% /if%} {% if da.serviceSysUserName %}
+<td>{% da.serviceSysUserName %}</td> {% else %}
+<td>{% da.attorneySysUserName %}</td> {% /if %} {% if da.attorneyName %}
+<td>{% da.attorneyName %}</td> {% else %}
+<td></td> {% /if %}
+<td class="noBorder"> {% if da.detailsUrl %}
+<span class="mycontract-detail-btn">
+<a href="{% da.detailsUrl %}" target="_blank">详情</a>
+</span>
+<span class="download">
+<a href="{% da.detailsUrl %}" target="_blank" download>下载</a>
+</span> {% else %}
+<span class="nodetail-btn">
+<a href="">详情</a>
+</span>
+<span class="nodownload">
+<a href="">下载</a>
+</span> {% /if %} </td>
+</tr> {% /each %} </script>
+<!--我的咨询 -->
+<script type="text/html" id="myconsult-template"> {% each list da i %} {% if i%2==0 %}
+<tr role="row" class="odd"> {% else %}
+<tr role="row" class="even"> {% /if %}
+<td>{% i+1 %}</td>
+<td class="rdWidth">{% da.title %}</td> {% if da.submitTime %}
+<td>{% da.submitTime | dateFormat 'yyyy'%}-{% da.submitTime | dateFormat 'MM'%}-{% da.submitTime | dateFormat 'dd'%}</td> {% else %}
+<td></td> {% /if%} {% if da.serviceSysUserName %}
+<td>{% da.serviceSysUserName %}</td> {% else %}
+<td></td> {% /if %} {% if da.lawyerName %}
+<td>{% da.lawyerName %}</td> {% else %}
+<td></td> {% /if %}
+<td class="noBorder"> {% if da.answer %}
+<span class="answer">待回复</span> {% /if %} {% if da.detailsUrl %}
+<span class="myconsult-detail-btn">
+<a href="{% da.detailsUrl %}" target="_blank">详情</a>
+</span> {% else %}
+<span class="nodetail-btn">
+<a href="">详情</a>
+</span>
+</td> {% /if %} </tr> {% /each %} </script>
+<!-- container end -->
+<!-- footer -->
+<div class="footer_bar">
+<div class="footer_auto">
+<div class="footer-bottom-info">
+<p>©
+<span class="year"></span> , all rights reserved 广东八鼎网络科技有限公司 沪ICP备001号-2</p>
+<p>注册地址： 广东省东莞市南城区元美路丰硕广场24楼2404号</p>
+<p>沪公网安备 00000000001号</p>
+</div>
+</div>
+</div>
+<!-- footer end -->
+<script src="${host}/views/lawyerCenter/main-e8c82fa597.js"></script>
+<!--登录注册模态框-->
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<!--manifest="${host}/cache/cache.mainfest"-->
+<html lang="en">
+<head>
+<title>法务宝-案件详情</title>
+<!--#set(String host )-->
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta content="" name="description" />
+<meta content="" name="author" />
+<link rel="stylesheet" href="${host}/public/basic-a300c0880e.css">
+<link rel="stylesheet" href="${host}/views/caseDetail/main-50d44dc4f2.css">
+<script>
+var api = {
+    //  host:"http://120.24.181.248:8080/",
+    host: "${host}/",
+    //     host:"${host}/",
+    link: "${host}/",
+    //   link:"http://120.24.181.248:8080/",
+    assetsPath: "${host}/assets/",
+    IL: "/IL/",
+    globalImgPath: "image/"
+};
+
+function setCookie(name, value, day)
+{
+    if (day)
+    {
+        var Days = day;
+        var exp = new Date();
+        exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
+        document.cookie = ";expires=" + exp.toGMTString();
+    }
+    document.cookie = name + "=" + escape(value)
+};
+
+function getCookie(name)
+{
+    var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+    if (arr = document.cookie.match(reg)) return unescape(arr[2]);
+    else return null;
+};
+
+function delCookie(name)
+{
+    var exp = new Date();
+    exp.setTime(exp.getTime() - 1);
+    var cval = getCookie(name);
+    if (cval != null) document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
+};
+
+function createXMLHTTPRequest()
+{
+    //1.创建XMLHttpRequest对象
+    //这是XMLHttpReuquest对象无部使用中最复杂的一步
+    //需要针对IE和其他类型的浏览器建立这个对象的不同方式写不同的代码
+    var xmlHttpRequest;
+    if (window.XMLHttpRequest)
+    {
+        //针对FireFox，Mozillar，Opera，Safari，IE7，IE8
+        xmlHttpRequest = new XMLHttpRequest();
+        //针对某些特定版本的mozillar浏览器的BUG进行修正
+        if (xmlHttpRequest.overrideMimeType)
+        {
+            xmlHttpRequest.overrideMimeType("text/xml");
+        }
+    }
+    else if (window.ActiveXObject)
+    {
+        //针对IE6，IE5.5，IE5
+        //两个可以用于创建XMLHTTPRequest对象的控件名称，保存在一个js的数组中
+        //排在前面的版本较新
+        var activexName = ["MSXML2.XMLHTTP", "Microsoft.XMLHTTP"];
+        for (var i = 0; i < activexName.length; i++)
+        {
+            try
+            {
+                //取出一个控件名进行创建，如果创建成功就终止循环
+                //如果创建失败，回抛出异常，然后可以继续循环，继续尝试创建
+                xmlHttpRequest = new ActiveXObject(activexName[i]);
+                if (xmlHttpRequest)
+                {
+                    break;
+                }
+            }
+            catch (e)
+            {}
+        }
+    }
+    return xmlHttpRequest;
+}
+</script>
+<script src="${host}/public/basic-a3e3c983cd.js"></script>
+</head>
+<body>
+<!-- header -->
+<div class="header">
+<div class="header-top">
+<div class="container clear">
+<div class="login-operating pull-right">
+<a class="login-btn" href="${host}/loginPage">【登录】</a>
+<a class="register-btn" id='register-btn' href="${host}/loginPage?reg=1">【注册】</a>
+<a class="lawer-enter" id='lower-btn' href="${host}/lawerLogin">【律所入口】</a>
+</div>
+<div class="checklogin"></div>
+<div class="user-operating pull-right" style="display:none;">
+<a class="user-center" href="${host}/userCenter">【个人中心】</a>
+<a class="user-logout">【退出】</a>
+</div>
+<div class="lawer-operating" pull-right style="display:none;">
+<a class="lawer-center" href="${host}/lawerCenter">【个人中心】</a>
+<a class="user-logout">【退出】</a>
+</div>
+</div>
+</div>
+<div class="header-nav">
+<div class="container">
+<div class="header-content row">
+<div class="col-sm-3 col-md-3">
+<div class="header-logo">
+<img src="${host}/assets/image/logo.png" class="img-responsive" alt="法务宝"> </div>
+</div>
+<div class="col-sm-9 col-md-9">
+<div class="title pull-right" id="header-nav">
+<div class="pull-left nav">
+<a href="${host}" class="index-name">法务贷</a>
+</div>
+<div class="pull-left nav">
+<a href="${host}/recommendation" id="a0101" class="index-name">智能推荐</a>
+</div>
+<div class="pull-left nav">
+<a href="${host}/aboutUs" id="a0102" class="index-name" data-moduleno="1007">关于我们</a>
+</div>
+<div class="pull-left nav">
+<a href="${host}/helpCenter" id="a0103" class="index-name" data-moduleno="1008">帮助中心</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- header end -->
+<!-- container -->
+<div class="index-main-content">
+<div id="top-banner">
+<img src="${host}/assets/image/lawyer-banner.png" class="img-responsive bann-img" alt="律师详情">
+<div class="lawyerinfo">
+<div class="info-box">
+<img src="${host}/assets/image/lawyer-icon.png" class="img-responsive" alt="律师头像">
+<h4></h4>
+</div>
+</div>
+</div>
+<div class="main-content-service pd50 pt50" id="mainContent">
+<div class="container">
+<div class="row">
+<div class="col-md-1 col-sm-2">
+<div class="item-left clear">
+<img src="${host}/assets/image/item-icon-left.png"> </div>
+<div class="item-list-left clear">
+<img src="${host}/assets/image/process-2.png">
+<div class="item-p">
+<p>首部</p>
+<p>事实</p>
+<p>案情结果</p>
+<p>尾部</p>
+</div>
+</div>
+</div>
+<div class="col-md-8 col-sm-7">
+<div class="content"> </div>
+</div>
+<div class="col-md-3 col-sm-3">
+<div class="item-btn">
+<img src="${host}/assets/image/item-icon.png">
+</div>
+<div class="item-list c">
+<img src="${host}/assets/image/process.png">
+<div class="item-p">
+<div class="base-info">
+<p class="case-title">基本信息</p>
+</div>
+<div class="case-ifon">
+<p class="case-title-btm">法律依据</p>
+<ul class="parentul"> </ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script type="text/html" id="case-content-templete">
+<div class="content-text"> {% data.content %} </div>
+</script>
+<!-- container end -->
+<!-- footer -->
+<div class="footer_bar">
+<div class="footer_auto">
+<div class="footer-bottom-info">
+<p>©
+<span class="year"></span> , all rights reserved 广东八鼎网络科技有限公司 沪ICP备001号-2</p>
+<p>注册地址： 广东省东莞市南城区元美路丰硕广场24楼2404号</p>
+<p>沪公网安备 00000000001号</p>
+</div>
+</div>
+</div>
+<!-- footer end -->
+<script src="${host}/views/caseDetail/main-673ba23c56.js"></script>
+<!--登录注册模态框-->
+</body>
+</html>

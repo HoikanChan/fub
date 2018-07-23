@@ -1,0 +1,308 @@
+        <div id="banner">
+                <div class="banner-content">
+                        <h1>我的服务</h1>
+                </div>
+        </div>
+        <div class="main-content">
+            <div class="container">
+                <div class="person-info">
+                        <ul class="clear">
+                                
+                        </ul>
+                </div>
+                <div class="tab-content">
+                        <div class="tab-nav">
+                                <ul class="clear">
+                                        <li class="li-first active" data-moduleid="001" ><div><i></i><span>我的合同</span></div></li>
+                                        <li class="li-second" data-moduleid="002" ><div><i></i><span>我的案件</span></div></li>
+                                        <li class="li-last" data-moduleid="003" ><div><i></i><span>我的咨询</span></div></li>
+                                </ul>
+                        </div>
+                        <div class="tab-box">
+                                <div class="tab-content-box content-page"  id="mycontract" style="display: block">
+                                        <div class="table-title">
+                                                <p>我的合同<span class="myRating" data-remodal-target="myarting-modal">我的评价</span></p>
+                                        </div>
+                                        <div class="table-div" >
+                                                <table id="contract-table" class="dataTable table table-striped table-hover">
+                                                        <thead>
+                                                                <tr>
+                                                                    <th>序号</th>
+                                                                    <th>合同名称</th>
+                                                                    <th>合同日期</th>
+                                                                    <th>起草人</th>
+                                                                    <th>客服人员</th>
+                                                                    <th class="noBorder">详情</th>
+                                                                </tr>
+                                                        </thead>
+                                                        <tbody>
+           
+                                                        </tbody>
+                                                </table>
+                                                <div class="page-row clear">
+                                                       <div class="pager pull-right">
+                                                        
+                                                       </div>
+                                                 </div>
+                                        </div>
+
+                                </div>
+                                <div class="tab-content-box content-page"  id="mycase">
+                                                <div class="table-title">
+                                                        <p>我的案例<span class="myRating" data-remodal-target="myarting-modal">我的评价</span></p>
+                                                </div>
+                                                <div class="table-div">
+                                                <table id="mycase-table" class="dataTable table table-striped table-hover">
+                                                        <thead>
+                                                                <tr>
+                                                                        <th>序号</th>
+                                                                        <th>案件名称</th>
+                                                                        <th>开庭时间</th>
+                                                                        <th>客服人员</th>
+                                                                        <th>代理律师</th>
+                                                                        <th class="noBorder">详情</th>
+                                                                </tr>
+                                                        </thead>
+                                                        <tbody>
+
+                                                        </tbody>
+                                                </table>
+                                                 <div class="page-row clear">
+                                                       <div class="pager pull-right">
+                                                        
+                                                       </div>
+                                                 </div>
+                                        </div>
+                                        
+                                </div>
+                                <div class="tab-content-box" id="myconsult">
+                                                <div class="table-title">
+                                                        <p>我的咨询<span class="myRating" data-remodal-target="myarting-modal">我的评价</span></p>
+                                                </div>
+                                               <div class="table-div">
+                                                <table id="myconsult-table" class="dataTable table table-striped table-hover">
+                                                        <thead>
+                                                                <tr>
+                                                                        <th>序号</th>
+                                                                        <th>咨询标题</th>
+                                                                        <th>咨询日期</th>
+                                                                        <th>客服人员</th>
+                                                                        <th>律师</th>
+                                                                        <th class="noBorder">解决方案</th>
+                                                                </tr>
+                                                        </thead>
+                                                        <tbody>
+
+                                                        </tbody>
+                                                </table>
+                                                 <div class="page-row clear">
+                                                       <div class="pager pull-right">
+                                                        
+                                                       </div>
+                                                 </div>
+                                        </div>
+
+                                        <div class="sendInquery">
+                                                <div class="form-box">
+                                                        <div class="form-title">发起咨询</div>
+                                                        <form id="inquery-form">
+                       
+                                                                <div class="row clear">
+                                                                        <label class="label pull-left">咨询标题：</label>
+                                                                        <input class="pull-left" type="text" name="title"></input>
+                                                                        <div class="error-div"></div>
+                                                               
+                                                                </div>
+                                                                <div class="row clear">
+                                                                        <label class="label pull-left">咨询内容：</label>
+                                                                        <textarea class="pull-left" type="text" name="content"></textarea>
+                                                                        <div class="error-div"></div>        
+                                                                </div>
+                                                              
+                                                        </form>
+                                                          <div class="inquery-comfirm">
+                                                                <div class="comfirm-btn">
+                                                                 <button class="sumbit-inquery">提 交</button>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                        
+                                </div>
+                        </div>
+                </div>
+            </div>
+        </div> 
+        {{ include '../~modal/ratingModel/main'}}
+        
+<!--我的信息 -->
+<script type="text/html" id="myinfo-template">
+        <li class="textCenter">
+            <div class="headdiv">
+                <img src="" class="fl mr20" id="uploadimgHead">
+                <span id="yanLaiIMG"/></span>
+            </div>
+            {% if userInfo.realName %}
+            <p class="fl"><strong>{%  userInfo.realName  %}</strong></p>
+            {% else%}
+            <p class="fl"><strong></strong></p>
+            {% /if %}
+        </li>
+        <li>
+            <p>最后登录日期：<span> {% if userInfo.lastLoginTime %} {%  userInfo.lastLoginTime  %} {% else %}  {% /if %}</span></p>
+            <p>公司名称：<span>{% if userInfo.companyName %} {%  userInfo.companyName  %}  {% else %}  {% /if %}</span></p>
+            <p>手机号码：<span>{% if userInfo.mobilePhone %} {%  userInfo.mobilePhone  %}  {% else %}  {% /if %}</span></p>    
+        </li>
+        <li>
+            <p>邮箱：<span>{% if userInfo.mail %} {%  userInfo.mail %} {% else %}  {% /if %}</span></p>
+          
+            <p>合作年限：
+                {% if(userInfo.cooperationYear) %}
+                <span>{%  userInfo.cooperationYear %}</span>
+                {% /if %}
+        </p>
+        </li>
+</script>  
+
+<!--我的合同 -->
+ <script type="text/html" id="mycontract-template">
+{% each list da i %}
+        {% if  i%2==0 %}
+        <tr role="row" class="odd">
+        {% else %}
+        <tr role="row" class="even">
+        {% /if %}
+       
+                <td>{% i+1 %}</td>
+                <td class="rdWidth">{% da.contractName %}</td>
+                {% if da.contractDate %}
+                <td>{% da.contractDate | dateFormat 'yyyy'%}-{% da.contractDate | dateFormat 'MM'%}-{% da.contractDate | dateFormat 'dd'%}</td>
+                {% else %}
+                <td></td>
+                {% /if %}
+                {% if da.drafterName %}
+                <td>{% da.drafterName %}</td>
+                {% else %}
+                <td>{% da.drafterSysUserName %}</td>
+                {% /if %}
+                {% if da.serviceSysUserName %}
+                <td>{% da.serviceSysUserName %}</td>
+                {% else %}
+                <td></td>
+                {% /if %}
+                
+                <td class="noBorder">
+                        {% if da.detailsUrl %}
+                        <span class="mycontract-detail-btn">
+                                        <a href="{% da.detailsUrl %}" target="_blank">详情</a>
+                                </span>
+                                <span class="download">
+                                        <a href="{% da.detailsUrl %}" target="_blank" download>下载</a>
+                                </span>
+                        
+                        {% else %}
+                        <span class="nodetail-btn">
+                                        <a href="" >详情</a>
+                                </span>
+                                <span class="nodownload">
+                                        <a href="" >下载</a>
+                                </span>
+                        
+                        {% /if %}
+                </td>
+        </tr>
+{% /each %}
+</script>
+
+<!--我的案件 -->
+<script type="text/html" id="mycase-template">
+        {% each list  da i %}
+                {% if  i%2==0 %}
+                <tr role="row" class="odd">
+                {% else %}
+                <tr role="row" class="even">
+                {% /if %}
+               
+                        <td>{% i+1 %}</td>
+                        <td class="rdWidth">{% da.caseName %}</td>
+                        {% if da.caseDate %}
+                        <td>{% da.caseDate | dateFormat 'yyyy'%}-{% da.caseDate | dateFormat 'MM'%}-{% da.caseDate | dateFormat 'dd'%}</td>
+                        {% else %}
+                        <td></td>
+                        {% /if%}
+
+                        {% if da.serviceSysUserName %}
+                        <td>{% da.serviceSysUserName %}</td>
+                        {% else %}
+                        <td>{% da.attorneySysUserName %}</td>
+                        {% /if %}
+                        {% if da.attorneyName %}
+                        <td>{% da.attorneyName %}</td>
+                        {% else %}
+                        <td></td>
+                        {% /if %}
+                        <td class="noBorder">
+                                        {% if da.detailsUrl %}
+                                        <span class="mycontract-detail-btn">
+                                                <a href="{% da.detailsUrl %}" target="_blank">详情</a>
+                                        </span>
+                                        <span class="download">
+                                                <a href="{% da.detailsUrl %}" target="_blank" download>下载</a>
+                                        </span>
+                                        {% else %}
+                                        <span class="nodetail-btn">
+                                                <a href="" >详情</a>
+                                        </span>
+                                        <span class="nodownload">
+                                                <a href="" >下载</a>
+                                        </span>
+                                        {% /if %}
+                        </td>
+                </tr>
+        {% /each %}
+</script>
+
+<!--我的咨询 -->
+<script type="text/html" id="myconsult-template">
+        {% each list  da i %}
+                {% if  i%2==0 %}
+                <tr role="row" class="odd">
+                {% else %}
+                <tr role="row" class="even">
+                {% /if %}
+               
+                        <td>{% i+1 %}</td>
+                        <td class="rdWidth">{% da.title %}</td>
+                        {% if da.submitTime %}
+                        <td>{% da.submitTime | dateFormat 'yyyy'%}-{% da.submitTime | dateFormat 'MM'%}-{% da.submitTime | dateFormat 'dd'%}</td>
+                        {% else %}
+                        <td></td>
+                        {% /if%}
+                        {% if da.serviceSysUserName %}
+                        <td>{% da.serviceSysUserName %}</td>
+                        {% else %}
+                        <td></td>
+                        {% /if %}
+                        {% if da.lawyerName %}
+                        <td>{% da.lawyerName %}</td>
+                        {% else %}
+                        <td></td>
+                        {% /if %}
+                       
+                        <td class="noBorder">
+                                {% if da.answer %}
+                                <span class="answer">待回复</span>
+                                {% /if %}
+                                {% if da.detailsUrl %}
+                        <span class="myconsult-detail-btn">
+                                <a href="{% da.detailsUrl %}" target="_blank">详情</a>
+                        </span>
+                        {% else %}
+                        <span class="nodetail-btn">
+                                <a href="">详情</a>
+                                </span>
+                        </td>
+                        {% /if %}
+                </tr>
+        {% /each %}
+</script>

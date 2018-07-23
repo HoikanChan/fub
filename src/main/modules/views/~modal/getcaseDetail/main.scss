@@ -1,0 +1,129 @@
+#getService-modal{
+        width: 750px;
+        border-radius:8px;
+        .login-res-row{
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                 .getService-title-btn{ 
+                         width: 100%;
+                         height: 44px;
+                        cursor:pointer;
+                        line-height: 44px;
+                        text-align: center;
+                        font-size: 16px;
+                        border-top-left-radius: 3px;
+                        border-top-right-radius: 3px;
+                        font-size:18px;
+                        font-weight: 600;
+                        margin-top:20px;
+                }
+        }
+        .remodal-content{
+                width: 533px;
+                margin: 0 auto;
+                margin-top:40px;
+                p{
+                   color:#9d9d9d;
+                }
+                form{
+                        padding-top: 15px;
+                        .row{
+                                min-height: 65px;
+                                .label{
+                                        width: 90px;
+                                        height: 40px;
+                                        line-height: 40px;
+                                        text-align: right;
+                                        margin-right: 20px;
+                                        span.required {
+                                                padding-right: 5px;
+                                                color: #f00;
+                                        }
+                                }
+                                input[type='text']{
+                                        width: 390px;
+                                        height: 38px;
+                                        line-height: 38px;
+                                        border:1px solid #9d9d9d;
+                                        border-radius: 5px;
+                                        text-indent: 12px;
+                                        
+                                }
+                                textarea[type='text']{
+                                        width:390px;
+                                        height:90px;
+                                        border-radius: 5px;
+                                        margin-bottom: 25px;
+                                }
+                                .error-div{
+                                        margin-left: 110px;
+                                        line-height: 22px;
+                                        color:#ff0000;
+                                        font-size: 12px;
+                                        margin-right: 20px;
+                                        label{
+                                                font-size: 12px;
+                                               
+                                        }
+                                }
+                        }
+                        .verification-code-row{
+                                input[type='text']{
+                                        width: 256px;
+                                }
+                                .btn-white{
+                                        width: 110px;
+                                        height: 38px;
+                                        line-height: 38px;
+                                        margin-left: 7px;
+                                }
+                        }
+                }
+                #getService-form{
+                         .row{
+                                &:last-child{
+                                        height: 57px;
+                                }
+                         }
+                }
+        }
+        .remodal-footer{
+                width: 433px;
+                        margin: 0 auto;
+                .remodal-confirm{
+                        margin-left: 56px;
+                        width: 170px;
+                        height: 40px;
+                        line-height: 40px;
+                        padding:0;
+                        float:left;
+                        border-radius: 5px;
+                        background: #009bd5;
+                        border:none;
+                        &:hover{
+                          background: #007dac; 
+                          color:#fff;     
+                        } 
+                }
+                .remodal-close-btn{
+                        margin-left: 30px;
+                        width: 170px;
+                        height: 40px;
+                        line-height: 40px;
+                        padding:0;
+                        float:left;
+                        text-align: center;
+                        border:1px solid #9d9d9d;
+                        border-radius: 5px;
+                        
+                        cursor: pointer; 
+                        &:hover{
+                            background: #009bd5;
+                            color:#fff;
+                            border:none;
+                        }
+                }
+        }
+}

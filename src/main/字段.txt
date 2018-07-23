@@ -1,0 +1,21 @@
+智能推荐页面：
+搜索：searchContent
+案由：caseResour
+地区：area
+原告姓名：rlaintiffName
+被告姓名：defendantName
+案发地点：locationCrime
+案发时间：timeCrime
+案情描述：description
+标的额：fee
+律师费浮动 : feeFloating
+性别 : sex
+年龄 : age
+执业年限 : lengthPractice
+办理类似案件数量 : caseNum
+语言要求 : language
+其他要求 : otherRequirement
+
+
+
+

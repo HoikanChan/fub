@@ -1,0 +1,65 @@
+@charset "UTF-8";
+
+
+/*
+* @Author: anchen
+* @Date:   2018-05-28 16:39:52
+* @Last Modified by:   anchen
+* @Last Modified time: 2018-06-04 14:10:57
+*/
+@import '../../public/css/common.scss';
+
+#banner{
+  background: url("../../assets/image/about_banner.jpg") no-repeat;
+  width:100%;
+  height: auto;
+  background-size: 100%;
+}
+
+
+.about-title-top img {
+	margin: 0 auto;
+	display: block;
+	margin-bottom: 40px;
+}
+
+/*
+* @module: module-title
+*/
+
+
+.title-btm{
+  margin-top:10px;
+}
+.title-btm p{
+  text-align:center;
+  color:#999;
+  font-size:14px;
+  line-height:25px;
+}
+.main-box{
+	text-align: left;
+  margin-bottom: 40px;
+  position: relative;
+  border: 1px solid #ddd;
+  padding:60px 30px;
+}
+.main-box img{
+  width:95%;
+  height: 200px;
+  margin: 0 auto;
+  display:block;
+  padding-bottom:15px;
+}
+.contact-text{
+  width:95%;
+  margin: 0 auto;
+  display:block;
+}
+.main-box p {
+	margin: 8px 0;
+}
+.about-content.clear p{
+  line-height: 33px;
+}
+

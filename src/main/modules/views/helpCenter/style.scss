@@ -1,0 +1,145 @@
+@charset "UTF-8";
+
+
+/*
+* @Author: anchen
+* @Date:   2018-05-28 16:39:52
+* @Last Modified by:   anchen
+* @Last Modified time: 2018-06-04 14:10:57
+*/
+@import '../../public/css/common.scss';
+.second-title{
+  p{
+    text-align: center;
+    font-weight: 600;
+    font-size: 22px;
+  }
+}
+#basic-addon2{
+  cursor: pointer;
+}
+.col-md-6.col-sm-12.margin-auto{
+  float: inherit;
+  margin:0 auto;
+  .search-div{
+    margin-bottom:5px;
+    input{
+        height: 45px;
+    }
+    .input-group-addon{
+      padding:6px 15px;
+    }
+  }
+}
+.search-list{
+  padding-top:5px;
+  text-align: left;
+  span{
+  padding:10px 20px 5px 0;
+}
+}
+.img-box{
+  margin:0 auto;
+  text-align: center;
+  p{
+    background: #f4f3f3;
+    padding:6px;
+    font-weight: 600;
+  }
+}
+#top-banner{
+  background: url("../../assets/image/help-cneter.jpg") no-repeat;
+  width:100%;
+  background-size: 100% 100%;
+  position: relative;
+}
+.banner-content {
+	text-align: center;
+	padding: 85px 0 100px 0;
+	color: #fff;
+}
+
+.banner-content h1 {
+	font-size: 36px;
+	margin: 30px 0 40px;
+}
+
+.banner-content p {
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+#accordion{
+  .panel{
+    box-shadow: inherit;
+    border:none;
+    .panel-heading{
+      background: none;
+      margin:0;
+      padding:0;
+      border-bottom:1px solid #ddd;
+      .panel-title{
+        padding:5px 0 16px 0;
+        background: url("../../assets/image/help-cion.png") no-repeat;
+        a{
+          padding-left: 40px;
+        span{
+          float: right;
+          color:#999;
+        }
+      }
+      }
+    }
+    .panel-collapse{
+      .panel-body{
+        border:none;
+        padding:15px;
+      }
+    }
+  }
+}
+//分页
+.page-row{
+  padding-bottom: 16px;
+  .pager{
+      height:86px;
+      line-height: 86px;
+      span{
+          font-size: 12px;
+          color:#999999;
+      }
+
+      .pager-btn{
+          display: inline-block;
+          width:46px;
+          height:28px;
+          line-height: 28px;
+          text-align: center;
+          border-radius: 3px;
+          margin-left:12px;
+          font-size: 12px;
+          border:1px solid #009bd5;
+          color:#009bd5;
+      }
+      .disenable {
+          color:#999999;
+          border:1px solid #dddddd;
+          background-color: #e7e7e7;
+      }
+      #txtToPager,#txtToPagerThree{
+          margin-left:7px;
+          margin-right: 5px;
+          width:45px;
+          height:27px;
+          line-height: 27px;
+          border:1px solid #dddddd;
+          margin-top: -4px;
+          text-align: center;
+      }
+      
+    
+  }
+  #newsPage{
+    line-height: 45px;
+    height: 45px;;
+  }
+}

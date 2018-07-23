@@ -1,0 +1,475 @@
+{
+  "code":"1",
+  "msg":"获取当前模块及其子模块列表信息成功",
+  "pageNo":"1",
+  "pageSize":"10",
+  "totalItems":"12",
+  "totalPages":"1",
+  "myifon":{
+     "name":"张晓云",
+     "head_img_url":"",
+     "last_login_time":"2018-6-18",
+     "company_name":"广东中科遥感科技有限公司",
+     "mail":"12345455@qq.com",
+     "phone":"1234455555",
+     "cop_years":"我们还没有正式合作，快加入我们吧"
+ },
+ "helpCenterList":[
+    {
+        "title":"Collapsible Group Item #1",
+        "description":"Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciuntyou probably haven't heard of them accusamus labore sustainable VHS."   
+    },
+    {
+        "title":"Collapsible Group Item #1",
+        "description":"Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciuntyou probably haven't heard of them accusamus labore sustainable VHS."   
+    },
+    {
+        "title":"Collapsible Group Item #1",
+        "description":"Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciuntyou probably haven't heard of them accusamus labore sustainable VHS."  
+    },
+    {
+        "title":"Collapsible Group Item #1",
+        "description":"Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciuntyou probably haven't heard of them accusamus labore sustainable VHS."  
+    },
+    {
+        "title":"Collapsible Group Item #1",
+        "description":"Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciuntyou probably haven't heard of them accusamus labore sustainable VHS." 
+    },
+    {
+        "title":"Collapsible Group Item #1",
+        "description":"Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciuntyou probably haven't heard of them accusamus labore sustainable VHS."  
+    },
+    {
+        "title":"Collapsible Group Item #1",
+        "description":"Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciuntyou probably haven't heard of them accusamus labore sustainable VHS."   
+    },
+    {
+        "title":"Collapsible Group Item #1",
+        "description":"Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciuntyou probably haven't heard of them accusamus labore sustainable VHS."   
+    },
+    {
+        "title":"Collapsible Group Item #1",
+        "description":"Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciuntyou probably haven't heard of them accusamus labore sustainable VHS."  
+    },
+    {
+        "title":"Collapsible Group Item #1",
+        "description":"Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciuntyou probably haven't heard of them accusamus labore sustainable VHS."   
+    },
+    {
+        "title":"Collapsible Group Item #1",
+        "description":"Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciuntyou probably haven't heard of them accusamus labore sustainable VHS."   
+    },
+    {
+        "title":"Collapsible Group Item #1",
+        "description":"Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciuntyou probably haven't heard of them accusamus labore sustainable VHS."   
+    },
+    {
+        "title":"Collapsible Group Item #1",
+        "description":"Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciuntyou probably haven't heard of them accusamus labore sustainable VHS."   
+    },
+    {
+        "title":"Collapsible Group Item #1",
+        "description":"Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciuntyou probably haven't heard of them accusamus labore sustainable VHS."   
+    }
+ ],
+ 
+  "mycontratList": [
+      {
+          "order_num": "1",
+          "name": "http://www.google.com",
+          "id": "123",
+          "date": "2018-6-8",
+          "edit_person": "张三",
+          "custom_service": "李四",
+          "download_url": "http://www.google.com"
+      },
+      {
+          "order_num": "2",
+          "name": "http://www.google.com",
+          "id": "123",
+          "date": "2018-6-8",
+          "edit_person": "张三",
+          "custom_service": "李四",
+          "download_url": "http://www.google.com"
+      },
+      {
+          "order_num": "3",
+          "name": "http://www.google.com",
+          "id": "123",
+          "date": "2018-6-8",
+          "edit_person": "张三",
+          "custom_service": "李四",
+          "download_url": "http://www.google.com"
+      },
+{
+          "order_num": "4",
+          "name": "http://www.google.com",
+          "id": "123",
+          "date": "2018-6-8",
+          "edit_person": "张三",
+          "custom_service": "李四",
+          "download_url": "http://www.google.com"
+      },{
+          "order_num": "5",
+          "name": "http://www.google.com",
+          "id": "123",
+          "date": "2018-6-8",
+          "edit_person": "张三",
+          "custom_service": "李四",
+          "download_url": "http://www.google.com"
+      },
+{
+          "order_num": "6",
+          "name": "http://www.google.com",
+          "id": "123",
+          "date": "2018-6-8",
+          "edit_person": "张三",
+          "custom_service": "李四",
+          "download_url": "http://www.google.com"
+      },
+{
+          "order_num": "7",
+          "name": "http://www.google.com",
+          "id": "123",
+          "date": "2018-6-8",
+          "edit_person": "张三",
+          "custom_service": "李四",
+          "download_url": "http://www.google.com"
+      },
+{
+          "order_num": "8",
+          "name": "http://www.google.com",
+          "id": "123",
+          "date": "2018-6-8",
+          "edit_person": "张三",
+          "custom_service": "李四",
+          "download_url": "http://www.google.com"
+      },
+{
+          "order_num": "9",
+          "name": "http://www.google.com",
+          "id": "123",
+          "date": "2018-6-8",
+          "edit_person": "张三",
+          "custom_service": "李四",
+          "download_url": "http://www.google.com"
+      },
+{
+          "order_num": "Google",
+          "name": "http://www.google.com",
+          "id": "123",
+          "date": "2018-6-8",
+          "edit_person": "张三",
+          "custom_service": "李四",
+          "download_url": "http://www.google.com"
+      },
+{
+          "order_num": "Google",
+          "name": "http://www.google.com",
+          "id": "123",
+          "date": "2018-6-8",
+          "edit_person": "张三",
+          "custom_service": "李四",
+          "download_url": "http://www.google.com"
+      },{
+          "order_num": "Google",
+          "name": "http://www.google.com",
+          "id": "123",
+          "date": "2018-6-8",
+          "edit_person": "张三",
+          "custom_service": "李四",
+          "download_url": "http://www.google.com"
+      }
+  ],
+  "mycaseList": [
+    {
+        "order_num": "1",
+        "name": "",
+        "id": "123",
+        "date": "2018-6-8",
+        "edit_person": "张三",
+        "custom_service": "李四",
+        "download_url": ""
+    },
+    {
+        "order_num": "2",
+        "name": "",
+        "id": "123",
+        "date": "2018-6-8",
+        "edit_person": "张三",
+        "custom_service": "李四",
+        "download_url": "http://www.google.com"
+    },
+    {
+        "order_num": "3",
+        "name": "",
+        "id": "123",
+        "date": "2018-6-8",
+        "edit_person": "张三",
+        "custom_service": "李四",
+        "download_url": "http://www.google.com"
+    },
+{
+        "order_num": "4",
+        "name": "",
+        "id": "123",
+        "date": "2018-6-8",
+        "edit_person": "张三",
+        "custom_service": "李四",
+        "download_url": "http://www.google.com"
+    },{
+        "order_num": "5",
+        "name": "",
+        "id": "123",
+        "date": "2018-6-8",
+        "edit_person": "张三",
+        "custom_service": "李四",
+        "download_url": "http://www.google.com"
+    },
+{
+        "order_num": "6",
+        "name": "http://www.google.com",
+        "id": "123",
+        "date": "2018-6-8",
+        "edit_person": "张三",
+        "custom_service": "李四",
+        "download_url": "http://www.google.com"
+    },
+{
+        "order_num": "7",
+        "name": "http://www.google.com",
+        "id": "123",
+        "date": "2018-6-8",
+        "edit_person": "张三",
+        "custom_service": "李四",
+        "download_url": "http://www.google.com"
+    },
+{
+        "order_num": "8",
+        "name": "http://www.google.com",
+        "id": "123",
+        "date": "2018-6-8",
+        "edit_person": "张三",
+        "custom_service": "李四",
+        "download_url": "http://www.google.com"
+    },
+{
+        "order_num": "9",
+        "name": "http://www.google.com",
+        "id": "123",
+        "date": "2018-6-8",
+        "edit_person": "张三",
+        "custom_service": "李四",
+        "download_url": "http://www.google.com"
+    },
+{
+        "order_num": "Google",
+        "name": "http://www.google.com",
+        "id": "123",
+        "date": "2018-6-8",
+        "edit_person": "张三",
+        "custom_service": "李四",
+        "download_url": "http://www.google.com"
+    },
+{
+        "order_num": "Google",
+        "name": "http://www.google.com",
+        "id": "123",
+        "date": "2018-6-8",
+        "edit_person": "张三",
+        "custom_service": "李四",
+        "download_url": "http://www.google.com"
+    },{
+        "order_num": "Google",
+        "name": "http://www.google.com",
+        "id": "123",
+        "date": "2018-6-8",
+        "edit_person": "张三",
+        "custom_service": "李四",
+        "download_url": "http://www.google.com"
+    }
+],
+"myserviceList": [
+  {
+      "order_num": "1",
+      "name": "http://www.google.com",
+      "id": "123",
+      "date": "2018-6-8",
+      "edit_person": "张三",
+      "custom_service": "李四",
+      "download_url": "http://www.google.com"
+  },
+  {
+      "order_num": "2",
+      "name": "http://www.google.com",
+      "id": "123",
+      "date": "2018-6-8",
+      "edit_person": "张三",
+      "custom_service": "李四",
+      "download_url": "http://www.google.com"
+  },
+  {
+      "order_num": "3",
+      "name": "http://www.google.com",
+      "id": "123",
+      "date": "2018-6-8",
+      "edit_person": "张三",
+      "custom_service": "李四",
+      "download_url": "http://www.google.com"
+  },
+{
+      "order_num": "4",
+      "name": "http://www.google.com",
+      "id": "123",
+      "date": "2018-6-8",
+      "edit_person": "张三",
+      "custom_service": "李四",
+      "download_url": "http://www.google.com"
+  },{
+      "order_num": "5",
+      "name": "http://www.google.com",
+      "id": "123",
+      "date": "2018-6-8",
+      "edit_person": "张三",
+      "custom_service": "李四",
+      "download_url": "http://www.google.com"
+  },
+{
+      "order_num": "6",
+      "name": "http://www.google.com",
+      "id": "123",
+      "date": "2018-6-8",
+      "edit_person": "张三",
+      "custom_service": "李四",
+      "download_url": "http://www.google.com"
+  },
+{
+      "order_num": "7",
+      "name": "http://www.google.com",
+      "id": "123",
+      "date": "2018-6-8",
+      "edit_person": "张三",
+      "custom_service": "李四",
+      "download_url": "http://www.google.com"
+  },
+{
+      "order_num": "8",
+      "name": "http://www.google.com",
+      "id": "123",
+      "date": "2018-6-8",
+      "edit_person": "张三",
+      "custom_service": "李四",
+      "download_url": "http://www.google.com"
+  },
+{
+      "order_num": "9",
+      "name": "http://www.google.com",
+      "id": "123",
+      "date": "2018-6-8",
+      "edit_person": "张三",
+      "custom_service": "李四",
+      "download_url": "http://www.google.com"
+  },
+{
+      "order_num": "Google",
+      "name": "http://www.google.com",
+      "id": "123",
+      "date": "2018-6-8",
+      "edit_person": "张三",
+      "custom_service": "李四",
+      "download_url": "http://www.google.com"
+  },
+{
+      "order_num": "Google",
+      "name": "http://www.google.com",
+      "id": "123",
+      "date": "2018-6-8",
+      "edit_person": "张三",
+      "custom_service": "李四",
+      "download_url": "http://www.google.com"
+  },{
+      "order_num": "Google",
+      "name": "http://www.google.com",
+      "id": "123",
+      "date": "2018-6-8",
+      "edit_person": "张三",
+      "custom_service": "李四",
+      "download_url": "http://www.google.com"
+  }
+],
+"list":[
+    {
+        "content" :"<p>2544</p>",
+        "createtime":1510542883142,
+        "new_abstract":"4534544345345343",
+        "newsid":"c250deff-55e6-4ea4-af93-ee6e092ded13",
+        "paramstring":null,
+        "sort":10,
+        "source":"7876",
+        "status":1,
+        "thumbnail":"http://test.1010earth.com:8088/hljmgmt/data/outLinkFile/hlj/image/20171206/1512530135260613490.jpg",
+        "title":"Planet卫星拍下新苹果总部建设过程的卫星影像"
+    },
+    {
+        "content" :"<p>2544</p>",
+        "createtime":1510542883142,
+        "new_abstract":"<p><span style='color: rgb(51, 51, 51); font-family: &quot;微软雅黑 Regular&quot;, 微软雅黑; font-size: 14px;'>北京时间9月13日，美国加州库比蒂诺，苹果新总部的乔布斯剧院，开始接待来自全球各地的媒体记者，参加它们的秋季新品发布会。iPhone 8，iPhone 8plus和iPhone X发布会，对苹果来说，是一个双重意义的里程碑...</span></p>",
+        "newsid":"c250deff-55e6-4ea4-af93-ee6e092ded13",
+        "paramstring":null,
+        "sort":10,
+        "source":"7876",
+        "status":1,
+        "thumbnail":"http://test.1010earth.com:8088/hljmgmt/data/outLinkFile/hlj/image/20171206/1512530135260613490.jpg",
+        "title":"Planet卫星拍下新苹果总部建设过程的卫星影像"
+    },
+    {
+        "content" :"<p>2544</p>",
+        "createtime":1510542883142,
+        "new_abstract":"<p><span style='color: rgb(51, 51, 51); font-family: &quot;微软雅黑 Regular&quot;, 微软雅黑; font-size: 14px;'>卫星遥感监测显示，10月2日的抚远地面农田、道路、植被、建筑物等清晰可见；11月25日则被积雪覆盖，变成白茫茫一片。从11月下旬以来，抚远县遭遇多次降雪...</span></p>",
+        "newsid":"c250deff-55e6-4ea4-af93-ee6e092ded13",
+        "paramstring":null,
+        "sort":10,
+        "source":"7876",
+        "status":1,
+        "thumbnail":"http://test.1010earth.com:8088/hljmgmt/data/outLinkFile/hlj/image/20171206/1512530135260613490.jpg",
+        "title":"编辑权限"
+    },
+    {
+        "content" :"<p>2544</p>",
+        "createtime":1510542883142,
+        "new_abstract":"4534544345345343",
+        "newsid":"c250deff-55e6-4ea4-af93-ee6e092ded13",
+        "paramstring":null,
+        "sort":10,
+        "source":"7876",
+        "status":1,
+        "thumbnail":"http://test.1010earth.com:8088/hljmgmt/data/outLinkFile/hlj/image/20171206/1512530135260613490.jpg",
+        "title":"编辑权限"
+    },
+    {
+        "content" :"<p>2544</p>",
+        "createtime":1510542883142,
+        "new_abstract":"4534544345345343",
+        "newsid":"c250deff-55e6-4ea4-af93-ee6e092ded13",
+        "paramstring":null,
+        "sort":10,
+        "source":"7876",
+        "status":1,
+        "thumbnail":"http://test.1010earth.com:8088/hljmgmt/data/outLinkFile/hlj/image/20171206/1512530135260613490.jpg",
+        "title":"Planet卫星拍下新苹果总部建设过程的卫星影像"
+    },
+    {
+        "content" :"<p>2544</p>",
+        "createtime":1510542883142,
+        "new_abstract":"4534544345345343",
+        "newsid":"c250deff-55e6-4ea4-af93-ee6e092ded13",
+        "paramstring":null,
+        "sort":10,
+        "source":"7876",
+        "status":1,
+        "thumbnail":"http://test.1010earth.com:8088/hljmgmt/data/outLinkFile/hlj/image/20171206/1512530135260613490.jpg",
+        "title":"中科遥感SAR新型卫星星座首发星“深圳一号”正式启动"
+    }
+]
+
+}

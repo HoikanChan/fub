@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<!--manifest="{{ $imports.globalVariable }}/cache/cache.mainfest"-->
+<html lang="en" >
+<head>
+    <title>{{title}}</title>
+    <!--#set(String host )-->
+    {{include '../../modules/public/meta'}}
+    <!-- build:css ../static/public/basic.css -->
+    {{include '../../modules/public/basicCss'}}
+    <!-- endbuild -->
+    {{include '../../modules/views/'+views+'/css'}}
+    {{include '../../modules/public/api'}}
+    <!-- build:js ../static/public/basic.js -->
+    {{include '../../modules/public/basicJs'}}
+    <!-- endbuild -->
+</head>
+<body>
+<!-- header -->
+{{include '../../modules/public/header'}}
+<!-- header end -->
+<!-- container -->
+{{include '../../modules/views/'+views+'/index'}}
+<!-- container end -->
+<!-- footer -->
+{{include '../../modules/public/footer'}}
+<!-- footer end -->
+{{include '../../modules/views/'+views+'/script'}}
+<!--登录注册模态框-->
+
+
+</body>
+</html>

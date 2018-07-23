@@ -1,0 +1,12 @@
+CACHE MANIFEST  
+#VERSION 1.0  
+# 直接缓存的文件  
+CACHE:  
+../plugins/js/Cesium-1.34/Cesium.js  
+../plugins/js/jquery-ui.js
+  
+#需要在时间在线的文件  
+NETWORK:  
+* 
+# 替代方案  
+FALLBACK: 

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<!--manifest="${host}/cache/cache.mainfest"-->
+<html lang="en">
+<head>
+<title>法务宝-律师助手</title>
+<!--#set(String host )-->
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta content="" name="description" />
+<meta content="" name="author" />
+<link rel="stylesheet" href="${host}/public/basic-a300c0880e.css">
+<link rel="stylesheet" href="${host}/views/recommendation/main-42183ff566.css">
+<script>
+var api = {
+    //  host:"http://120.24.181.248:8080/",
+    host: "${host}/",
+    //     host:"${host}/",
+    link: "${host}/",
+    //   link:"http://120.24.181.248:8080/",
+    assetsPath: "${host}/assets/",
+    IL: "/IL/",
+    globalImgPath: "image/"
+};
+
+function setCookie(name, value, day)
+{
+    if (day)
+    {
+        var Days = day;
+        var exp = new Date();
+        exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
+        document.cookie = ";expires=" + exp.toGMTString();
+    }
+    document.cookie = name + "=" + escape(value)
+};
+
+function getCookie(name)
+{
+    var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+    if (arr = document.cookie.match(reg)) return unescape(arr[2]);
+    else return null;
+};
+
+function delCookie(name)
+{
+    var exp = new Date();
+    exp.setTime(exp.getTime() - 1);
+    var cval = getCookie(name);
+    if (cval != null) document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
+};
+
+function createXMLHTTPRequest()
+{
+    //1.创建XMLHttpRequest对象
+    //这是XMLHttpReuquest对象无部使用中最复杂的一步
+    //需要针对IE和其他类型的浏览器建立这个对象的不同方式写不同的代码
+    var xmlHttpRequest;
+    if (window.XMLHttpRequest)
+    {
+        //针对FireFox，Mozillar，Opera，Safari，IE7，IE8
+        xmlHttpRequest = new XMLHttpRequest();
+        //针对某些特定版本的mozillar浏览器的BUG进行修正
+        if (xmlHttpRequest.overrideMimeType)
+        {
+            xmlHttpRequest.overrideMimeType("text/xml");
+        }
+    }
+    else if (window.ActiveXObject)
+    {
+        //针对IE6，IE5.5，IE5
+        //两个可以用于创建XMLHTTPRequest对象的控件名称，保存在一个js的数组中
+        //排在前面的版本较新
+        var activexName = ["MSXML2.XMLHTTP", "Microsoft.XMLHTTP"];
+        for (var i = 0; i < activexName.length; i++)
+        {
+            try
+            {
+                //取出一个控件名进行创建，如果创建成功就终止循环
+                //如果创建失败，回抛出异常，然后可以继续循环，继续尝试创建
+                xmlHttpRequest = new ActiveXObject(activexName[i]);
+                if (xmlHttpRequest)
+                {
+                    break;
+                }
+            }
+            catch (e)
+            {}
+        }
+    }
+    return xmlHttpRequest;
+}
+</script>
+<script src="${host}/public/basic-a3e3c983cd.js"></script>
+</head>
+<body>
+<!-- header -->
+<div class="header">
+<div class="header-top">
+<div class="container clear">
+<div class="login-operating pull-right">
+<a class="login-btn" href="${host}/loginPage">【登录】</a>
+<a class="register-btn" id='register-btn' href="${host}/loginPage?reg=1">【注册】</a>
+<a class="lawer-enter" id='lower-btn' href="${host}/lawerLogin">【律所入口】</a>
+</div>
+<div class="checklogin"></div>
+<div class="user-operating pull-right" style="display:none;">
+<a class="user-center" href="${host}/userCenter">【个人中心】</a>
+<a class="user-logout">【退出】</a>
+</div>
+<div class="lawer-operating" pull-right style="display:none;">
+<a class="lawer-center" href="${host}/lawerCenter">【个人中心】</a>
+<a class="user-logout">【退出】</a>
+</div>
+</div>
+</div>
+<div class="header-nav">
+<div class="container">
+<div class="header-content row">
+<div class="col-sm-3 col-md-3">
+<div class="header-logo">
+<img src="${host}/assets/image/logo.png" class="img-responsive" alt="法务宝"> </div>
+</div>
+<div class="col-sm-9 col-md-9">
+<div class="title pull-right" id="header-nav">
+<div class="pull-left nav">
+<a href="${host}" class="index-name">法务贷</a>
+</div>
+<div class="pull-left nav">
+<a href="${host}/recommendation" id="a0101" class="index-name">智能推荐</a>
+</div>
+<div class="pull-left nav">
+<a href="${host}/aboutUs" id="a0102" class="index-name" data-moduleno="1007">关于我们</a>
+</div>
+<div class="pull-left nav">
+<a href="${host}/helpCenter" id="a0103" class="index-name" data-moduleno="1008">帮助中心</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- header end -->
+<!-- container -->
+<div class="main-content width1920 width1600 width1366 width1288 width1024">
+<div class="container">
+<div class="page-title">
+<h2>智能推荐</h2>
+<p>更懂你的律师推荐助手</p>
+</div>
+<div class="form-box">
+<!--登录表单-->
+<div class="row">
+<div class="page-search col-md-7 group-center">
+<p>您好!为了解你对法律事务的需求，我们将从为您筛选出最合适的律师，请帮助我们填写“高级检索”的内容</p>
+<div class="fom-div">
+<form id="keyword-form" class="form-horizontal">
+<div class="form-group ">
+<div class="input-group">
+<span class="input-group-addon" id="highSeach">高级检索
+<span class="glyphicon glyphicon-menu-left"></span>
+</span>
+<input type="text" name="keyword" class="form-control" id="searchbox" placeholder="请输入搜索内容">
+<div class="input-group-addon" id="searchBtn">搜 索</div>
+</div>
+</div>
+</form>
+<div class="recommend-form" style="display:none;">
+<div class="row">
+<form class="form-horizontal " id="recommend-form">
+<div class="col-md-6">
+<div class="second-title">
+<p>基本资料</p>
+</div>
+<div class="form-group">
+<label for="appellors" class="col-sm-3 control-label">原告姓名：</label>
+<div class="col-sm-9">
+<input type="text" class="form-control" name="appellors" id="appellors" placeholder="请输入原告人姓名"> </div>
+</div>
+<div class="form-group">
+<label for="defendant" class="col-sm-3 control-label">被告人：</label>
+<div class="col-sm-9">
+<input type="text" class="form-control" name="defendant" id="defendant" placeholder="请输入被告人姓名"> </div>
+</div>
+<div class="form-group">
+<label for="trialDateBegin" class="col-sm-3 control-label">裁判时间开始：</label>
+<div class="col-sm-9 ">
+<input id="start-date" name="trialDateBegin" placeholder="请选择裁判时间开始" class="pull-left form-control" type="text" readonly> </div>
+</div>
+<div class="form-group">
+<label for="trialDateEnd" class="col-sm-3 control-label">裁判时间结束：</label>
+<div class="col-sm-9">
+<input id="end-date" name="trialDateEnd" placeholder="请选择裁判时间结束" class="pull-left form-control" type="text" readonly> </div>
+</div>
+<div class="form-group">
+<label for="introduction" class="col-sm-3 control-label">
+<span class="required">*</span>案情描述：</label>
+<div class="col-sm-9">
+<textarea class="form-control" name="introduction" placeholder="案情描述" id="introduction" rows="3"></textarea>
+</div>
+</div>
+<div class="second-title">
+<p>费用要求</p>
+</div>
+<div class="form-group">
+<label for="standardAmount" class="col-sm-3 control-label">标的额：</label>
+<div class="col-sm-9">
+<select class="form-control" name="standardAmount">
+<option value="0">全部</option>
+<option value="1">10万元以下</option>
+<option value="2">10－50万元</option>
+<option value="3">50－100万元</option>
+<option value="4">100－500万元</option>
+<option value="5">500－1000万元</option>
+<option value="6">1000－5000万元</option>
+<option value="7">5000万元以上</option>
+</select>
+</div>
+</div>
+<div class="form-group">
+<label for="lawyerFeeLimit" class="col-sm-3 control-label">律师费浮动：</label>
+<div class="col-sm-9">
+<select class="form-control" name="lawyerFeeLimit">
+<option value="0">全部</option>
+<option value="1">可以上浮20%</option>
+<option value="2">可以上浮10%</option>
+<option value="3">按正常标准即可</option>
+<option value="4">希望按正常标准下浮10%</option>
+<option value="5">希望按正常标准下浮20%</option>
+</select>
+</div>
+</div>
+</div>
+<div class="col-md-6">
+<div class="second-title">
+<p>律师要求</p>
+</div>
+<div class="form-group">
+<label for="lawyerSex" class="col-sm-3 control-label">性别：</label>
+<div class="col-sm-9">
+<select class="form-control" name="lawyerSex">
+<option value="0">全部</option>
+<option value="1">男</option>
+<option value="2">女</option>
+</select>
+</div>
+</div>
+<div class="form-group">
+<label for="lawyerAge" class="col-sm-3 control-label">年龄：</label>
+<div class="col-sm-9">
+<select class="form-control" name="lawyerAge">
+<option value="0">全部</option>
+<option value="1">30岁以下</option>
+<option value="2">31－40岁</option>
+<option value="3">41－50岁</option>
+<option value="4">50岁以上</option>
+<option value="5">没关系</option>
+</select>
+</div>
+</div>
+<div class="form-group">
+<label for="lawyerWorkYears" class="col-sm-3 control-label">执业年限：</label>
+<div class="col-sm-9">
+<select class="form-control" name="lawyerWorkYears">
+<option value="0">全部</option>
+<option value="1">执业三年以内</option>
+<option value="2">执业三年以上五年以内</option>
+<option value="3">执业五年以上八年以内</option>
+<option value="4">执业八年以上</option>
+<option value="5">没关系</option>
+</select>
+</div>
+</div>
+<div class="form-group">
+<label for="lawyerCaseCount" class="col-sm-3 control-label">办理类似案件数量：</label>
+<div class="col-sm-9">
+<select class="form-control" name="lawyerCaseCount">
+<option value="0">全部</option>
+<option value="1">办理类似案件三件以上</option>
+<option value="2">办理类似案件五件以上</option>
+<option value="3">办理类似案件10件以上</option>
+<option value="4">办理类似案件30件以上</option>
+<option value="5">办理类似案件50件以上</option>
+<option value="5">办理类似案件100件以上</option>
+</select>
+</div>
+</div>
+<div class="form-group">
+<label for="lawyerLanguage" class="col-sm-3 control-label">语言要求：</label>
+<div class="col-sm-9">
+<select class="form-control" name="lawyerLanguage">
+<option value="0">全部</option>
+<option value="1">会英语沟通</option>
+<option value="2">会粤语沟通</option>
+<option value="3">会闽南语</option>
+<option value="4">会上海话</option>
+<option value="5">会江浙话</option>
+<option value="6">会蒙古语</option>
+<option value="7">会藏语</option>
+<option value="8">会维吾尔语</option>
+</select>
+</div>
+</div>
+<div class="form-group">
+<label for="lawyerOther" class="col-sm-3 control-label">其他要求：</label>
+<div class="col-sm-9">
+<textarea type="text" class="form-control" name="lawyerOther" id="lawyerOther" rows="3"></textarea>
+</div>
+</div>
+</div>
+</form>
+</div>
+</div>
+</div>
+<div class="searchText">
+<span class="serachtext">婚姻继承</span>
+<span class="serachtext">侵权纠纷</span>
+<span class="serachtext">交通事故</span>
+<span class="serachtext">工伤赔偿</span>
+<span class="serachtext">医疗纠纷</span>
+<span class="serachtext">债权债务</span>
+<span class="serachtext">劳动仲裁</span>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="group-center col-md-7">
+<div class="form-group  col-md-6 ">
+<label for="caseresours" class="col-sm-3 control-label">案由：</label>
+<div class="col-sm-9">
+<select class="form-control caseresours" name="caseresours">
+<option value="全部">全部</option>
+<option value="刑事案件">刑事案件</option>
+<option value="民事案件">民事案件</option>
+<option value="行政案件">行政案件</option>
+<option value="赔偿案件">赔偿案件</option>
+<option value="执行案件">执行案件</option>
+</select>
+<!-- <div class="reason-select">
+                                                 <div id="reasonslect" name="caseresours"><span>点击 </span>
+                                              
+                                               <div class="collapse navbar-collapse" id="navbar-menu" style="display:none;">
+
+                                                </div>   
+                                                </div>
+                                        </div> --></div>
+</div>
+<div class="form-group  col-md-6">
+<label for="courtCityId" class="col-sm-3 control-label">地区：</label>
+<div class="col-sm-9">
+<input type="area" name="courtCityId" class="form-control city_input" id="area-select" area-id="0" value="全部" placeholder="地区"> </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="search-result" style="display: none">
+<div class="container" id="list-page">
+<div class="row" id="search-result"> </div>
+<div class="page-row clear">
+<div class="pager pull-right"> </div>
+</div>
+</div>
+</div>
+<script type="text/html" id="search-result-templete"> {% each list da %}
+<div class="col-md-6 col-sm-6">
+<div class="result-box">
+<img src="${host}/assets/image/contact-cion.png" class="col-md-3">
+<div class="col-md-9">
+<p>
+<strong>{% da.lawyerName %}</strong>
+</p>
+<p>
+<span>账号：123456789123</span>
+</p>
+</div>
+<div class="bot-btm">
+<p>已协理过
+<span>{% da.caseCount %}</span>件类似案件
+<a href="{% host %}caseQueryLogId={% da.caseQueryLogId %}&name={% da.lawyerName%}" target="_blank">查看</a>
+</p>
+</div>
+</div>
+</div> {% /each %} </script>
+<script type="text/html" id="search-reason-templete">
+<ul> {% each data da %}
+<li class="oneli dropdown">
+<a href="javascript:;" onclick="viewcaseone({% da.id %})" id="one{% da.id %}" title="{% da.name %}">{% da.name %}</a>
+</li> {% /each %} </ul>
+</script>
+<script type="text/html" id="search-lidrop-templete"> {% each data da %}
+<li class="twoli dropdown">
+<a href="javascript:;" onclick="viewcasetwo({% da.id %})" class="dropdown-toggle" data-toggle="dropdown" title="{% da.name %}">{% da.name %}</a>
+</li> {% /each %} </script>
+<!-- container end -->
+<!-- footer -->
+<div class="footer_bar">
+<div class="footer_auto">
+<div class="footer-bottom-info">
+<p>©
+<span class="year"></span> , all rights reserved 广东八鼎网络科技有限公司 沪ICP备001号-2</p>
+<p>注册地址： 广东省东莞市南城区元美路丰硕广场24楼2404号</p>
+<p>沪公网安备 00000000001号</p>
+</div>
+</div>
+</div>
+<!-- footer end -->
+<script src="${host}/views/recommendation/main-71a22d8fc1.js"></script>
+<!--登录注册模态框-->
+</body>
+</html>

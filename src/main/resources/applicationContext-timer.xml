@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd"
+	default-lazy-init="true">
+	<description>使用JDK ScheduledExecutorService的定时任务配置</description>
+	
+	<!-- 每 5秒进行一次添加队列及处理订单准备数据流程 -->
+	 <bean id="orderTimer" class="com.rsclouds.oljixi.web.timers.OrderTimer" lazy-init="false">
+		<property name="cronExpression" value="0/5 * * * * *" />
+		<property name="shutdownTimeout" value="300" />
+	</bean>
+	
+	<!-- 每 5秒进行一次添加队列及处理api申请订单api发布任务(表olhlj_user_apiinfo_relations) -->
+	<bean id="apiApplyOrderApiReleaseTaskQueueTimer" class="com.rsclouds.oljixi.web.timers.ApiApplyOrderApiReleaseTaskQueueTimer" lazy-init="false">
+		<property name="cronExpression" value="1/5 * * * * *" />
+		<property name="shutdownTimeout" value="300" />
+		<property name="poolSize" value="30" />
+	</bean>
+	<!-- 每 5秒进行一次添加队列及处理申请订单api发布任务(表olhlj_relation_delivery) -->
+	<bean id="applyOrderApiReleaseTaskQueueTimer" class="com.rsclouds.oljixi.web.timers.ApplyOrderApiReleaseTaskQueueTimer" lazy-init="false">
+		<property name="cronExpression" value="1/5 * * * * *" />
+		<property name="shutdownTimeout" value="300" />
+		<property name="poolSize" value="30" />
+	</bean>
+	<!-- 每 5秒进行一次添加队列及处理定制订单api发布任务(表olhlj_order_meta_relation) -->
+	<bean id="customizedOrderApiReleaseTaskTimer" class="com.rsclouds.oljixi.web.timers.CustomizedOrderApiReleaseTaskTimer" lazy-init="false">
+		<property name="cronExpression" value="2/5 * * * * *" />
+		<property name="shutdownTimeout" value="300" />
+		<property name="poolSize" value="30" />
+	</bean>
+	<!-- 每 5秒进行一次添加队列及处理订单总表订单api发布任务(表olhlj_order) -->
+	<bean id="modifyOrderStatusQueueTimer" class="com.rsclouds.oljixi.web.timers.ModifyOrderStatusQueueTimer" lazy-init="false">
+		<property name="cronExpression" value="2/5 * * * * *" />
+		<property name="shutdownTimeout" value="300" />
+		<property name="poolSize" value="30" />
+	</bean>
+	
+	<bean id="dealExpiredOrderQueueTimer" class="com.rsclouds.oljixi.web.timers.DealExpiredOrderQueueTimer" lazy-init="false">
+		<property name="cronExpression" value="3/5 * * * * *" />
+		<property name="shutdownTimeout" value="300" />
+	</bean>
+	<bean id="releaseMetaServiceTimer" class="com.rsclouds.oljixi.web.timers.ReleaseMetaServiceTimer" lazy-init="false">
+		<property name="cronExpression" value="3/5 * * * * *" />
+		<property name="shutdownTimeout" value="300" />
+	</bean>
+	
+</beans>

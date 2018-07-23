@@ -1,0 +1,6 @@
+#dist开发生产的文件
+dist/
+#node_modules 存放gulp的插件
+node_modules/
+#pages 打包过程中生成的页面
+/pages/

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	
+	<dubbo:application name="${dubbo.applicationname}"
+		logger="slf4j" />
+
+	<dubbo:registry protocol="zookeeper" address="${zookeeper.address}" />
+	<dubbo:protocol name="dubbo" port="${dubbo.port}" />
+	<dubbo:annotation package="com.rsclouds.oljixi.web"/>
+	
+	<dubbo:reference id="userInfoService" interface="com.rsclouds.oljixi.rpc.api.UserInfoService" />
+	<!-- 延迟到Spring初始化完成后，再暴露服务,服务调用超时设置为10秒,超时不重试 -->
+	<!--<dubbo:provider delay="-1" timeout="1000000000" retries="0" />-->
+	<!---->
+	<!--<dubbo:reference id="testServiceImpl"-->
+		<!--interface="TestService" timeout="100000" />-->
+</beans>

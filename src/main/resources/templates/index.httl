@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<!--manifest="${host}/cache/cache.mainfest"-->
+<html lang="en">
+<head>
+<title>法务宝</title>
+<!--#set(String host )-->
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta content="" name="description" />
+<meta content="" name="author" />
+<link rel="stylesheet" href="${host}/public/basic-a300c0880e.css">
+<link rel="stylesheet" href="${host}/views/index/main-debf651ed8.css">
+<script>
+var api = {
+    //  host:"http://120.24.181.248:8080/",
+    host: "${host}/",
+    //     host:"${host}/",
+    link: "${host}/",
+    //   link:"http://120.24.181.248:8080/",
+    assetsPath: "${host}/assets/",
+    IL: "/IL/",
+    globalImgPath: "image/"
+};
+
+function setCookie(name, value, day)
+{
+    if (day)
+    {
+        var Days = day;
+        var exp = new Date();
+        exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
+        document.cookie = ";expires=" + exp.toGMTString();
+    }
+    document.cookie = name + "=" + escape(value)
+};
+
+function getCookie(name)
+{
+    var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+    if (arr = document.cookie.match(reg)) return unescape(arr[2]);
+    else return null;
+};
+
+function delCookie(name)
+{
+    var exp = new Date();
+    exp.setTime(exp.getTime() - 1);
+    var cval = getCookie(name);
+    if (cval != null) document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
+};
+
+function createXMLHTTPRequest()
+{
+    //1.创建XMLHttpRequest对象
+    //这是XMLHttpReuquest对象无部使用中最复杂的一步
+    //需要针对IE和其他类型的浏览器建立这个对象的不同方式写不同的代码
+    var xmlHttpRequest;
+    if (window.XMLHttpRequest)
+    {
+        //针对FireFox，Mozillar，Opera，Safari，IE7，IE8
+        xmlHttpRequest = new XMLHttpRequest();
+        //针对某些特定版本的mozillar浏览器的BUG进行修正
+        if (xmlHttpRequest.overrideMimeType)
+        {
+            xmlHttpRequest.overrideMimeType("text/xml");
+        }
+    }
+    else if (window.ActiveXObject)
+    {
+        //针对IE6，IE5.5，IE5
+        //两个可以用于创建XMLHTTPRequest对象的控件名称，保存在一个js的数组中
+        //排在前面的版本较新
+        var activexName = ["MSXML2.XMLHTTP", "Microsoft.XMLHTTP"];
+        for (var i = 0; i < activexName.length; i++)
+        {
+            try
+            {
+                //取出一个控件名进行创建，如果创建成功就终止循环
+                //如果创建失败，回抛出异常，然后可以继续循环，继续尝试创建
+                xmlHttpRequest = new ActiveXObject(activexName[i]);
+                if (xmlHttpRequest)
+                {
+                    break;
+                }
+            }
+            catch (e)
+            {}
+        }
+    }
+    return xmlHttpRequest;
+}
+</script>
+<script src="${host}/public/basic-a3e3c983cd.js"></script>
+</head>
+<body>
+<!-- header -->
+<div class="header">
+<div class="header-top">
+<div class="container clear">
+<div class="login-operating pull-right">
+<a class="login-btn" href="${host}/loginPage">【登录】</a>
+<a class="register-btn" id='register-btn' href="${host}/loginPage?reg=1">【注册】</a>
+<a class="lawer-enter" id='lower-btn' href="${host}/lawerLogin">【律所入口】</a>
+</div>
+<div class="checklogin"></div>
+<div class="user-operating pull-right" style="display:none;">
+<a class="user-center" href="${host}/userCenter">【个人中心】</a>
+<a class="user-logout">【退出】</a>
+</div>
+<div class="lawer-operating" pull-right style="display:none;">
+<a class="lawer-center" href="${host}/lawerCenter">【个人中心】</a>
+<a class="user-logout">【退出】</a>
+</div>
+</div>
+</div>
+<div class="header-nav">
+<div class="container">
+<div class="header-content row">
+<div class="col-sm-3 col-md-3">
+<div class="header-logo">
+<img src="${host}/assets/image/logo.png" class="img-responsive" alt="法务宝"> </div>
+</div>
+<div class="col-sm-9 col-md-9">
+<div class="title pull-right" id="header-nav">
+<div class="pull-left nav">
+<a href="${host}" class="index-name">法务贷</a>
+</div>
+<div class="pull-left nav">
+<a href="${host}/recommendation" id="a0101" class="index-name">智能推荐</a>
+</div>
+<div class="pull-left nav">
+<a href="${host}/aboutUs" id="a0102" class="index-name" data-moduleno="1007">关于我们</a>
+</div>
+<div class="pull-left nav">
+<a href="${host}/helpCenter" id="a0103" class="index-name" data-moduleno="1008">帮助中心</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- header end -->
+<!-- container -->
+<div id="banner">
+<ul class="swiper-wrapper" id="banner-list">
+<li class="swiper-slide">
+<img src="${host}/assets/image/banner.png" alt="法务贷款好帮手" class="img-responsive">
+<div class="banner-content">
+<div class="apply-btn">
+<a href="javascript:;" target="_blank" class="btnstyle legaloan" onclick="infoJumpTo()">立即申请</a>
+</div>
+</div>
+</li>
+<li class="swiper-slide">
+<img src="${host}/assets/image/banner.png" alt="法务贷款好帮手" class="img-responsive">
+<div class="banner-content">
+<div class="apply-btn">
+<a href="javascript:;" target="_blank" class="btnstyle legaloan" onclick="infoJumpTo()">立即申请</a>
+</div>
+</div>
+</li>
+</ul>
+<div class="swiper-button-next"></div>
+<div class="swiper-button-prev"></div>
+</div>
+<div class="index-main-content">
+<!--our advantage -->
+<div class="our-advantage">
+<div class="container">
+<div class="main-title">
+<img src="${host}/assets/image/characteristics-tittle.png" class="img-responsive">
+<div class="title-top">
+<div class="mtdown"></div>
+<h2>法务贷四大特点</h2>
+</div>
+</div>
+<div class="mb40"></div>
+<div class="data-content">
+<div class="data-satellite clear">
+<div class="row">
+<div class="adv-box satellite-first col-md-3  col-sm-6">
+<img src="${host}/assets/image/index-featrue-icon1.png" alt="诉讼费贷款">
+<p class="ptitle">诉讼费贷款</p>
+<p>
+<span>打官司，诉讼费、律师服务费，到处都要花钱，并且难以一次性支付。法务贷能帮助您向银行申请贷款。</span>
+</p>
+</div>
+<div class="adv-box col-md-3 col-sm-6">
+<img src="${host}/assets/image/index-featrue-icon2.png " alt="平台担保">
+<p class="ptitle">平台担保</p>
+<p>
+<span>普通借贷平台，放款慢，没保障，法务贷针对法律案件诉讼贷款，与线下银行深度合作，对资金进行管理和监督，保证手续正规安全。</span>
+</p>
+</div>
+<div class="adv-box col-md-3 col-sm-6">
+<img src="${host}/assets/image/index-featrue-icon3.png" alt="手续简单快捷">
+<p class="ptitle">手续简单快捷</p>
+<p>
+<span>由平台注册的委托律师从旁协助，文件资料可由律师代办，当事人不必到处交办理手续。</span>
+</p>
+</div>
+<div class="adv-box col-md-3 col-sm-6">
+<img src="${host}/assets/image/index-featrue-icon4.png" alt="24小时全程跟进">
+<p class="ptitle">24小时全程跟进</p>
+<p class="mb0">
+<span>法务贷平台全程跟踪贷款流程，有新消息及时通知当事人，并有还贷提醒，委托律师也会进行全程监督。</span>
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="choose mt50" id="choose">
+<div class="container">
+<div class="row" id="choose-col">
+<div class="col-md-8 col-sm-8 left-box">
+<div class="main-title">
+<img src="${host}/assets/image/choose-title.png" class="img-responsive">
+<div class="title-top">
+<div class="hidden-sm hidden-xs mt40down"></div>
+<h2>为什么选择我们</h2>
+</div>
+</div>
+<div class="row">
+<div class="col-md-4 col-sm-4">
+<img src="${host}/assets/image/choose-circle01.png" class="img-responsive" alt=""> </div>
+<div class="col-md-4 col-sm-4">
+<img src="${host}/assets/image/choose-circle02.png" class="img-responsive" alt=""> </div>
+<div class="col-md-4 col-sm-4">
+<img src="${host}/assets/image/choose-circle03.png" class="img-responsive" alt=""> </div>
+</div>
+</div>
+<div class="col-md-4 col-sm-4 right-box">
+<img src="${host}/assets/image/choose-right.png" class="img-responsive"> </div>
+</div>
+</div>
+</div>
+</div>
+<!--apply process -->
+<div class="service-process mt50">
+<div class="container">
+<div class="main-content-list mb30">
+<div class="main-title">
+<img src="${host}/assets/image/process-title.png" class="img-responsive">
+<div class="title-top">
+<div class="mt40down"></div>
+<h2>申请流程</h2>
+</div>
+</div>
+<div class="mb40 hidden-sm"></div>
+<div class="mb20 visible-sm-block"></div>
+<div class="conprocess ">
+<img src="${host}/assets/image/process-icon.png" class="img-responsive" alt="法务贷申请流程"> </div>
+</div>
+</div>
+</div>
+<div class="news-center mt30">
+<div class="container">
+<div class="main-content-list">
+<div class="main-title">
+<img src="${host}/assets/image/example-title.png" class="img-responsive">
+<div class="title-top">
+<div class="mt60down"></div>
+<h2>申请样例</h2>
+</div>
+</div>
+</div>
+<div class="mb40"></div>
+<div class="apply-example mb40 width1920">
+<div class="row">
+<div class="col-sm-12 col-md-12 example">
+<img src="${host}/assets/image/example-1.jpg" alt="诉讼难处" class="img-responsive col-sm-4 col-md-2">
+<div class="text-box1 sm col-sm-8 col-md-10 ">
+<p>李某某，因交通事故要打官司，一时拿不出律师费</p>
+<i></i>
+</div>
+</div>
+<div class="mb40 col-md-12 hidden-sm hidden-xs"></div>
+<div class="mb25 col-sm-12 visible-sm-block"></div>
+<div class="col-sm-12 col-md-12 example">
+<img src="${host}/assets/image/example-2.jpg" alt="诉讼难处" class="img-responsive col-sm-4 col-md-2">
+<div class="text-box2 sm col-sm-8 col-md-10">
+<p>律师帮助当事人申请，平台。。。。。</p>
+<p>律师帮助当事人申请，平台。。。。。</p>
+<i></i>
+</div>
+</div>
+<div class="mb40  col-md-12 hidden-sm  hidden-xs"></div>
+<div class="mb25  col-sm-12 visible-sm-block"></div>
+<div class="col-sm-12 col-md-12 example">
+<img src="${host}/assets/image/example-3.jpg" alt="诉讼难处" class="img-responsive col-sm-4 col-md-2">
+<div class="text-box3 sm col-sm-8 col-md-10">
+<p>法务贷平台与客户电话沟通，帮助客户详细分析其面对的法律问题，并提供了专业的</p>
+<p>1、帮助用户申请了法务贷1000元。</p>
+<p>1、帮助用户申请了法务贷1000元。</p>
+<p>1、帮助用户申请了法务贷1000元。</p>
+<i></i>
+</div>
+</div>
+<div class="mb40 col-md-12"></div>
+<div class="mb25  col-sm-12 visible-sm-block"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- banner  -->
+<!-- <script type="text/html" id="index-banner-templete">
+    {% each list data %}
+     <img src="{% data.url%}" alt="">
+    {% /each %}
+</script> -->
+<!-- client-logo  -->
+<!-- <script type="text/html" id="client-icon-templete">
+    {% each list  data %}
+    <li class="swiper-slide"><img src="{% data.trademarkUrl%}" alt=""></li>
+    {% /each %}
+</script> -->
+<!-- client-say  -->
+<!-- <script type="text/html" id="client-say-templete">
+    {% each list  data %}
+<div class="text-box swiper-slide">
+    {% if data.userHeadshotUrl %}
+        <img src="{% data.userHeadshotUrl%}">
+    {% else %}
+    <img src="${host}/assets/image/myhead-img.jpg">
+    {% /if %}
+    <p class="client-name">{% data.userMobilePhone %}</p>
+    <p>{% data.content %}</p>
+  </div>
+  {% /each %}
+</script> -->
+<!-- news  -->
+<!-- container end -->
+<!-- footer -->
+<div class="footer_bar">
+<div class="footer_auto">
+<div class="footer-bottom-info">
+<p>©
+<span class="year"></span> , all rights reserved 广东八鼎网络科技有限公司 沪ICP备001号-2</p>
+<p>注册地址： 广东省东莞市南城区元美路丰硕广场24楼2404号</p>
+<p>沪公网安备 00000000001号</p>
+</div>
+</div>
+</div>
+<!-- footer end -->
+<script src="${host}/views/index/main-e959d90290.js"></script>
+<!--登录注册模态框-->
+</body>
+</html>

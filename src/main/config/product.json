@@ -1,0 +1,5 @@
+{
+        "globalVariable":"${host}",
+         "globalTitle":"${title}",
+         "userCenterLink":"${userCenterLink}"
+}

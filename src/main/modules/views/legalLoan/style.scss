@@ -1,0 +1,75 @@
+@charset "UTF-8";
+
+
+/*
+* @Author: anchen
+* @Date:   2018-05-28 16:39:52
+* @Last Modified by:   anchen
+* @Last Modified time: 2018-06-04 14:10:57
+*/
+@import '../../public/css/common.scss';
+
+.apply-title{
+  text-align: center;
+ p{
+  font-size: 20px;
+ }
+}
+.form-horizontal.col-sm-9{
+  float: inherit;
+  margin: 0 auto;
+.form-group{
+  margin-bottom: 30px;
+    .radio-inline{
+      padding: 5px 40px 5px 55px;
+      margin-right: 20px;
+      font-size: 14px;
+      background: #fff;
+      border:1px solid #666;
+      color:#666;
+      border-radius:3px;
+      &:hover{
+        background: #f08f5a;
+        border:1px solid #f08f5a;
+        color:#fff;
+        input[type=radio]{
+          content: url("../../assets/image/check_click.png");
+      }
+      }
+    }
+    .radio-inline.checked{
+      background: #f08f5a;
+      color: #fff;
+      border:1px solid #f08f5a;
+      &:hover{
+        background: #f08f5a;
+        border:1px solid #f08f5a;
+        color:#fff;
+        input[type=radio]{
+          content: url("../../assets/image/check_click.png");
+      }
+
+
+      }
+    }
+    input[type=radio]{
+        content: url("../../assets/image/check.png");
+          -webkit-appearance: none;
+          appearance: none;
+          margin-left:-30px;
+          margin-top:2px;
+    }
+  
+    input[type=radio]:checked {
+        content: url("../../assets/image/check_click.png");
+    }
+    .lawyerdiv{
+      margin-top: -24px;
+      input{
+          border:none;
+          margin-top: -24px;
+       }
+      }
+    }
+
+}

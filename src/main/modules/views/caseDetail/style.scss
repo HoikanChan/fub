@@ -1,0 +1,107 @@
+@charset "UTF-8";
+
+
+/*
+* @Author: anchen
+* @Date:   2018-05-28 16:39:52
+* @Last Modified by:   anchen
+* @Last Modified time: 2018-06-04 14:10:57
+*/
+@import '../../public/css/common.scss';
+#top-banner{
+ 
+    position: relative;
+
+  .lawyerinfo{
+    position: absolute;
+    z-index: 9999;
+    top:20%;
+    left:46%;
+    width:120px;
+    h4{
+      color:#fff;
+      font-weight: 600;
+      font-size: 24px;
+      text-align: center;
+    }
+  }
+}
+#mainContent{
+  .col-md-1.col-sm-2{
+    padding:0;
+  }
+  .content {
+    border: 1px solid #ddd;
+    padding: 15px;
+}
+  .item-list{
+    img{
+      float: left;
+    }
+    .item-p{
+      float:left;
+      max-width: 230px;
+      p.case-title{
+        font-size: 18px;
+        font-weight: 600;
+        padding-left:10px;
+        margin-bottom:10px;
+        margin-top:15px;
+      }
+      p.case-title-btm{
+        font-size: 18px;
+        font-weight: 600;
+        padding-left:10px;
+        margin-bottom:10px;
+        margin-top:30px;
+      }
+      ul.parentul{
+        li{
+          margin-bottom: 10px;
+          margin-top: 10px;
+          ul{
+           li{
+            padding-left:20px;
+           }
+          }
+        }
+      }
+      p{
+        padding-left: 20px;
+        line-height: 25px;
+      }
+    }
+  }
+  .item-left{
+    img{
+     float: right;
+  }
+}
+  .item-list-left{
+   img{
+    float: right;
+   }
+    .item-p{
+      float:right;
+      padding-top:35px;
+      max-width:80px;
+     
+      p.case-title-btm{
+        font-size: 18px;
+        font-weight: 600;
+        padding-left:10px;
+        margin-bottom:15px;
+      }
+      p{
+   
+        line-height: 18px;
+        text-align: right;
+        padding-right:5px;
+        cursor: pointer;
+
+      }
+    }
+  }
+}
+
+

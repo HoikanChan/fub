@@ -1,0 +1,182 @@
+@import '../../public/css/common.scss';
+
+.footer_bar{
+        background: #fff!important;
+       .footer_auto{
+               padding-top:0!important;    
+                .footer-info{
+                        display: none!important;
+                }
+                .footer-bottom-info{
+                        background: #fff!important;
+                        border:none!important;
+                        padding-top:0!important;
+                        margin-top:20px!important;
+                p{
+                        color:#333!important;
+                }      
+                }
+        }
+}
+.login-bg{
+        background: url("../../assets/image/login-bg.jpg") no-repeat center center!important;
+        background-size:cover;
+        background-attachment: fixed;
+        top:0!important;
+        left:0!important;
+        bottom:0!important;
+        right: 0!important;
+
+#login-modal-box{
+  position: absolute;
+  margin: 0 auto;
+  background: #fff;
+  padding-bottom:30px;
+  left:510px;
+  top:200px;
+  border-radius: 5px;
+  .remodal-header {
+	position: relative;
+	height: 50px;
+
+  .login-res-row{
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+           .login-title-btn,.register-title-btn{
+          
+                   height: 44px;
+                  cursor:pointer;
+                  line-height: 44px;
+                  text-align: center;
+                  font-size: 16px;
+                  background-color: #eeeeee;
+                  &:hover{
+                          background-color: #e1e1e1;
+                  }
+          }
+           .login-title-btn{
+                   border-top-left-radius: 3px;
+           }
+           .register-title-btn{
+                   border-top-right-radius: 3px;
+           }
+          .current{
+                  background-color: #fff;
+          }
+  }
+}
+  .remodal-content{
+         
+          margin: 0 auto;
+          #login-form{
+                .form-group{
+                        margin-bottom: 20px;
+                        .forgetPassword{
+                                text-align: right;
+                                a{
+                                   color:#ed7a39;
+                                }
+                        }
+                        
+                }
+                .noaccout.form-group{
+                        margin-bottom:0;
+                        text-align: right;
+                        cursor: pointer;
+                        p{
+                            color:#ed7a39;
+                        }
+                }
+         }
+          form.form-horizontal{
+                  padding-top: 28px;
+                  .form-group{
+                        margin-right:0;
+                        margin-left:0;
+                        margin-bottom:32px;
+                          .label{
+                                 
+                                  height: 40px;
+                                  line-height: 40px;
+                          }
+                          input[type='text'],input[type='password']{
+                                
+                                  height: 38px;
+                                  line-height: 38px;
+                                  border:1px solid #cccccc;
+                                  border-radius: 2px;
+                                  text-indent: 12px;
+                          }
+                          .validateCode-btn.col-sm-6.col-md-6{
+                                  width:47%;
+                                  margin-left:2%;
+                          }
+                          .error-div{
+                                  line-height: 22px;
+                                  color:#ff0000;
+                                  font-size: 12px;
+                                  label{
+                                          font-size: 12px;
+                                          margin-bottom: 0;
+                                  }
+                          }
+                          .input-group-addon{
+                                  border-left:none;
+                                  .glyphicon-eye-open{
+                                          color:#ed7a39;
+                                  }
+                          }
+                  }
+                  .verification-code-row{
+                         
+                          .btn-white{
+                                
+                                  height: 38px;
+                                  line-height: 38px;
+                                  border:1px solid #ed7a39;
+                                  color:#ed7a39;
+                                  &:hover{
+                                        background:#ed7a39;
+                                        color:#fff; 
+                                  }
+                          }
+                          .registerCode-btn{
+                                  img{
+                                          width:112px;
+                                          height: 40px;
+                                          margin-left:7px;
+                                  }
+                          }
+                  }
+          }
+         
+          #registered-form{
+                  padding-top: 28px;
+                  display: none;
+                  .stopBtn{
+                          cursor: default;
+                  }
+          }
+  }
+  .remodal-footer{
+                 
+          .remodal-confirm{
+                  height: 40px;
+                  line-height: 40px;
+                  padding:0;
+                  float:left;
+                  background: #ed7a39;
+                  border:1px solid #ed7a39;
+         &:hover{
+                 background: none;
+                 color:#ed7a39;
+         }
+          }
+          .col-md-offset-4{
+                  margin-left:29.5%;
+          }
+  }
+}
+}

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<!--manifest="${host}/cache/cache.mainfest"-->
+<html lang="en">
+<head>
+<title>劳资管理服务</title>
+<!--#set(String host )-->
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta content="" name="description" />
+<meta content="" name="author" />
+<link rel="stylesheet" href="${host}/public/basic-a300c0880e.css">
+<link rel="stylesheet" href="${host}/views/lobarCapital/main-bc10bd72d0.css">
+<script>
+var api = {
+    //  host:"http://120.24.181.248:8080/",
+    host: "${host}/",
+    //     host:"${host}/",
+    link: "${host}/",
+    //   link:"http://120.24.181.248:8080/",
+    assetsPath: "${host}/assets/",
+    IL: "/IL/",
+    globalImgPath: "image/"
+};
+
+function setCookie(name, value, day)
+{
+    if (day)
+    {
+        var Days = day;
+        var exp = new Date();
+        exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
+        document.cookie = ";expires=" + exp.toGMTString();
+    }
+    document.cookie = name + "=" + escape(value)
+};
+
+function getCookie(name)
+{
+    var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+    if (arr = document.cookie.match(reg)) return unescape(arr[2]);
+    else return null;
+};
+
+function delCookie(name)
+{
+    var exp = new Date();
+    exp.setTime(exp.getTime() - 1);
+    var cval = getCookie(name);
+    if (cval != null) document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
+};
+
+function createXMLHTTPRequest()
+{
+    //1.创建XMLHttpRequest对象
+    //这是XMLHttpReuquest对象无部使用中最复杂的一步
+    //需要针对IE和其他类型的浏览器建立这个对象的不同方式写不同的代码
+    var xmlHttpRequest;
+    if (window.XMLHttpRequest)
+    {
+        //针对FireFox，Mozillar，Opera，Safari，IE7，IE8
+        xmlHttpRequest = new XMLHttpRequest();
+        //针对某些特定版本的mozillar浏览器的BUG进行修正
+        if (xmlHttpRequest.overrideMimeType)
+        {
+            xmlHttpRequest.overrideMimeType("text/xml");
+        }
+    }
+    else if (window.ActiveXObject)
+    {
+        //针对IE6，IE5.5，IE5
+        //两个可以用于创建XMLHTTPRequest对象的控件名称，保存在一个js的数组中
+        //排在前面的版本较新
+        var activexName = ["MSXML2.XMLHTTP", "Microsoft.XMLHTTP"];
+        for (var i = 0; i < activexName.length; i++)
+        {
+            try
+            {
+                //取出一个控件名进行创建，如果创建成功就终止循环
+                //如果创建失败，回抛出异常，然后可以继续循环，继续尝试创建
+                xmlHttpRequest = new ActiveXObject(activexName[i]);
+                if (xmlHttpRequest)
+                {
+                    break;
+                }
+            }
+            catch (e)
+            {}
+        }
+    }
+    return xmlHttpRequest;
+}
+</script>
+<script src="${host}/public/basic-a3e3c983cd.js"></script>
+</head>
+<body>
+<!-- header -->
+<div class="header">
+<div class="header-top">
+<div class="container clear">
+<div class="login-operating pull-right">
+<a class="login-btn" href="${host}/loginPage">【登录】</a>
+<a class="register-btn" id='register-btn' href="${host}/loginPage?reg=1">【注册】</a>
+<a class="lawer-enter" id='lower-btn' href="${host}/lawerLogin">【律所入口】</a>
+</div>
+<div class="checklogin"></div>
+<div class="user-operating pull-right" style="display:none;">
+<a class="user-center" href="${host}/userCenter">【个人中心】</a>
+<a class="user-logout">【退出】</a>
+</div>
+<div class="lawer-operating" pull-right style="display:none;">
+<a class="lawer-center" href="${host}/lawerCenter">【个人中心】</a>
+<a class="user-logout">【退出】</a>
+</div>
+</div>
+</div>
+<div class="header-nav">
+<div class="container">
+<div class="header-content row">
+<div class="col-sm-3 col-md-3">
+<div class="header-logo">
+<img src="${host}/assets/image/logo.png" class="img-responsive" alt="法务宝"> </div>
+</div>
+<div class="col-sm-9 col-md-9">
+<div class="title pull-right" id="header-nav">
+<div class="pull-left nav">
+<a href="${host}" id="a" class="index-name" data-moduleno="1001">首页</a>
+</div>
+<div class="pull-left nav">
+<a href="javascript:void(0);" class="index-name legaloan" onclick="infoJumpTo()">法务贷</a>
+</div>
+<div class="pull-left nav">
+<a href="${host}/recommendation" id="a0101" class="index-name">智能推荐</a>
+</div>
+<div class="pull-left nav">
+<a href="${host}/aboutUs" id="a0102" class="index-name" data-moduleno="1007">关于我们</a>
+</div>
+<div class="pull-left nav">
+<a href="${host}/helpCenter" id="a0103" class="index-name" data-moduleno="1008">帮助中心</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- header end -->
+<!-- container -->
+<div class="index-main-content">
+<div id="banner">
+<div class="banner-content">
+<h1>劳资管理服务</h1>
+<p>起草，修订企业人事管理制度，重要岗位的劳动合同，保密协议，竞业禁止协议等</p>
+<p>保密管理制度与保密措施修订企业的人事规章制度</p>
+<p class="viewDetail">
+<a href="#mainContent">查看详情
+<i></i>
+</a>
+</p>
+</div>
+</div>
+<div class="main-content-service pd50 pt50" id="mainContent">
+<div class="container">
+<div class="main-content-list">
+<div class="second-title mb50">
+<p> 劳动管理服务</p>
+</div>
+<div class="service-list">
+<ul class="service-list-ul clear"> </ul>
+<div class="getService">
+<bttton class="service-btn" data-remodal-target="getService-modal">获取服务</bttton>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!--service process -->
+<div class="service-process pd50 pt50">
+<div class="container">
+<div class="main-content-list">
+<div class="second-title mb50">
+<p>服务流程</p>
+</div>
+<div class="conprocess mt20 clear">
+<div class="process-box ml0">
+<img src="${host}/assets/image/process_icon_01.png">
+<p>客户咨询</p>
+</div>
+<div class="to-right-icon"></div>
+<div class="process-box">
+<img src="${host}/assets/image/process_icon_02.png">
+<p>客服回访</p>
+</div>
+<div class="to-right-icon"></div>
+<div class="process-box">
+<img src="${host}/assets/image/process_icon_03.png">
+<p>签订合同</p>
+</div>
+<div class="to-right-icon"></div>
+<div class="process-box">
+<img src="${host}/assets/image/process_icon_04.png">
+<p>业务下单</p>
+</div>
+<div class="to-right-icon"></div>
+<div class="process-box">
+<img src="${host}/assets/image/process_icon_05.png">
+<p>法律体验</p>
+</div>
+<div class="to-right-icon"></div>
+<div class="process-box">
+<img src="${host}/assets/image/process_icon_06.png">
+<p>解决方案</p>
+</div>
+<div class="to-right-icon"></div>
+<div class="process-box mr0">
+<img src="${host}/assets/image/process_icon_07.png">
+<p>一对一服务</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="news-center mt50">
+<div class="container">
+<div class="second-title mb50">
+<p>资讯动态</p>
+</div>
+<div class="news-content"> </div>
+</div>
+</div>
+<!--coutact us-->
+<div class="contact-module">
+<div class="container">
+<div class="second-title mb50">
+<p>联系我们</p>
+</div>
+<div class="contact-content clear">
+<div class="left-box clear">
+<div class="qrcode-img">
+<img src="${host}/assets/image/qrcode.png" alt=""> </div>
+<div class="qrcode-text">
+<p class="qrcode-title">中法邦微信公众号</p>
+<p>扫码关注中法邦微信公众号，获取一手法律干货</p>
+<p>资讯，在线咨询获取法律援助</p>
+</div>
+</div>
+<div class="right-box">
+<p>请输入您的手机号码，我们将立即给您回电！</p>
+<div class="input-group">
+<input type="text" name="phoneNum" class="phoneInput" placeholder="请输入您的手机号码" onfocus="this.placeholder=''" onblur="this.placeholder='请输入手机号'">
+<button class="getphone">
+<i></i>
+</button>
+<p class="phone-msg hide">请输入正确的手机号码</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="getService-modal" class="remodal" data-remodal-id="getService-modal">
+<div class="remodal-header">
+<div class="login-res-row">
+<div class="getService-title-btn">获取服务</div>
+<!-- <a class="login-btn register-title-btn pull-left" href="http://192.168.15.40:8080/cas/register?systemId=4e6f5d00-d023-11e7-a9e1-fb16d651f8ad&service=http://127.0.0.1:8090/cas">注册</a> -->
+</div>
+<button class="remodal-close closeModal" data-remodal-action="close" aria-label="Close"></button>
+</div>
+<div class="remodal-content">
+<!--登录表单-->
+<p>请您输入详情信息，我们会尽快跟您联系</p>
+<form id="gerService-form">
+<div class="row clear">
+<label class="label pull-left">
+<span class="required">*</span>姓名：</label>
+<input class="pull-left" type="text" name="realName">
+<div class="error-div"></div>
+</div>
+<div class="row clear">
+<label class="label pull-left">
+<span class="required">*</span>电话：</label>
+<input class="pull-left" type="text" name="mobilePhone">
+<div class="error-div"></div>
+</div>
+<div class="row clear">
+<label class="label pull-left">
+<span class="required">*</span>公司名称：</label>
+<input class="pull-left" type="text" name="companyName">
+<div class="error-div"></div>
+</div>
+<div class="row clear">
+<label class="label pull-left">备注说明：</label>
+<textarea class="pull-left" type="text" name="remark"></textarea>
+</div>
+</form>
+<div class="remodal-footer">
+<div data-remodal-action="confirm" class="remodal-confirm">提交</div>
+<div data-remodal-action="close" class="remodal-close-btn">取消</div>
+</div>
+</div>
+</div>
+<!-- news  -->
+<script type="text/html" id="news-content-template"> {% each list data %} {% if($index
+< 4) %} <div class="news-box clear">
+<a href="{% host %}{% data.id %}" target="_blank">
+<div class="news-text">
+<h3>{% data.title %}</h3>
+<p>{% data.preview %}</p>
+</div>
+<div class="news-time">
+<div class="triangle"></div>
+<p>
+<span>{% data.time | dateFormat 'MM' %}</span>
+<span class="slash">/</span>
+<span>{% data.time | dateFormat 'dd' %}</span>
+</p>
+<p class="news-year">
+<span>{% data.time | dateFormat 'yyyy' %}</span>
+</p>
+</div>
+</a>
+</div> {% /if %} {% /each %} </script>
+<script type="text/html" id="service-list-templete"> {% each tree %}
+<li class="service-li">
+<div class="libox">
+<div class="libox-title">
+<span>{% $index | getSubSting %}</span>
+</div> {% if $value %}
+<ul> {% each $value val %}
+<li>{% val.itemName %}</li> {% /each %} </ul> {% /if %} </div>
+</li> {% /each %} </script>
+<!-- container end -->
+<!-- footer -->
+<div class="footer_bar">
+<div class="footer_auto">
+<div class="footer-bottom-info">
+<p>©
+<span class="year"></span> , all rights reserved 广东八鼎网络科技有限公司 沪ICP备001号-2</p>
+<p>注册地址： 广东省东莞市南城区元美路丰硕广场24楼2404号</p>
+<p>沪公网安备 00000000001号</p>
+</div>
+</div>
+</div>
+<!-- footer end -->
+<script src="${host}/views/lobarCapital/main-0fd989396e.js"></script>
+<!--登录注册模态框-->
+</body>
+</html>

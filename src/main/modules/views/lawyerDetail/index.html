@@ -1,0 +1,114 @@
+
+<div class="index-main-content">
+        <div id="top-banner">
+            
+           <img src="dist/assets/image/lawyer-banner.png" class="img-responsive bann-img" alt="律师详情">
+            <div class="lawyerinfo">
+                <div class="info-box">
+                    <img src="dist/assets/image/lawyer-icon.png" class="img-responsive" alt="律师头像">
+                    <h4></h4>
+                </div>
+            </div>
+        </div>
+    <div class="main-content-service pd50 pt50" id="mainContent">
+        <div class="container">
+                
+                <div class="row">
+                    <div class="col-md-3 col-sm-4">
+                        <nav class="sidenav" data-sidenav>
+                            <ul class="ultitle">
+                                <li><span>所有类目</span></li>
+                            </ul>
+                            <ul class="sidenav-menu">
+                                
+                              
+                               
+                            </ul>
+                          </nav>
+                    </div>
+                    <div class="col-md-9 col-sm-8">
+                        <div class="col-right">
+                            <!-- <form id="keyword-form">
+                                    <div class="form-group ">
+                                            <div class="input-group">
+                                                    <input type="text" name="keyword" class="form-control" id="searchbox" placeholder="请输入搜索内容">
+                                                    <div class="input-group-addon" id="searchBtn">搜 索</div>
+                                            </div>
+                                    </div>
+                            </form> -->
+                            <p>共找到<span class="result-count"></span>条结果</p>
+                             <!-- <div class="col-md-8 col-right">
+                            <p>排序：<span class="sort-one active">法院层级</span> <span class="sort-two">裁判日期</span>  <span class="sort-three">审判程序</span></p>
+                        </div> -->
+                        </div>    
+                        <div class="case-list-page">
+                            <div class="case-list">
+                              
+                            </div>
+                            <div class="page-row">
+                                    <div class="pager pull-right">
+                                     
+                                    </div>
+                              </div>
+                         </div> 
+                    </div>
+                </div>
+                
+               
+             </div>   
+        </div>
+    </div>
+    {{ include '../~modal/getcaseDetail/main'}}
+
+<script type="text/html" id="lawyer-list-templete">
+    {% each list das %}
+    {% each das.caseVoList da %}
+   <a class="case-hover" href="{% host %}id={% da.id %}&name={% da.lawyerName %}"><div class="case-list-box" >
+            <div class="case-title">
+                <div class="row">
+                    <p class="title col-md-9 col-sm-8">{% da.title %}</p>
+                    <p class="col-md-3 col-sm-4 tag"><span>{% da.caseType %}</span><span>{% da.trialRound %}</span><span>判决</span></p>
+                </div>
+                <p class="second-tag"><span>{% da.court %} </span><span>{% da.caseNo %}</span><span> {% da.trialDate | dateFormat 'yyyy'%}-{% da.trialDate | dateFormat 'MM'%}-{% da.trialDate | dateFormat 'dd'%} </span></p>
+            </div>
+                <P>【裁判理由】：</P>
+                <P>{% da.reason %}</P>
+            </div>
+        </div></a>
+    
+        {% /each %}
+        {% /each %}
+</script>
+<script type="text/html" id="lawyer-slider-templete">
+    {% each list das %}
+    {% each das.groupMenu da %}  
+<li class="oneLevel">
+       
+        <a href="javascript:;" onclick="changeicon()" data-sidenav-dropdown-toggle class="active">
+               <i class="material-icons">{% da.categoryName %}</i><span class="glyphicon glyphicon-menu-down"></span>
+        </a>
+        <ul class="sidenav-dropdown threelevel" data-sidenav-dropdown>
+             
+                    {% each da.sonCategoryList data %}  
+  
+                    <li><p class="slider-result"  data-id="{% data.sonCategoryQueryLogId %}"> <a href="{% hosts %}&caseQueryLogId={% data.sonCategoryQueryLogId %}">{% data.sonCategoryName %}</a></p></li>
+
+                    {% /each %}   
+                    </ul>
+              
+            
+        </li>
+       
+        {% /each %}
+        {% /each %}
+</script>   
+<!-- <script type="text/html" id="lawyer-info-templete">
+    {% each list la i %}
+    {% if i==0 %}
+    <div class="info-box">
+        <img src="dist/assets/image/lawyer-icon.png" class="img-responsive" alt="律师头像">
+        <h4>{% la.lawyerName %}</h4>
+    </div>
+    {% /if %}
+    {% /each %}
+</script> -->

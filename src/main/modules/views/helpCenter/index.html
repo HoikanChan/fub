@@ -1,0 +1,115 @@
+
+<div class="index-main-content">
+        <div id="top-banner">
+            
+            <div class="banner-content">
+                <div class="container">
+                    <h1>帮助中心</h1>
+                    <div class="searchBox row">
+                            <div class="col-md-6 col-sm-12 margin-auto"> 
+                                <div class="input-group search-div">
+                                        <input type="text" class="form-control searchbox" placeholder="请输入搜索内容" aria-describedby="basic-addon2" name="name">
+                                        <span class="input-group-addon btnstyle" id="basic-addon2"> 搜 索</span>
+                                </div> 
+                            <!-- <div class="search-list">
+                                <span>花呗</span>
+                                <span>花呗</span>
+                                <span>花呗</span>
+                                <span>花呗</span>
+                                <span>花呗</span>
+                                <span>花呗</span>
+                                <span>花呗</span>
+                                <span>花呗</span>
+                                <span>花呗</span>
+                                <span>花呗</span>
+                            </div> -->
+                        </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    <div class="main-content mb35 mt40 " id="mainContent">
+        <div class="container">
+        <div class="com-news-content mb50">
+            
+                <div class="main-content-list">
+                   <div class="second-title mb40">
+                       <p>自助服务</p>
+                   </div>
+                   <div class="row mb30">
+                        <div class="col-md-3 col-sm-3">
+                            <div class="img-box">
+                                <a href="{{ $imports.globalVariable }}/loginPage?reg=1">
+                                    <img src="dist/assets/image/service_icon_01.jpg" alt="新手注册"  class="img-responsive">
+                                    <p>新手注册</p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-3">
+                            <div class="img-box">
+                                    <a href="">
+                                        <img src="dist/assets/image/service_icon_02.jpg" alt="找回密码"  class="img-responsive">
+                                        <p>找回密码</p>
+                                    </a>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-3">
+                            <div class="img-box">
+                                    <a href="">
+                                        <img src="dist/assets/image/service_icon_03.jpg" alt="修改密码"  class="img-responsive">
+                                        <p>修改密码</p>
+                                    </a>
+                            </div>   
+                        </div>
+                        <div class="col-md-3 col-sm-3">
+                            <div class="img-box">
+                                    <a href="">
+                                        <img src="dist/assets/image/service_icon_04.jpg" alt="更改手机"  class="img-responsive">
+                                        <p>更改手机</p>
+                                    </a>
+                            </div>
+                        </div>
+                   </div>
+                   <div class="second-title mb40">
+                        <p>常见问题</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12" id="page-list">
+                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                    
+                                
+                                
+                                  </div>
+                                  <div class="page-row clear">
+                                        <div class="pager pull-right">
+                                         
+                                        </div>
+                                  </div>
+                            </div>     
+                    </div>
+                </div>
+           
+        </div>
+    </div>
+    </div>
+</div>
+<script type="text/html" id="question-content-templete">
+    {% each list  data i %} 
+
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="heading{% i+1 %}">
+        <h4 class="panel-title">
+            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{% i+1 %}" aria-expanded="false" aria-controls="collapse{% i+1 %}}">
+                {% data.title %}<span>{% data.updateTime  | dateFormat 'yyyy'%}-{% data.updateTime | dateFormat 'MM'%}-{% data.updateTime | dateFormat 'dd'%}</span>
+            </a>
+        </h4>
+        </div>
+        <div id="collapse{% i+1 %}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{% i+1 %}">
+        <div class="panel-body">
+            {% data.content %}
+        </div>
+        </div>
+    </div>
+  
+    {% /each %}
+</script> 
