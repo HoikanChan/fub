@@ -32,7 +32,7 @@ function makeYear() {
 	var endYear = my.getFullYear();// 获取当前年份
 	year.text(endYear);
 }
-
+  
 /**
  *
  * @param phone
@@ -611,7 +611,7 @@ function decodeUnicode(str) {
 
 
 function jumpTo(p, url) {
-    var mobileItem=window.sessionStorage.getItem("mobile");
+    var mobileItem= getCookis("JSESSIONID");
   
     if (mobileItem == undefined) {
     p.attr("href", api.host+"loginPage?legalLoan");

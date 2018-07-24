@@ -11,7 +11,7 @@
 <meta content="" name="description" />
 <meta content="" name="author" />
 <link rel="stylesheet" href="${host}/public/basic-a300c0880e.css">
-<link rel="stylesheet" href="${host}/views/recommendation/main-42183ff566.css">
+<link rel="stylesheet" href="${host}/views/recommendation/main-1384782cfd.css">
 <script>
 var api = {
     //  host:"http://120.24.181.248:8080/",
@@ -92,7 +92,7 @@ function createXMLHTTPRequest()
     return xmlHttpRequest;
 }
 </script>
-<script src="${host}/public/basic-a3e3c983cd.js"></script>
+<script src="${host}/public/basic-2496a6f88f.js"></script>
 </head>
 <body>
 <!-- header -->
@@ -408,7 +408,7 @@ function createXMLHTTPRequest()
 </div>
 </div>
 <!-- footer end -->
-<script src="${host}/views/recommendation/main-71a22d8fc1.js"></script>
+<script src="${host}/views/recommendation/main-b8b012bf65.js"></script>
 <!--登录注册模态框-->
 </body>
 </html>

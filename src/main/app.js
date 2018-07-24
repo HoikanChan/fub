@@ -8,6 +8,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var template = require('art-template');
 var session = require("express-session");
+var cookieParser = require('cookie-parser');
 var FileStore = require('session-file-store')(session);
 var IL = '/';
 var app = express();
@@ -23,7 +24,16 @@ app.use(cookieParser());
 app.use('/dist', express.static('dist'));
 app.set('views', __dirname + '/modules');
 
-app.use(require('connect-livereload')());
+app.use(cookieParser());
+app.use(session({
+  resave: true, // don't save session if unmodified
+  saveUninitialized: false, // don't create session until something stored
+  secret: 'admin', //密钥
+  name: 'testapp', //这里的name值得是cookie的name，默认cookie的name是：connect.sid
+  cookie: {
+    maxAge: 80000
+  } //设置maxAge是80000ms，即80s后session和相应的cookie失效过期
+}));
 
 
 /*获取参数*/
@@ -42,9 +52,22 @@ app.use(cors());
 //     }
 // });
 
+
+
 app.get('/', function (req, res) {
     res.render('../modules/pages/index.html',require('./modules/views/index/config.json'));
 });
+
+
+// app.get('/userCenter', function (req, res) {
+//     res.locals.session = req.session;
+//     if(req.session.user){ //判断session 状态，如果有效，则返回主页，否则转到登录页面
+//       res.render('../modules/pages/userCenter.html',require('./modules/views/index/config.json'));
+//     }else{
+//       res.render('../modules/pages/loginPage.html',require('./modules/views/index/config.json'));
+//     }
+//   })
+
 
 app.get("/404", function (req, res) {
 
@@ -146,9 +169,7 @@ readFile('./modules/views', IL);
 
 
 
-app.get('/index', function (req, res) {
-    res.render('../modules/pages/index.html',require('./modules/views/register/config.json'));
-});
+
 
 if (!module.parent) {
     app.listen(3000); 

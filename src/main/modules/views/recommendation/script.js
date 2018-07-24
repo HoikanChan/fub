@@ -68,7 +68,7 @@ var _persone = function () {
             },
         
     })
-   
+
     function highSeachSumbit(){
         var reason =$(".caseresours").find("option:selected").val();
         var areaid = $("input[name='courtCityId']").attr("area-id");

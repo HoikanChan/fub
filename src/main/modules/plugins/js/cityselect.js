@@ -16,14 +16,14 @@ function init_city_select($inputE) {
 	html += '<div class="pre"><a><span class="glyphicon glyphicon-menu-left"></span></a></div>';
 	html += '<div class="list"><ul></ul></div>';
 	html += '<div class="next"><a><span class="glyphicon glyphicon-menu-right"></span></a></div>';
-	//html += '<div class="province-comfime clear"></div>';
+
 	html += '</div>';
 	html += '<div class="cityAll">';
 	html += '<div class="pre"><a><span class="glyphicon glyphicon-menu-left"></span></a></div>';
 	html += '<div class="list"><ul></ul></div>';
 	html += '<div class="next"><a><span class="glyphicon glyphicon-menu-right"></span></a></div>';
-	//html += '<div class="province-comfime clear"><span onclick="getprovince()">确定</span></div>';
 	html += '</div>';
+	html += '<div class="province-comfime clear"><span>确定</span></div>';
 	// html += '<div class="countyAll">';
 	// html += '<div class="pre"><a></a></div>';
 	// html += '<div class="list"><ul></ul></div>';
@@ -48,15 +48,15 @@ function init_city_select($inputE) {
 	$(".provinceCityAll").on("click", function(event) {
 			event.stopPropagation();
 	});
-	$(document).on("click",".province-comfime span",function(event){
-		var $li = $(".provinceAll list ul li");
-		console.log($li.find(".current").attr("id"));
-	alert("134")
-		for(var i=0;i<$li.length;i++){
-				 
-				
-		}
+	$(".province-comfime span").on("click", function(event) {
+		$(".provinceCityAll").hide();
+		var id = $(".province-comfime span").attr("id");
+		var name =$(".province-comfime span").attr("title");
+		$("#area-select").attr("area-id",id);
+		$("#area-select").val(name)
+		console.log("123")
 });
+
 	$inputE.on("click", function(event){
 		$cityInput = $(this);
 		$(".provinceCityAll").css({
@@ -229,15 +229,17 @@ function provincePage(currentProvincePage) {
 
 function viewCity(provinceId) {
 	$("#" + provinceId).addClass("current").closest("li").siblings("li").find("a").removeClass("current");
+	var proname = $("#"+provinceId).attr("title");
 	$(".provinceCityAll .con .cityAll").show().siblings().hide();
-//	$("#cityAll").addClass("current").closest("li").siblings("li").find("a").removeClass("current");
-	getprovince(provinceId);
+	$("#cityAll").addClass("current").closest("li").siblings("li").find("a").removeClass("current");
+$(".province-comfime span").attr("id",provinceId);
+$(".province-comfime span").attr("title",proname);
 	cityPage(provinceId, 1);
-	//alert($("#" + provinceId).attr("title"))
+	$(".province-comfime").show()
 }
-function getprovince(provinceId){
-	$(".province-comfime span").attr("id",provinceId);
-}
+
+
+
 function cityPage(provinceId, currentCityPage) {
 	var provinceAllCity = allCityMap.get(provinceId);
 	var totalPage = Math.ceil(provinceAllCity.length / pageSize);

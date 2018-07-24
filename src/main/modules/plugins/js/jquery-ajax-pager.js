@@ -8,7 +8,7 @@
 
     var tablePager = window.tablePager1 = {
         opts: {
-            length: 12,
+            length: 10,
             preText: "上一页",
             nextText: "下一页",
             firstText: "",

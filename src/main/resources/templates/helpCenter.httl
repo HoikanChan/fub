@@ -92,7 +92,7 @@ function createXMLHTTPRequest()
     return xmlHttpRequest;
 }
 </script>
-<script src="${host}/public/basic-a3e3c983cd.js"></script>
+<script src="${host}/public/basic-2496a6f88f.js"></script>
 </head>
 <body>
 <!-- header -->
@@ -254,7 +254,7 @@ function createXMLHTTPRequest()
 </div>
 </div>
 <!-- footer end -->
-<script src="${host}/views/helpCenter/main-0f7b0aa0f8.js"></script>
+<script src="${host}/views/helpCenter/main-5f451c13cf.js"></script>
 <!--登录注册模态框-->
 </body>
 </html>

@@ -152,20 +152,23 @@
   }
 }
 .provinceCityAll{
+  border:1px solid #ddd;
     .tabs {
       ul{
           li{
             a{
-              width:152px
+              width:151px
             }
           }
       }
     }
     .con{
+      border:none;
       .province-comfime.clear {
         height: 30px;
         float: right;
         overflow: inherit;
+
         span {
           background: #ed7a39;
           padding: 5px 15px;
