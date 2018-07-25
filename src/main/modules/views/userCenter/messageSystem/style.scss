@@ -4,7 +4,7 @@
 * @Last Modified by:   anchen
 * @Last Modified time: 2017-06-22 18:04:27
 */
-@import '../../public/css/common.scss';
+@import '../../../public/css/common.scss';
 $font-color: #666;
 $secondary-color: #9a9a9a;
 
@@ -32,16 +32,6 @@ $content-size: 16px;
       top: 50%;
       transform: translate(-50%, -50%);
       left: 50%;
-    }
-  }
-  .container {
-    margin: 32px 0;
-    width: 100%;
-    .page {
-      display: none;
-    }
-    .pageNow {
-      display: inline;
     }
   }
 }
@@ -95,7 +85,7 @@ input:focus {
   }
 }
 .input {
-  width: 260px;
+  width: 240px;
   padding: 6px 12px;
   border-radius: 5px;
   box-shadow: none;

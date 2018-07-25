@@ -1,174 +1,9 @@
-;var userCenter = function () {
-    var page = 1;
-    var inquery_validate;
-    var clidentId =  sessionStorage.getItem("clientid")
-      var phone = window.sessionStorage.getItem("mobile");
-
-      $({mobile:phone})._Ajax({
-          url:"client/queryByMobile",
-          success:function(result){
-             if(result.code == 0){
-              
-              sessionStorage.setItem("clientid",result.client.clientId)
-             }else{
-               
-
-             }
-            
-          }
-      })
-
-/* 我的案件 */
-      //我的案件数据请求
-      function getMycase(){
-     
-        var params = {
-          clientId:clidentId,
-          sidx : "createTime",
-          order : "desc"
-        }
-        $('.my-cases-content .pager').tablePager({
-          url: "order/queryOrderList",
-          searchParam:params,
-          success: function (result) {
-             if(result.code == 0){
-                var html = template('my-cases-template', result.data); 
-                $(".my-cases-box").html(html);
-            
-              if(result.data.totalCount<10){
-                  $(".page-row").hide()
-              }else{
-                  $(".page-row").show()
-              }
-              if(result.data.totalCount==0){
-                  $(".my-cases-box").html("<P class='noresult'>抱歉，没有该检索内容数据</P>")
-              }
-             }else{
-                  toastr.warning("数据请求失败");
-             }
-            $(".searchbar .totalNum").text(result.data.totalCount);
-          }
-      })
-      }
-
-      function seachMycase(){
-       
-        var starttime = $("#start-date").val();
-        var endtime = $("#end-date").val();
-        var params = {
-          clientId:clidentId,
-          beginDate:starttime,
-          endDate:endtime,
-          sidx : "createTime",
-          order : "desc"
-        }
-        $('.my-cases-content .pager').tablePager({
-          url: "order/queryOrderList",
-          searchParam:params,
-          success: function (result) {
-             if(result.code == 0){
-                var html = template('my-cases-template', result.data); 
-                $(".my-cases-box").html(html);
-            
-              if(result.data.totalCount<10){
-                  $(".page-row").hide()
-              }else{
-                  $(".page-row").show()
-              }
-              if(result.data.totalCount==0){
-                  $(".my-cases-box").html("<P class='noresult'>抱歉，没有该检索内容数据</P>")
-              }
-             }else{
-                  toastr.warning("数据请求失败");
-             }
-            
-          }
-      })
-      }
-
-  //我的案件选中计价
-  var selectNum = 0;
-function selectFeatureByFid(obj) {
-
-	var dataid = $(obj).attr("dataid");
-	if($(obj).prop("checked") == true){
-		$(obj).addClass("active");
-		$(obj).parents("tr").addClass("active-blue").siblings("tr").removeClass("active-blue");
-		blueLightId = $(obj).parents("tr").attr("id");
-    showNowSelectNum(obj);
-   
-
-}
-}
-//显示当前总数和选中的数量
-function showNowSelectNum() {
-
-  var dataIdsSelectArray = new Array();
-  var dataIdsArray = new Array();
-
-      /*$("#tbodyInit input[type='checkbox']").each(function() {*/
-    $(".my-cases-box table tr td input[type='checkbox']").each(function() {
-          if ($(this).prop("checked") == true) {
-              dataIdsSelectArray.push($(this).attr("dataid"));
-              dataIdsArray.push($(this).attr("dataid"));
-          }
-      });
-  //}
-  //去掉数组中重复的id
-  dataIdsArray = unique(dataIdsArray);
-  dataIdsSelectArray = unique(dataIdsSelectArray);
-  var dataIds = "";
-  for (var i = 0; i < dataIdsArray.length; i++) {
-      dataIds += dataIdsArray[i] + ",";
-  }
- 
-  //判断端是否含有dataIds
-  if (stringIsNull(dataIds)) {
-      $(".loan-items-counts").html(dataIdsSelectArray.length);
-  } else {
-      dataIds = dataIds.substring(0, dataIds.length - 1);
-     
-      $(".loan-items-counts").html(dataIdsSelectArray.length);
-  }
-
-}
-
+var userCenter = (function() {
+  var page = 1
+  var inquery_validate
 
   $(function() {
-    var start = {
-      isinitVal: true,
-      initDate:[{DD:"-7"},true],
-      format: "YYYY-MM-DD",
-      maxDate: $.nowDate({DD:0}), //最大日期
-      zIndex: 99999,
-      isClear:false,
-      isok:false,
-      okfun: function (elem, date) {
-              end.minDate = elem.val.replace(/\//g,"-"); //开始日选好后，重置结束日的最小日期
-        //     endDates();
-      },
-  };
-  var end = {
-      isinitVal: true,
-      isok: false,
-      isClear:false,
-      zIndex: 99999,
-      maxDate: $.nowDate({DD:0}), //最大日期
-      format: "YYYY-MM-DD",
-      okfun: function (elem, date) {
-              start.maxDate = elem.val.replace(/\//g,"-"); //将结束日的初始值设定为开始日的最大日期
-      }
-  };
-
-  getMycase();
- 
-
-     //时间选择 
-    $("#start-date").jeDate(start);
-    $("#end-date").jeDate(end);
-    $("#start-date-loan").jeDate(start);
-    $("#end-date-loan").jeDate(end);
-    //$('#calendar').fullCalendar({})
+    $('#calendar').fullCalendar({})
     $('.fc-widget-header .fc-sun span').html('星期天')
     $('.fc-widget-header .fc-mon span').html('星期一')
     $('.fc-widget-header .fc-tue span').html('星期二')
@@ -193,7 +28,6 @@ function showNowSelectNum() {
           .removeClass('fa-chevron-up')
           .addClass('fa-chevron-down')
       }
-
     })
     $('.nav-link').click(function(e) {
       $('.nav-link').removeClass('active')
@@ -203,17 +37,13 @@ function showNowSelectNum() {
       $('.page').removeClass('pageNow')
       // if(e.target.id ==='')
       $('#' + e.target.id + '.page').addClass('pageNow')
+      
       return false
     })
   })
 
   return {
     init: function() {
-
-      $(".my-cases-content .primary-btn").on("click",function(){
-        seachMycase();
-      })
-
       //  satelliteApplication();
       $('.user-info').html(
         template('userinfo-template', {
@@ -238,110 +68,58 @@ function showNowSelectNum() {
           }
         })
       )
-      // $('.reports-content').html(
-      //   template('report-template', {
-      //     reports: {
-      //       count: 21,
-      //       cases: [
-      //         {
-      //           title: '志明等与春娇所有权确认纠纷二审民事判决书',
+      $('.reports-content').html(
+        template('report-template', {
+          reports: {
+            count: 21,
+            cases: [
+              {
+                title: '志明等与春娇所有权确认纠纷二审民事判决书',
 
-      //           content:
-      //             'Designed as Ant Design，提炼和服务企业级中后台产品的交互语言和视觉风格。React Component ',
-      //           created: '2015-06-05 15:33:30'
-      //         },
-      //         {
-      //           title: '志明等与春娇所有权确认纠纷二审民事判决书',
+                content:
+                  'Designed as Ant Design，提炼和服务企业级中后台产品的交互语言和视觉风格。React Component ',
+                created: '2015-06-05 15:33:30'
+              },
+              {
+                title: '志明等与春娇所有权确认纠纷二审民事判决书',
 
-      //           content:
-      //             'Designed as Ant Design，提炼和服务企业级中后台产品的交互语言和视觉风格。React Component ',
-      //           created: '2015-06-05 15:33:30'
-      //         },
-      //         {
-      //           title: '志明等与春娇所有权确认纠纷二审民事判决书',
+                content:
+                  'Designed as Ant Design，提炼和服务企业级中后台产品的交互语言和视觉风格。React Component ',
+                created: '2015-06-05 15:33:30'
+              },
+              {
+                title: '志明等与春娇所有权确认纠纷二审民事判决书',
 
-      //           content:
-      //             'Designed as Ant Design，提炼和服务企业级中后台产品的交互语言和视觉风格。React Component ',
-      //           created: '2015-06-05 15:33:30'
-      //         },
-      //         {
-      //           title: '志明等与春娇所有权确认纠纷二审民事判决书',
+                content:
+                  'Designed as Ant Design，提炼和服务企业级中后台产品的交互语言和视觉风格。React Component ',
+                created: '2015-06-05 15:33:30'
+              },
+              {
+                title: '志明等与春娇所有权确认纠纷二审民事判决书',
 
-      //           content:
-      //             'Designed as Ant Design，提炼和服务企业级中后台产品的交互语言和视觉风格。React Component ',
-      //           created: '2015-06-05 15:33:30'
-      //         },
-      //         {
-      //           title: '志明等与春娇所有权确认纠纷二审民事判决书',
+                content:
+                  'Designed as Ant Design，提炼和服务企业级中后台产品的交互语言和视觉风格。React Component ',
+                created: '2015-06-05 15:33:30'
+              },
+              {
+                title: '志明等与春娇所有权确认纠纷二审民事判决书',
 
-      //           content:
-      //             'Designed as Ant Design，提炼和服务企业级中后台产品的交互语言和视觉风格。React Component ',
-      //           created: '2015-06-05 15:33:30'
-      //         },
-      //         {
-      //           title: '志明等与春娇所有权确认纠纷二审民事判决书',
+                content:
+                  'Designed as Ant Design，提炼和服务企业级中后台产品的交互语言和视觉风格。React Component ',
+                created: '2015-06-05 15:33:30'
+              },
+              {
+                title: '志明等与春娇所有权确认纠纷二审民事判决书',
 
-      //           content:
-      //             'Designed as Ant Design，提炼和服务企业级中后台产品的交互语言和视觉风格。React Component ',
-      //           created: '2015-06-05 15:33:30'
-      //         }
-      //       ]
-      //     }
-      //   })
-      // )
-      // $('.reports-content').html(
-      //   template('report-template', {
-      //     // // reports: {
-      //     // //   count: 21,
-      //     // //   cases: [
-      //     // //     {
-      //     // //       title: '志明等与春娇所有权确认纠纷二审民事判决书',
-
-      //     // //       content:
-      //     // //         'Designed as Ant Design，提炼和服务企业级中后台产品的交互语言和视觉风格。React Component ',
-      //     // //       created: '2015-06-05 15:33:30'
-      //     // //     },
-      //     // //     {
-      //     // //       title: '志明等与春娇所有权确认纠纷二审民事判决书',
-
-      //     // //       content:
-      //     // //         'Designed as Ant Design，提炼和服务企业级中后台产品的交互语言和视觉风格。React Component ',
-      //     // //       created: '2015-06-05 15:33:30'
-      //     // //     },
-      //     // //     {
-      //     // //       title: '志明等与春娇所有权确认纠纷二审民事判决书',
-
-      //     // //       content:
-      //     // //         'Designed as Ant Design，提炼和服务企业级中后台产品的交互语言和视觉风格。React Component ',
-      //     // //       created: '2015-06-05 15:33:30'
-      //     // //     },
-      //     // //     {
-      //     // //       title: '志明等与春娇所有权确认纠纷二审民事判决书',
-
-      //     // //       content:
-      //     // //         'Designed as Ant Design，提炼和服务企业级中后台产品的交互语言和视觉风格。React Component ',
-      //     // //       created: '2015-06-05 15:33:30'
-      //     // //     },
-      //     // //     {
-      //     // //       title: '志明等与春娇所有权确认纠纷二审民事判决书',
-
-      //     // //       content:
-      //     // //         'Designed as Ant Design，提炼和服务企业级中后台产品的交互语言和视觉风格。React Component ',
-      //     // //       created: '2015-06-05 15:33:30'
-      //     // //     },
-      //     // //     {
-      //     // //       title: '志明等与春娇所有权确认纠纷二审民事判决书',
-
-      //     // //       content:
-      //     // //         'Designed as Ant Design，提炼和服务企业级中后台产品的交互语言和视觉风格。React Component ',
-      //     // //       created: '2015-06-05 15:33:30'
-      //     // //     }
-      //     // //   ]
-      //     // }
-      //   })
-      // )
-
-      $('.my-loan-box').html(
+                content:
+                  'Designed as Ant Design，提炼和服务企业级中后台产品的交互语言和视觉风格。React Component ',
+                created: '2015-06-05 15:33:30'
+              }
+            ]
+          }
+        })
+      )
+      $('.lawyer-loan-content').html(
         template('lawyer-loan-template', {
           loans: {},
           bills: [
@@ -372,7 +150,40 @@ function showNowSelectNum() {
           ]
         })
       )
-   
+      $('.my-cases-content').html(
+        template('my-cases-template', {
+          loans: {},
+          bills: [
+            {
+              no: '1123234256532',
+              casename: '某某某抢劫案',
+              amount: '250.00',
+              lawyer: '仗义飞',
+              phone: '12345671223',
+              state: '平台审批中',
+              time: '2015-06-05 15:33:30'
+            },
+            {
+              no: '1123234256532',
+              casename: '某某某抢劫案',
+              amount: '250.00',
+              lawyer: '仗义飞',
+              phone: '12345671223',
+              state: '平台审批中',
+              time: '2015-06-05 15:33:30'
+            },
+            {
+              no: '1123234256532',
+              amount: '250.00',
+              casename: '某某某抢劫案',
+              lawyer: '仗义飞',
+              phone: '12345671223',
+              state: '平台审批中',
+              time: '2015-06-05 15:33:30'
+            }
+          ]
+        })
+      )
       $('.my-bills-content').html(
         template('my-bills-template', {
           loans: {},
@@ -535,5 +346,5 @@ function showNowSelectNum() {
       )
     }
   }
-}();
-userCenter.init();
+})()
+userCenter.init()

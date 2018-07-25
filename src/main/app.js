@@ -59,16 +59,6 @@ app.get('/', function (req, res) {
 });
 
 
-// app.get('/userCenter', function (req, res) {
-//     res.locals.session = req.session;
-//     if(req.session.user){ //判断session 状态，如果有效，则返回主页，否则转到登录页面
-//       res.render('../modules/pages/userCenter.html',require('./modules/views/index/config.json'));
-//     }else{
-//       res.render('../modules/pages/loginPage.html',require('./modules/views/index/config.json'));
-//     }
-//   })
-
-
 app.get("/404", function (req, res) {
 
         res.render('./modules/pages/404.html',{title:"404"});

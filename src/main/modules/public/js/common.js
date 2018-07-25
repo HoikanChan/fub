@@ -587,28 +587,6 @@ function decodeUnicode(str) {
  *@param boolean 是否在登录之后回调参数1 callback; true 回调
  **/
 
-// function login() {  
-//    var mobileNum= window.sessionStorage.getItem("mobile");
-//    if(mobileNum){
-//     $({mobile:mobileNum})._Ajax({
-//         url: "user/queryByMobile",
-//         success:function(result){
-//             if (result.code == 0) {
-//                if(result.user){ 
-//                     $(".login-operating").hide();
-//                     $(".user-operating").show();
-//               }else{
-//                    $(".login-operating").show();
-//                    $(".user-operating").hide();
-                    
-//                }
-                
-//             }
-//         }
-//     })
-// }
-// }
-
 
 function jumpTo(p, url) {
     var mobileItem= getCookis("JSESSIONID");
@@ -623,6 +601,22 @@ function infoJumpTo() {
     var $info = $(".legaloan"); 
     jumpTo($info, api.host+"legalLoan"); 
  }
+ 
+ var clidentId =  sessionStorage.getItem("clientid")
+ var phone = window.sessionStorage.getItem("mobile");
+ $({mobile:phone})._Ajax({
+     url:"client/queryByMobile",
+     success:function(result){
+        if(result.code == 0){
+         
+         sessionStorage.setItem("clientid",result.client.clientId)
+        }else{
+          
+
+        }
+       
+     }
+ })
 //获取url中参数值
  function GetRequest() {
     var url = decodeURI(window.location.search); //获取url中"?"符后的字串

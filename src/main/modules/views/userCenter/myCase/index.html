@@ -1,0 +1,116 @@
+<div class="clearfix usercenter">
+    <div class="title-bar">
+      <img src="dist/assets/image/usercenter_bg.png" alt="" style="width: 100%;">
+      <span class="page-title">个人中心</span>
+    </div>
+    <div class="content-container">
+        <div class="col-sm-1"></div>
+      {{ include '../../~modal/sliderMenu/main'}}
+      <div class="col-sm-8">
+        <div class="content-container">
+          <div id="my-cases">
+            <div class="my-cases-content affairs-template">
+                <div class="searchbar">
+                    <div class="col-md-2">
+                      <p>共搜索到<span class="totalNum"></span>条数据</p>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">查询时间：</label>
+                            <div class="col-sm-9 ">
+                                    <input id="start-date" class="col-md-5 form-control " type="text" readonly><span class="pull-left">-</span>
+                                    <input id="end-date"  class="col-md-5 form-control" type="text" readonly>
+                            </div>
+                         </div>
+                    </div>
+                    <div class="col-md-5">
+                      <input type="text" class="input" placeholder="请输入关键词"></input>
+                      <button class="primary-btn">搜索</button>
+                      <button class="primary-btn">申请法务贷</button>
+                    </div>
+                </div>
+                <div class="info-bar">
+                      <div class="left">
+                        <img src="dist/assets/image/usercenter_icon_exclamation.png" alt=""></img>
+                        <span>
+                          已选择 <span class="loan-items-counts font-theme">2</span>项
+                        </span>
+                        <span>
+                          总计
+                          <strong class="loan-amount font-theme">1000000</strong>
+                          元
+                        </span>
+                      </div>
+                      <div class="right">
+                        <span>
+                          状态：
+                        </span>
+                        <select class="form-control">
+                          <option>全部</option>
+                        </select>  
+                      </div>
+                </div>
+              <!-- my-cases-template -->
+              <div class="table-responsive table-hover mycasepage">
+                  <table class="table table-bordered table-striped jambo_table bulk_action " >
+                    <thead>
+                      <tr class="headings">
+                        <th class="column-title">
+                        </th>
+                        <th class="column-title">订单编号 </th>
+                        <th class="column-title">案件名称 </th>
+                        <th class="column-title">律师费</th>
+                        <th class="column-title">代理律师 </th>
+                        <th class="column-title">联系电话 </th>
+                        <th class="column-title">状态 </th>
+                        <th class="column-title">订单时间 </th>
+                        <th class="column-title"><span class="nobr">操作</span>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody class="my-case-box">
+  
+                    </tbody>
+                </table>
+           
+              <div class="page-row clear">
+                  <div class="pager pull-right">
+                          
+                  </div>
+               </div>  
+            </div>
+          </div>
+          </div>
+     
+        </div>
+      </div>
+      <div class="col-sm-1"></div>
+    </div>
+  </div>
+  
+  <script type="text/html" id="case-result-templete">
+    {% each list da %}
+      <tr class="even pointer">
+        <td class="a-center ">
+          <input type="checkbox" class="flat checkbox" name="table_records">
+        </td>
+        <td class="column-content">{% da.orderSn %}</td>
+        <td class="column-content ">{% da.caseName %} </td>
+        {% if da.lawyerPrice %}
+        <td class="column-content ">{% da.lawyerPrice %} </td>
+        {% else %}
+        <td class="column-content "></td>
+        {% /if %}
+        <td class="column-content">{% da.lawyerName %} </td>
+        <td class="column-content">{% da.lawyerMobile %}</td>
+        <td class="column-content">{% da.trialRound %}</td>
+        <td class="a-right a-right ">{% da.createTime | dateFormat 'yyyy'%}-{% da.createTime | dateFormat 'MM'%}-{% da.createTime | dateFormat 'dd'%}</td>
+        <td class=" last">
+          <a href="#">详情 </a>
+          <a href="#">下载 </a>
+          <a href="#">更多</a>
+          <span class="fa fa-chevron-down"></span>
+        </td>
+      </tr>
+    {% /each %} 
+  </script>

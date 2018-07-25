@@ -3,7 +3,7 @@ var userCenter = (function() {
   var inquery_validate
 
   $(function() {
-  //  $('#calendar').fullCalendar({})
+    $('#calendar').fullCalendar({})
     $('.fc-widget-header .fc-sun span').html('星期天')
     $('.fc-widget-header .fc-mon span').html('星期一')
     $('.fc-widget-header .fc-tue span').html('星期二')
