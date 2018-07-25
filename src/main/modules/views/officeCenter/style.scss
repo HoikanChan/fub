@@ -21,7 +21,7 @@ $title-size: 24px;
 $subtitle-size: 18px;
 $content-size: 16px;
 //outer
-.usercenter {
+.officeCenter {
   background: $gray-color;
   .title-bar {
     position: relative;
@@ -39,7 +39,7 @@ $content-size: 16px;
     margin: 32px 0;
     width: 100%;
     .page {
-      display: none;
+ 
     }
     .pageNow {
       display: inline;
@@ -741,16 +741,30 @@ aside {
     }
   }
 
-  #affairs-delegation{
-    .affairs-delegation-content{
+  #member-manage{
+    .member-manage-content{
       .subtab{
         text-align: center;
       }
       .searchbar{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin: 24px 0;
+        margin-bottom: 24px;
+        p{
+          line-height: 32px;
+        }
+        div{
+          input{
+            width: 200px !important;
+          }
+          select{
+            width: 120px !important;
+            margin-right: 12px;
+          }
+          button{
+            margin-right: 12px;
+          }
+          display: flex;
+          align-items: center;
+        }
       }
     }
   }

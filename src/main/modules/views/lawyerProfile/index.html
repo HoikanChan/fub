@@ -1,0 +1,231 @@
+<div class="clearfix officeCenter">
+  <div class="title-bar">
+    <img src="dist/assets/image/usercenter_bg.png" alt="" style="width: 100%;">
+    <span class="page-title">我的财富</span>
+  </div>
+  <div class="container">
+    <div class="col-sm-1"></div>
+
+    {{ include '../~modal/lawyerNav/main'}}
+    <div class="col-sm-8">
+      <div class="content-container">
+        <div class="page " id="my-profile">
+          <div class="my-profile-content">
+            <h3 class="title">个人资料</h3>
+            <form class="form-horizontal" id="recommend-form">
+              <div class="form-group">
+                <label for="name" class="col-sm-2 control-label">姓名：</label>
+                <div class="col-sm-10">
+                  <input type="resours" class="form-control" id="caseresours" placeholder="请输入">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">昵称：</label>
+                <div class="col-sm-10">
+                  <input type="area" class="form-control city_input" area-id="1001" id="area-select" placeholder="请输入">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputPassword3" class="col-sm-2 control-label">身份证号码：</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control " id="inputPassword3" placeholder="请输入">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputPassword3" class="col-sm-2 control-label">性别：</label>
+                <div class="col-sm-10">
+                  <select class="form-control">
+                    <option>男</option>
+                    <option>女</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputPassword3" class="col-sm-2 control-label">手机号：</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control " id="inputPassword3" placeholder="请输入">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputPassword3" class="col-sm-2 control-label">邮箱：</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control " id="inputPassword3" placeholder="请输入">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputPassword3" class="col-sm-2 control-label">最高学历：</label>
+                <div class="col-sm-10">
+                  <select class="form-control">
+                    <option>初中及以下</option>
+                    <option>高中</option>
+                    <option>中技</option>
+                    <option>中专</option>
+                    <option>大专</option>
+                    <option>本科</option>
+                    <option>硕士</option>
+                    <option>博士</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputPassword3" class="col-sm-2 control-label">毕业院校：</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control " id="inputPassword3" rows="5" placeholder="请输入">
+                  </textarea>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputPassword3" class="col-sm-2 control-label">婚姻状况：</label>
+                <div class="col-sm-10">
+                  <select class="form-control">
+                    <option>未婚</option>
+                    <option>已婚</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputPassword3" class="col-sm-2 control-label">居住地址：</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control " id="inputPassword3" rows="5" placeholder="请输入">
+                  </input>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputPassword3" class="col-sm-2 control-label">银行帐号：</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control " id="inputPassword3" rows="5" placeholder="请输入">
+                  </input>
+                </div>
+              </div>
+              <h3 class="title">公司资料</h3>
+              <div class="form-group">
+                <label for="inputPassword3" class="col-sm-2 control-label">公司名称：</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control " id="inputPassword3" placeholder="请输入">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputPassword3" class="col-sm-2 control-label">公司税号：</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control " id="inputPassword3" placeholder="请输入">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputPassword3" class="col-sm-2 control-label">公司地址：</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control " id="inputPassword3" placeholder="请输入">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputPassword3" class="col-sm-2 control-label">公司电话：</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control " id="inputPassword3" placeholder="请输入">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputPassword3" class="col-sm-2 control-label">开户银行：</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control " id="inputPassword3" placeholder="请输入">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputPassword3" class="col-sm-2 control-label">银行账号：</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control " id="inputPassword3" placeholder="请输入">
+                </div>
+              </div>
+              <div class="footer">
+                <button class="primary-btn">提交</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-1"></div>
+  </div>
+</div>
+
+<script type="text/html" id="lawyer-loan-template">
+  <div class="searchbar">
+    <p>共为你找到<span>{% loans.count %}</span>条相关结果</p>
+    <div>
+      <input type="text" class="input" placeholder="请输入关键词"></input>
+      <button class="primary-btn">搜索</button>
+      <button class="primary-btn">导出</button>
+      <button class="primary-btn">申请案件</button>
+    </div>
+  </div>
+  <div class="info-bar">
+    <div class="left">
+      <img src="dist/assets/image/usercenter_icon_exclamation.png" alt=""></img>
+      <span>
+        已选择 <span class="loan-items-counts font-theme">2</span>项
+      </span>
+      <span>
+        总计
+        <strong class="loan-amount font-theme">1000000</strong>
+        元
+      </span>
+    </div>
+    <div class="right">
+      <span>
+        状态：
+      </span>
+      <select class="form-control">
+        <option>全部</option>
+      </select>  
+    </div>
+  </div>
+  <div class="table-responsive table-bordered table-hover">
+      <table class="table table-striped jambo_table bulk_action">
+        <thead>
+          <tr class="headings">
+            <th class="column-title">
+              
+            </th>
+            <th class="column-title">订单编号 </th>
+            <th class="column-title">贷款金额 </th>
+            <th class="column-title">委托律师 </th>
+            <th class="column-title">联系电话 </th>
+            <th class="column-title">状态 </th>
+            <th class="column-title">订单时间 </th>
+            <th class="column-title"><span class="nobr">操作</span>
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% each bills  data%}
+            <tr class="even pointer">
+              <td class="a-center ">
+                <input type="checkbox" class="flat checkbox" name="table_records">
+              </td>
+              <td class=" column-content">{%data.no%}</td>
+              <td class="column-content ">{%data.amount%} </td>
+              <td class=" column-content">{%data.lawyer%} </td>
+              <td class=" column-content">{%data.phone%}</td>
+              <td class=" column-content">{% data.state%}</td>
+              <td class="a-right a-right ">{% data.time %}</td>
+              <td class=" last">
+                <a href="#">详情 </a>
+                <a href="#">下载 </a>
+                <a href="#">更多</a>
+                <span class="fa fa-chevron-down"></span>
+              </td>
+            </tr>
+
+          {% /each %}
+
+        </tbody>
+      </table>
+    </div>
+  <div class="pagination">
+    <span>共{% loans.pages %}页，当前第<span id="current-page">1</span>页</span>
+    <button class="prev ghost-border-btn ">上一页</button>
+    <button class="next ghost-border-btn ">下一页</button>
+    <input type="text"></input>
+    <button class="jumpto border-btn">跳转</button>
+  </div>
+</script>
