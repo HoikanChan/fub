@@ -1,0 +1,116 @@
+<div class="clearfix officeCenter">
+  <div class="title-bar">
+    <img src="dist/assets/image/usercenter_bg.png" alt="" style="width: 100%;">
+    <span class="page-title">我的财富</span>
+  </div>
+  <div class="container">
+    <div class="col-sm-1"></div>
+
+    {{ include '../~modal/lawyerNav/main'}}
+    <div class="col-sm-8">
+      <div class="content-container">
+          <!-- 事务委派 -->
+          <div class="page pageNow" id="affairs-delegation">
+            <div class="affairs-delegation-content">
+              <div class="subtab">
+  
+                <input class="subtab1" id="delegation-tab1" type="radio" name="delegation-subtabs" checked>
+                <label for="delegation-tab1" class="label-left">我的委托</label>
+  
+                <input class="subtab2" id="delegation-tab2" type="radio" name="delegation-subtabs">
+                <label for="delegation-tab2" class="label-right">委托给我</label>
+  
+                <section class="my-delegation" id="content1">
+                  <!-- 我的委托 -->
+                  <!-- my-delegation-template -->
+                </section>
+                <section class="delegation-to-me" id="content2">
+                  <!-- 委托给我 -->
+                  <!-- delegations-to-me-template -->
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-1"></div>
+  </div>
+</div>
+
+<script type="text/html" id="my-delegation-template">
+  <div class="searchbar">
+    <p>共为你搜索到 <span>{% count %}</span> 条数据</p>
+    <div>
+      <input type="text" class="input" placeholder="请输入关键词"></input>
+      <button class="primary-btn">添加</button>
+    </div>
+  </div>
+  <div class="table-responsive table-bordered table-hover">
+    <table class="table table-striped jambo_table bulk_action">
+      <thead>
+        <tr class="headings">
+          <th class="column-title">事务类型 </th>
+          <th class="column-title">被委托人 </th>
+          <th class="column-title">生效时间 </th>
+          <th class="column-title">失效时间 </th>
+          <th class="column-title"><span class="nobr">操作</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+          {% each delegations  data%}
+            <tr class="even pointer">
+              <td class="column-content ">{% data.type %} </td>
+              <td class="column-content ">{% data.client %} </td>
+              <td class=" column-content">{% data.validTime %} </td>
+              <td class="a-right a-right ">{% data.invalidTime %}</td>
+              <td class=" last">
+                <a href="#">删除</a>
+                <a href="#">消息</a>
+                <a href="#">查看</a>
+              </td>
+            </tr>
+          {%/each %}
+        </tbody>
+    </table>
+  </div>  
+</script>
+<script type="text/html" id="delegation-to-me-template">
+  <div class="searchbar">
+      <p>共为你搜索到 <span>{% count %}</span> 条数据</p>
+      <div>
+        <input type="text" class="input" placeholder="请输入关键词"></input>
+        <button class="primary-btn">添加</button>
+      </div>
+    </div>
+    <div class="table-responsive table-bordered table-hover">
+      <table class="table table-striped jambo_table bulk_action">
+        <thead>
+          <tr class="headings">
+            <th class="column-title">事务类型 </th>
+            <th class="column-title">被委托人 </th>
+            <th class="column-title">生效时间 </th>
+            <th class="column-title">失效时间 </th>
+            <th class="column-title"><span class="nobr">操作</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+            {% each delegations  data%}
+              <tr class="even pointer">
+                <td class="column-content ">{% data.type %} </td>
+                <td class="column-content ">{% data.client %} </td>
+                <td class=" column-content">{% data.validTime %} </td>
+                <td class="a-right a-right ">{% data.invalidTime %}</td>
+                <td class=" last">
+                  <a href="#">删除</a>
+                  <a href="#">消息</a>
+                  <a href="#">查看</a>
+                </td>
+              </tr>
+            {%/each %}
+          </tbody>
+      </table>
+    </div>  
+</script>

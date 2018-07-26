@@ -1,0 +1,78 @@
+<div class="clearfix officeCenter">
+  <div class="title-bar">
+    <img src="dist/assets/image/usercenter_bg.png" alt="" style="width: 100%;">
+    <span class="page-title">我的财富</span>
+  </div>
+  <div class="container">
+    <div class="col-sm-1"></div>
+
+    {{ include '../~modal/officeNav/main'}}
+    <div class="col-sm-8">
+      <div class="content-container">
+        <!-- 成员管理 -->
+        <div class="page pageNow" id="member-manage">
+          <div class="member-manage-content">
+            <!-- member-manage-template -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-1"></div>
+  </div>
+</div>
+
+<script type="text/html" id="member-manage-template">
+  <div class="searchbar clearfix">
+    <p class="col-sm-4">共为你搜索到 <span>{% count %}</span> 条数据</p>
+    <div class="col-sm-4">
+      <input type="text" class="input" placeholder="请输入订单号"></input>
+      <button class="primary-btn">搜索</button>
+    </div>
+    <div class="col-sm-4">
+        <select class="form-control">
+          <option>全部</option>
+          <option>已完成</option>
+        </select>
+      <button class="primary-btn">添加</button>
+      <button class="primary-btn">导入</button>
+    </div>
+  </div>
+  <div class="table-responsive table-bordered table-hover">
+    <table class="table table-striped jambo_table bulk_action">
+      <thead>
+        <tr class="headings">
+          <th class="column-title">账号 </th>
+          <th class="column-title">姓名 </th>
+          <th class="column-title">性别 </th>
+          <th class="column-title">状态 </th>
+          <th class="column-title">加入时间 </th>
+          <th class="column-title"><span class="nobr">操作</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+          {% each delegations  data%}
+            <tr class="even pointer">
+              <td class="column-content ">{% data.account %} </td>
+              <td class="column-content ">{% data.name %} </td>
+              <td class=" column-content">{% data.sex %} </td>
+              <td class="a-right a-right ">{% data.state %}</td>
+              <td class="a-right a-right ">{% data.joinTime %}</td>
+              <td class=" last">
+                <a href="#">查看</a>
+                <a href="#">失效</a>
+                <a href="#">删除</a>
+              </td>
+            </tr>
+          {%/each %}
+        </tbody>
+    </table>
+  </div>  
+  <div class="pagination">
+    <span>共{% pages %}页，当前第<span id="current-page">1</span>页</span>
+    <button class="prev ghost-border-btn ">上一页</button>
+    <button class="next ghost-border-btn ">下一页</button>
+    <input type="text"></input>
+    <button class="jumpto border-btn">跳转</button>
+  </div>
+</script>

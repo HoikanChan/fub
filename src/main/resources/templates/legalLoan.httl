@@ -92,7 +92,7 @@ function createXMLHTTPRequest()
     return xmlHttpRequest;
 }
 </script>
-<script src="${host}/public/basic-2496a6f88f.js"></script>
+<script src="${host}/public/basic-4501e28ec6.js"></script>
 </head>
 <body>
 <!-- header -->

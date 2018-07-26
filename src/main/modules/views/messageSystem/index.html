@@ -1,0 +1,103 @@
+<div class="clearfix usercenter">
+    <div class="title-bar">
+      <img src="dist/assets/image/usercenter_bg.png" alt="" style="width: 100%;">
+      <span class="page-title">消息中心</span>
+    </div>
+    <div class="container">
+        <div class="col-sm-1"></div>
+      {{ include '../~modal/sliderMenu/main'}}
+      <div class="col-sm-8">
+        <div class="content-container">
+            <divid="message-center">
+                <div class="message-center-content">
+                  <div class="tab">
+                    <input id="tab1" type="radio" name="tabs" checked>
+                    <label for="tab1">系统消息</label>
+      
+                    <input id="tab2" type="radio" name="tabs">
+                    <label for="tab2">个人消息</label>
+      
+                    <input id="tab3" type="radio" name="tabs">
+                    <label for="tab3">通讯录</label>
+      
+      
+                    <section id="content1" class="system-messages">
+                      <!-- system-messages-template -->
+                      <div class="message-center-template system-message">
+                         <div class="subtab clear mb20">
+                          <input class="subtab1" id="system-tab1" type="radio" name="system-subtabs" checked>
+                            <label for="system-tab1" class="label-left">全部</label>
+                          
+                            <input class="subtab2" id="system-tab2" type="radio" name="system-subtabs">
+                            <label for="system-tab2" class="label-right">未读</label>
+                            <span class="setReaded">全部设为已读</span>
+                          </div>
+                          <session id="content1read">
+
+                         </session>
+                         <div class="page-row clear">
+                          <div class="pager pull-right">
+                                  
+                          </div>
+                       </div>  
+                      </div>
+                    </session>
+      
+                    <section id="content2" class="personal-messages">
+                      <!-- personal-messages-template -->
+                    </section>
+      
+                    <section id="content3" class="contacts">
+                      <!-- contacts-template -->
+                    </section>
+      
+                    </main>
+                  </div>
+                </div>
+              </div>
+     
+        </div>
+      </div>
+      <div class="col-sm-1"></div>
+    </div>
+  </div>
+  
+  <script type="text/html" id="systemNews-result-templete">
+    
+     
+            {% each list data %}
+            <div class="messages-item" id="system{% data.id %}">
+              <span class="message-title"><img src="dist/assets/image/usercenter_icon_bell.png" alt="">{% data.title %}</span>
+               <span class="aside-bar">
+                <span class="time">{% data.createTime | dateFormat 'yyyy'%}-{% data.createTime | dateFormat 'MM'%}-{% data.createTime | dateFormat 'dd'%}</span>
+                <span class="actions">     
+                  <a href="#">查看</a>
+                  <a href="#" class="showmore" >更多<span class="fa fa-chevron-down"></span>
+                  <div class="showdiv">
+                    <p class="hadread" dataid="{% data.id %}">设为已读</p>
+                    <p class="del" dataid="{% data.id %}">删除</p>
+                  </div>
+                  </a>
+                </span>
+                </span>
+            </div>
+            {% /each %}
+          
+        
+        <!-- <section  id="content2noread">
+            {% each readedMessages  data%}
+            <div class="messages-item">
+              <span class="message-title"><img src="dist/assets/image/usercenter_icon_bell.png" alt="">{%data.name%}</span>
+              <span class="aside-bar">
+                <span class="time">{%data.time%}</span>
+                <span class="actions">     
+                  <a href="#">查看</a>
+                  <a href="#">更多<span class="fa fa-chevron-down"></span></a>
+                </span>
+                </span>
+            </div>
+            {% /each %}
+        </section> -->
+     
+    
+  </script>

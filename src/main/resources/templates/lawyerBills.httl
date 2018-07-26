@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<!--manifest="${host}/cache/cache.mainfest"-->
+<html lang="en">
+<head>
+<title>个人中心</title>
+<!--#set(String host )-->
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta content="" name="description" />
+<meta content="" name="author" />
+<link rel="stylesheet" href="${host}/public/basic-a300c0880e.css">
+<link rel="stylesheet" href="${host}/views/lawyerBills/main-cdcc84c610.css">
+<script>
+var api = {
+    //  host:"http://120.24.181.248:8080/",
+    host: "${host}/",
+    //     host:"${host}/",
+    link: "${host}/",
+    //   link:"http://120.24.181.248:8080/",
+    assetsPath: "${host}/assets/",
+    IL: "/IL/",
+    globalImgPath: "image/"
+};
+
+function setCookie(name, value, day)
+{
+    if (day)
+    {
+        var Days = day;
+        var exp = new Date();
+        exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
+        document.cookie = ";expires=" + exp.toGMTString();
+    }
+    document.cookie = name + "=" + escape(value)
+};
+
+function getCookie(name)
+{
+    var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+    if (arr = document.cookie.match(reg)) return unescape(arr[2]);
+    else return null;
+};
+
+function delCookie(name)
+{
+    var exp = new Date();
+    exp.setTime(exp.getTime() - 1);
+    var cval = getCookie(name);
+    if (cval != null) document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
+};
+
+function createXMLHTTPRequest()
+{
+    //1.创建XMLHttpRequest对象
+    //这是XMLHttpReuquest对象无部使用中最复杂的一步
+    //需要针对IE和其他类型的浏览器建立这个对象的不同方式写不同的代码
+    var xmlHttpRequest;
+    if (window.XMLHttpRequest)
+    {
+        //针对FireFox，Mozillar，Opera，Safari，IE7，IE8
+        xmlHttpRequest = new XMLHttpRequest();
+        //针对某些特定版本的mozillar浏览器的BUG进行修正
+        if (xmlHttpRequest.overrideMimeType)
+        {
+            xmlHttpRequest.overrideMimeType("text/xml");
+        }
+    }
+    else if (window.ActiveXObject)
+    {
+        //针对IE6，IE5.5，IE5
+        //两个可以用于创建XMLHTTPRequest对象的控件名称，保存在一个js的数组中
+        //排在前面的版本较新
+        var activexName = ["MSXML2.XMLHTTP", "Microsoft.XMLHTTP"];
+        for (var i = 0; i < activexName.length; i++)
+        {
+            try
+            {
+                //取出一个控件名进行创建，如果创建成功就终止循环
+                //如果创建失败，回抛出异常，然后可以继续循环，继续尝试创建
+                xmlHttpRequest = new ActiveXObject(activexName[i]);
+                if (xmlHttpRequest)
+                {
+                    break;
+                }
+            }
+            catch (e)
+            {}
+        }
+    }
+    return xmlHttpRequest;
+}
+</script>
+<script src="${host}/public/basic-4501e28ec6.js"></script>
+</head>
+<body>
+<!-- header -->
+<div class="header">
+<div class="header-top">
+<div class="container clear">
+<div class="login-operating pull-right">
+<a class="login-btn" href="${host}/loginPage">【登录】</a>
+<a class="register-btn" id='register-btn' href="${host}/loginPage?reg=1">【注册】</a>
+<a class="lawer-enter" id='lower-btn' href="${host}/lawerLogin">【律所入口】</a>
+</div>
+<div class="checklogin"></div>
+<div class="user-operating pull-right" style="display:none;">
+<a class="user-center" href="${host}/userCenter">【个人中心】</a>
+<a class="user-logout">【退出】</a>
+</div>
+<div class="lawer-operating" pull-right style="display:none;">
+<a class="lawer-center" href="${host}/lawerCenter">【个人中心】</a>
+<a class="user-logout">【退出】</a>
+</div>
+</div>
+</div>
+<div class="header-nav">
+<div class="container">
+<div class="header-content row">
+<div class="col-sm-3 col-md-3">
+<div class="header-logo">
+<img src="${host}/assets/image/logo.png" class="img-responsive" alt="法务宝"> </div>
+</div>
+<div class="col-sm-9 col-md-9">
+<div class="title pull-right" id="header-nav">
+<div class="pull-left nav">
+<a href="${host}" class="index-name">法务贷</a>
+</div>
+<div class="pull-left nav">
+<a href="${host}/recommendation" id="a0101" class="index-name">智能推荐</a>
+</div>
+<div class="pull-left nav">
+<a href="${host}/aboutUs" id="a0102" class="index-name" data-moduleno="1007">关于我们</a>
+</div>
+<div class="pull-left nav">
+<a href="${host}/helpCenter" id="a0103" class="index-name" data-moduleno="1008">帮助中心</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- header end -->
+<!-- container -->
+<div class="clearfix officeCenter">
+<div class="title-bar">
+<img src="${host}/assets/image/usercenter_bg.png" alt="" style="width: 100%;">
+<span class="page-title">我的财富</span>
+</div>
+<div class="container">
+<div class="col-sm-1"></div>
+<aside class="col-sm-2 ">
+<nav class="card">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item">
+<a class="nav-link nav-item-head active" id="indexpage" href="${host}/lawyerCenter">账户首页 </a>
+</li>
+<li class="nav-item dropdown">
+<a class=" nav-item-head" href="#"> 我的事务 </a>
+<div class="dropdown-menu collapse" aria-labelledby="navbarDropdown">
+<div class="dropdown-content">
+<a class="dropdown-item nav-link" href="${host}/lawyerLawLoan">法务贷</a>
+<a class="dropdown-item nav-link" href="${host}/lawyerCases">我的案件</a>
+<a class="dropdown-item nav-link" href="${host}/lawyerTeam">我的团队</a>
+<a class="dropdown-item nav-link" href="${host}/lawyerAssistant">律师助手</a>
+</div>
+</div>
+<span class="fa fa-chevron-up right-icon"></span>
+</li>
+<li class="nav-item">
+<a class="nav-item-head" href="#">查询中心</a>
+<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+<div class="dropdown-content">
+<a class="dropdown-item nav-link" href="${host}/lawyerAssets" id="my-assets">我的财富</a>
+<a class="dropdown-item nav-link" href="${host}/lawyerBills">账单记录</a>
+</div>
+</div>
+<span class="fa fa-chevron-up right-icon"></span>
+</li>
+<li class="nav-item">
+<a class="nav-item-head" href="#">个人设置</a>
+<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+<div class="dropdown-content">
+<a class="dropdown-item nav-link" href="${host}/lawyerProfile">资料管理</a>
+<a class="dropdown-item nav-link" href="${host}/lawyerCetification">律师认证</a>
+<a class="dropdown-item nav-link" href="#">律所认证</a>
+<a class="dropdown-item nav-link" href="${host}/lawyerDelegation">事务委派</a>
+<a class="dropdown-item nav-link" href="${host}/lawyerMessage">消息中心</a>
+</div>
+</div>
+<span class="fa fa-chevron-up right-icon"></span>
+</li>
+</ul>
+</nav>
+</aside>
+<div class="col-sm-8">
+<div class="content-container">
+<div class="page" id="my-bills">
+<div class="my-bills-content affairs-template">
+<!-- my-cases-template -->
+</div>
+</div>
+</div>
+</div>
+<div class="col-sm-1"></div>
+</div>
+</div>
+<script type="text/html" id="my-bills-template">
+<div class="searchbar">
+<p>共为你找到
+<span>{% loans.count %}</span>条相关结果</p>
+<div>
+<input type="text" class="input" placeholder="请输入订单号"></input>
+<button class="primary-btn">搜索</button>
+</div>
+</div>
+<div class="info-bar">
+<div class="left">
+<img src="${host}/assets/image/usercenter_icon_exclamation.png" alt=""></img>
+<span> 已选择
+<span class="loan-items-counts font-theme">2</span>项 </span>
+<span> 总计
+<strong class="loan-amount font-theme">1000000</strong> 元 </span>
+</div>
+<div class="right">
+<span> 状态： </span>
+<select class="form-control">
+<option>全部</option>
+</select>
+</div>
+</div>
+<div class="table-responsive table-bordered table-hover">
+<table class="table table-striped jambo_table bulk_action">
+<thead>
+<tr class="headings">
+<th class="column-title"> </th>
+<th class="column-title">订单编号 </th>
+<th class="column-title">事务名称 </th>
+<th class="column-title">银行贷款</th>
+<th class="column-title">服务费 </th>
+<th class="column-title">状态 </th>
+<th class="column-title">订单时间 </th>
+<th class="column-title">
+<span class="nobr">操作</span>
+</th>
+</tr>
+</thead>
+<tbody> {% each bills data%}
+<tr class="even pointer">
+<td class="a-center ">
+<input type="checkbox" class="flat checkbox" name="table_records"> </td>
+<td class=" column-content">{%data.no%}</td>
+<td class="column-content ">{%data.name%} </td>
+<td class="column-content ">{%data.loan%} </td>
+<td class=" column-content">{%data.servicefee%} </td>
+<td class=" column-content">{% data.state%}</td>
+<td class="a-right a-right ">{% data.time %}</td>
+<td class=" last">
+<a href="#">更多</a>
+<span class="fa fa-chevron-down"></span>
+</td>
+</tr> {% /each %} </tbody>
+</table>
+</div>
+<div class="table-footer clearfix">
+<strong> 合计 银行贷款：
+<span class="font-theme"> 36320.0</span> 服务费：
+<span class="font-theme">269561.0</span>
+</strong>
+</div>
+<div class="pagination">
+<span>共{% loans.pages %}页，当前第
+<span id="current-page">1</span>页</span>
+<button class="prev ghost-border-btn ">上一页</button>
+<button class="next ghost-border-btn ">下一页</button>
+<input type="text"></input>
+<button class="jumpto border-btn">跳转</button>
+</div>
+</script>
+<!-- container end -->
+<!-- footer -->
+<div class="footer_bar">
+<div class="footer_auto">
+<div class="footer-bottom-info">
+<p>©
+<span class="year"></span> , all rights reserved 广东八鼎网络科技有限公司 沪ICP备001号-2</p>
+<p>注册地址： 广东省东莞市南城区元美路丰硕广场24楼2404号</p>
+<p>沪公网安备 00000000001号</p>
+</div>
+</div>
+</div>
+<!-- footer end -->
+<script src="${host}/views/lawyerBills/main-40450a38d6.js"></script>
+<!--登录注册模态框-->
+</body>
+</html>

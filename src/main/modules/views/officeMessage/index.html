@@ -1,0 +1,165 @@
+<div class="clearfix officeCenter">
+  <div class="title-bar">
+    <img src="dist/assets/image/usercenter_bg.png" alt="" style="width: 100%;">
+    <span class="page-title">我的财富</span>
+  </div>
+  <div class="container">
+    <div class="col-sm-1"></div>
+
+    {{ include '../~modal/officeNav/main'}}
+    <div class="col-sm-8">
+      <div class="content-container">
+        <div class="page " id="message-center">
+          <div class="message-center-content">
+            <div class="tab">
+              <input id="tab1" type="radio" name="tabs" checked>
+              <label for="tab1">系统消息</label>
+
+              <input id="tab2" type="radio" name="tabs">
+              <label for="tab2">个人消息</label>
+
+              <input id="tab3" type="radio" name="tabs">
+              <label for="tab3">通讯录</label>
+
+
+              <section id="content1" class="system-messages">
+                <!-- system-messages-template -->
+              </section>
+
+              <section id="content2" class="personal-messages">
+                <!-- personal-messages-template -->
+              </section>
+
+              <section id="content3" class="contacts">
+                <!-- contacts-template -->
+              </section>
+
+              </main>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-1"></div>
+  </div>
+</div>
+
+<!-- message-center -->
+<script type="text/html" id="system-messages-template">
+  <div class="subtab message-center-template">
+    <input class="subtab1" id="system-tab1" type="radio" name="system-subtabs" checked>
+    <label for="system-tab1" class="label-left">全部</label>
+  
+    <input class="subtab2" id="system-tab2" type="radio" name="system-subtabs">
+    <label for="system-tab2" class="label-right">未读</label>
+    <span class="setReaded">全部设为已读</span>
+    <section id="content1">
+      {% each messages  data%}
+      <div class="messages-item">
+        <span class="message-title"><img src="dist/assets/image/usercenter_icon_bell.png" alt="">{%data.name%}</span>
+        <span class="aside-bar">
+          <span class="time">{%data.time%}</span>
+          <span class="actions">     
+            <a href="#">查看</a>
+            <a href="#">更多<span class="fa fa-chevron-down"></span></a>
+          </span>
+          </span>
+      </div>
+      {% /each %}
+    </section>
+    <section  id="content2">
+        {% each readedMessages  data%}
+        <div class="messages-item">
+          <span class="message-title"><img src="dist/assets/image/usercenter_icon_bell.png" alt="">{%data.name%}</span>
+          <span class="aside-bar">
+            <span class="time">{%data.time%}</span>
+            <span class="actions">     
+              <a href="#">查看</a>
+              <a href="#">更多<span class="fa fa-chevron-down"></span></a>
+            </span>
+            </span>
+        </div>
+        {% /each %}
+    </section>
+  </div>
+  <div class="pagination">
+    <span>共{% loans.pages %}页，当前第<span id="current-page">1</span>页</span>
+    <button class="prev ghost-border-btn ">上一页</button>
+    <button class="next ghost-border-btn ">下一页</button>
+    <input type="text"></input>
+    <button class="jumpto border-btn">跳转</button>
+  </div>
+</script>
+<script type="text/html" id="personal-messages-template">
+  <div class="subtab message-center-template">
+    <input class="subtab1" id="personal-tab1" type="radio" name="personal-subtabs" checked>
+    <label for="personal-tab1" class="label-left">全部</label>
+  
+    <input class="subtab2" id="personal-tab2" type="radio" name="personal-subtabs">
+    <label for="personal-tab2" class="label-right">未读</label>
+    <span class="setReaded">全部设为已读</span>
+    <section id="content1">
+      {% each messages  data%}
+      <div class="messages-item">
+        <span class="message-title"><img src="dist/assets/image/usercenter_icon_bell.png" alt="">{%data.name%}</span>
+        <span class="aside-bar">
+          <span class="time">{%data.time%}</span>
+          <span class="actions">     
+            <a href="#">查看</a>
+            <a href="#">更多<span class="fa fa-chevron-down"></span></a>
+          </span>
+          </span>
+      </div>
+      {% /each %}
+    </section>
+    <section  id="content2">
+        {% each readedMessages  data%}
+        <div class="messages-item">
+          <span class="message-title"><img src="dist/assets/image/usercenter_icon_bell.png" alt="">{%data.name%}</span>
+          <span class="aside-bar">
+            <span class="time">{%data.time%}</span>
+            <span class="actions">     
+              <a href="#">查看</a>
+              <a href="#">更多<span class="fa fa-chevron-down"></span></a>
+            </span>
+            </span>
+        </div>
+        {% /each %}
+    </section>
+  </div>
+  
+  <div class="pagination">
+    <span>共{% loans.pages %}页，当前第<span id="current-page">1</span>页</span>
+    <button class="prev ghost-border-btn ">上一页</button>
+    <button class="next ghost-border-btn ">下一页</button>
+    <input type="text"></input>
+    <button class="jumpto border-btn">跳转</button>
+  </div>
+</script>
+<script type="text/html" id="contacts-template">
+  <div class="subtab message-center-template">
+    <div >
+      {% each messages  data%}
+      <div class="messages-item">
+        <span class="message-title"><img src="dist/assets/image/usercenter_icon_person.png" alt="">{%data.name%}</span>
+        <span class="aside-bar">
+          <span class="time">{%data.time%}</span>
+          <span class="actions">     
+            <a href="#">消息</a>
+            <a href="#">更多<span class="fa fa-chevron-down"></span></a>
+          </span>
+          </span>
+      </div>
+      {% /each %}
+    </div>
+  </div>
+  
+  <div class="pagination">
+    <span>共{% loans.pages %}页，当前第<span id="current-page">1</span>页</span>
+    <button class="prev ghost-border-btn ">上一页</button>
+    <button class="next ghost-border-btn ">下一页</button>
+    <input type="text"></input>
+    <button class="jumpto border-btn">跳转</button>
+  </div>
+</script>
+<!-- message-center -->
