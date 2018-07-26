@@ -734,5 +734,99 @@ function change_main_current_class(indexPage) {
 	$(obj[indexPage]).addClass("active");
 }
 
+//点击上传文件
+function fileAjaxUpload(fileInputObj, paramInputObj, type, fileShowObj, validataType) {
+    var form = fileInputObj.closest('form')[0];
+    var imageType = ['jpg', 'jpeg', 'png', 'tiff', 'tif', 'gif'];
+    var fileType = ['txt', 'doc', 'docx', 'xls', 'xlsx', 'pdf', 'rar', 'zip', 'text'];
+    var file = $(fileInputObj)[0].files[0].type
+    //type 1 图片、2 文件
+    if (validataType) {
+        if (file.indexOf(validataType)==-1) {
+            toastr.warning("仅支持" + validataType + "格式")
+            return false
+        }
+    }
+    if (type == 1) {
+        var errFile;
+        for (var i = 0; i < imageType.length; i++){
+            if (file.indexOf(imageType[i])!=-1) {
+                errFile = true;
+            }
+        }
+        if (!errFile) {
+            toastr.warning('图片类型必须为jpg、jpeg、png、tiff、tif、gif格式')
+            return false
+        }
+    } else if (type == 2) {
+        var errFile;
+        for (var i = 0; i < fileType.length; i++){
+            if (file.indexOf(fileType[i])!=-1) {
+                errFile = true;
+            }
+        }
+        if (!errFile) {
+            toastr.warning('文件类型必须为txt、doc、docx、xls、xlsx、pdf、rar、zip格式')
+            return false
+        }
+    }
+    if (navigator.appName == "Microsoft Internet Explorer"&&parseInt(navigator.appVersion.split(";")[1].replace(/[ ]/g, "").replace("MSIE",""))<=9) {
+        var formData = {};
+        formData["uploadFile"] = $(fileInputObj)[0].files[0];
+        formData["type"] = type;
+        $(form).ajaxSubmit({
+            type: "post",
+            url: api.host + "/lawyer/uploadLawyerFile",
+            dataType:"json",
+            data: {
+                "uploadFile": $(fileInputObj)[0].files[0],
+                "type": type
+            },
+            success : function(data){
+                if(data.code == 0){
+                    var filepath = api.host + '/file/' + data.fileList[0].filePath + data.fileList[0].fileName;
+                    console.log(filepath)
+                    $(paramInputObj).val(filepath);
+                    if(fileShowObj){
+                        $(fileShowObj).attr('src',filepath);
+                    }
+                }else {
+                    toastr.warning(data.msg);
+                }
+            },
+            error : function (jqXHR, textStatus, errorThrown) {
+                toastr.error(textStatus);
+            }
+        });
+    } else {
+        var formData = new FormData();
+        formData.append("uploadFile", $(fileInputObj)[0].files[0]);
+        formData.append('type',type);
+        $.ajax({
+            url : api.host + "/lawyer/uploadLawyerFile",
+            data : formData,
+            type : "post",
+            dataType : "json",
+            async:false,
+            processData : false,
+            contentType : false,
+            success : function(data){
+                if(data.code == 0){
+                    var filepath = api.host + '/file/' + data.fileList[0].filePath + data.fileList[0].fileName;
+                    console.log(filepath)
+                    $(paramInputObj).val(filepath);
+                    if(fileShowObj){
+                        $(fileShowObj).attr('src',filepath);
+                    }
+                }else {
+                    toastr.warning(data.msg);
+                }
+            },
+            error : function (jqXHR, textStatus, errorThrown) {
+                toastr.error(textStatus);
+            }
+        });
+    }
 
+}
 
