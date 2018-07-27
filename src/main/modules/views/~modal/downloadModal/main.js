@@ -4,7 +4,7 @@ var downloadModal = (function() {
   function showModal(loanId) {
     console.log(loanId)
     $('.getcaseDeatil-form').html('')
-    $('#download-modal .pager').tablePager({
+    $({})._Ajax({
       url: 'loan/queryLoanDeatilAndFiles?loanId=' + loanId,
       success: function(result) {
         if (result.code == 0) {
