@@ -65,11 +65,9 @@
               </div>
               <div class="form-group">
                 <label for="inputPassword3" class="col-sm-2 control-label">证书起始时间：</label>
-                <div class="col-sm-10">
-                  <select class="form-control">
-                    <option>未婚</option>
-                    <option>已婚</option>
-                  </select>
+                <div class="col-sm-6">
+                  <input type="text" id="startTime" class="form-control " id="inputPassword3" rows="5" placeholder="请选择时间">
+                  </input>
                 </div>
               </div>
               <h3 class="title">引荐人资料</h3>
@@ -90,29 +88,27 @@
               <div class="form-group">
                 <label for="inputPassword3" class="col-sm-2 control-label">所属团队：</label>
                 <div class="col-sm-10">
-                  <select class="form-control">
-                    <option>未婚</option>
-                    <option>已婚</option>
-                  </select>
+                  <select class="form-control" id="lawyer-team"></select>
                 </div>
               </div>
               <h3 class="title">其他资料</h3>
               <div class="form-group">
                 <label for="inputPassword3" class="col-sm-2 control-label">掌握语言：</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control " id="inputPassword3" placeholder="请输入">
+                  <select class="form-control" id="lawyer-language"></select>
                 </div>
               </div>
               <div class="form-group">
                 <label for="inputPassword3" class="col-sm-2 control-label">擅长领域：</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control " id="inputPassword3" placeholder="请输入">
+                  <select class="form-control" id="lawyer-professional"></select>
                 </div>
               </div>
               <div class="form-group">
                 <label for="inputPassword3" class="col-sm-2 control-label">个人简介：</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control " id="inputPassword3" placeholder="请输入">
+                  <!--<input type="text" class="form-control " id="inputPassword3" placeholder="请输入">-->
+                  <textarea  rows="4" class="form-control " id="inputPassword3" placeholder="请输入"></textarea>
                 </div>
               </div>
               <div>
@@ -127,17 +123,23 @@
               <div class="form-group">
                 <label for="inputPassword3" class="col-sm-2 control-label">上传身份证：</label>
                 <div class="col-sm-10">
-                  <div class="col-sm-3 upload-btn">
+                  <div class="col-sm-3 upload-btn upload-btn-shenfenzheng">
                     <span class="fa fa-plus"></span>
                   </div>
+                  <input type="hidden" style="display: none" id="upload-text-shenfenzheng">
+                  <input type="file" style="display: none" id="upload-file-shenfenzheng">
+                  <img src="" height="70" id="upload-show-shenfenzheng">
                 </div>
               </div>
               <div class="form-group">
                 <label for="inputPassword3" class="col-sm-2 control-label">上传执业证书：</label>
                 <div class="col-sm-10">
-                  <div class="col-sm-3 upload-btn">
+                  <div class="col-sm-3 upload-btn upload-btn-zhiyezheng">
                     <span class="fa fa-plus"></span>
                   </div>
+                  <input type="hidden" style="display: none" id="upload-text-zhiyezheng">
+                  <input type="file" style="display: none" id="upload-file-zhiyezheng">
+                  <img src="" height="70" id="upload-show-zhiyezheng">
                 </div>
               </div>
               <div class="clearfix"></div>
@@ -154,85 +156,8 @@
   </div>
 </div>
 
-<script type="text/html" id="lawyer-loan-template">
-  <div class="searchbar">
-    <p>共为你找到<span>{% loans.count %}</span>条相关结果</p>
-    <div>
-      <input type="text" class="input" placeholder="请输入关键词"></input>
-      <button class="primary-btn">搜索</button>
-      <button class="primary-btn">导出</button>
-      <button class="primary-btn">申请案件</button>
-    </div>
-  </div>
-  <div class="info-bar">
-    <div class="left">
-      <img src="dist/assets/image/usercenter_icon_exclamation.png" alt=""></img>
-      <span>
-        已选择 <span class="loan-items-counts font-theme">2</span>项
-      </span>
-      <span>
-        总计
-        <strong class="loan-amount font-theme">1000000</strong>
-        元
-      </span>
-    </div>
-    <div class="right">
-      <span>
-        状态：
-      </span>
-      <select class="form-control">
-        <option>全部</option>
-      </select>  
-    </div>
-  </div>
-  <div class="table-responsive table-bordered table-hover">
-      <table class="table table-striped jambo_table bulk_action">
-        <thead>
-          <tr class="headings">
-            <th class="column-title">
-              
-            </th>
-            <th class="column-title">订单编号 </th>
-            <th class="column-title">贷款金额 </th>
-            <th class="column-title">委托律师 </th>
-            <th class="column-title">联系电话 </th>
-            <th class="column-title">状态 </th>
-            <th class="column-title">订单时间 </th>
-            <th class="column-title"><span class="nobr">操作</span>
-            </th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {% each bills  data%}
-            <tr class="even pointer">
-              <td class="a-center ">
-                <input type="checkbox" class="flat checkbox" name="table_records">
-              </td>
-              <td class=" column-content">{%data.no%}</td>
-              <td class="column-content ">{%data.amount%} </td>
-              <td class=" column-content">{%data.lawyer%} </td>
-              <td class=" column-content">{%data.phone%}</td>
-              <td class=" column-content">{% data.state%}</td>
-              <td class="a-right a-right ">{% data.time %}</td>
-              <td class=" last">
-                <a href="#">详情 </a>
-                <a href="#">下载 </a>
-                <a href="#">更多</a>
-                <span class="fa fa-chevron-down"></span>
-              </td>
-            </tr>
-
-          {% /each %}
-
-        </tbody>
-      </table>
-    </div>
-  <div class="pagination">
-    <span>共{% loans.pages %}页，当前第<span id="current-page">1</span>页</span>
-    <button class="prev ghost-border-btn ">上一页</button>
-    <button class="next ghost-border-btn ">下一页</button>
-    <input type="text"></input>
-    <button class="jumpto border-btn">跳转</button>
-  </div>
+<script type="text/html" id="lawyer-select-template">
+   {% each %}
+      <option value="{% $value.id %}">{% $value.name?$value.name:$value.teamName %}</option>
+   {% /each %}
 </script>
