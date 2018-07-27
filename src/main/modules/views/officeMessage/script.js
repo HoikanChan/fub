@@ -1,57 +1,74 @@
-var userCenter = (function() {
-  var page = 1
-  var inquery_validate
-
-  function getMycase() {
+var msgSytem = (function() {
+  function getMycase(){ 
     var params = {
-      clientId: clidentId,
-      sidx: 'createTime',
-      order: 'desc'
+      loginUserId:userid
     }
+  $('#my-cases .pager').tablePager({
+      url: "usernotice/api/list",
+      searchParam:params,
+      success: function (result) {
+              if (result.code==0) {
+             
+                if (result) {
+                  
+                    var html = template("systemNews-result-templete",result.data)
+            
+                    $("#content1read").html(html); 
+                    if(result.data.totalCount<10){
+                        $(".page-row").hide()
+                    }else{
+                        $(".page-row").show()
+                    }
+                    if(result.data.totalCount==0){
+                        $("#content1read").html("<P class='noresult'>抱歉，没有系统消息</P>")
+                    }
+                    }else{
+                        toastr.warning(result.msg);
+                    }
+                 
+                }
 
-    $('#my-cases .pager').tablePager({
-      url: 'order/queryOrderList',
-      searchParam: params,
-      success: function(result) {
-        if (result.code == 0) {
-          if (result) {
-            var html = template('case-result-templete', result.data)
-
-            $('.my-case-box').html(html)
-          }
-        }
       }
-    })
+ })
+}
+ function getnoReadMycase(){ 
+  var params = {
+    loginUserId:userid,
+    isRead:0
+  }
+$('#my-cases .pager').tablePager({
+    url: "usernotice/api/list",
+    searchParam:params,
+    success: function (result) {
+            if (result.code==0) {
+           
+              if (result) {
+                
+                  var html = template("systemNews-result-templete",result.data)
+          
+                  $("#content1read").html(html); 
+                  if(result.data.totalCount<10){
+                      $(".page-row").hide()
+                  }else{
+                      $(".page-row").show()
+                  }
+                  if(result.data.totalCount==0){
+                      $("#content1read").html("<P class='noresult'>抱歉，没有系统消息</P>")
+                  }
+                  }else{
+                      toastr.warning(result.msg);
+                  }
+               
+              }
 
-    //   $('#my-cases .mycasepage .pager').tablePager({
-    //     url: "order/queryOrderList",
-    //     searchParam:params,
-    //     success: function (result) {
-    //        if(result.code == 0){
-    //          console.log(result.data)
-    //           // var html1 = template('my-cases-template', result.data);
-    //           // $(".my-cases-box").html(html1);
-    //           var html = template('search-result-templete', result.data);
-    //           $(".my-case-box").html(html);
-
-    //         if(result.data.totalCount<10){
-    //             $(".page-row").hide()
-    //         }else{
-    //             $(".page-row").show()
-    //         }
-    //         if(result.data.totalCount==0){
-    //             $(".my-cases-box").html("<P class='noresult'>抱歉，没有相关案件</P>")
-    //         }
-    //        }else{
-    //             toastr.warning(result.msg);
-    //        }
-    //       $(".my-cases-content .totalNum").text(result.data.totalCount);
-    //     }
-    // })
+    }
+})
+ 
   }
   $(function() {
-
-    $('aside .right-icon').click(function(e) {
+   
+   
+    $('aside .right-icon').click(function(e) { 
       e.stopPropagation()
       if (e.target.classList.contains('fa-chevron-down')) {
         $(e.target)
@@ -69,140 +86,74 @@ var userCenter = (function() {
           .addClass('fa-chevron-down')
       }
     })
+    
+  
   })
   return {
     init: function() {
-      $('.system-messages').html(
-        template('system-messages-template', {
-          loans: {},
-          messages: [
-            {
-              name:
-                '某某某抢劫案某某某抢劫案某某某抢劫案某某某抢劫案某某某抢劫案',
-              time: '2015-06-05 15:33:30'
-            },
-            {
-              name: '某某某抢劫案',
-              time: '2015-06-05 15:33:30'
-            },
-            {
-              name: '某某某抢劫案',
-              time: '2015-06-05 15:33:30'
-            },
-            {
-              name: '某某某抢劫案',
-              time: '2015-06-05 15:33:30'
-            },
-            {
-              name: '某某某抢劫案',
-              time: '2015-06-05 15:33:30'
-            },
-            {
-              name: '某某某抢劫案',
-              time: '2015-06-05 15:33:30'
-            }
-          ],
-          readedMessages: [
-            {
-              name: '某某某抢劫案某',
-              time: '2015-06-05 15:33:30'
-            }
-          ]
-        })
-      )
-      $('.personal-messages').html(
-        template('personal-messages-template', {
-          loans: {},
-          messages: [
-            {
-              name:
-                '某某某抢劫案某某某抢劫案某某某抢劫案某某某抢劫案某某某抢劫案',
-              time: '2015-06-05 15:33:30'
-            },
-            {
-              name: '某某某抢劫案',
-              time: '2015-06-05 15:33:30'
-            },
-            {
-              name: '某某某抢劫案',
-              time: '2015-06-05 15:33:30'
-            },
-            {
-              name: '某某某抢劫案',
-              time: '2015-06-05 15:33:30'
-            },
-            {
-              name: '某某某抢劫案',
-              time: '2015-06-05 15:33:30'
-            },
-            {
-              name: '某某某抢劫案',
-              time: '2015-06-05 15:33:30'
-            }
-          ],
-          readedMessages: [
-            {
-              name: '某某某抢劫案某',
-              time: '2015-06-05 15:33:30'
-            },
-            {
-              name: '某某某抢劫案',
-              time: '2015-06-05 15:33:30'
-            },
-            {
-              name: '某某某抢劫案',
-              time: '2015-06-05 15:33:30'
-            }
-          ]
-        })
-      )
-      $('.contacts').html(
-        template('contacts-template', {
-          loans: {},
-          messages: [
-            {
-              name: '张三律师',
-              time: '2015-06-05 15:33:30'
-            },
-            {
-              name: '李四律师',
-              time: '2015-06-05 15:33:30'
-            },
-            {
-              name: '李四律师',
-              time: '2015-06-05 15:33:30'
-            },
-            {
-              name: '李四律师',
-              time: '2015-06-05 15:33:30'
-            },
-            {
-              name: '李四律师',
-              time: '2015-06-05 15:33:30'
-            },
-            {
-              name: '李四律师',
-              time: '2015-06-05 15:33:30'
-            }
-          ],
-          readedMessages: [
-            {
-              name: '某某某抢劫案某',
-              time: '2015-06-05 15:33:30'
-            },
-            {
-              name: '某某某抢劫案',
-              time: '2015-06-05 15:33:30'
-            },
-            {
-              name: '某某某抢劫案',
-              time: '2015-06-05 15:33:30'
-            }
-          ]
-        })
-      )
+      getMycase()
      
+    $(document).on("click",".hadread",function(){
+      var dataid = $(this).attr("dataid");
+      $("#"+dataid).addClass("hadreadicon");
+     
+      $({})._Ajax({
+        url: "usernotice/api/update/"+dataid,
+        success: function (result) {
+                if (result.code==0) {
+                   
+                }
+             }
+            });
+    })
+    $(document).on("click",".setReaded",function(){
+      var ids = $(this).attr("dataid");
+      var megdiv = $("#content1read .messages-item");
+      console.log(megdiv)
+      var ids =[];
+      for(var i=0;i<megdiv.length;i++){
+        console.log(megdiv[i].id)
+        ids += megdiv[i].id+",";
+      }
+      ids = ids +"]";
+      var idss = ids.replace(",]","");
+      console.log(idss)
+      $({ids:idss})._Ajax({
+        url: "usernotice/api/batchUpdate/",
+        success: function (result) {
+                if (result.code==0) {
+                  location.reload();
+                }
+             }
+        });
+      });
+      
+      $(document).on("click",".del",function(){
+        var id = $(this).attr("dataid");
+        $({})._Ajax({
+          url: "usernotice/api/delete/"+id,
+          success: function (result) {
+                  if (result.code==0) {
+                    location.reload();
+                  }
+               }
+          }); 
+      })
+      $(document).on("click",".label-right",function(){
+        getnoReadMycase();
+         
+      })
+    
+      $(document).on("click",".label-left",function(){
+        getMycase();
+         
+      })
+      $(document).on("click",".msg-detail-btn",function(){
+                
+        msgDetail.showDataDetailDialog2($(this).attr("data-id"))
+   
+})
     }
   }
 })()
-userCenter.init()
+msgSytem.init()

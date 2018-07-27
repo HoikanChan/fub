@@ -11,7 +11,7 @@
 <meta content="" name="description" />
 <meta content="" name="author" />
 <link rel="stylesheet" href="${host}/public/basic-a300c0880e.css">
-<link rel="stylesheet" href="${host}/views/officeMessage/main-cdcc84c610.css">
+<link rel="stylesheet" href="${host}/views/officeMessage/main-875c033e6b.css">
 <script>
 var api = {
     //  host:"http://120.24.181.248:8080/",
@@ -92,7 +92,7 @@ function createXMLHTTPRequest()
     return xmlHttpRequest;
 }
 </script>
-<script src="${host}/public/basic-4501e28ec6.js"></script>
+<script src="${host}/public/basic-09c2e4dbf6.js"></script>
 </head>
 <body>
 <!-- header -->
@@ -102,15 +102,18 @@ function createXMLHTTPRequest()
 <div class="login-operating pull-right">
 <a class="login-btn" href="${host}/loginPage">【登录】</a>
 <a class="register-btn" id='register-btn' href="${host}/loginPage?reg=1">【注册】</a>
-<a class="lawer-enter" id='lower-btn' href="${host}/lawerLogin">【律所入口】</a>
+<a class="register-btn" id='register-btn' href="${host}/officeLoginPage?reg=1">【律所入口】</a>
 </div>
-<div class="checklogin"></div>
 <div class="user-operating pull-right" style="display:none;">
 <a class="user-center" href="${host}/userCenter">【个人中心】</a>
 <a class="user-logout">【退出】</a>
 </div>
 <div class="lawer-operating" pull-right style="display:none;">
-<a class="lawer-center" href="${host}/lawerCenter">【个人中心】</a>
+<a class="lawer-center" href="${host}/lawyerCenter">【个人中心】</a>
+<a class="user-logout">【退出】</a>
+</div>
+<div class="office-operating" pull-right style="display:none;">
+<a class="lawer-center" href="${host}/officeCenter">【个人中心】</a>
 <a class="user-logout">【退出】</a>
 </div>
 </div>
@@ -144,10 +147,10 @@ function createXMLHTTPRequest()
 </div>
 <!-- header end -->
 <!-- container -->
-<div class="clearfix officeCenter">
+<div class="clearfix usercenter">
 <div class="title-bar">
 <img src="${host}/assets/image/usercenter_bg.png" alt="" style="width: 100%;">
-<span class="page-title">我的财富</span>
+<span class="page-title">消息中心</span>
 </div>
 <div class="container">
 <div class="col-sm-1"></div>
@@ -184,7 +187,7 @@ function createXMLHTTPRequest()
 </aside>
 <div class="col-sm-8">
 <div class="content-container">
-<div class="page " id="message-center">
+<divid="message-center">
 <div class="message-center-content">
 <div class="tab">
 <input id="tab1" type="radio" name="tabs" checked>
@@ -195,7 +198,20 @@ function createXMLHTTPRequest()
 <label for="tab3">通讯录</label>
 <section id="content1" class="system-messages">
 <!-- system-messages-template -->
-</section>
+<div class="message-center-template system-message">
+<div class="subtab clear mb20">
+<input class="subtab1" id="system-tab1" type="radio" name="system-subtabs" checked>
+<label for="system-tab1" class="label-left">全部</label>
+<input class="subtab2" id="system-tab2" type="radio" name="system-subtabs">
+<label for="system-tab2" class="label-right">未读</label>
+<span class="setReaded">全部设为已读</span>
+</div>
+<session id="content1read"> </session>
+<div class="page-row clear">
+<div class="pager pull-right"> </div>
+</div>
+</div>
+</session>
 <section id="content2" class="personal-messages">
 <!-- personal-messages-template -->
 </section>
@@ -211,124 +227,38 @@ function createXMLHTTPRequest()
 <div class="col-sm-1"></div>
 </div>
 </div>
-<!-- message-center -->
-<script type="text/html" id="system-messages-template">
-<div class="subtab message-center-template">
-<input class="subtab1" id="system-tab1" type="radio" name="system-subtabs" checked>
-<label for="system-tab1" class="label-left">全部</label>
-<input class="subtab2" id="system-tab2" type="radio" name="system-subtabs">
-<label for="system-tab2" class="label-right">未读</label>
-<span class="setReaded">全部设为已读</span>
-<section id="content1"> {% each messages data%}
-<div class="messages-item">
+<div id="getcaseDeatil-modal" class="remodal" data-remodal-id="getcaseDeatil-modal">
+<div class="remodal-header">
+<div class="login-res-row">
+<div class="getService-title-btn"></div>
+<!-- <a class="login-btn register-title-btn pull-left" href="http://192.168.15.40:8080/cas/register?systemId=4e6f5d00-d023-11e7-a9e1-fb16d651f8ad&service=http://127.0.0.1:8090/cas">注册</a> -->
+</div>
+<button class="remodal-close closeModal" data-remodal-action="close" aria-label="Close"></button>
+</div>
+<div class="remodal-content">
+<!--登录表单-->
+<div class="getcaseDeatil-form"> </div>
+</div>
+</div>
+<script type="text/html" id="systemNews-result-templete"> {% each list data %} {% if data.isRead == 0 %}
+<div class="messages-item" id="{% data.id %}" data-id="{% data.id %}"> {% else %}
+<div class="messages-item hadreadicon" id="{% data.id %}" data-id="{% data.id %}"> {% /if %}
 <span class="message-title">
-<img src="${host}/assets/image/usercenter_icon_bell.png" alt="">{%data.name%}</span>
+<img src="${host}/assets/image/usercenter_icon_bell.png" alt="">{% data.noticeTitle %}</span>
 <span class="aside-bar">
-<span class="time">{%data.time%}</span>
+<span class="time">{% data.noticeTime %}</span>
 <span class="actions">
-<a href="#">查看</a>
-<a href="#">更多
+<a href="#" class="msg-detail-btn" data-id="{% data.id %}" data-remodal-target="getcaseDeatil-modal">查看</a>
+<a href="#" class="showmore">更多
 <span class="fa fa-chevron-down"></span>
+<div class="showdiv">
+<p class="hadread" dataid="{% data.id %}">设为已读</p>
+<p class="del" dataid="{% data.id %}">删除</p>
+</div>
 </a>
 </span>
 </span>
-</div> {% /each %} </section>
-<section id="content2"> {% each readedMessages data%}
-<div class="messages-item">
-<span class="message-title">
-<img src="${host}/assets/image/usercenter_icon_bell.png" alt="">{%data.name%}</span>
-<span class="aside-bar">
-<span class="time">{%data.time%}</span>
-<span class="actions">
-<a href="#">查看</a>
-<a href="#">更多
-<span class="fa fa-chevron-down"></span>
-</a>
-</span>
-</span>
-</div> {% /each %} </section>
-</div>
-<div class="pagination">
-<span>共{% loans.pages %}页，当前第
-<span id="current-page">1</span>页</span>
-<button class="prev ghost-border-btn ">上一页</button>
-<button class="next ghost-border-btn ">下一页</button>
-<input type="text"></input>
-<button class="jumpto border-btn">跳转</button>
-</div>
-</script>
-<script type="text/html" id="personal-messages-template">
-<div class="subtab message-center-template">
-<input class="subtab1" id="personal-tab1" type="radio" name="personal-subtabs" checked>
-<label for="personal-tab1" class="label-left">全部</label>
-<input class="subtab2" id="personal-tab2" type="radio" name="personal-subtabs">
-<label for="personal-tab2" class="label-right">未读</label>
-<span class="setReaded">全部设为已读</span>
-<section id="content1"> {% each messages data%}
-<div class="messages-item">
-<span class="message-title">
-<img src="${host}/assets/image/usercenter_icon_bell.png" alt="">{%data.name%}</span>
-<span class="aside-bar">
-<span class="time">{%data.time%}</span>
-<span class="actions">
-<a href="#">查看</a>
-<a href="#">更多
-<span class="fa fa-chevron-down"></span>
-</a>
-</span>
-</span>
-</div> {% /each %} </section>
-<section id="content2"> {% each readedMessages data%}
-<div class="messages-item">
-<span class="message-title">
-<img src="${host}/assets/image/usercenter_icon_bell.png" alt="">{%data.name%}</span>
-<span class="aside-bar">
-<span class="time">{%data.time%}</span>
-<span class="actions">
-<a href="#">查看</a>
-<a href="#">更多
-<span class="fa fa-chevron-down"></span>
-</a>
-</span>
-</span>
-</div> {% /each %} </section>
-</div>
-<div class="pagination">
-<span>共{% loans.pages %}页，当前第
-<span id="current-page">1</span>页</span>
-<button class="prev ghost-border-btn ">上一页</button>
-<button class="next ghost-border-btn ">下一页</button>
-<input type="text"></input>
-<button class="jumpto border-btn">跳转</button>
-</div>
-</script>
-<script type="text/html" id="contacts-template">
-<div class="subtab message-center-template">
-<div> {% each messages data%}
-<div class="messages-item">
-<span class="message-title">
-<img src="${host}/assets/image/usercenter_icon_person.png" alt="">{%data.name%}</span>
-<span class="aside-bar">
-<span class="time">{%data.time%}</span>
-<span class="actions">
-<a href="#">消息</a>
-<a href="#">更多
-<span class="fa fa-chevron-down"></span>
-</a>
-</span>
-</span>
-</div> {% /each %} </div>
-</div>
-<div class="pagination">
-<span>共{% loans.pages %}页，当前第
-<span id="current-page">1</span>页</span>
-<button class="prev ghost-border-btn ">上一页</button>
-<button class="next ghost-border-btn ">下一页</button>
-<input type="text"></input>
-<button class="jumpto border-btn">跳转</button>
-</div>
-</script>
-<!-- message-center -->
+</div> {% /each %} </script>
 <!-- container end -->
 <!-- footer -->
 <div class="footer_bar">
@@ -342,7 +272,7 @@ function createXMLHTTPRequest()
 </div>
 </div>
 <!-- footer end -->
-<script src="${host}/views/officeMessage/main-59f87174e8.js"></script>
+<script src="${host}/views/officeMessage/main-8871cfd1b7.js"></script>
 <!--登录注册模态框-->
 </body>
 </html>

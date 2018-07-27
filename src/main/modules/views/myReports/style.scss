@@ -311,29 +311,85 @@ aside {
           font-size: 16px;
           span {
             color: #ed7a39;
-            padding:0 5px;
+            padding: 0 5px;
           }
         }
       }
-      .content {
-        .content-item {
-          border-bottom: solid 1px $border-color;
-          &:last-child {
-            border-bottom: none;
-          }
-          .case-title {
-            font-weight: bold;
-            font-size: $subtitle-size;
-            padding: 20px 0;
-          }
-          .case-content {
-            margin-bottom: 12px;
-            font-size: $content-size;
-          }
-          .case-time {
-            color: $secondary-color;
+      .reports-list {
+        .content {
+          .content-item {
+            border-bottom: solid 1px $border-color;
+            &:last-child {
+              border-bottom: none;
+            }
+            .case-title {
+              font-weight: bold;
+              font-size: $subtitle-size;
+              padding: 20px 0;
+            }
+            .case-content {
+              margin-bottom: 12px;
+              font-size: $content-size;
+            }
+            .case-time {
+              color: $secondary-color;
+            }
           }
         }
+        .mutil-line-ellipsis {
+          height: 76px;
+          line-height: 25px;
+          overflow: hidden;
+        }
+        /*相当于之前的prop*/
+        .mutil-line-ellipsis:before {
+          content: '';
+          float: left;
+          width: 5px; /*缩小宽度为5px，其余属性不变*/
+          height: 76px;
+        }
+        /*相当于之前的main*/
+        .mutil-line-ellipsis > :first-child {
+          float: right;
+          width: 100%;
+          margin-left: -5px; /*让main元素左移5px，这样main元素在宽度上就完全占满了父元素；*/
+          word-break: break-all;
+        }
+        /*相当于之前的realEnd*/
+        .mutil-line-ellipsis:after {
+          content: '...';
+          box-sizing: content-box;
+          float: right;
+          position: relative;
+          width: 76px;
+          height: 25px;
+          top: -25px; /*等于高度的负值，就是文字的行高*/
+          left: 100%;
+          /*而设置margin-left: -76px、padding-right: 5px则是为了让realend元素的盒模型的最终宽度计算为5px。*/
+          margin-left: -76px;
+          padding-right: 5px;
+          font-size: 13px;
+          text-align: right;
+          background: linear-gradient(
+            to right,
+            rgba(255, 255, 255, 0),
+            #ffffff 40px
+          );
+        }
+      }
+    }
+    .reports-detail {
+      display: none;
+      h2{
+        text-align: center;
+        background: #eaeaea;
+        padding: 24px;
+        font-weight: 600;
+      }
+      p{
+        padding: 24px;
+        line-height: 32px;
+        font-size: 16px;
       }
     }
   }
@@ -377,25 +433,25 @@ aside {
     align-items: center;
     padding: 12px 0;
     justify-content: space-between;
-    .form-group{
-      .control-label{
-        padding:5px 0 0 0;
+    .form-group {
+      .control-label {
+        padding: 5px 0 0 0;
       }
       .col-sm-9 {
-        padding:0;
+        padding: 0;
         .col-md-5.form-control {
-          width:41.66666667%;
-          padding:0;
+          width: 41.66666667%;
+          padding: 0;
         }
-        span{
-          padding:5px;
+        span {
+          padding: 5px;
         }
       }
     }
-    p{
+    p {
       .totalNum {
         color: #ed7a39;
-        padding:0 5px;
+        padding: 0 5px;
       }
     }
   }
@@ -464,27 +520,27 @@ aside {
           &:hover {
             color: $theme-color;
           }
-          .showdiv{
+          .showdiv {
             display: none;
             position: absolute;
-            top:20px;
-            left:-25px;
+            top: 20px;
+            left: -25px;
             background: #fff;
-            width:90px;
-            padding:5px;
+            width: 90px;
+            padding: 5px;
             z-index: 9999;
-            border:1px solid #ddd;
-            p{
+            border: 1px solid #ddd;
+            p {
               line-height: 18px;
-              color:#149cd3;
-            
-              &:hover{
-                color:#ed7a39;
+              color: #149cd3;
+
+              &:hover {
+                color: #ed7a39;
               }
             }
           }
-          &:hover .showdiv{
-              display: block;
+          &:hover .showdiv {
+            display: block;
           }
         }
       }

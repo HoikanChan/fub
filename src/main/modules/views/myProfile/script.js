@@ -4,7 +4,7 @@ var userCenter = (function() {
   function getMycase(){
      
     var params = {
-      clientId:clidentId,
+      clientId:clientId,
       sidx : "createTime",
       order : "desc"
     }

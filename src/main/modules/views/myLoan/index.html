@@ -1,5 +1,6 @@
 
 <div class="clearfix usercenter">
+    {{ include '../~modal/downloadModal/main'}}
     <div class="title-bar">
       <img src="dist/assets/image/usercenter_bg.png" alt="" style="width: 100%;">
       <span class="page-title">法务贷</span>
@@ -63,9 +64,8 @@
                         <th class="column-title">
                         </th>
                         <th class="column-title">订单编号 </th>
-                        <th class="column-title">案件名称 </th>
-                        <th class="column-title">律师费</th>
-                        <th class="column-title">代理律师 </th>
+                        <th class="column-title">贷款金额 </th>
+                        <th class="column-title">委托律师 </th>
                         <th class="column-title">联系电话 </th>
                         <th class="column-title">状态 </th>
                         <th class="column-title">订单时间 </th>
@@ -104,19 +104,18 @@
           <input type="checkbox" class="flat checkbox" name="table_records">
         </td>
         <td class="column-content">{% da.orderSn %}</td>
-        <td class="column-content ">{% da.caseName %} </td>
-        {% if da.lawyerPrice %}
-        <td class="column-content ">{% da.lawyerPrice %} </td>
+        <td class="column-content ">{% da.loanPrice %} </td>
+        <td class="column-content ">{% da.lawyerName %} </td>
+        {% if da.lawyerMobile %}
+        <td class="column-content">{% da.lawyerMobile %} </td>
         {% else %}
-        <td class="column-content "></td>
+        <td class="column-content"></td>
         {% /if %}
-        <td class="column-content">{% da.lawyerName %} </td>
-        <td class="column-content">{% da.lawyerMobile %}</td>
-        <td class="column-content">{% da.trialRound %}</td>
+        <td class="column-content">{% da.loanStatus | loanType %}</td>
         <td class="a-right a-right ">{% da.createTime | dateFormat 'yyyy'%}-{% da.createTime | dateFormat 'MM'%}-{% da.createTime | dateFormat 'dd'%}</td>
         <td class=" last">
-          <a href="#">详情 </a>
-          <a href="#">下载 </a>
+          <a href="#" data-remodal-target="download-modal">文件 </a>
+          <a href="#">评价 </a>
           <span class="showmore" data-id="{% da.sourceId %}" data-status="{% da.sourceId %}">更多</span>
           <span class="fa fa-chevron-down"></span>
         </td>

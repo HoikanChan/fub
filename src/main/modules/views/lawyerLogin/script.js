@@ -18,8 +18,9 @@ var _login = function () {
                 $(".login-bg").height(winH-125).width(winW);  
             })
             $(".registerCode-btn img").attr("src",api.host+"web/userinfo/registerCode.jpg");
-           
-            if (getCookie("mobilePhone")&&getCookie("rememberUser")){
+         
+            $("#header-nav").hide();
+            if (getCookie("mobile")&&getCookie("type")){
             
               //  $(".user-operating").find(".user-name").html(getCookie("mobilePhone"));
               //  $(".user-operating").find("ul").append(userOper);
@@ -27,10 +28,14 @@ var _login = function () {
 
                 $(".user-operating").html("")
             }
-            if (getCookie("mobilePhone") && getCookie("password")) {
-                $("#login-form input[name='mobilePhone']").val(getCookie("mobilePhone"));
-                $("#login-form input[name='password']").val(getCookie("password"));
+
+            if (getCookie("mpt") && getCookie("__")) {
+                $("#login-form input[name='mobile']").val(getCookie("mpt"));
+                $("#login-form input[name='password']").val(base.decode(getCookie("__")));
                 $("#remember-psw").prop("checked", true);
+            }else{
+                $("#login-form input[name='mobile']").val("");
+                $("#login-form input[name='password']").val("");
             }
             
            
@@ -105,38 +110,35 @@ var _login = function () {
 
         //登录请求
         function loginAjax() {
-            var hash;
-            if (getCookie("password")) {
-                hash =$("#login-form input[name='password']").val();
-               
-            } else {
-                hash = hex_sha256($("#login-form input[name='password']").val())
-             
-            }
-            var params = {
-                    mobilePhone: $("#login-form input[name='mobilePhone']").val(),
-                    password: hash,
-                    type:$("#login-form #remember-psw").prop("checked")?2:"",
-            }
-            
-            if ($("#login-form #remember-psw").prop("checked")) {
-                setCookie("mobilePhone", $("#login-form input[name='mobilePhone']").val(), 7);
-                setCookie("password", hash, 7);
-                setCookie("rememberUser", 1, 7);
-            } else {
-                delCookie("mobilePhone");
-                delCookie("password");
-                setCookie("rememberUser",1);
-            }
+          
+            var hash,mobilePhone;
+            mobilePhone = $("#login-form input[name='mobile']").val();
+            hash = $("#login-form input[name='password']").val();
+        var params = {
+                mobile:mobilePhone,
+                password: hash,
+                type:$("#login-form #remember-psw").prop("checked")?2:"",
+        }
+        
+        if ($("#login-form #remember-psw").prop("checked")) {
+            setCookie("mpt", $("#login-form input[name='mobile']").val(), 7);
+            setCookie("__",base.encode(hash), 7);
+           
+            setCookie("type", 1, 7);
+        } else {
+            delCookie("mpt");
+            delCookie("__");
+            setCookie("type",1);
+        }
             $(params)._Ajax({
                     url: "web/userinfo/login",
                     success: function (result) {
                             if (result.code==1) {
-                                toastr.success(result.msg);
+                            sessionStorage.setItem("userType",result.user.userType);
                            
-                           
-                           //     req.session.user=result.user.mobile;
-                                self.location=document.referrer; 
+                           console.log(result.user.userType)
+                         
+                         //       self.location=document.referrer; 
                                 //判断没有登录，然后用户登录成功后调用之前的回调函数
                                
                             } else {
@@ -198,7 +200,7 @@ var _login = function () {
                             toastr.success("注册成功")
                         }else {
                           
-                            toastr.warning(result.message)
+                            toastr.warning(result.msg)
                         }
                 }
         })
