@@ -1,6 +1,7 @@
 var userCenter = (function() {
   var page = 1
   var inquery_validate
+  var listData
   var start = {
     isinitVal: true,
     initDate: [{ DD: '-7' }, true],
@@ -25,36 +26,37 @@ var userCenter = (function() {
       start.maxDate = elem.val.replace(/\//g, '-') //将结束日的初始值设定为开始日的最大日期
     }
   }
-  function getMycase() {
+  function getMyloan() {
     var params = {
       clientId: clientId,
       sidx: 'createTime',
       order: 'desc'
     }
 
-    $('#my-cases .pager').tablePager({
+    $('#my-loans .pager').tablePager({
       url: 'loan/queryClientLoanOrderList',
       searchParam: params,
       success: function(result) {
         if (result.code == 0) {
           if (result) {
-            var html = template('case-result-templete', result.data)
-
-            $('.my-case-box').html(html)
+            var html = template('loan-result-templete', result.data)
+            listData = result.data.list
+            $('.totalNum').html(result.data.totalCount)
+            $('.my-loan-box').html(html)
             if (result.data.totalCount < 10) {
               $('.page-row').hide()
             } else {
               $('.page-row').show()
             }
             if (result.data.totalCount == 0) {
-              $('.my-cases-box').html(
+              $('.my-loans-box').html(
                 "<P class='noresult'>抱歉，没有相关案件</P>"
               )
             }
           } else {
             toastr.warning(result.msg)
           }
-          $('.my-cases-content .totalNum').text(result.data.totalCount)
+          $('.my-loans-content .totalNum').text(result.data.totalCount)
         }
       }
     })
@@ -90,47 +92,40 @@ var userCenter = (function() {
   })
   return {
     init: function() {
-      getMycase()
+      getMyloan()
       $(document).on('click', '.showmore', function() {
-        var caseid = $(this).attr('data-id')
-        $({ caseId: caseid })._Ajax({
-          url: 'casetrial/queryCaseTrial',
+        var loanid = $(this).attr('data-id')
+        // 根据loanid在loan列表查找loanStatus
+        var loanStatus = listData.filter(function(loan) {
+          return Number(loanid) === Number(loan.id)
+        })[0].loanStatus
+        $({ loanId: loanid })._Ajax({
+          url: 'loanauditlog/AuditLogByLoanId',
           success: function(result) {
-            var html = [],
-              html2 = [],
-              html3 = [],
-              html4 = []
+            var html = []
             if (result.code == 0) {
-              var data = result.trialList
-              html =
-                "<div class='process-img'>" +
-                "<div class='grap-bg'>" +
-                "<div class='org-bg-one'>" +
-                '</div>' +
-                "<div class='org-bg-two'>" +
-                '</div>' +
-                "<div class='org-bg-three'>" +
-                '</div>' +
-                "<div class='org-bg-four'>" +
-                '</div>' +
-                "<div class='org-bg-five'>" +
-                '</div>' +
-                '</div>' +
-                '<div>'
+              var data = result.list
               for (var i = 0; i < data.length; i++) {
-                html2 +=
+                html +=
                   "<div class='pro-tex'>" +
-                  data[i].trialRound +
+                  data[i].desc +
                   '<span>' +
-                  data[i].time +
+                  data[i].createTime +
                   '</span></div>'
               }
-
-              $('#tr' + caseid + ' .process-text').html(html2)
-              $('#tr' + caseid).toggle()
+              $('#tr' + loanid + ' .steps-box .step').each(function(index) {
+                if (index < loanStatus + 1) {
+                  $(this).addClass('active-step')
+                }
+              })
+              $('#tr' + loanid + ' .process-text').html(html)
+              $('#tr' + loanid).toggle()
             }
           }
         })
+      })
+      $(document).on('click', '.check-file-btn', function() {
+        downloadModal.showModal($(this).attr('data-id'))
       })
     }
   }

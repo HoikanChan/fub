@@ -1,7 +1,7 @@
 <div id="download-modal" class="remodal" data-remodal-id="download-modal">
   <div class="remodal-header">
     <div class="login-res-row">
-      <div class="title">查看文件</div>
+      <div class="title getService-title-btn">查看文件</div>
     </div>
     <button class="remodal-close closeModal" data-remodal-action="close" aria-label="Close"></button>
   </div>
@@ -9,6 +9,11 @@
 
     <div class="file-table">
 
+    </div>
+    <div class="page-row clear">
+      <div class="pager pull-right">
+
+      </div>
     </div>
   </div>
 </div>
@@ -28,25 +33,16 @@
         <tbody>
             {% each files  data%}
               <tr class="even pointer">
-                <td class="column-content ">{% data.name %} </td>
-                <td class="column-content ">{% data.lawyer %} </td>
-                <td class="a-right a-right ">{% data.time %}</td>
+                <td class="column-content ">{% data.fileName %} </td>
+                <td class="column-content ">{% lawyerName %} </td>
+                <td class="a-right a-right ">{% data.fileTime %}</td>
                 <td class=" last">
-                  <a href="#">预览</a>
-                  <a href="#">下载</a>
+                  <a  data-path="{% data.filePath %}" id="preview">预览</a>
+                  <a  href="{% host + data.filePath %}" download id="download">下载</a>
                 </td>
               </tr>
             {%/each %}
           </tbody>
       </table>
-    </div>
-    <div class="pagination">
-        <span>共{% pages %}页，当前第
-          <span id="current-page">1</span>页</span>
-        <button class="prev ghost-border-btn ">上一页</button>
-        <button class="next ghost-border-btn ">下一页</button>
-        <input type="text"></input>
-        <button class="jumpto border-btn">跳转</button>
-      </div>
     </div>
 </script>
