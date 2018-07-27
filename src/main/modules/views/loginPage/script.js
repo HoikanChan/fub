@@ -27,6 +27,9 @@ var _login = function () {
             })
            
            $("#header-nav").hide();
+           $("#registered-form input[name='password']").val("");
+           $("#registered-form input[name='mobile']").val("");
+           $("#registered-form input[name='code']").val("");
             if (getCookie("mobile")&&getCookie("type")){
             
               //  $(".user-operating").find(".user-name").html(getCookie("mobilePhone"));
@@ -35,10 +38,14 @@ var _login = function () {
 
                 $(".user-operating").html("")
             }
-            if (getCookie("mpt") && getCookie("__")) {
+            if (getCookie("mpt") && getCookie("__")){
                 $("#login-form input[name='mobile']").val(getCookie("mpt"));
                 $("#login-form input[name='password']").val(base.decode(getCookie("__")));
                 $("#remember-psw").prop("checked", true);
+            }else{
+                $("#login-form input[name='mobile']").val("");
+                $("#login-form input[name='password']").val("");
+                $("#remember-psw").prop("checked", false);
             }
               
             //表单验证

@@ -5,13 +5,10 @@ var _login = function () {
     console.log(urlparam)
     $(function () {
         //    checkLogin();
-            if(urlparam == "legalLoan"){
-                $("#login-modal-box .login-title-btn").trigger("click");
-            }
-            if(urlparam == "reg=1"){
-                $(".register-title-btn").trigger("click");
-            }
            
+            $("#registered-form input[name='password']").val("");
+            $("#registered-form input[name='mobile']").val("");
+            $("#registered-form input[name='code']").val("");
             var boxh = $("#login-modal-box").innerHeight();
             var boxw = $("#login-modal-box").innerWidth();
             $(".login-bg").height(winH-205).width(winW); 
@@ -26,46 +23,46 @@ var _login = function () {
             })
            
            $("#header-nav").hide();
-            if (getCookie("mobile")&&getCookie("rememberUser")){
+            // if (getCookie("mobile")&&getCookie("rememberUser")){
             
-              //  $(".user-operating").find(".user-name").html(getCookie("mobilePhone"));
-              //  $(".user-operating").find("ul").append(userOper);
-                $(".login-operating").html("");
+            //   //  $(".user-operating").find(".user-name").html(getCookie("mobilePhone"));
+            //   //  $(".user-operating").find("ul").append(userOper);
+            //     $(".login-operating").html("");
 
-                $(".user-operating").html("")
-            }
-            if (getCookie("mobile") && getCookie("password")) {
-                $("#login-form input[name='mobile']").val(getCookie("mobile"));
-                $("#login-form input[name='password']").val(getCookie("password"));
-                $("#remember-psw").prop("checked", true);
-            }
+            //     $(".user-operating").html("")
+            // }
+            // if (getCookie("mobile") && getCookie("password")) {
+            //     $("#login-form input[name='mobile']").val(getCookie("mobile"));
+            //     $("#login-form input[name='password']").val(getCookie("password"));
+            //     $("#remember-psw").prop("checked", true);
+            // }
               
             //表单验证
-            login_validate = $("#login-form").validate({
-                    rules: {
-                        mobile: {
-                            required: true,
-                            account:true
-                        },
-                        password: {
-                            required: true,
-                            password:false,
-                        }
-                    },
-                    messages: {
-                        mobile: {
-                            required: "请输入有效的手机号码",
-                            account:"请输入正确的手机号码以13X 15X 18X 14X 17X号段开头"
-                        },
-                        password: {
-                            required: "请输入密码",
-                            password:"长度为6-16位，由字母和数字(不能以下划线开头、结尾)组合，区分大小写，不能为纯数字"
-                        }
-                    },
-                    errorPlacement: function (error, element) {
-                        element.siblings(".error-div").html(error)
-                    },
-            });
+            // login_validate = $("#login-form").validate({
+            //         rules: {
+            //             mobile: {
+            //                 required: true,
+            //                 account:true
+            //             },
+            //             password: {
+            //                 required: true,
+            //                 password:false,
+            //             }
+            //         },
+            //         messages: {
+            //             mobile: {
+            //                 required: "请输入有效的手机号码",
+            //                 account:"请输入正确的手机号码以13X 15X 18X 14X 17X号段开头"
+            //             },
+            //             password: {
+            //                 required: "请输入密码",
+            //                 password:"长度为6-16位，由字母和数字(不能以下划线开头、结尾)组合，区分大小写，不能为纯数字"
+            //             }
+            //         },
+            //         errorPlacement: function (error, element) {
+            //             element.siblings(".error-div").html(error)
+            //         },
+            // });
             registered_validate = $("#registered-form").validate({
                 rules: {
                     mobile : {
@@ -176,9 +173,10 @@ var _login = function () {
            success:function (result) {
             if (result.code == 0) {
                 $("#registered-form")[0].reset();
-                $("#login-modal-box .login-title-btn").trigger("click");
+                $("#registered-form")[1].reset();  
+                $("#registered-form")[2].reset();
+                self.location= api.host+"loginPage";  
                
-                toastr.success(result.msg)
             }else {
                 toastr.warning(result.msg)
             }
@@ -188,61 +186,61 @@ var _login = function () {
       
         //登录请求
        
-        function loginAjax() {
-            var hash,mobilePhone;
-                mobilePhone = $("#login-form input[name='mobile']").val();
-                hash = $("#login-form input[name='password']").val();
-            var params = {
-                    mobile:mobilePhone,
-                    password: hash,
-                    type:$("#login-form #remember-psw").prop("checked")?2:"",
-            }
+        // function loginAjax() {
+        //     var hash,mobilePhone;
+        //         mobilePhone = $("#login-form input[name='mobile']").val();
+        //         hash = $("#login-form input[name='password']").val();
+        //     var params = {
+        //             mobile:mobilePhone,
+        //             password: hash,
+        //             type:$("#login-form #remember-psw").prop("checked")?2:"",
+        //     }
             
-            if ($("#login-form #remember-psw").prop("checked")) {
-                setCookie("mobile", $("#login-form input[name='mobile']").val(), 7);
-                setCookie("password", hash, 7);
-                setCookie("rememberUser", 1, 7);
-            } else {
-                delCookie("mobile");
-                delCookie("password");
-                setCookie("rememberUser",1);
-            }
-            $(params)._Ajax({
-                    url: "user/login",
-                    success: function (result) {
-                            if (result.code==0) {
+        //     if ($("#login-form #remember-psw").prop("checked")) {
+        //         setCookie("mobile", $("#login-form input[name='mobile']").val(), 7);
+        //         setCookie("password", hash, 7);
+        //         setCookie("rememberUser", 1, 7);
+        //     } else {
+        //         delCookie("mobile");
+        //         delCookie("password");
+        //         setCookie("rememberUser",1);
+        //     }
+        //     $(params)._Ajax({
+        //             url: "user/login",
+        //             success: function (result) {
+        //                     if (result.code==0) {
                                
-                              window.sessionStorage.setItem("mobile", result.user.mobile);
-                              sessionStorage.setItem("userid", result.user.id);
+        //                       window.sessionStorage.setItem("mobile", result.user.mobile);
+        //                       sessionStorage.setItem("userid", result.user.id);
                               
-                            if(urlparam == "legalLoan"){
+        //                     if(urlparam == "legalLoan"){
 
-                                self.location = api.host+"legalLoan";
-                            }else{
-                               //判断没有登录，然后用户登录成功后调用之前的回调函数
-                             self.location=document.referrer;  
-                            }
+        //                         self.location = api.host+"legalLoan";
+        //                     }else{
+        //                        //判断没有登录，然后用户登录成功后调用之前的回调函数
+        //                      self.location=document.referrer;  
+        //                     }
                                 
-                            } else {
-                                toastr.warning(result.msg)
-                            }
-                    }
-            })
-        };
+        //                     } else {
+        //                         toastr.warning(result.msg)
+        //                     }
+        //             }
+        //     })
+        // };
     return {
         init: function () {
-                    $(document).on("click", "#login-modal-box .login-title-btn", function () {
-                            $(this).addClass("current").siblings(".current").removeClass("current");
-                            $("#login-modal-box #registered-form").hide();
-                            $("#login-modal-box #login-form").show();
-                            $("#login-modal-box .remodal-confirm").html("登录");
-                    });
-                    $(document).on("click", "#login-modal-box .register-title-btn", function () {
-                            $(this).addClass("current").siblings(".current").removeClass("current");
-                                $("#login-modal-box #login-form").hide();
-                                $("#login-modal-box #registered-form").show();
-                                $("#login-modal-box .remodal-confirm").html("注册");
-                    });
+                    // $(document).on("click", "#login-modal-box .login-title-btn", function () {
+                    //         $(this).addClass("current").siblings(".current").removeClass("current");
+                    //         $("#login-modal-box #registered-form").hide();
+                    //         $("#login-modal-box #login-form").show();
+                    //         $("#login-modal-box .remodal-confirm").html("登录");
+                    // });
+                    // $(document).on("click", "#login-modal-box .register-title-btn", function () {
+                    //         $(this).addClass("current").siblings(".current").removeClass("current");
+                    //             $("#login-modal-box #login-form").hide();
+                    //             $("#login-modal-box #registered-form").show();
+                    //             $("#login-modal-box .remodal-confirm").html("注册");
+                    // });
                    
                 $(document).on("click",".validateCode-btn",function(){
                     getMessage();
@@ -253,34 +251,25 @@ var _login = function () {
                
                 $(document).on("click", ".remodal-confirm", function () {
                         jude=false
-                        if (!$("#login-modal-box #login-form").is(":hidden")) { 
-                            if (login_validate.form()) {
-                                        loginAjax();
-                                    
-                                    }
-                            }else if (!$("#login-modal-box #registered-form").is(":hidden")){
-                                
-                                if (registered_validate.form()) {
-                                   
+                      
                                         registerAjax();
-                                    }
-                            }
+                           
                     });
              
                   //多选框
-                    $(document).on("click", ".checkbox-input input", function (e) {
-                            e.stopPropagation();
-                            if ($(this).prop("checked") == true) {
-                            $(this).parent().addClass("checkbox-checked-input");
-                            } else {
-                            $(this).parent().removeClass("checkbox-checked-input");
-                            }
-                    });
-                    $(document).on("keydown", "#login-form input[name='password']", function (e) {
-                        if (e.which != 13) {
-                            delCookie("password");
-                        }
-                    })
+                    // $(document).on("click", ".checkbox-input input", function (e) {
+                    //         e.stopPropagation();
+                    //         if ($(this).prop("checked") == true) {
+                    //         $(this).parent().addClass("checkbox-checked-input");
+                    //         } else {
+                    //         $(this).parent().removeClass("checkbox-checked-input");
+                    //         }
+                    // });
+                    // $(document).on("keydown", "#login-form input[name='password']", function (e) {
+                    //     if (e.which != 13) {
+                    //         delCookie("password");
+                    //     }
+                    // })
                     //enter登录
                     $(document).on("keydown", function (e) {
                         e.stopPropagation();
@@ -289,9 +278,9 @@ var _login = function () {
                             $("#login-modal-box [data-remodal-action='confirm']").trigger("click");
                         }
                     });
-                    $(".noaccout p").click(function(){
-                        $(".register-title-btn").trigger("click");
-                    })
+                    // $(".noaccout p").click(function(){
+                    //     $(".register-title-btn").trigger("click");
+                    // })
 
 
                     var input=$('[name="password"]');
