@@ -258,6 +258,29 @@ template.defaults.imports.getHours = function (date) {
     var date = new Date(date);
     return date.getHours();
 };
+template.defaults.imports.loanType = function (type) {
+    switch(type){
+        case  -2:return '取消' ;
+        case -1:return '驳回' ;
+        case 0:return '已申请'; 
+        case 1:return '律师初审完成'; 
+        case 2:return '团队复审完成'; 
+        case 3:return '平台审核完成'; 
+        case 4:return '银行审核完成'; 
+        case 5:return '已放款' ;
+        case 6:return '已完结' ;
+        case 7:return '逾期';
+        default:return '';
+    }
+    return conversionTime(date,format)
+};
+template.defaults.imports.convertNull = function (data) {
+    if(data === null || data === undefined){
+        return '';
+    }else{
+        return data;
+    }
+}
 //将字符串转换成对象
 template.defaults.imports.beObj = function (data, exportData) {
     var a = JSON.parse(data);
@@ -623,7 +646,7 @@ function decodeUnicode(str) {
 
 
 function jumpTo(p, url) {
-    var mobileItem= getCookis("JSESSIONID");
+    var mobileItem= sessionStorage.getItem("mobile");
   
     if (mobileItem == undefined) {
     p.attr("href", api.host+"loginPage?legalLoan");
@@ -636,7 +659,9 @@ function infoJumpTo() {
     jumpTo($info, api.host+"legalLoan"); 
  }
  
- var clidentId =  sessionStorage.getItem("clientid")
+ var clientId =  sessionStorage.getItem("clientid");
+ var usertype = sessionStorage.getItem("userType");
+ var userid = sessionStorage.getItem("userid");
  var phone = window.sessionStorage.getItem("mobile");
  $({mobile:phone})._Ajax({
      url:"client/queryByMobile",
@@ -645,12 +670,10 @@ function infoJumpTo() {
          
          sessionStorage.setItem("clientid",result.client.clientId)
         }else{
-          
-
         }
-       
      }
  })
+
 //获取url中参数值
  function GetRequest() {
     var url = decodeURI(window.location.search); //获取url中"?"符后的字串
@@ -745,7 +768,14 @@ $(function(){
    
     // })
    
-   
+    console.log(usertype)
+    if(usertype==0){
+        $(".user-operating .user-center").attr("href",api.host+"userCenter")   
+    }else if(usertype==1){
+        $(".user-operating .user-center").attr("href",api.host+"lawyerCenter");  
+    }else{
+        $(".user-operating .user-center").attr("href",api.host+"officeCenter");  
+    }
 })
 
 

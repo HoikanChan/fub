@@ -92,7 +92,7 @@ function createXMLHTTPRequest()
     return xmlHttpRequest;
 }
 </script>
-<script src="${host}/public/basic-4501e28ec6.js"></script>
+<script src="${host}/public/basic-09c2e4dbf6.js"></script>
 </head>
 <body>
 <!-- header -->
@@ -102,15 +102,18 @@ function createXMLHTTPRequest()
 <div class="login-operating pull-right">
 <a class="login-btn" href="${host}/loginPage">【登录】</a>
 <a class="register-btn" id='register-btn' href="${host}/loginPage?reg=1">【注册】</a>
-<a class="lawer-enter" id='lower-btn' href="${host}/lawerLogin">【律所入口】</a>
+<a class="register-btn" id='register-btn' href="${host}/officeLoginPage?reg=1">【律所入口】</a>
 </div>
-<div class="checklogin"></div>
 <div class="user-operating pull-right" style="display:none;">
 <a class="user-center" href="${host}/userCenter">【个人中心】</a>
 <a class="user-logout">【退出】</a>
 </div>
 <div class="lawer-operating" pull-right style="display:none;">
-<a class="lawer-center" href="${host}/lawerCenter">【个人中心】</a>
+<a class="lawer-center" href="${host}/lawyerCenter">【个人中心】</a>
+<a class="user-logout">【退出】</a>
+</div>
+<div class="office-operating" pull-right style="display:none;">
+<a class="lawer-center" href="${host}/officeCenter">【个人中心】</a>
 <a class="user-logout">【退出】</a>
 </div>
 </div>
@@ -352,7 +355,7 @@ function createXMLHTTPRequest()
 </div>
 </div>
 <!-- footer end -->
-<script src="${host}/views/lawyerTeam/main-e50c28ac80.js"></script>
+<script src="${host}/views/lawyerTeam/main-1357de94d3.js"></script>
 <!--登录注册模态框-->
 </body>
 </html>

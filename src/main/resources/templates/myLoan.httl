@@ -11,7 +11,7 @@
 <meta content="" name="description" />
 <meta content="" name="author" />
 <link rel="stylesheet" href="${host}/public/basic-a300c0880e.css">
-<link rel="stylesheet" href="${host}/views/myLoan/main-e8c803bded.css">
+<link rel="stylesheet" href="${host}/views/myLoan/main-1c8c68789e.css">
 <script>
 var api = {
     //  host:"http://120.24.181.248:8080/",
@@ -92,7 +92,7 @@ function createXMLHTTPRequest()
     return xmlHttpRequest;
 }
 </script>
-<script src="${host}/public/basic-4501e28ec6.js"></script>
+<script src="${host}/public/basic-09c2e4dbf6.js"></script>
 </head>
 <body>
 <!-- header -->
@@ -102,15 +102,18 @@ function createXMLHTTPRequest()
 <div class="login-operating pull-right">
 <a class="login-btn" href="${host}/loginPage">【登录】</a>
 <a class="register-btn" id='register-btn' href="${host}/loginPage?reg=1">【注册】</a>
-<a class="lawer-enter" id='lower-btn' href="${host}/lawerLogin">【律所入口】</a>
+<a class="register-btn" id='register-btn' href="${host}/officeLoginPage?reg=1">【律所入口】</a>
 </div>
-<div class="checklogin"></div>
 <div class="user-operating pull-right" style="display:none;">
 <a class="user-center" href="${host}/userCenter">【个人中心】</a>
 <a class="user-logout">【退出】</a>
 </div>
 <div class="lawer-operating" pull-right style="display:none;">
-<a class="lawer-center" href="${host}/lawerCenter">【个人中心】</a>
+<a class="lawer-center" href="${host}/lawyerCenter">【个人中心】</a>
+<a class="user-logout">【退出】</a>
+</div>
+<div class="office-operating" pull-right style="display:none;">
+<a class="lawer-center" href="${host}/officeCenter">【个人中心】</a>
 <a class="user-logout">【退出】</a>
 </div>
 </div>
@@ -145,6 +148,52 @@ function createXMLHTTPRequest()
 <!-- header end -->
 <!-- container -->
 <div class="clearfix usercenter">
+<div id="download-modal" class="remodal" data-remodal-id="download-modal">
+<div class="remodal-header">
+<div class="login-res-row">
+<div class="title">查看文件</div>
+</div>
+<button class="remodal-close closeModal" data-remodal-action="close" aria-label="Close"></button>
+</div>
+<div class="remodal-content">
+<div class="file-table"> </div>
+</div>
+</div>
+<script type="text/html" id="file-table-template">
+<div class="table-responsive table-bordered table-hover">
+<table class="table table-striped jambo_table bulk_action">
+<thead>
+<tr class="headings">
+<th class="column-title">文件名称 </th>
+<th class="column-title">申请律师 </th>
+<th class="column-title">提交时间</th>
+<th class="column-title">
+<span class="nobr">操作</span>
+</th>
+</tr>
+</thead>
+<tbody> {% each files data%}
+<tr class="even pointer">
+<td class="column-content ">{% data.name %} </td>
+<td class="column-content ">{% data.lawyer %} </td>
+<td class="a-right a-right ">{% data.time %}</td>
+<td class=" last">
+<a href="#">预览</a>
+<a href="#">下载</a>
+</td>
+</tr> {%/each %} </tbody>
+</table>
+</div>
+<div class="pagination">
+<span>共{% pages %}页，当前第
+<span id="current-page">1</span>页</span>
+<button class="prev ghost-border-btn ">上一页</button>
+<button class="next ghost-border-btn ">下一页</button>
+<input type="text"></input>
+<button class="jumpto border-btn">跳转</button>
+</div>
+</div>
+</script>
 <div class="title-bar">
 <img src="${host}/assets/image/usercenter_bg.png" alt="" style="width: 100%;">
 <span class="page-title">法务贷</span>
@@ -155,7 +204,7 @@ function createXMLHTTPRequest()
 <nav class="card">
 <ul class="navbar-nav mr-auto">
 <li class="nav-item">
-<a class="nav-link nav-item-head active" id="indexpage" href="#">账户首页 </a>
+<a class="nav-link nav-item-head active" id="indexpage" href="${host}/userCenter">账户首页 </a>
 </li>
 <li class="nav-item dropdown">
 <a class=" nav-item-head" href="#"> 我的事务 </a>
@@ -182,7 +231,7 @@ function createXMLHTTPRequest()
 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 <div class="dropdown-content">
 <a class="dropdown-item nav-link" id="my-profile" href="${host}/myProfile">资料管理</a>
-<a class="dropdown-item nav-link" href="${host}/lawyer">律师认证</a>
+<a class="dropdown-item nav-link" id="my-lawyer" href="${host}/mylawyerCetification">律师认证</a>
 <a class="dropdown-item nav-link" id="message-center" href="${host}/messageSystem">消息中心</a>
 </div>
 </div>
@@ -241,9 +290,8 @@ function createXMLHTTPRequest()
 <tr class="headings">
 <th class="column-title"> </th>
 <th class="column-title">订单编号 </th>
-<th class="column-title">案件名称 </th>
-<th class="column-title">律师费</th>
-<th class="column-title">代理律师 </th>
+<th class="column-title">贷款金额 </th>
+<th class="column-title">委托律师 </th>
 <th class="column-title">联系电话 </th>
 <th class="column-title">状态 </th>
 <th class="column-title">订单时间 </th>
@@ -271,16 +319,15 @@ function createXMLHTTPRequest()
 <td class="a-center ">
 <input type="checkbox" class="flat checkbox" name="table_records"> </td>
 <td class="column-content">{% da.orderSn %}</td>
-<td class="column-content ">{% da.caseName %} </td> {% if da.lawyerPrice %}
-<td class="column-content ">{% da.lawyerPrice %} </td> {% else %}
-<td class="column-content "></td> {% /if %}
-<td class="column-content">{% da.lawyerName %} </td>
-<td class="column-content">{% da.lawyerMobile %}</td>
-<td class="column-content">{% da.trialRound %}</td>
+<td class="column-content ">{% da.loanPrice %} </td>
+<td class="column-content ">{% da.lawyerName %} </td> {% if da.lawyerMobile %}
+<td class="column-content">{% da.lawyerMobile %} </td> {% else %}
+<td class="column-content"></td> {% /if %}
+<td class="column-content">{% da.loanStatus | loanType %}</td>
 <td class="a-right a-right ">{% da.createTime | dateFormat 'yyyy'%}-{% da.createTime | dateFormat 'MM'%}-{% da.createTime | dateFormat 'dd'%}</td>
 <td class=" last">
-<a href="#">详情 </a>
-<a href="#">下载 </a>
+<a href="#" data-remodal-target="download-modal">文件 </a>
+<a href="#">评价 </a>
 <span class="showmore" data-id="{% da.sourceId %}" data-status="{% da.sourceId %}">更多</span>
 <span class="fa fa-chevron-down"></span>
 </td>
@@ -306,7 +353,7 @@ function createXMLHTTPRequest()
 </div>
 </div>
 <!-- footer end -->
-<script src="${host}/views/myLoan/main-811bde1d57.js"></script>
+<script src="${host}/views/myLoan/main-c4e6356333.js"></script>
 <!--登录注册模态框-->
 </body>
 </html>

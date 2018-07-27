@@ -11,7 +11,7 @@
 <meta content="" name="description" />
 <meta content="" name="author" />
 <link rel="stylesheet" href="${host}/public/basic-a300c0880e.css">
-<link rel="stylesheet" href="${host}/views/messageSystem/main-523486b23e.css">
+<link rel="stylesheet" href="${host}/views/messageSystem/main-9d2176b96e.css">
 <script>
 var api = {
     //  host:"http://120.24.181.248:8080/",
@@ -92,7 +92,7 @@ function createXMLHTTPRequest()
     return xmlHttpRequest;
 }
 </script>
-<script src="${host}/public/basic-4501e28ec6.js"></script>
+<script src="${host}/public/basic-09c2e4dbf6.js"></script>
 </head>
 <body>
 <!-- header -->
@@ -102,15 +102,18 @@ function createXMLHTTPRequest()
 <div class="login-operating pull-right">
 <a class="login-btn" href="${host}/loginPage">【登录】</a>
 <a class="register-btn" id='register-btn' href="${host}/loginPage?reg=1">【注册】</a>
-<a class="lawer-enter" id='lower-btn' href="${host}/lawerLogin">【律所入口】</a>
+<a class="register-btn" id='register-btn' href="${host}/officeLoginPage?reg=1">【律所入口】</a>
 </div>
-<div class="checklogin"></div>
 <div class="user-operating pull-right" style="display:none;">
 <a class="user-center" href="${host}/userCenter">【个人中心】</a>
 <a class="user-logout">【退出】</a>
 </div>
 <div class="lawer-operating" pull-right style="display:none;">
-<a class="lawer-center" href="${host}/lawerCenter">【个人中心】</a>
+<a class="lawer-center" href="${host}/lawyerCenter">【个人中心】</a>
+<a class="user-logout">【退出】</a>
+</div>
+<div class="office-operating" pull-right style="display:none;">
+<a class="lawer-center" href="${host}/officeCenter">【个人中心】</a>
 <a class="user-logout">【退出】</a>
 </div>
 </div>
@@ -155,7 +158,7 @@ function createXMLHTTPRequest()
 <nav class="card">
 <ul class="navbar-nav mr-auto">
 <li class="nav-item">
-<a class="nav-link nav-item-head active" id="indexpage" href="#">账户首页 </a>
+<a class="nav-link nav-item-head active" id="indexpage" href="${host}/userCenter">账户首页 </a>
 </li>
 <li class="nav-item dropdown">
 <a class=" nav-item-head" href="#"> 我的事务 </a>
@@ -182,7 +185,7 @@ function createXMLHTTPRequest()
 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 <div class="dropdown-content">
 <a class="dropdown-item nav-link" id="my-profile" href="${host}/myProfile">资料管理</a>
-<a class="dropdown-item nav-link" href="${host}/lawyer">律师认证</a>
+<a class="dropdown-item nav-link" id="my-lawyer" href="${host}/mylawyerCetification">律师认证</a>
 <a class="dropdown-item nav-link" id="message-center" href="${host}/messageSystem">消息中心</a>
 </div>
 </div>
@@ -233,14 +236,28 @@ function createXMLHTTPRequest()
 <div class="col-sm-1"></div>
 </div>
 </div>
-<script type="text/html" id="systemNews-result-templete"> {% each list data %}
-<div class="messages-item" id="system{% data.id %}">
+<div id="getcaseDeatil-modal" class="remodal" data-remodal-id="getcaseDeatil-modal">
+<div class="remodal-header">
+<div class="login-res-row">
+<div class="getService-title-btn"></div>
+<!-- <a class="login-btn register-title-btn pull-left" href="http://192.168.15.40:8080/cas/register?systemId=4e6f5d00-d023-11e7-a9e1-fb16d651f8ad&service=http://127.0.0.1:8090/cas">注册</a> -->
+</div>
+<button class="remodal-close closeModal" data-remodal-action="close" aria-label="Close"></button>
+</div>
+<div class="remodal-content">
+<!--登录表单-->
+<div class="getcaseDeatil-form"> </div>
+</div>
+</div>
+<script type="text/html" id="systemNews-result-templete"> {% each list data %} {% if data.isRead == 0 %}
+<div class="messages-item" id="{% data.id %}" data-id="{% data.id %}"> {% else %}
+<div class="messages-item hadreadicon" id="{% data.id %}" data-id="{% data.id %}"> {% /if %}
 <span class="message-title">
-<img src="${host}/assets/image/usercenter_icon_bell.png" alt="">{% data.title %}</span>
+<img src="${host}/assets/image/usercenter_icon_bell.png" alt="">{% data.noticeTitle %}</span>
 <span class="aside-bar">
-<span class="time">{% data.createTime | dateFormat 'yyyy'%}-{% data.createTime | dateFormat 'MM'%}-{% data.createTime | dateFormat 'dd'%}</span>
+<span class="time">{% data.noticeTime %}</span>
 <span class="actions">
-<a href="#">查看</a>
+<a href="#" class="msg-detail-btn" data-id="{% data.id %}" data-remodal-target="getcaseDeatil-modal">查看</a>
 <a href="#" class="showmore">更多
 <span class="fa fa-chevron-down"></span>
 <div class="showdiv">
@@ -250,22 +267,7 @@ function createXMLHTTPRequest()
 </a>
 </span>
 </span>
-</div> {% /each %}
-<!-- <section  id="content2noread">
-            {% each readedMessages  data%}
-            <div class="messages-item">
-              <span class="message-title"><img src="${host}/assets/image/usercenter_icon_bell.png" alt="">{%data.name%}</span>
-              <span class="aside-bar">
-                <span class="time">{%data.time%}</span>
-                <span class="actions">     
-                  <a href="#">查看</a>
-                  <a href="#">更多<span class="fa fa-chevron-down"></span></a>
-                </span>
-                </span>
-            </div>
-            {% /each %}
-        </section> -->
-</script>
+</div> {% /each %} </script>
 <!-- container end -->
 <!-- footer -->
 <div class="footer_bar">
@@ -279,7 +281,7 @@ function createXMLHTTPRequest()
 </div>
 </div>
 <!-- footer end -->
-<script src="${host}/views/messageSystem/main-77bc1485ee.js"></script>
+<script src="${host}/views/messageSystem/main-4c17c9ea2f.js"></script>
 <!--登录注册模态框-->
 </body>
 </html>

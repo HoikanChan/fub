@@ -1,16 +1,48 @@
 var userCenter = (function() {
   var page = 1
-  var inquery_validate
-  
+  function getReports() {
+    var params = {
+      clientId: clientId
+    }
+
+    $('#my-cases .pager').tablePager({
+      url: 'report/api/list',
+      searchParam: params,
+      success: function(result) {
+        if (result.code == 0) {
+          if (result) {
+            $('.reports-content .reports-list').html(template('report-template', result.data))
+            if (result.data.totalCount < 10) {
+              $('.page-row').hide()
+            } else {
+              $('.page-row').show()
+            }
+            if (result.data.totalCount == 0) {
+              $('.reports-content').html(
+                "<p class='noresult'>抱歉，没有相关报告</p>"
+              )
+            }
+          } else {
+            toastr.warning(result.msg)
+          }
+        }
+      }
+    })
+  }
+  //查询报告详情
+
+  function getCaseDetail(id) {
+    $({})._Ajax({
+      url: 'report/api/info/' + id,
+      success: function(result) {
+        $('.reports-list').hide()
+        $('.reports-detail').show()
+        $('.reports-content .reports-detail').html(template('report-detail-template', result.data))
+      }
+    })
+  }
   $(function() {
-    $('#my-reports').addClass("active")
-    $('.fc-widget-header .fc-sun span').html('星期天')
-    $('.fc-widget-header .fc-mon span').html('星期一')
-    $('.fc-widget-header .fc-tue span').html('星期二')
-    $('.fc-widget-header .fc-wed span').html('星期三')
-    $('.fc-widget-header .fc-thu span').html('星期四')
-    $('.fc-widget-header .fc-fri span').html('星期五')
-    $('.fc-widget-header .fc-sat span').html('星期六')
+    $('#my-reports').addClass('active')
     $('aside .right-icon').click(function(e) {
       e.stopPropagation()
       if (e.target.classList.contains('fa-chevron-down')) {
@@ -29,62 +61,17 @@ var userCenter = (function() {
           .addClass('fa-chevron-down')
       }
     })
-
   })
   return {
     init: function() {
       //  satelliteApplication();
-      $('.reports-content').html(
-        template('report-template', {
-          reports: {
-            count: 21,
-            cases: [
-              {
-                title: '志明等与春娇所有权确认纠纷二审民事判决书',
-
-                content:
-                  'Designed as Ant Design，提炼和服务企业级中后台产品的交互语言和视觉风格。React Component ',
-                created: '2015-06-05 15:33:30'
-              },
-              {
-                title: '志明等与春娇所有权确认纠纷二审民事判决书',
-
-                content:
-                  'Designed as Ant Design，提炼和服务企业级中后台产品的交互语言和视觉风格。React Component ',
-                created: '2015-06-05 15:33:30'
-              },
-              {
-                title: '志明等与春娇所有权确认纠纷二审民事判决书',
-
-                content:
-                  'Designed as Ant Design，提炼和服务企业级中后台产品的交互语言和视觉风格。React Component ',
-                created: '2015-06-05 15:33:30'
-              },
-              {
-                title: '志明等与春娇所有权确认纠纷二审民事判决书',
-
-                content:
-                  'Designed as Ant Design，提炼和服务企业级中后台产品的交互语言和视觉风格。React Component ',
-                created: '2015-06-05 15:33:30'
-              },
-              {
-                title: '志明等与春娇所有权确认纠纷二审民事判决书',
-
-                content:
-                  'Designed as Ant Design，提炼和服务企业级中后台产品的交互语言和视觉风格。React Component ',
-                created: '2015-06-05 15:33:30'
-              },
-              {
-                title: '志明等与春娇所有权确认纠纷二审民事判决书',
-
-                content:
-                  'Designed as Ant Design，提炼和服务企业级中后台产品的交互语言和视觉风格。React Component ',
-                created: '2015-06-05 15:33:30'
-              }
-            ]
-          }
-        })
-      )
+      getReports()
+      $(document).on('click', '.content-item a', function(e) {
+        e.stopPropagation()
+        //查询报告详情
+        getCaseDetail($(this).attr('to'))
+        return false
+      })
     }
   }
 })()

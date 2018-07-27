@@ -61,18 +61,22 @@
       <div class="col-sm-1"></div>
     </div>
   </div>
-  
+  {{ include '../~modal/systemMessageDetail/main'}}
   <script type="text/html" id="systemNews-result-templete">
     
      
             {% each list data %}
-            <div class="messages-item" id="system{% data.id %}">
-              <span class="message-title"><img src="dist/assets/image/usercenter_icon_bell.png" alt="">{% data.title %}</span>
+            {% if data.isRead == 0 %}
+            <div class="messages-item" id="{% data.id %}" data-id="{% data.id %}">
+            {% else %}
+            <div class="messages-item hadreadicon" id="{% data.id %}" data-id="{% data.id %}">
+             {% /if %}
+              <span class="message-title"><img src="dist/assets/image/usercenter_icon_bell.png" alt="">{% data.noticeTitle %}</span>
                <span class="aside-bar">
-                <span class="time">{% data.createTime | dateFormat 'yyyy'%}-{% data.createTime | dateFormat 'MM'%}-{% data.createTime | dateFormat 'dd'%}</span>
+                <span class="time">{% data.noticeTime %}</span>
                 <span class="actions">     
-                  <a href="#">查看</a>
-                  <a href="#" class="showmore" >更多<span class="fa fa-chevron-down"></span>
+                  <a href="#" class="msg-detail-btn" data-id="{% data.id %}" data-remodal-target="getcaseDeatil-modal">查看</a>
+                  <a href="#" class="showmore">更多<span class="fa fa-chevron-down"></span>
                   <div class="showdiv">
                     <p class="hadread" dataid="{% data.id %}">设为已读</p>
                     <p class="del" dataid="{% data.id %}">删除</p>
@@ -82,22 +86,5 @@
                 </span>
             </div>
             {% /each %}
-          
-        
-        <!-- <section  id="content2noread">
-            {% each readedMessages  data%}
-            <div class="messages-item">
-              <span class="message-title"><img src="dist/assets/image/usercenter_icon_bell.png" alt="">{%data.name%}</span>
-              <span class="aside-bar">
-                <span class="time">{%data.time%}</span>
-                <span class="actions">     
-                  <a href="#">查看</a>
-                  <a href="#">更多<span class="fa fa-chevron-down"></span></a>
-                </span>
-                </span>
-            </div>
-            {% /each %}
-        </section> -->
-     
     
   </script>

@@ -27,7 +27,7 @@ var end = {
 };
   function getMycase(){ 
     var params = {
-      clientId:clidentId,
+      clientId:clientId,
       sidx : "createTime",
       order : "desc"
     }
@@ -63,7 +63,7 @@ var end = {
   function searchMycase(){ 
 
     var params = {
-      clientId:clidentId,
+      clientId:clientId,
       sidx : "createTime",
       order : "desc",
       beginDate:$("#start-date").val(),

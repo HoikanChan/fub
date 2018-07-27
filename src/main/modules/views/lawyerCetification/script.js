@@ -1,3 +1,4 @@
+
 var lawyerCertification = (function() {
   var validate = $("#certification-form").validate({
       rules: {
@@ -163,6 +164,7 @@ var lawyerCertification = (function() {
               }else{
                 toastr.warning(result.msg)
               }
+
           }
       })
   }

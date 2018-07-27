@@ -1,7 +1,7 @@
 ;var userCenter = function () {
     var page = 1;
     var inquery_validate;
-    var clidentId =  sessionStorage.getItem("clientid")
+    var clientId =  sessionStorage.getItem("clientid")
       var phone = window.sessionStorage.getItem("mobile");
 
       $({mobile:phone})._Ajax({
@@ -23,7 +23,7 @@
       function getMycase(){
      
         var params = {
-          clientId:clidentId,
+          clientId:clientId,
           sidx : "createTime",
           order : "desc"
         }
@@ -56,7 +56,7 @@
         var starttime = $("#start-date").val();
         var endtime = $("#end-date").val();
         var params = {
-          clientId:clidentId,
+          clientId:clientId,
           beginDate:starttime,
           endDate:endtime,
           sidx : "createTime",

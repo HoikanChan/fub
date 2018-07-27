@@ -2,7 +2,7 @@
                 <nav class="card">
                   <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                      <a class="nav-link nav-item-head active" id="indexpage" href="#">账户首页 </a>
+                      <a class="nav-link nav-item-head active" id="indexpage" href="{{ $imports.globalVariable }}/userCenter">账户首页 </a>
                     </li>
                     <li class="nav-item dropdown">
                       <a class=" nav-item-head" href="#">
@@ -32,7 +32,7 @@
                       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <div class="dropdown-content">
                           <a class="dropdown-item nav-link" id="my-profile" href="{{ $imports.globalVariable }}/myProfile">资料管理</a>
-                          <a class="dropdown-item nav-link" href="{{ $imports.globalVariable }}/lawyer">律师认证</a>
+                          <a class="dropdown-item nav-link" id="my-lawyer" href="{{ $imports.globalVariable }}/mylawyerCetification">律师认证</a>
                           <a class="dropdown-item nav-link" id="message-center" href="{{ $imports.globalVariable }}/messageSystem">消息中心</a>
                         </div>
                       </div>

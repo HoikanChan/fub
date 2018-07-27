@@ -2,6 +2,7 @@ var _login = function () {
     var login_validate, registered_validate, login_modal;
     var jude = true;
     var urlparam = window.location.search.replace("?", ""); 
+    var base = new Base64();   
     console.log(urlparam)
     $(function () {
         //    checkLogin();
@@ -26,7 +27,10 @@ var _login = function () {
             })
            
            $("#header-nav").hide();
-            if (getCookie("mobile")&&getCookie("rememberUser")){
+           $("#registered-form input[name='password']").val("");
+           $("#registered-form input[name='mobile']").val("");
+           $("#registered-form input[name='code']").val("");
+            if (getCookie("mobile")&&getCookie("type")){
             
               //  $(".user-operating").find(".user-name").html(getCookie("mobilePhone"));
               //  $(".user-operating").find("ul").append(userOper);
@@ -34,10 +38,14 @@ var _login = function () {
 
                 $(".user-operating").html("")
             }
-            if (getCookie("mobile") && getCookie("password")) {
-                $("#login-form input[name='mobile']").val(getCookie("mobile"));
-                $("#login-form input[name='password']").val(getCookie("password"));
+            if (getCookie("mpt") && getCookie("__")){
+                $("#login-form input[name='mobile']").val(getCookie("mpt"));
+                $("#login-form input[name='password']").val(base.decode(getCookie("__")));
                 $("#remember-psw").prop("checked", true);
+            }else{
+                $("#login-form input[name='mobile']").val("");
+                $("#login-form input[name='password']").val("");
+                $("#remember-psw").prop("checked", false);
             }
               
             //表单验证
@@ -199,13 +207,14 @@ var _login = function () {
             }
             
             if ($("#login-form #remember-psw").prop("checked")) {
-                setCookie("mobile", $("#login-form input[name='mobile']").val(), 7);
-                setCookie("password", hash, 7);
-                setCookie("rememberUser", 1, 7);
+                setCookie("mpt", $("#login-form input[name='mobile']").val(), 7);
+                setCookie("__",base.encode(hash), 7);
+               
+                setCookie("type", 1, 7);
             } else {
-                delCookie("mobile");
-                delCookie("password");
-                setCookie("rememberUser",1);
+                delCookie("mpt");
+                delCookie("__");
+                setCookie("type",1);
             }
             $(params)._Ajax({
                     url: "user/login",
@@ -213,17 +222,14 @@ var _login = function () {
                             if (result.code==0) {
                                
                               window.sessionStorage.setItem("mobile", result.user.mobile);
-                              
-                              // var mobileItem =  result.user.mobile
-                                // sessionStorage.mobileItem = mobileItem;
-                                toastr.success(result.msg);
-                           
+                              sessionStorage.setItem("userid", result.user.id);
+                              sessionStorage.setItem("userType", result.user.userType);
                             if(urlparam == "legalLoan"){
 
                                 self.location = api.host+"legalLoan";
                             }else{
                                //判断没有登录，然后用户登录成功后调用之前的回调函数
-                             self.location=document.referrer;  
+                           self.location=document.referrer;  
                             }
                                 
                             } else {

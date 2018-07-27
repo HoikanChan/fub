@@ -1,0 +1,48 @@
+<div id="download-modal" class="remodal" data-remodal-id="download-modal">
+  <div class="remodal-header">
+    <div class="login-res-row">
+      <div class="title getService-title-btn">查看文件</div>
+    </div>
+    <button class="remodal-close closeModal" data-remodal-action="close" aria-label="Close"></button>
+  </div>
+  <div class="remodal-content">
+
+    <div class="file-table">
+
+    </div>
+    <div class="page-row clear">
+      <div class="pager pull-right">
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/html" id="file-table-template">
+  <div class="table-responsive table-bordered table-hover">
+      <table class="table table-striped jambo_table bulk_action">
+        <thead>
+          <tr class="headings">
+            <th class="column-title">文件名称 </th>
+            <th class="column-title">申请律师 </th>
+            <th class="column-title">提交时间</th>
+            <th class="column-title"><span class="nobr">操作</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+            {% each files  data%}
+              <tr class="even pointer">
+                <td class="column-content ">{% data.fileName %} </td>
+                <td class="column-content ">{% lawyerName %} </td>
+                <td class="a-right a-right ">{% data.fileTime %}</td>
+                <td class=" last">
+                  <a  data-path="{% data.filePath %}" id="preview">预览</a>
+                  <a  href="{% host + data.filePath %}" download id="download">下载</a>
+                </td>
+              </tr>
+            {%/each %}
+          </tbody>
+      </table>
+    </div>
+</script>
