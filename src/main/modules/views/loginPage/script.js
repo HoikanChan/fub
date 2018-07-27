@@ -3,7 +3,7 @@ var _login = function () {
     var jude = true;
     var urlparam = window.location.search.replace("?", ""); 
     var base = new Base64();   
-    console.log(urlparam)
+
     $(function () {
         //    checkLogin();
             if(urlparam == "legalLoan"){
@@ -229,7 +229,9 @@ var _login = function () {
                                 self.location = api.host+"legalLoan";
                             }else{
                                //判断没有登录，然后用户登录成功后调用之前的回调函数
-                           self.location=document.referrer;  
+                         
+                            self.location = document.referrer;  
+
                             }
                                 
                             } else {
