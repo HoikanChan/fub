@@ -1,114 +1,158 @@
 
 var lawyerCertification = (function() {
-  var validate = $("#addMapServiceModal form").validate({
+  var validate = $("#certification-form").validate({
       rules: {
-          name: {
+          realname: {
               required: true,
               trim:true,
           },
-          starttimeTemp: {
+          idcard: {
               required: true,
-              trim:true
+              trim:true,
+              idcard:true
           },
-          endtimeTemp: {
+          sex: {
               required: true,
               trim:true,
           },
-          srs: {
+          email: {
+              required: true,
+              trim:true,
+              email:true
+          },
+          officeId: {
               required: true,
               trim:true,
           },
-          type: {
+          licenseNo: {
+              required: true,
+              trim:true,
+              licenseNo:true
+          },
+          workBaginDate: {
               required: true,
               trim:true,
           },
-          service_url: {
+          recommendMobile: {
+              required: true,
+              trim:true,
+              mobile:true
+          },
+          recommendId: {
               required: true,
               trim:true,
           },
-          format: {
+          teamId: {
               required: true,
               trim:true,
           },
-          layers: {
+          languages: {
               required: true,
               trim:true,
           },
-          bounds: {
+          professions: {
               required: true,
               trim:true,
           },
-          resnums: {
+          introduction: {
               required: true,
               trim:true,
           },
-          mservice_type: {
+          idcardUrl: {
               required: true,
               trim:true,
           },
-          legend: {
+          licenseUrl: {
               required: true,
               trim:true,
           },
-          tiff_url: {
-              required: false,
-              trim:false,
+          idcardUrlBack: {
+              required: true,
+              trim:true,
+          },
+          licenseUrlBack: {
+              required: true,
+              trim:true,
           },
       },
       messages: {
-          name: {
-              required: "请输入地图服务名称",
-              trim:"请输入地图服务名称",
+          realname: {
+              required: "请输入姓名",
+              trim:"请输入姓名",
           },
-          starttimeTemp: {
-              required: "请输入开始时间和结束时间",
-              trim:"请输入开始时间和结束时间"
+          idcard: {
+              required: "请输入身份证号码",
+              trim:"请输入身份证号码",
+              idcard:"请输入正确的身份证号码"
           },
-          endtimeTemp: {
-              required: "请输入开始时间和结束时间",
-              trim:"请输入开始时间和结束时间",
+          sex: {
+              required: "请选择性别",
+              trim:"请选择性别",
           },
-          srs: {
-              required: "请输入坐标系",
-              trim:"请输入坐标系",
+          email: {
+              required: "请输入邮箱",
+              trim:"请输入邮箱",
+              email:"请输入正确的邮箱"
           },
-          type: {
-              required: "请输入地图服务类型",
-              trim:"请输入地图服务类型",
+          officeId: {
+              required: "请选择所属律所",
+              trim:"请选择所属律所",
           },
-          service_url: {
-              required: "请输入地图服务地址",
-              trim:"请输入地图服务地址",
+          licenseNo: {
+              required: "请输入律师证号",
+              trim:"请输入律师证号",
+              licenseNo:"请输入正确的律师证号"
           },
-          format: {
-              required: "请输入图片格式",
-              trim:"请输入图片格式",
+          workBaginDate: {
+              required: "请选择起始时间",
+              trim:"请输入姓名",
           },
-          layers: {
-              required: "请输入图层资源",
-              trim:"请输入图层资源",
+          recommendMobile: {
+              required: "请输入引荐人手机号",
+              trim:"请输入引荐人手机号",
+              mobile:"请输入正确的手机号"
           },
-          bounds: {
-              required: "请输入地理范围",
-              trim:"请输入地理范围",
+          recommendId: {
+              required: "请输入引荐人姓名",
+              trim:"请输入引荐人姓名",
           },
-          resnums: {
-              required: "请输入层级范围",
-              trim:"请输入层级范围",
+          teamId: {
+              required: "请选择引荐人所属团队",
+              trim:"请选择引荐人所属团队",
           },
-          mservice_type: {
-              required: "请输入地图服务类型",
-              trim:"请输入地图服务类型",
+          languages: {
+              required: "请选择掌握语言",
+              trim:"请选择掌握语言",
           },
-          legend: {
-              required: "请输入图例",
-              trim:"请输入图例",
+          professions: {
+              required: "请选择擅长领域",
+              trim:"请选择擅长领域",
+          },
+          introduction: {
+              required: "请输入个人简介",
+              trim:"请输入个人简介",
+          },
+          idcardUrl: {
+              required: "请上传身份证正面照",
+              trim:"请上传身份证正面照",
+          },
+          licenseUrl: {
+              required: "请上传执业证书正面照",
+              trim:"请上传执业证书正面照",
+          },
+          idcardUrlBack: {
+              required: "请上传身份证背面照",
+              trim:"请上传身份证背面照",
+          },
+          licenseUrlBack: {
+              required: "请上传执业证书背面照",
+              trim:"请上传执业证书背面照",
           },
       },
       errorPlacement: function (error, element) {
-          element.siblings('.error-msg').html(error)
+          element.siblings('.error-div').html(error)
       },
-      errorElement: 'span',
+      errorElement: 'div',
   });
   function queryTeams() {
       $({})._Ajax({
@@ -116,7 +160,7 @@ var lawyerCertification = (function() {
           success: function(result) {
               if (result.code == 0) {
                   lawyerCertification.Teams = result.data
-                  $('#lawyer-team').html(template("lawyer-select-template",lawyerCertification.Teams));
+                  $('#selectOfficeId').html(template("lawyer-select-template",lawyerCertification.Teams));
               }else{
                 toastr.warning(result.msg)
               }
@@ -130,7 +174,7 @@ var lawyerCertification = (function() {
             success: function(result) {
                 if (result.code == 0) {
                     lawyerCertification.Language = result.data
-                    $('#lawyer-language').html(template("lawyer-select-template",lawyerCertification.Language));
+                    $('#selectLanguages').html(template("lawyer-select-template",lawyerCertification.Language));
                 }else{
                     toastr.warning(result.msg)
                 }
@@ -143,13 +187,16 @@ var lawyerCertification = (function() {
             success: function(result) {
                 if (result.code == 0) {
                     lawyerCertification.Professional = result.data
-                    $('#lawyer-professional').html(template("lawyer-select-template",lawyerCertification.Professional));
+                    $('#selectProfessions').html(template("lawyer-select-template",lawyerCertification.Professional));
                 }else{
                     toastr.warning(result.msg)
                 }
             }
         })
     }
+    //http://120.24.181.248:8080/lvswbao-admin/client/queryByMobile?mobile=15920683372
+
+    //http://120.24.181.248:8080/lvswbao-admin/lawyer/queryMyTeam?mobile=13537086079
 
   return {
       init: function() {
@@ -170,6 +217,40 @@ var lawyerCertification = (function() {
               queryProfessional();
               $('#startTime').jeDate(start);
           })
+          //上传执业证
+          $(document).on('blur','#inputMobile',function (e) {
+              e.stopPropagation();
+              if(regexs.mobile.test($(this).val())){
+                  $({mobile:$(this).val()})._Ajax({
+                      url: 'client/queryByMobile',
+                      success: function(result) {
+                          if (result.code == 0) {
+                              $('#selectRecommendId').html('<option value="'+result.client.clientId+'">'+result.client.realname+'</option>');
+                          }else{
+                              toastr.warning(result.msg)
+                          }
+                      }
+                  })
+                  $({mobile:$(this).val()})._Ajax({
+                      url: 'lawyer/queryMyTeam',
+                      success: function(result) {
+                          if (result.code == 0) {
+                              var html = '';
+                              result.data.forEach(function (t) {
+                                  html += '<option value="'+t.teamId+'">'+t.teamName+'</option>';
+                              })
+                              $('#selectTeamId').html(html);
+                          }else{
+                              toastr.warning(result.msg)
+                          }
+                      }
+                  })
+              }else{
+                  toastr.warning("请输入正确的手机号")
+              }
+
+          })
+          //上传身份证正
           $(document).on('click','#my-certification .upload-btn-shenfenzheng',function (e) {
               e.stopPropagation();
               $('#upload-file-shenfenzheng').click();
@@ -177,6 +258,15 @@ var lawyerCertification = (function() {
                   fileAjaxUpload($('#upload-file-shenfenzheng'),$('#upload-text-shenfenzheng'),1,$('#upload-show-shenfenzheng'))
               })
           })
+          //上传身份证背
+          $(document).on('click','#my-certification .upload-btn-shenfenzhengBack',function (e) {
+              e.stopPropagation();
+              $('#upload-file-shenfenzhengBack').click();
+              $('#upload-file-shenfenzhengBack').change(function () {
+                  fileAjaxUpload($('#upload-file-shenfenzhengBack'),$('#upload-text-shenfenzhengBack'),1,$('#upload-show-shenfenzhengBack'))
+              })
+          })
+          //上传执业证正
           $(document).on('click','#my-certification .upload-btn-zhiyezheng',function (e) {
               e.stopPropagation();
               $('#upload-file-zhiyezheng').click();
@@ -184,22 +274,32 @@ var lawyerCertification = (function() {
                   fileAjaxUpload($('#upload-file-zhiyezheng'),$('#upload-text-zhiyezheng'),1,$('#upload-show-zhiyezheng'))
               })
           })
-
+          //上传执业证背
+          $(document).on('click','#my-certification .upload-btn-zhiyezhengBack',function (e) {
+              e.stopPropagation();
+              $('#upload-file-zhiyezhengBack').click();
+              $('#upload-file-zhiyezhengBack').change(function () {
+                  fileAjaxUpload($('#upload-file-zhiyezhengBack'),$('#upload-text-zhiyezhengBack'),1,$('#upload-show-zhiyezhengBack'))
+              })
+          })
+            //提交认证
           $(document).on('click','#my-certification .primary-btn',function (e) {
               e.stopPropagation();
-              $('#my-certification .recommend-form')._Ajax({
-                  url: "lawyer/saveLawyerInformation",
-                  type:"post",
-                  dataType:"json",
-                  success: function (result) {
-                      if (result.code == '0') {
-                          toastr.success(result.msg);
-                      }else{
-                          toastr.error(result.msg);
-                      }
+              if(validate.form()){
+                  $('#certification-form')._Ajax({
+                      url: "lawyer/saveLawyerInformationBySite",
+                      type:"post",
+                      dataType:"json",
+                      success: function (result) {
+                          if (result.code == '0') {
+                              toastr.success(result.msg);
+                          }else{
+                              toastr.error(result.msg);
+                          }
 
-                  }
-              })
+                      }
+                  })
+              }
           })
       },
       Teams:[],//团队信息

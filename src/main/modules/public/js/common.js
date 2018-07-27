@@ -274,7 +274,13 @@ template.defaults.imports.loanType = function (type) {
     }
     return conversionTime(date,format)
 };
-
+template.defaults.imports.convertNull = function (data) {
+    if(data === null || data === undefined){
+        return '';
+    }else{
+        return data;
+    }
+}
 //将字符串转换成对象
 template.defaults.imports.beObj = function (data, exportData) {
     var a = JSON.parse(data);
@@ -414,10 +420,44 @@ var regexs = {
     password: /^(?!_)(?!.*?_$)(?![0-9]+$)[\u4e00-\u9fa5a-zA-Z0-9]{6,16}$/,
     mobile: /(^0{0,1}1[3|4|5|7|8][0-9]{9}$)/, // mobile 手机号码 包括13X 15X 18X 14X 17X号段
     chinese:/^[\u4e00-\u9fa5]+$/,    //中文
-    email:/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/ //邮箱
+    email:/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/, //邮箱
+    trim : /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, //表单前后空格验证
+    idcard: /(^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$)|(^[1-9]\d{5}\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{2}$)/, // 15/18位身份证号码验证的正则表达式
+    licenseNo: /(^0{0,1}1[1-9]{1}\d{3}(18|19|([23]\d))\d{2}[1-9]{1}(0|1)\d{6}$)/ // 律师证件号17位 1开头 + 省市代码4位 + 年份4位 + 类别1位 + 性别1位 + 序列号6位
 };
 
-
+//添加validate的通用表单
+$(function () {
+    if ($.validator){
+        //去空格后是否为空
+        $.validator.addMethod("trim", function (value, element, params) {
+            if (!regexs.trim.test(value)) {
+                regexs.trim.lastIndex = 0
+                return true
+            } else {
+                regexs.trim.lastIndex = 0;
+                // $(element).val($.trim(value));
+                return false
+            }
+        });
+        //添加手机号的验证
+        $.validator.addMethod("mobile", function (value, element, params) {
+            return regexs.mobile.test(value)
+        });
+        //添加手机号的验证
+        $.validator.addMethod("email", function (value, element, params) {
+            return regexs.email.test(value)
+        });
+        //添加身份证的验证
+        $.validator.addMethod("idcard", function (value, element, params) {
+            return regexs.idcard.test(value)
+        });
+        //添加律师证件号的验证
+        $.validator.addMethod("licenseNo", function (value, element, params) {
+            return regexs.licenseNo.test(value)
+        });
+    }
+})
 
   /**
  * @param t            loading对象
