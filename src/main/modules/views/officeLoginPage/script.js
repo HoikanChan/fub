@@ -175,7 +175,7 @@ var _login = function () {
                 $("#registered-form")[0].reset();
                 $("#registered-form")[1].reset();  
                 $("#registered-form")[2].reset();
-                self.location= api.host+"loginPage";  
+              self.location= api.host+"loginPage";  
                
             }else {
                 toastr.warning(result.msg)

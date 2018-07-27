@@ -681,11 +681,20 @@ $(document).on("click", ".user-operating .user-logout", function () {
                 $(".login-operating").show();
                 top.location.reload();
                 delCookie("rememberUser");
-               
+                sessionStorage.clear();
                 var pathName = window.location.pathname.substring(window.location.pathname.lastIndexOf("/")+1).replace(/.httl\S*/, "").replace(/.httl\S*/,"");
-                if (pathName == "legalLoan" || pathName == "lawerCenter" ) {
-                     window.location = "index";
+                var pathName2 = window.location.pathname.substring(window.location.pathname.lastIndexOf("/")+1).replace(/.httl\S*/, "").replace(/.httl\S*/,"");
+                var pathName3 = window.location.pathname.substring(window.location.pathname.lastIndexOf("/")+1).replace(/.httl\S*/, "").replace(/.httl\S*/,"");
+                if (pathName == "lawyerAssets" || pathName == "lawyerAssistant" ||  pathName == "lawyerMessage" ||  pathName == "lawyerProfile"  ||  pathName == "lawyerTeam" ||  pathName == "legalLoan" ||
+                pathName == "lawyerBills" || pathName == "lawyerCases" || pathName == "lawyerCenter" || pathName == "lawyerCetification" || pathName == "lawyerDelegation" || pathName == "lawyerLawLoan") {
+                     window.location = api.host;
                 }
+                if (pathName2 == "userCenter" || pathName2 == "myBills" || pathName2 == "myCase" ||  pathName2 == "myLoan" ||  pathName2 == "mylawyerCetification"  ||  pathName2 == "myProfile" ||  pathName2 == "myReports") {
+                     window.location = api.host;
+                }
+                if (pathName2 == "officeCenter" || pathName2 == "officeAssets" || pathName2 == "officeBills" ||  pathName2 == "officeCertification" ||  pathName2 == "officeMember"  ||  pathName2 == "officeMessage" ||  pathName2 == "officeProfile") {
+                    window.location = api.host;
+               }
             }
         }
     })
