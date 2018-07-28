@@ -10,172 +10,7 @@
     <div class="col-sm-8">
       <div class="content-container">
         <div class="page " id="my-certification">
-          <div class="my-certification-content">
-            <h3 class="title">基本资料</h3>
-            <form class="form-horizontal" id="certification-form">
-              <div class="form-group">
-                <label for="inputRealname" class="col-sm-2 control-label">姓名：</label>
-                <div class="col-sm-10">
-                  <input type="resours" class="form-control" id="inputRealname" name="realname" placeholder="请输入姓名">
-                  <div class="error-div"></div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="inputIdcard" class="col-sm-2 control-label">身份证号码：</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control " id="inputIdcard" name="idcard" placeholder="请输入身份证号码">
-                  <div class="error-div"></div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="selectSex" class="col-sm-2 control-label">性别：</label>
-                <div class="col-sm-10">
-                  <select class="form-control" id="selectSex" name="sex">
-                    <option value="1">男</option>
-                    <option value="2">女</option>
-                  </select>
-                  <div class="error-div"></div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="inputEmail" class="col-sm-2 control-label">邮箱：</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control " id="inputEmail" name="email" placeholder="请输入邮箱">
-                  <div class="error-div"></div>
-                </div>
-              </div>
-              <h3 class="title">证书资料</h3>
-              <div class="form-group">
-                <label for="selectOfficeId" class="col-sm-2 control-label">执业律所：</label>
-                <div class="col-sm-10">
-                  <select class="form-control" id="selectOfficeId" name="officeId"></select>
-                  <div class="error-div"></div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="inputLicenseNo" class="col-sm-2 control-label">律师证号：</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control " id="inputLicenseNo" rows="5" name="licenseNo" placeholder="请输入律师证号">
-                  </input>
-                  <div class="error-div"></div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="inputWorkBaginDate" class="col-sm-2 control-label">证书起始时间：</label>
-                <div class="col-sm-6">
-                  <input type="text" id="startTime" class="form-control " id="inputWorkBaginDate" rows="5" name="workBaginDate" placeholder="请选择时间">
-                  </input>
-                  <div class="error-div"></div>
-                </div>
-              </div>
-              <h3 class="title">引荐人资料</h3>
-              <div class="form-group">
-                <label for="inputMobile" class="col-sm-2 control-label">手机号：</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control " id="inputMobile" rows="5" name="recommendMobile" placeholder="请输入引荐人手机号">
-                  </input>
-                  <div class="error-div"></div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="selectRecommendId" class="col-sm-2 control-label">姓名：</label>
-                <div class="col-sm-10">
-                  <select class="form-control" id="selectRecommendId" name="recommendId"></select>
-                  <div class="error-div"></div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="selectTeamId" class="col-sm-2 control-label">所属团队：</label>
-                <div class="col-sm-10">
-                  <select class="form-control" id="selectTeamId" name="teamId"></select>
-                  <div class="error-div"></div>
-                </div>
-              </div>
-              <h3 class="title">其他资料</h3>
-              <div class="form-group">
-                <label for="selectLanguages" class="col-sm-2 control-label">掌握语言：</label>
-                <div class="col-sm-10">
-                  <select class="form-control" id="selectLanguages" name="languages"></select>
-                  <div class="error-div"></div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="selectProfessions" class="col-sm-2 control-label">擅长领域：</label>
-                <div class="col-sm-10">
-                  <select class="form-control" id="selectProfessions" name="professions"></select>
-                  <div class="error-div"></div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="inputIntroduction" class="col-sm-2 control-label">个人简介：</label>
-                <div class="col-sm-10">
-                  <textarea  rows="4" class="form-control " id="inputIntroduction" name="introduction" placeholder="请输入个人简介"></textarea>
-                  <div class="error-div"></div>
-                </div>
-              </div>
-              <div>
-                <div class="col-sm-2"></div>
-                <div class="col-sm-10">
-                  <img src="dist/assets/image/lawyercenter_icon_information.png" alt="">
-                  <span class="font-gray">温馨提示：请依据图示上传身份证和律师执业证件照，请勿涂改或打码，确保要素齐全，字迹清晰</span>
-                </div>
-              </div>
-              <div class="clearfix"></div>
-              <br>
-              <div class="form-group">
-                <label for="upload-text-shenfenzheng" class="col-sm-2 control-label">上传身份证正面照：</label>
-                <div class="col-sm-10">
-                  <div class="col-sm-3 upload-btn upload-btn-shenfenzheng">
-                    <span class="fa fa-plus"></span>
-                  </div>
-                  <input type="text" id="upload-text-shenfenzheng" name="idcardUrl">
-                  <input type="file" style="display: none" id="upload-file-shenfenzheng">
-                  <img src="" height="70" id="upload-show-shenfenzheng">
-                  <div class="error-div"></div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="upload-text-shenfenzheng" class="col-sm-2 control-label">上传身份证背面照：</label>
-                <div class="col-sm-10">
-                  <div class="col-sm-3 upload-btn upload-btn-shenfenzhengBack">
-                    <span class="fa fa-plus"></span>
-                  </div>
-                  <input type="text" id="upload-text-shenfenzhengBack" name="idcardUrlBack">
-                  <input type="file" style="display: none" id="upload-file-shenfenzhengBack">
-                  <img src="" height="70" id="upload-show-shenfenzhengBack">
-                  <div class="error-div"></div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="upload-text-zhiyezheng" class="col-sm-2 control-label">上传执业证书正面照：</label>
-                <div class="col-sm-10">
-                  <div class="col-sm-3 upload-btn upload-btn-zhiyezheng">
-                    <span class="fa fa-plus"></span>
-                  </div>
-                  <input type="text" id="upload-text-zhiyezheng" name="licenseUrl">
-                  <input type="file" style="display: none" id="upload-file-zhiyezheng">
-                  <img src="" height="70" id="upload-show-zhiyezheng">
-                  <div class="error-div"></div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="upload-text-zhiyezhengBack" class="col-sm-2 control-label">上传执业证书背面照：</label>
-                <div class="col-sm-10">
-                  <div class="col-sm-3 upload-btn upload-btn-zhiyezhengBack">
-                    <span class="fa fa-plus"></span>
-                  </div>
-                  <input type="text" id="upload-text-zhiyezhengBack" name="licenseUrlBack">
-                  <input type="file" style="display: none" id="upload-file-zhiyezhengBack">
-                  <img src="" height="70" id="upload-show-zhiyezhengBack">
-                  <div class="error-div"></div>
-                </div>
-              </div>
-              <div class="clearfix"></div>
-              <div class="footer">
-                <div class="col-sm-2"></div><div class="primary-btn">提交</div>
-              </div>
-            </form>
-          </div>
+
         </div>
         </div>
       </div>
@@ -183,7 +18,470 @@
     <div class="col-sm-1"></div>
   </div>
 </div>
-
+<script type="text/html" id="lawyer-add-template">
+  <div class="my-certification-content">
+    <form class="form-horizontal" id="certification-form">
+      <h3 class="title">基本资料</h3>
+      <div class="form-group">
+        <label for="inputRealname" class="col-sm-2 control-label">姓名：</label>
+        <div class="col-sm-10">
+          <input type="resours" class="form-control" id="inputRealname" name="realname" placeholder="请输入姓名">
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputIdcard" class="col-sm-2 control-label">身份证号码：</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control " id="inputIdcard" name="idcard" placeholder="请输入身份证号码">
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="selectSex" class="col-sm-2 control-label">性别：</label>
+        <div class="col-sm-10">
+          <select class="form-control" id="selectSex" name="sex">
+            <option value="1">男</option>
+            <option value="2">女</option>
+          </select>
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputEmail" class="col-sm-2 control-label">邮箱：</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control " id="inputEmail" name="email" placeholder="请输入邮箱">
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <h3 class="title">证书资料</h3>
+      <div class="form-group">
+        <label for="selectOfficeId" class="col-sm-2 control-label">执业律所：</label>
+        <div class="col-sm-10">
+          <select class="form-control" id="selectOfficeId" name="officeId"></select>
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputLicenseNo" class="col-sm-2 control-label">律师证号：</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control " id="inputLicenseNo" rows="5" name="licenseNo" placeholder="请输入律师证号">
+          </input>
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputWorkBaginDate" class="col-sm-2 control-label">证书起始时间：</label>
+        <div class="col-sm-6">
+          <input type="text" id="startTime" class="form-control " id="inputWorkBaginDate" rows="5" name="workBaginDate" placeholder="请选择时间">
+          </input>
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <h3 class="title">引荐人资料</h3>
+      <div class="form-group">
+        <label for="inputMobile" class="col-sm-2 control-label">手机号：</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control " id="inputMobile" rows="5" name="recommendMobile" placeholder="请输入引荐人手机号">
+          </input>
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="selectRecommendId" class="col-sm-2 control-label">姓名：</label>
+        <div class="col-sm-10">
+          <select class="form-control" id="selectRecommendId" name="recommendId"></select>
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="selectTeamId" class="col-sm-2 control-label">所属团队：</label>
+        <div class="col-sm-10">
+          <select class="form-control" id="selectTeamId" name="teamId"></select>
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <h3 class="title">其他资料</h3>
+      <div class="form-group">
+        <label for="selectLanguages" class="col-sm-2 control-label">掌握语言：</label>
+        <div class="col-sm-10">
+          <select class="form-control" id="selectLanguages" name="languages"></select>
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="selectProfessions" class="col-sm-2 control-label">擅长领域：</label>
+        <div class="col-sm-10">
+          <select class="form-control" id="selectProfessions" name="professions"></select>
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputIntroduction" class="col-sm-2 control-label">个人简介：</label>
+        <div class="col-sm-10">
+          <textarea  rows="4" class="form-control " id="inputIntroduction" name="introduction" placeholder="请输入个人简介"></textarea>
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-10">
+          <img src="dist/assets/image/lawyercenter_icon_information.png" alt="">
+          <span class="font-gray">温馨提示：请依据图示上传身份证和律师执业证件照，请勿涂改或打码，确保要素齐全，字迹清晰</span>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <br>
+      <div class="form-group">
+        <label for="upload-text-shenfenzheng" class="col-sm-2 control-label">上传身份证正面照：</label>
+        <div class="col-sm-10">
+          <div class="col-sm-3 upload-btn upload-btn-shenfenzheng">
+            <span class="fa fa-plus"></span>
+          </div>
+          <input type="text" id="upload-text-shenfenzheng" name="idcardUrl">
+          <input type="file" style="display: none" id="upload-file-shenfenzheng">
+          <img src="" height="70" id="upload-show-shenfenzheng">
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="upload-text-shenfenzheng" class="col-sm-2 control-label">上传身份证背面照：</label>
+        <div class="col-sm-10">
+          <div class="col-sm-3 upload-btn upload-btn-shenfenzhengBack">
+            <span class="fa fa-plus"></span>
+          </div>
+          <input type="text" id="upload-text-shenfenzhengBack" name="idcardUrlBack">
+          <input type="file" style="display: none" id="upload-file-shenfenzhengBack">
+          <img src="" height="70" id="upload-show-shenfenzhengBack">
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="upload-text-zhiyezheng" class="col-sm-2 control-label">上传执业证书正面照：</label>
+        <div class="col-sm-10">
+          <div class="col-sm-3 upload-btn upload-btn-zhiyezheng">
+            <span class="fa fa-plus"></span>
+          </div>
+          <input type="text" id="upload-text-zhiyezheng" name="licenseUrl">
+          <input type="file" style="display: none" id="upload-file-zhiyezheng">
+          <img src="" height="70" id="upload-show-zhiyezheng">
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="upload-text-zhiyezhengBack" class="col-sm-2 control-label">上传执业证书背面照：</label>
+        <div class="col-sm-10">
+          <div class="col-sm-3 upload-btn upload-btn-zhiyezhengBack">
+            <span class="fa fa-plus"></span>
+          </div>
+          <input type="text" id="upload-text-zhiyezhengBack" name="licenseUrlBack">
+          <input type="file" style="display: none" id="upload-file-zhiyezhengBack">
+          <img src="" height="70" id="upload-show-zhiyezhengBack">
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="footer">
+        <div class="col-sm-2"></div><div class="primary-btn">提交</div>
+      </div>
+    </form>
+  </div>
+</script>
+<script type="text/html" id="lawyer-edit-template">
+  <div class="my-certification-content">
+    <form class="form-horizontal" id="certification-form">
+      <h3 class="title">基本资料</h3>
+      <div class="form-group">
+        <label for="inputRealname" class="col-sm-2 control-label">姓名：</label>
+        <div class="col-sm-10">
+          <input type="resours" class="form-control" id="inputRealname" name="realname" placeholder="请输入姓名">
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputIdcard" class="col-sm-2 control-label">身份证号码：</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control " id="inputIdcard" name="idcard" placeholder="请输入身份证号码">
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="selectSex" class="col-sm-2 control-label">性别：</label>
+        <div class="col-sm-10">
+          <select class="form-control" id="selectSex" name="sex">
+            <option value="1">男</option>
+            <option value="2">女</option>
+          </select>
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputEmail" class="col-sm-2 control-label">邮箱：</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control " id="inputEmail" name="email" placeholder="请输入邮箱">
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <h3 class="title">证书资料</h3>
+      <div class="form-group">
+        <label for="selectOfficeId" class="col-sm-2 control-label">执业律所：</label>
+        <div class="col-sm-10">
+          <select class="form-control" id="selectOfficeId" name="officeId"></select>
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputLicenseNo" class="col-sm-2 control-label">律师证号：</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control " id="inputLicenseNo" rows="5" name="licenseNo" placeholder="请输入律师证号">
+          </input>
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputWorkBaginDate" class="col-sm-2 control-label">证书起始时间：</label>
+        <div class="col-sm-6">
+          <input type="text" id="startTime" class="form-control " id="inputWorkBaginDate" rows="5" name="workBaginDate" placeholder="请选择时间">
+          </input>
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <h3 class="title">引荐人资料</h3>
+      <div class="form-group">
+        <label for="inputMobile" class="col-sm-2 control-label">手机号：</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control " id="inputMobile" rows="5" name="recommendMobile" placeholder="请输入引荐人手机号">
+          </input>
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="selectRecommendId" class="col-sm-2 control-label">姓名：</label>
+        <div class="col-sm-10">
+          <select class="form-control" id="selectRecommendId" name="recommendId"></select>
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="selectTeamId" class="col-sm-2 control-label">所属团队：</label>
+        <div class="col-sm-10">
+          <select class="form-control" id="selectTeamId" name="teamId"></select>
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <h3 class="title">其他资料</h3>
+      <div class="form-group">
+        <label for="selectLanguages" class="col-sm-2 control-label">掌握语言：</label>
+        <div class="col-sm-10">
+          <select class="form-control" id="selectLanguages" name="languages"></select>
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="selectProfessions" class="col-sm-2 control-label">擅长领域：</label>
+        <div class="col-sm-10">
+          <select class="form-control" id="selectProfessions" name="professions"></select>
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputIntroduction" class="col-sm-2 control-label">个人简介：</label>
+        <div class="col-sm-10">
+          <textarea  rows="4" class="form-control " id="inputIntroduction" name="introduction" placeholder="请输入个人简介"></textarea>
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-10">
+          <img src="dist/assets/image/lawyercenter_icon_information.png" alt="">
+          <span class="font-gray">温馨提示：请依据图示上传身份证和律师执业证件照，请勿涂改或打码，确保要素齐全，字迹清晰</span>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <br>
+      <div class="form-group">
+        <label for="upload-text-shenfenzheng" class="col-sm-2 control-label">上传身份证正面照：</label>
+        <div class="col-sm-10">
+          <div class="col-sm-3 upload-btn upload-btn-shenfenzheng">
+            <span class="fa fa-plus"></span>
+          </div>
+          <input type="text" id="upload-text-shenfenzheng" name="idcardUrl">
+          <input type="file" style="display: none" id="upload-file-shenfenzheng">
+          <img src="" height="70" id="upload-show-shenfenzheng">
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="upload-text-shenfenzheng" class="col-sm-2 control-label">上传身份证背面照：</label>
+        <div class="col-sm-10">
+          <div class="col-sm-3 upload-btn upload-btn-shenfenzhengBack">
+            <span class="fa fa-plus"></span>
+          </div>
+          <input type="text" id="upload-text-shenfenzhengBack" name="idcardUrlBack">
+          <input type="file" style="display: none" id="upload-file-shenfenzhengBack">
+          <img src="" height="70" id="upload-show-shenfenzhengBack">
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="upload-text-zhiyezheng" class="col-sm-2 control-label">上传执业证书正面照：</label>
+        <div class="col-sm-10">
+          <div class="col-sm-3 upload-btn upload-btn-zhiyezheng">
+            <span class="fa fa-plus"></span>
+          </div>
+          <input type="text" id="upload-text-zhiyezheng" name="licenseUrl">
+          <input type="file" style="display: none" id="upload-file-zhiyezheng">
+          <img src="" height="70" id="upload-show-zhiyezheng">
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="upload-text-zhiyezhengBack" class="col-sm-2 control-label">上传执业证书背面照：</label>
+        <div class="col-sm-10">
+          <div class="col-sm-3 upload-btn upload-btn-zhiyezhengBack">
+            <span class="fa fa-plus"></span>
+          </div>
+          <input type="text" id="upload-text-zhiyezhengBack" name="licenseUrlBack">
+          <input type="file" style="display: none" id="upload-file-zhiyezhengBack">
+          <img src="" height="70" id="upload-show-zhiyezhengBack">
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="footer">
+        <div class="col-sm-2"></div><div class="primary-btn">提交</div>
+      </div>
+    </form>
+  </div>
+</script>
+<script type="text/html" id="lawyer-read-template">
+  <div class="my-certification-content">
+    <form class="form-horizontal" id="certification-form">
+      <h3 class="title">基本资料</h3>
+      <div class="form-group">
+        <label for="inputRealname" class="col-sm-2 control-label">姓名：</label>
+        <div class="col-sm-10">
+          <input type="resours" class="form-control" id="inputRealname" value="{% realname | convertNull %}" readonly />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputIdcard" class="col-sm-2 control-label">身份证号码：</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control " id="inputIdcard" value="{% idcard | convertNull %}" readonly />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="selectSex" class="col-sm-2 control-label">性别：</label>
+        <div class="col-sm-10">
+          <select class="form-control" id="selectSex" name="sex" readonly disabled>
+            <option value="1" {% if sex==1 %}selected{% /if %}>男</option>
+            <option value="2" {% if sex==2 %}selected{% /if %}>女</option>
+          </select>
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputEmail" class="col-sm-2 control-label">邮箱：</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control " id="inputEmail" value="{% email | convertNull %}" readonly />
+        </div>
+      </div>
+      <h3 class="title">证书资料</h3>
+      <div class="form-group">
+        <label for="selectOfficeId" class="col-sm-2 control-label">执业律所：</label>
+        <div class="col-sm-10">
+          <select class="form-control" id="selectOfficeId" name="officeId" readonly></select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputLicenseNo" class="col-sm-2 control-label">律师证号：</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control " id="inputLicenseNo" rows="5" value="{% licenseNo | convertNull %}" readonly>
+          </input>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputWorkBaginDate" class="col-sm-2 control-label">证书起始时间：</label>
+        <div class="col-sm-6">
+          <input type="text" id="startTime" class="form-control " id="inputWorkBaginDate" rows="5" value="{% workBaginDate | convertNull %}" readonly>
+          </input>
+        </div>
+      </div>
+      <h3 class="title">引荐人资料</h3>
+      <div class="form-group">
+        <label for="inputMobile" class="col-sm-2 control-label">手机号：</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control " id="inputMobileRead" rows="5" value="{% recommendMobile | convertNull %}" readonly>
+          </input>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="selectRecommendId" class="col-sm-2 control-label">姓名：</label>
+        <div class="col-sm-10">
+          <select class="form-control" id="selectRecommendId" name="recommendId" readonly></select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="selectTeamId" class="col-sm-2 control-label">所属团队：</label>
+        <div class="col-sm-10">
+          <select class="form-control" id="selectTeamId" name="teamId" readonly></select>
+        </div>
+      </div>
+      <h3 class="title">其他资料</h3>
+      <div class="form-group">
+        <label for="selectLanguages" class="col-sm-2 control-label">掌握语言：</label>
+        <div class="col-sm-10">
+          <select class="form-control" id="selectLanguages" name="languages" readonly></select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="selectProfessions" class="col-sm-2 control-label">擅长领域：</label>
+        <div class="col-sm-10">
+          <select class="form-control" id="selectProfessions" name="professions" readonly></select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputIntroduction" class="col-sm-2 control-label">个人简介：</label>
+        <div class="col-sm-10">
+          <textarea  rows="4" class="form-control " id="inputIntroduction" readonly>{% introduction | convertNull %}</textarea>
+        </div>
+      </div>
+      <div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-10">
+          <img src="dist/assets/image/lawyercenter_icon_information.png" alt="">
+          <span class="font-gray">温馨提示：请依据图示上传身份证和律师执业证件照，请勿涂改或打码，确保要素齐全，字迹清晰</span>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <br>
+      <div class="form-group">
+        <label for="upload-text-shenfenzheng" class="col-sm-2 control-label">上传身份证正面照：</label>
+        <div class="col-sm-10">
+          <img src="{% idcardUrl %}" height="70" id="upload-show-shenfenzheng">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="upload-text-shenfenzheng" class="col-sm-2 control-label">上传身份证背面照：</label>
+        <div class="col-sm-10">
+          <img src="{% idcardUrlBack %}" height="70" id="upload-show-shenfenzhengBack">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="upload-text-zhiyezheng" class="col-sm-2 control-label">上传执业证书正面照：</label>
+        <div class="col-sm-10">
+          <img src="{% licenseUrl %}" height="70" id="upload-show-zhiyezheng">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="upload-text-zhiyezhengBack" class="col-sm-2 control-label">上传执业证书背面照：</label>
+        <div class="col-sm-10">
+          <img src="{% licenseUrlBack %}" height="70" id="upload-show-zhiyezhengBack">
+        </div>
+      </div>
+    </form>
+  </div>
+</script>
 <script type="text/html" id="lawyer-select-template">
    {% each %}
       <option value="{% $value.id %}">{% $value.name?$value.name:$value.teamName %}</option>

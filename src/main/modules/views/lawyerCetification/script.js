@@ -198,6 +198,14 @@ var lawyerCertification = (function() {
 
     //http://120.24.181.248:8080/lvswbao-admin/lawyer/queryMyTeam?mobile=13537086079
 
+    const hander = {
+        set:function (target, key, value, proxy) {
+            console.log(target[key],key)
+        },
+        get:function (target, key, value, proxy) {
+            console.log(target[key],key)
+        }
+    }
   return {
       init: function() {
           var start = {
@@ -212,10 +220,24 @@ var lawyerCertification = (function() {
           };
 
           $(document).ready(function () {
+              if(/^[0-9]*[1-9][0-9]*$/.test(lawyerId)){
+                  $({id:lawyerId})._Ajax({
+                      url:'lawyer/api/info',
+                      success:function (result) {
+                          if(result.code==0){
+                              $('#my-certification').html(template("lawyer-read-template",result.data));
+                          }else{
+                              toastr.warning(result.msg)
+                          }
+                      }
+                  })
+              }else{
+                  $('#my-certification').html(template("lawyer-add-template"));
+              }
+              $('#startTime').jeDate(start);
               queryTeams();
               queryLanguage();
               queryProfessional();
-              $('#startTime').jeDate(start);
           })
           //上传执业证
           $(document).on('blur','#inputMobile',function (e) {
