@@ -35,6 +35,7 @@ var userCenter = (function() {
   return {
     init: function() {
       //  satelliteApplication();
+      $("#indexpage").addClass("active");
       $('.user-info').html(
         template('userinfo-template', {
           user: {
