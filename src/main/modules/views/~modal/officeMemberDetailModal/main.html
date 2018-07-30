@@ -1,0 +1,170 @@
+<div id="officeMemberDetailModal" class="remodal" data-remodal-id="officeMemberDetailModal">
+  <div class="remodal-header">
+    <div class="login-res-row">
+      <div class="title getService-title-btn" style="font-size: 20px;font-weight: bold;margin-bottom: 24px;">详细资料</div>
+    </div>
+    <button class="remodal-close closeModal" data-remodal-action="close" aria-label="Close"></button>
+  </div>
+  <div class="remodal-content" style="text-align: center;">
+  </div>
+</div>
+
+<script type="text/html" id="detail-template">
+  <h3 class="title">基本资料</h3>
+  <div class="clearfix" style="position:relative;">
+    <label class="col-sm-4 control-label">姓名：</label>
+    <div class="col-sm-8">
+      {% realname | convertNull%}
+    </div>
+    <label class="col-sm-4 control-label">昵称：</label>
+    <div class="col-sm-8">
+        {% nickname | convertNull%}
+    </div>
+    <div>
+    <label class="col-sm-4 control-label">登录密码：</label>
+    <div class="col-sm-8">
+        {% password | convertNull%}
+    </div>
+  </div>
+  <div>
+    <label class="col-sm-4 control-label">身份证号码：</label>
+    <div class="col-sm-8">
+      {% idcard | convertNull%}
+    </div>
+  </div>
+  <div>
+    <label class="col-sm-4 control-label">性别：</label>
+    {% if sex === 1%}
+    <div class="col-sm-8">
+        男
+    </div>
+    {% else if sex === 0%}
+    <div class="col-sm-8">
+        女
+    </div>
+    {% else %}
+    <div class="col-sm-8">
+        女
+    </div>
+    {% /if %}
+  </div>
+  <div>
+    <label class="col-sm-4 control-label">手机号：</label>
+    <div class="col-sm-8">
+      {% mobile | convertNull%}
+    </div>
+  </div>
+  <div>
+    <label class="col-sm-4 control-label">邮箱：</label>
+    <div class="col-sm-8">
+      {% email| convertNull%}
+    </div>
+  </div>
+  <div>
+    <label class="col-sm-4 control-label"> 最高学历：</label>
+    {% if education === 0%}
+    <div class="col-sm-8">
+        其他
+    </div>
+    {% else if education === 1%}
+    <div class="col-sm-8">
+        小学
+    </div>
+    {% else if education === 2%}
+    <div class="col-sm-8">
+        初中
+    </div>
+    {% else if education === 3%}
+    <div class="col-sm-8">
+        高中
+    </div>
+    {% else if education === 4%}
+    <div class="col-sm-8">
+        大专
+    </div>
+    {% else if education === 5%}
+    <div class="col-sm-8">
+        本科
+    </div>
+    {% else if education === 6%}
+    <div class="col-sm-8">
+        硕士
+    </div>
+    {% else if education === 7%}
+    <div class="col-sm-8">
+        博士
+    </div>
+    {% else %}
+    <div class="col-sm-8">
+    </div>
+    {% /if %}
+  </div>
+  <div>
+    <label class="col-sm-4 control-label">毕业院校：</label>
+    <div class="col-sm-8">
+      {%school | convertNull%}
+    </div>
+  </div>
+  <div>
+    <label class="col-sm-4 control-label">婚姻状况：</label>
+    <div class="col-sm-8">
+      {% isMarried| convertNull%}
+    </div>
+  </div>
+  <div>
+    <label class="col-sm-4 control-label">居住地址：</label>
+    <div class="col-sm-8">
+      {% address | convertNull%}
+    </div>
+  </div>
+</div>
+<h3 class="title">律师执业资料</h3>
+<div class="clearfix">
+<div>
+    <label class="col-sm-4 control-label">执业律所：</label>
+    <div class="col-sm-8">
+        {% officeName | convertNull%}
+    </div>
+  </div>
+  <div>
+    <label class="col-sm-4 control-label">律师证号：</label>
+    <div class="col-sm-8">
+        {% licenseNo | convertNull%}
+    </div>
+  </div>
+  <div>
+    <label class="col-sm-4 control-label">证书起始时间：</label>
+    <div class="col-sm-8">
+        {% workBaginDate | convertNull%}
+    </div>
+  </div>
+  <div>
+    <label  class="col-sm-4 control-label">掌握语言：</label>
+    <div class="col-sm-8">
+        {% languageName | convertNull%}
+    </div>
+  </div>
+  <div>
+    <label class="col-sm-4 control-label">擅长领域：</label>
+    <div class="col-sm-8">
+        {% professionalName | convertNull%}
+    </div>
+  </div>
+  <div>
+    <label class="col-sm-4 control-label">个人简介：</label>
+    <div class="col-sm-8">
+        {% introduction | convertNull%}
+    </div>
+  </div>
+  </div>
+  <div class="clearfix">
+    <label class="col-sm-4">执业资格证</label>
+    <div class="col-sm-8">
+      {% if licenseUrl%}
+      <img src="{% host + licenseUrl %}" alt="" class="license-img">
+      {% else %}
+       <h5>还未上传执业资格证</h5>
+      {% /if%}
+    </div>
+  </div>
+</script>

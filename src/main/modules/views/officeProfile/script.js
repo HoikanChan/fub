@@ -48,6 +48,7 @@ var userCenter = (function() {
   })
   return {
     init: function() {
+      $('#my-profile').addClass('active')
     }
   }
 })()

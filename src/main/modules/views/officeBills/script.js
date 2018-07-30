@@ -47,6 +47,7 @@ var userCenter = (function() {
   })
   return {
     init: function() {
+      $('#office-bills').addClass('active')
       $('.my-bills-content').html(
         template('my-bills-template', {
           loans: {},

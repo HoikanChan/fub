@@ -1,30 +1,6 @@
 var userCenter = (function() {
   var page = 1
-  var inquery_validate
-
-  function getMycase() {
-    var params = {
-      clientId: clientId,
-      sidx: 'createTime',
-      order: 'desc'
-    }
-
-    $('#my-cases .pager').tablePager({
-      url: 'order/queryOrderList',
-      searchParam: params,
-      success: function(result) {
-        if (result.code == 0) {
-          if (result) {
-            var html = template('case-result-templete', result.data)
-
-            $('.my-case-box').html(html)
-          }
-        }
-      }
-    })
-
-   
-  }
+  
   $(function() {
     $("#my-member").addClass("active");
     $('aside .right-icon').click(function(e) {
@@ -48,40 +24,49 @@ var userCenter = (function() {
   })
   return {
     init: function() {
-      $('#member-manage .member-manage-content').html(
-        template('member-manage-template', {
-          delegations: [
-            {
-              account: '126551453',
-              name: '张三',
-              sex: '男',
-              state: '有效',
-              joinTime: '2015-06-05 15:33:30'
-            },
-            {
-              account: '126551453',
-              name: '张三',
-              sex: '男',
-              state: '有效',
-              joinTime: '2015-06-05 15:33:30'
-            },
-            {
-              account: '126551453',
-              name: '张三',
-              sex: '男',
-              state: '有效',
-              joinTime: '2015-06-05 15:33:30'
-            },
-            {
-              account: '126551453',
-              name: '张三',
-              sex: '男',
-              state: '有效',
-              joinTime: '2015-06-05 15:33:30'
-            }
-          ]
-        })
-      )
+      $('#office-member').addClass('active')
+      this.getList()
+      //窗口按钮初始化
+      $(document).on('click', '#disable-btn', function() {
+        officeMemberDisableModal.showModal($(this).attr('data-id'))
+        return false
+      })
+      $(document).on('click', '#delete-btn', function() {
+        officeMemberDeleteModal.showModal($(this).attr('data-id'))
+        return false
+      })
+      $(document).on('click', '#detail-btn', function() {
+        officeMemberDetailModal.showModal($(this).attr('data-id'))
+        return false
+      })
+    },
+    //获取成员列表
+    getList: function() {
+      //Todo: remove the fixed officeId
+      officeId = 10
+      //Todo: 分页
+      // $('#my-cases .pager').tablePager({
+      //   url: 'order/queryOrderList',
+      //   searchParam: params,
+      //   success: function(result) {
+      //     if (result.code == 0) {
+      //       if (result) {
+      //         var html = template('case-result-templete', result.data)
+  
+      //         $('.my-case-box').html(html)
+      //       }
+      //     }
+      //   }
+      // })
+      $({})._Ajax({
+        url: 'lawyer/queryLawyerListByOffice?officeId=' + officeId,
+        success: function(result) {
+          $('.totalNum').html(result.page.totalCount)
+          $('#member-manage .member-list').html(
+            template('member-manage-template', result.page)
+          )
+        }
+      })
     }
   }
 })()

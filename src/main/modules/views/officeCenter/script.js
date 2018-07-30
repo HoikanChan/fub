@@ -30,13 +30,14 @@ var userCenter = (function() {
           .addClass('fa-chevron-down')
       }
     })
-
    
   })
 
   return {
     init: function() {
       //  satelliteApplication();
+    
+
       $('.user-info').html(
         template('userinfo-template', {
           user: {

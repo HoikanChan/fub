@@ -232,7 +232,7 @@ var _login = function () {
                             }else{
                                //判断没有登录，然后用户登录成功后调用之前的回调函数
                          
-                             self.location = document.referrer;  
+                           self.location = document.referrer;  
 
                             }
                                 

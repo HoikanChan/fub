@@ -93,6 +93,7 @@ var userCenter = (function() {
   $(function() {})
   return {
     init: function() {
+    $("#my-profile").addClass("active");
       initForm()
     }
   }
