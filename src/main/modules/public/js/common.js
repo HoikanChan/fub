@@ -427,6 +427,7 @@ var regexs = {
     // password: /^(?!_)(?!.*?_$)(?![0-9]+$)[\u4e00-\u9fa5a-zA-Z0-9_]{6,16}$/,
     password: /^(?!_)(?!.*?_$)(?![0-9]+$)[\u4e00-\u9fa5a-zA-Z0-9]{6,16}$/,
     mobile: /(^0{0,1}1[3|4|5|7|8][0-9]{9}$)/, // mobile 手机号码 包括13X 15X 18X 14X 17X号段
+    telephone: /0\d{2,3}[-]{0,1}\d{7,8}/,//座机号验证
     chinese:/^[\u4e00-\u9fa5]+$/,    //中文
     email:/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/, //邮箱
     trim : /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, //表单前后空格验证
@@ -452,7 +453,11 @@ $(function () {
         $.validator.addMethod("mobile", function (value, element, params) {
             return regexs.mobile.test(value)
         });
-        //添加手机号的验证
+        //添加座机号的验证
+        $.validator.addMethod("telephone", function (value, element, params) {
+            return regexs.telephone.test(value)
+        });
+        //添加邮箱的验证
         $.validator.addMethod("email", function (value, element, params) {
             return regexs.email.test(value)
         });

@@ -90,7 +90,7 @@ var officeCertification = (function() {
           officeMobile: {
               required: "请输入律所联系电话",
               trim:"请输入律所联系电话",
-              mobile:"请输入正确律所联系电话"
+              telephone:"请输入正确律所联系电话"
           },
           adminPrincipal: {
               required: "请输入行政负责人",
@@ -111,12 +111,12 @@ var officeCertification = (function() {
               trim:"请输入律所简介",
           },
           businessUrl: {
-              required: "请上传身份证背面照",
-              trim:"请上传身份证背面照",
+              required: "请上传营业执照",
+              trim:"请上传营业执照",
           },
           licenseUrl: {
-              required: "请上传身份证背面照",
-              trim:"请上传身份证背面照",
+              required: "请上传律所执业许可证",
+              trim:"请上传律所执业许可证",
           },
       },
       errorPlacement: function (error, element) {
