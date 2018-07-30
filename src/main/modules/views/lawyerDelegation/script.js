@@ -72,6 +72,7 @@ var userCenter = (function() {
   })
   return {
     init: function() {
+      $("#my-delegation").addClass("active");
       $('#affairs-delegation .my-delegation').html(
         template('my-delegation-template', {
           delegations: [

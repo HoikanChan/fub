@@ -41,12 +41,111 @@
               </div>
               <div class="options-block clearfix">
                 <!-- lawyer-assistant-template -->
+                <div class="col-sm-9">
+                  <form class="form-horizontal" id="assistant-form">
+                    <div class="form-group">
+                      <label for="name" class="col-sm-3 control-label">全文：</label>
+                      <div class="col-sm-9">
+                        <input type="resours" class="form-control" id="alltext" name="keyword" placeholder="请输入">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="defendant" class="col-sm-3 control-label">当事人：</label>
+                      <div class="col-sm-9">
+                        <input type="area" class="form-control" id="defendant" name="defendant" placeholder="请输入">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="trialDateBegin" class="col-sm-3 control-label">裁判时间开始：</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control " name="trialDateBegin" id="starttime" >
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="trialDateEnd" class="col-sm-3 control-label">裁判时间结束：</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control " name="trialDateEnd" id="endtime" >
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label  class="col-sm-3 control-label" id="resources" data-id="1">案由：</label>
+                      <div class="col-sm-9">
+                        <select class="form-control">
+                          <option>提供虚假财会报告</option>
+                          <option>提供虚假财会报告</option>
+                        </select>
+                      </div>
+                    </div>
+                  </form>
+                  <div>
+                    <h5>已添加搜索维度</h5>
+                    <div class="added-options clearfix" id="addedOption">
+                      <!-- lawyer-added-result-template -->
+                    </div>
+              
+                  </div>
+                </div>
+                <div class="col-sm-3 aside-btns resource-options">
+                   <!-- lawyer-assistant-result-template -->
+
+                </div>
+                
+                <div class="footer-btns">
+                  <span class="options-block-hide">
+                    收起
+                    <span class="fa fa-chevron-up right-icon"></span>
+                  </span>
+                  <button class="primary-btn" id="searchBtn">搜索</button>
+                  <button class="ghost-border-btn">重置</button>
+                </div>
               </div>
             </div>
-            <div class="result-page lawyer-assistant-page">
-              <!-- lawyer-assistant-result-template -->
+            <div class="page-result"> 
+                <div class="row">
+                    <div class="col-md-3 col-sm-4">
+                        <nav class="sidenav" data-sidenav>
+                            <ul class="ultitle">
+                                <li><span>所有类目</span></li>
+                            </ul>
+                            <ul class="sidenav-menu">
+  
+                            </ul>
+                          </nav>
+                    </div>
+                    <div class="col-md-9 col-sm-8">
+                        <div class="col-right">
+                            <!-- <form id="keyword-form">
+                                    <div class="form-group ">
+                                            <div class="input-group">
+                                                    <input type="text" name="keyword" class="form-control" id="searchbox" placeholder="请输入搜索内容">
+                                                    <div class="input-group-addon" id="searchBtn">搜 索</div>
+                                            </div>
+                                    </div>
+                            </form> -->
+                            <p>共找到<span class="result-count"></span>条结果</p>
+                             <!-- <div class="col-md-8 col-right">
+                            <p>排序：<span class="sort-one active">法院层级</span> <span class="sort-two">裁判日期</span>  <span class="sort-three">审判程序</span></p>
+                        </div> -->
+                        </div>    
+                        <div class="case-list-page">
+                            <div class="case-list">
+                              
+                            </div>
+                            <div class="page-row">
+                                    <div class="pager pull-right">
+                                     
+                                    </div>
+                              </div>
+                         </div> 
+                    </div>
+                </div>
+                
+               
+             </div>   
+        </div>
+            
             </div>
-            <div class="visual-result-page  lawyer-assistant-page  clearfix">
+            <!-- <div class="visual-result-page  lawyer-assistant-page  clearfix">
               <div class="col-sm-6">
                 <div class="chart-item">
                   <div class="chart-title">
@@ -69,169 +168,86 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
     </div>
-  </div>
+
   <div class="col-sm-1"></div>
 </div>
 </div>
 
-<script type="text/html" id="lawyer-assistant-template">
-  <div class="col-sm-9">
-    <form class="form-horizontal" id="recommend-form">
-      <div class="form-group">
-        <label for="name" class="col-sm-3 control-label">全文：</label>
-        <div class="col-sm-9">
-          <input type="resours" class="form-control" id="caseresours" placeholder="请输入">
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="inputEmail3" class="col-sm-3 control-label">当事人：</label>
-        <div class="col-sm-9">
-          <input type="area" class="form-control city_input" area-id="1001" id="area-select" placeholder="请输入">
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="inputPassword3" class="col-sm-3 control-label">裁判时间：</label>
-        <div class="col-sm-9">
-          <input type="text" class="form-control " id="inputPassword3" placeholder="请输入">
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="inputPassword3" class="col-sm-3 control-label">案由：</label>
-        <div class="col-sm-9">
-          <select class="form-control">
-            <option>提供虚假财会报告</option>
-            <option>提供虚假财会报告</option>
-          </select>
-        </div>
-      </div>
-    </form>
-    <div>
-      <h5>已添加搜索维度</h5>
-      <div class="added-options clearfix">
-        {% each addedOptions  data%}
-        <span id= {%data.value %} class="option-btn added-option col-sm-3"> 
-          <span class="fa fa-minus"></span>
-          <span class={% data.value %}>
-              {% data.name %}
-          </span>
-        </span>
-        {% /each %}
-      </div>
-
-    </div>
+<script type="text/html" id="lawyer-added-template">
+  {% each addedOptions  data%}
+  <div id= {%data.value %} class="option-btn added-option col-md-1" data-name={% data.name %}> 
+    <span class="fa fa-minus"></span>
   </div>
-  <div class="col-sm-3 aside-btns">
+    <div class="form-group col-md-11">
+      <label for="trialDateEnd" class="col-sm-3 control-label">{% data.name %}：</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control "   name="lawyerName" id="lawyerName" >
+      </div>
+    </div>
+  {% /each %}
+</script>
+
+<script type="text/html" id="lawyer-assistant-template">
+  
+  
     <h5>添加搜索维度</h5>
     {% each options  data%}
     <div id= {%data.value %}  class="option-btn topick-option" >
       <span class="fa fa-plus"></span>
-      <span class={% data.value%}>
+      <span class={% data.value %}>
           {%data.name%}
       </span>
     </div>
     {% /each %}
-  </div>
-  <div class="footer-btns">
-    <span class="options-block-hide">
-      收起
-      <span class="fa fa-chevron-up right-icon"></span>
-    </span>
-    <button class="primary-btn">搜索</button>
-    <button class="ghost-border-btn">重置</button>
-  </div>
-</script>
-<script type="text/html" id="lawyer-assistant-result-template">
-  <div class="searchbar clearfix">
-      <div class="col-sm-9">
-        <input class="input" type="text" placeholder="请输入搜索内容">
-        <span class="options-block-show">
-          选项
-          <i class="fa fa-chevron-down right-icon"></i>
-        </span>
-        </input>
 
-      </div>
-      <div class="col-sm-3">
-        <button class="primary-btn">搜索</button>
-      </div>
-  </div>
-  <div class="search-options">
-    <span>婚姻继承</span>
-    <span>侵权纠纷</span>
-    <span>交通事故</span>
-    <span>工伤赔偿</span>
-    <span>医疗纠纷</span>
-    <span>债权债务</span>
-    <span>劳动仲裁</span>
-  </div>
-  <div class="col-sm-3">
-    <div class="filter-title">
-      所有类目
-    </div>
-    <div class="sub-filter-title">
-    按关键字筛选<span class="fa fa-chevron-down"></span>
-    </div>
-    <div class="child-filter-title">减刑（100）</div>
-    <div class="child-filter-title">非法占有（100）</div>
-    <div class="child-filter-title">自首（100）</div>
-    <div class="filter-title">
-      按案由筛选
-    </div>
-    <div class="filter-title">
-      按法院层级
-    </div>
-    <div class="filter-title">
-      按地域及法院筛选
-    </div>
-    <div class="filter-title">
-      按裁判年份筛选
-    </div>
-    <div class="filter-title">
-      按审判程序筛选
-    </div>
-    <div class="filter-title">
-      按文书类型筛选
-    </div>
-  </div>
-  <div class="col-sm-9 result-contents">
-    <div class="col-sm-3 result-count">共找到 <span class="font-theme">{% count %}</span> 条结果</div>
-    <div class="col-sm-6 order-btns">
-      排序：
-      <button class="primary-btn">法院层级</button>
-      <button class="border-btn">裁判日期</button>
-      <button class="border-btn">审判程序</button>
-    </div>
-    <div class="col-sm-3 visualization-btn">
-      <img src="dist/assets/image/lawyercenter_icon_visualization.png" alt="">
-      可视化分析
-    </div>
-    <div class="clearfix"></div>
-    <br>
-    {% each results  data%}
-    <div class="result-item">
-      <div class="flex-row">
-        <div class="result-title">{% data.title%}</div>
-        <div class="result-type font-theme">{% data.type%}</div>
-      </div>
-      <div class="flex-row">
-        <span class="font-gray">{% data.court %}</span>
-        <span class="font-gray">{% data.no %}</span>
-        <span class="font-gray">{% data.time %}</span>
-      </div>
-      <div>【裁判理由】</div>
-      <article>
-        {% data.content%}
-      </article>
-    </div>
-    {% /each %}
-  </div>
-  
  
 </script>
+<script type="text/html" id="lawyer-list-templete">
+  {% each list das %}
+  {% each das.caseVoList da %}
+ <a class="case-hover" href="{% host %}id={% da.id %}&name={% da.lawyerName %}"><div class="case-list-box" >
+          <div class="case-title">
+              <div class="row">
+                  <p class="title col-md-9 col-sm-8">{% da.title %}</p>
+                  <p class="col-md-3 col-sm-4 tag"><span>{% da.caseType %}</span><span>{% da.trialRound %}</span><span>判决</span></p>
+              </div>
+              <p class="second-tag"><span>{% da.court %} </span><span>{% da.caseNo %}</span><span> {% da.trialDate | dateFormat 'yyyy'%}-{% da.trialDate | dateFormat 'MM'%}-{% da.trialDate | dateFormat 'dd'%} </span></p>
+          </div>
+              <P>【裁判理由】：</P>
+              <P>{% da.reason %}</P>
+          </div>
+      </div></a>
+  
+      {% /each %}
+      {% /each %}
+</script>
+<script type="text/html" id="lawyer-slider-templete">
+  {% each list das %}
+  {% each das.groupMenu da %}  
+<li class="oneLevel">
+     
+      <a href="javascript:;" onclick="changeicon()" data-sidenav-dropdown-toggle class="active">
+             <i class="material-icons">{% da.categoryName %}</i><span class="glyphicon glyphicon-menu-down"></span>
+      </a>
+      <ul class="sidenav-dropdown threelevel" data-sidenav-dropdown>
+           
+                  {% each da.sonCategoryList data %}  
+
+                  <li><p class="slider-result"  data-id="{% data.sonCategoryQueryLogId %}"> <a href="{% hosts %}&caseQueryLogId={% data.sonCategoryQueryLogId %}">{% data.sonCategoryName %}</a></p></li>
+
+                  {% /each %}   
+                  </ul>
+            
+          
+      </li>
+     
+      {% /each %}
+      {% /each %}
+</script> 
 <script type="text/html" id="lawyer-assistant-visual-result-template">
 </script>

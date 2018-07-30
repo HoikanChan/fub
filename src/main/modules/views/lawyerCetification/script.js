@@ -1,5 +1,6 @@
 
 var lawyerCertification = (function() {
+    $("#my-certification").addClass("active");
   var validate = $("#certification-form").validate({
       rules: {
           realname: {
@@ -239,6 +240,7 @@ var lawyerCertification = (function() {
 
   return {
       init: function() {
+       
           var start = {
               isinitVal: true,
               //initDate:[{DD:"0"},true],

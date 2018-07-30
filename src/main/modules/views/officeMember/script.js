@@ -1,55 +1,8 @@
 var userCenter = (function() {
   var page = 1
-  var inquery_validate
-
-  function getMycase() {
-    var params = {
-      clientId: clientId,
-      sidx: 'createTime',
-      order: 'desc'
-    }
-
-    $('#my-cases .pager').tablePager({
-      url: 'order/queryOrderList',
-      searchParam: params,
-      success: function(result) {
-        if (result.code == 0) {
-          if (result) {
-            var html = template('case-result-templete', result.data)
-
-            $('.my-case-box').html(html)
-          }
-        }
-      }
-    })
-
-    //   $('#my-cases .mycasepage .pager').tablePager({
-    //     url: "order/queryOrderList",
-    //     searchParam:params,
-    //     success: function (result) {
-    //        if(result.code == 0){
-    //          console.log(result.data)
-    //           // var html1 = template('my-cases-template', result.data);
-    //           // $(".my-cases-box").html(html1);
-    //           var html = template('search-result-templete', result.data);
-    //           $(".my-case-box").html(html);
-
-    //         if(result.data.totalCount<10){
-    //             $(".page-row").hide()
-    //         }else{
-    //             $(".page-row").show()
-    //         }
-    //         if(result.data.totalCount==0){
-    //             $(".my-cases-box").html("<P class='noresult'>抱歉，没有相关案件</P>")
-    //         }
-    //        }else{
-    //             toastr.warning(result.msg);
-    //        }
-    //       $(".my-cases-content .totalNum").text(result.data.totalCount);
-    //     }
-    // })
-  }
+  
   $(function() {
+    $("#my-member").addClass("active");
     $('aside .right-icon').click(function(e) {
       e.stopPropagation()
       if (e.target.classList.contains('fa-chevron-down')) {
@@ -71,40 +24,49 @@ var userCenter = (function() {
   })
   return {
     init: function() {
-      $('#member-manage .member-manage-content').html(
-        template('member-manage-template', {
-          delegations: [
-            {
-              account: '126551453',
-              name: '张三',
-              sex: '男',
-              state: '有效',
-              joinTime: '2015-06-05 15:33:30'
-            },
-            {
-              account: '126551453',
-              name: '张三',
-              sex: '男',
-              state: '有效',
-              joinTime: '2015-06-05 15:33:30'
-            },
-            {
-              account: '126551453',
-              name: '张三',
-              sex: '男',
-              state: '有效',
-              joinTime: '2015-06-05 15:33:30'
-            },
-            {
-              account: '126551453',
-              name: '张三',
-              sex: '男',
-              state: '有效',
-              joinTime: '2015-06-05 15:33:30'
-            }
-          ]
-        })
-      )
+      $('#office-member').addClass('active')
+      this.getList()
+      //窗口按钮初始化
+      $(document).on('click', '#disable-btn', function() {
+        officeMemberDisableModal.showModal($(this).attr('data-id'))
+        return false
+      })
+      $(document).on('click', '#delete-btn', function() {
+        officeMemberDeleteModal.showModal($(this).attr('data-id'))
+        return false
+      })
+      $(document).on('click', '#detail-btn', function() {
+        officeMemberDetailModal.showModal($(this).attr('data-id'))
+        return false
+      })
+    },
+    //获取成员列表
+    getList: function() {
+      //Todo: remove the fixed officeId
+      officeId = 10
+      //Todo: 分页
+      // $('#my-cases .pager').tablePager({
+      //   url: 'order/queryOrderList',
+      //   searchParam: params,
+      //   success: function(result) {
+      //     if (result.code == 0) {
+      //       if (result) {
+      //         var html = template('case-result-templete', result.data)
+  
+      //         $('.my-case-box').html(html)
+      //       }
+      //     }
+      //   }
+      // })
+      $({})._Ajax({
+        url: 'lawyer/queryLawyerListByOffice?officeId=' + officeId,
+        success: function(result) {
+          $('.totalNum').html(result.page.totalCount)
+          $('#member-manage .member-list').html(
+            template('member-manage-template', result.page)
+          )
+        }
+      })
     }
   }
 })()

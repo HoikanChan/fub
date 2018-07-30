@@ -1,4 +1,5 @@
 <div class="clearfix officeCenter">
+  {{ include '../~modal/downloadModal/main'}}
   <div class="title-bar">
     <img src="dist/assets/image/usercenter_bg.png" alt="" style="width: 100%;">
     <span class="page-title">我的财富</span>
@@ -9,97 +10,133 @@
     {{ include '../~modal/lawyerNav/main'}}
     <div class="col-sm-8">
       <div class="content-container">
-        <div class="page" id="lawyer-loan">
-          <div class="lawyer-loan-content affairs-template">
-            <!-- lawyer-loan-template -->
+        <div id="my-loan">
+          <div class="my-loan-content affairs-template">
+            <div class="searchbar">
+              <div class="col-md-2">
+                <p>共搜索到
+                  <span class="totalNum"></span>条数据</p>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">查询时间：</label>
+                  <div class="col-sm-9 ">
+                    <input id="start-date" class="col-md-5 form-control " type="text" readonly>
+                    <span class="pull-left">-</span>
+                    <input id="end-date" class="col-md-5 form-control" type="text" readonly>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 clearfix" style="text-align: right;">
+                <input type="text" class="input" placeholder="请输入关键词"></input>
+                <button class="primary-btn">搜索</button>
+                <button class="primary-btn">申请法务贷</button>
+              </div>
+            </div>
+            <div class="info-bar">
+              <div class="left">
+                <img src="dist/assets/image/usercenter_icon_exclamation.png" alt=""></img>
+                <span>
+                  已选择
+                  <span class="loan-items-counts font-theme">2</span>项
+                </span>
+                <span>
+                  总计
+                  <strong class="loan-amount font-theme">1000000</strong>
+                  元
+                </span>
+              </div>
+              <div class="right">
+                <span>
+                  状态：
+                </span>
+                <select class="form-control all-status" name="status">
+                  <option>全部</option>
+                  <option>诉前准备</option>
+                  <option>公安侦察阶段</option>
+                  <option>行政复议</option>
+                  <option>案件执行</option>
+                </select>
+              </div>
+            </div>
+            <!-- my-loan-template -->
+            <div class="table-responsive table-hover myloanpage">
+              <table class="table table-bordered table-striped jambo_table bulk_action ">
+                <thead>
+                  <tr class="headings">
+                    <th class="column-title">
+                    </th>
+                    <th class="column-title">订单编号 </th>
+                    <th class="column-title">贷款金额 </th>
+                    <th class="column-title">委托律师 </th>
+                    <th class="column-title">联系电话 </th>
+                    <th class="column-title">状态 </th>
+                    <th class="column-title">订单时间 </th>
+                    <th class="column-title">
+                      <span class="nobr">操作</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="my-loan-box">
+
+                </tbody>
+              </table>
+
+              <div class="page-row clear">
+                <div class="pager pull-right">
+
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        </div>
+
       </div>
     </div>
     <div class="col-sm-1"></div>
   </div>
 </div>
 
-<script type="text/html" id="lawyer-loan-template">
-  <div class="searchbar">
-    <p>共为你找到<span>{% loans.count %}</span>条相关结果</p>
-    <div>
-      <input type="text" class="input" placeholder="请输入关键词"></input>
-      <button class="primary-btn">搜索</button>
-      <button class="primary-btn">导出</button>
-      <button class="primary-btn">申请案件</button>
-    </div>
-  </div>
-  <div class="info-bar">
-    <div class="left">
-      <img src="dist/assets/image/usercenter_icon_exclamation.png" alt=""></img>
-      <span>
-        已选择 <span class="loan-items-counts font-theme">2</span>项
-      </span>
-      <span>
-        总计
-        <strong class="loan-amount font-theme">1000000</strong>
-        元
-      </span>
-    </div>
-    <div class="right">
-      <span>
-        状态：
-      </span>
-      <select class="form-control">
-        <option>全部</option>
-      </select>  
-    </div>
-  </div>
-  <div class="table-responsive table-bordered table-hover">
-      <table class="table table-striped jambo_table bulk_action">
-        <thead>
-          <tr class="headings">
-            <th class="column-title">
-              
-            </th>
-            <th class="column-title">订单编号 </th>
-            <th class="column-title">贷款金额 </th>
-            <th class="column-title">委托律师 </th>
-            <th class="column-title">联系电话 </th>
-            <th class="column-title">状态 </th>
-            <th class="column-title">订单时间 </th>
-            <th class="column-title"><span class="nobr">操作</span>
-            </th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {% each bills  data%}
-            <tr class="even pointer">
-              <td class="a-center ">
-                <input type="checkbox" class="flat checkbox" name="table_records">
-              </td>
-              <td class=" column-content">{%data.no%}</td>
-              <td class="column-content ">{%data.amount%} </td>
-              <td class=" column-content">{%data.lawyer%} </td>
-              <td class=" column-content">{%data.phone%}</td>
-              <td class=" column-content">{% data.state%}</td>
-              <td class="a-right a-right ">{% data.time %}</td>
-              <td class=" last">
-                <a href="#">详情 </a>
-                <a href="#">下载 </a>
-                <a href="#">更多</a>
-                <span class="fa fa-chevron-down"></span>
-              </td>
-            </tr>
-
-          {% /each %}
-
-        </tbody>
-      </table>
-    </div>
-  <div class="pagination">
-    <span>共{% loans.pages %}页，当前第<span id="current-page">1</span>页</span>
-    <button class="prev ghost-border-btn ">上一页</button>
-    <button class="next ghost-border-btn ">下一页</button>
-    <input type="text"></input>
-    <button class="jumpto border-btn">跳转</button>
-  </div>
+<script type="text/html" id="loan-result-templete">
+  {% each list da i %}
+  {% if  i%2==0 %}
+    <tr class="even pointer">
+  {% else %}    
+    <tr class = "odd pointer">  
+  {% /if %}    
+      <td class="a-center ">
+        <input type="checkbox" class="flat checkbox" name="table_records">
+      </td>
+      <td class="column-content">{% da.orderSn %}</td>
+      <td class="column-content ">{% da.loanPrice %} </td>
+      <td class="column-content ">{% da.lawyerName %} </td>
+      <td class="column-content">{% da.lawyerMobile %} </td>
+      <td class="column-content">{% da.loanStatus | loanType %}</td>
+      <td class="a-right a-right ">{% da.createTime | dateFormat 'yyyy'%}-{% da.createTime | dateFormat 'MM'%}-{% da.createTime | dateFormat 'dd'%}</td>
+      <td class=" last">
+        <a  data-remodal-target="download-modal" data-id="{% da.id %}" class="check-file-btn">文件 </a>
+        <a href="#">评价 </a>
+        <span class="showmore" data-id="{% da.id %}" data-status="{% da.id %}">更多<i class="fa fa-chevron-down"></i></span>
+      </td>
+    </tr>
+    <tr class="detail" id="tr{% da.id %}" style="display:none">
+     <td colspan="9">
+        <div class="steps-box">
+          <div class="step"><i class="fa fa-check"></i> 提交申请</div>
+          <div class="step"><i class="fa fa-check"></i>律师初审</div>
+          <div class="step"><i class="fa fa-check"></i>团队复审</div>
+          <div class="step"><i class="fa fa-check"></i>平台审批</div>
+          <div class="step"><i class="fa fa-check"></i>银行审批</div>
+          <div class="step"><i class="fa fa-check"></i>银行放款</div>
+          <div class="step"><i class="fa fa-check"></i>贷后跟踪</div>
+        </div>
+        <div class="process-box">
+            <div class="process-line col-sm-offset-2">
+            </div>
+            <div class="process-text col-sm-offset-2">
+            </div>
+        </div>
+     </td>
+    </tr>  
+  {% /each %} 
 </script>

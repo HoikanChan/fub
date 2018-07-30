@@ -236,7 +236,6 @@ var officeCertification = (function() {
             }
         })
     }
-
   return {
       init: function() {
           var start = {
