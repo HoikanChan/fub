@@ -1,0 +1,57 @@
+#officeMemberAddModal {
+  width: 600px;
+  border-radius: 8px;
+  position: relative;
+  .login-res-row {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    .getService-title-btn {
+      width: 100%;
+      height: 44px;
+      cursor: pointer;
+      line-height: 44px;
+      text-align: center;
+      font-size: 16px;
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+      font-size: 18px;
+      font-weight: 600;
+      margin-top: 20px;
+    }
+  }
+  .remodal-header {
+    .title {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 24px;
+    }
+  }
+  .remodal-content {
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 20px;
+    label{
+      margin: 0;
+    }
+    h3{
+      font-size: 16px;
+      text-align: left;
+      margin-bottom: 24px;
+    }
+    .col-sm-4 {
+      margin-bottom: 12px
+    }
+    .col-sm-8{
+      margin-bottom: 12px;
+      min-height: 20px;
+    }
+    .license-img{
+      width: 50%;
+      height: 120px ;
+      margin: 0 auto;
+      cursor: pointer;
+    }
+  }
+}

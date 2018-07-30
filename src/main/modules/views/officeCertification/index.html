@@ -5,7 +5,7 @@
   </div>
   <div class="container">
     <div class="col-sm-1"></div>
-    {{ include '../~modal/lawyerNav/main'}}
+    {{ include '../~modal/officeNav/main'}}
     <div class="col-sm-8">
       <div class="content-container">
         <div class="auth-process">
@@ -31,7 +31,7 @@
       <div class="form-group">
         <label for="inputRealname" class="col-sm-2 control-label">律所名称：</label>
         <div class="col-sm-10">
-          <input type="resours" class="form-control" id="inputRealname" name="realname" placeholder="请输入律所名称">
+          <input type="text" class="form-control" id="inputRealname" name="realname" placeholder="请输入律所名称">
           <div class="error-div"></div>
         </div>
       </div>
@@ -156,7 +156,7 @@
     <div class="form-group">
         <label for="inputRealname" class="col-sm-2 control-label">律所名称：</label>
         <div class="col-sm-10">
-            <input type="resours" class="form-control" id="inputRealname" name="realname" placeholder="请输入律所名称" value="{% realname | convertNull %}">
+            <input type="text" class="form-control" id="inputRealname" name="realname" placeholder="请输入律所名称" value="{% realname | convertNull %}">
             <div class="error-div"></div>
         </div>
     </div>
@@ -280,7 +280,7 @@
     <div class="form-group">
         <label for="inputRealname" class="col-sm-2 control-label">律所名称：</label>
         <div class="col-sm-10">
-            <input type="resours" class="form-control" id="inputRealname" value="{% realname | convertNull %}" readonly>
+            <input type="text" class="form-control" id="inputRealname" value="{% realname | convertNull %}" readonly>
             <div class="error-div"></div>
         </div>
     </div>

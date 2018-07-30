@@ -31,7 +31,7 @@ var officeCertification = (function() {
           officeMobile: {
               required: true,
               trim:true,
-              mobile:true
+              telephone:true
           },
           adminPrincipal: {
               required: true,
