@@ -525,9 +525,16 @@ tr.detail{
     }
   }
 }
-.showmore{
-  cursor: pointer;
+.last{
+  a{
+    color:#108EE9;
+  }
+  span{
+    cursor: pointer;
+    color:#108EE9;
+  }
 }
+
 //tab 通用样式
 .tab {
   & > section {

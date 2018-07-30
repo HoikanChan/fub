@@ -2,20 +2,46 @@ var userCenter = (function() {
   var page = 1
   var inquery_validate
   var searchOptions = [
-    { name: '全文检索', value: 'global' },
-    { name: '标题', value: 'title' },
-    { name: '当事人', value: 'client' },
-    { name: '代理律师', value: 'lawyer' },
-    { name: '律师事务所', value: 'office' },
+    // { name: '全文检索', value: 'global' },
+    // { name: '标题', value: 'title' },
+    { name: '被告人', value: 'defendant' },
+    { name: '原告人', value: 'appellors' },
+    { name: '代理律师', value: 'lawyerName' },
+    { name: '律师事务所', value: 'officeName' },
     { name: '法院名称', value: 'court' },
-    { name: '法院层级', value: 'courtlevel' },
-    { name: '裁判时间', value: 'judgingtime' },
-    { name: '案由', value: 'route' },
-    { name: '裁判人员', value: 'judger' },
-    { name: '文书类型', value: 'documentType' },
-    { name: '审判程序', value: 'judgingAoo' }
+    { name: '法院层级', value: 'courtLevel' },
+    // { name: '裁判时间', value: 'judgingtime' },
+    // { name: '案由', value: 'route' },
+    { name: '裁判人员', value: 'judge' },
+    { name: '文书类型', value: 'docType' },
+    { name: '审判程序', value: 'trialRound' },
+    { name: '法律依据', value: 'legalBases' },
   ]
   var addedOptions = []
+  var start = {
+    isinitVal: true,
+    initDate:[{DD:"-7"},true],
+    format: "YYYY-MM-DD",
+    maxDate: $.nowDate({DD:0}), //最大日期
+    zIndex: 99999,
+    isClear:false,
+    isok:false,
+    okfun: function (elem, date) {
+            end.minDate = elem.val.replace(/\//g,"-"); //开始日选好后，重置结束日的最小日期
+         //   endDates();
+    },
+};
+var end = {
+    isinitVal: true,
+    isok: false,
+    isClear:false,
+    zIndex: 99999,
+    maxDate: $.nowDate({DD:0}), //最大日期
+    format: "YYYY-MM-DD",
+    okfun: function (elem, date) {
+            start.maxDate = elem.val.replace(/\//g,"-"); //将结束日的初始值设定为开始日的最大日期
+    }
+};
   function getMycase() {
     var params = {
       clientId: clientId,
@@ -37,34 +63,79 @@ var userCenter = (function() {
       }
     })
 
-    //   $('#my-cases .mycasepage .pager').tablePager({
-    //     url: "order/queryOrderList",
-    //     searchParam:params,
-    //     success: function (result) {
-    //        if(result.code == 0){
-    //          console.log(result.data)
-    //           // var html1 = template('my-cases-template', result.data);
-    //           // $(".my-cases-box").html(html1);
-    //           var html = template('search-result-templete', result.data);
-    //           $(".my-case-box").html(html);
-
-    //         if(result.data.totalCount<10){
-    //             $(".page-row").hide()
-    //         }else{
-    //             $(".page-row").show()
-    //         }
-    //         if(result.data.totalCount==0){
-    //             $(".my-cases-box").html("<P class='noresult'>抱歉，没有相关案件</P>")
-    //         }
-    //        }else{
-    //             toastr.warning(result.msg);
-    //        }
-    //       $(".my-cases-content .totalNum").text(result.data.totalCount);
-    //     }
-    // })
   }
-  $(function() {
 
+  function searchHigt(){
+    var searhKey = $("#alltext").val();
+    var defendant = $("#defendant").val();
+    var starttime = $("#starttime").val();
+    var endtime = $("#endtime").val();
+    var reason = $("#resources").attr("data-id");
+    var lawyerName = $("#lawyerName").val();
+    var officeName = $("#officeName").val();
+    var lawyerName = $("#lawyerName").val();
+    var lawyerName = $("#lawyerName").val();
+    var lawyerName = $("#lawyerName").val();
+    var lawyerName = $("#lawyerName").val();
+    var lawyerName = $("#lawyerName").val();
+    var lawyerName = $("#lawyerName").val();
+    var lawyerName = $("#lawyerName").val();
+    var lawyerName = $("#lawyerName").val();
+    var params = {
+      keywork:searhKey,
+      defendant:defendant,
+      trialDateBegin:starttime,
+      trialDateEnd:endtime,
+      reason:reason,
+      isGroupCategory:true,
+      lawyerName:lawyerName
+    }
+    $('.result-contents .pager').tablePagerOne({
+        
+      url: "case/lawyerRecommendCaseList",
+      searchParam:params,
+      success: function (result) {
+         if(result.code == 0){
+    
+            result.data.host=  api.link+"caseDetail?";
+            $(".result-count").text(result.data.totalCount);
+            var html = template('lawyer-list-templete', result.data); 
+            $(".case-list").html(html);
+       //     result.data.hosts=  api.link+"lawyerDetail?name="+codename;
+            result.data.hosts=  api.link+"lawyerDetail";
+            var html2 = template('lawyer-slider-templete', result.data); 
+            $(".sidenav-menu").html(html2);
+
+
+
+
+            if(result.data.totalCount<10){
+                $(".page-row").hide()
+            }else{
+               $(".page-row").show()
+            }
+
+          if(result.data.totalCount>10){
+              $(".page-row").hide()
+          }else{
+              $(".page-row").show()
+          }
+          if(result.data.totalCount==0){
+              $("#search-result").html("<P class='noresult'>抱歉，没有该检索内容数据</P>")
+          }
+         }else{
+              toastr.warning("数据请求失败");
+         }
+        
+      }
+  })
+  }
+
+
+  $(function() {
+    $("#my-assistant").addClass("active");
+    $("#starttime").jeDate(start);
+    $("#endtime").jeDate(end);
     $('aside .right-icon').click(function(e) {
       e.stopPropagation()
       if (e.target.classList.contains('fa-chevron-down')) {
@@ -101,9 +172,19 @@ var userCenter = (function() {
       searchOptions = searchOptions.filter(function(option) {
         return option.value !== pickedValue
       })
-      $('#lawyer-assistant .options-block').html(
+      // $('#lawyer-assistant .options-block').html(
+      //   template('lawyer-assistant-template', {
+      //     options: searchOptions,
+      //     addedOptions: addedOptions
+      //   })
+      // )
+      $('#lawyer-assistant .aside-btns').html(
         template('lawyer-assistant-template', {
-          options: searchOptions,
+          options: searchOptions
+        })
+      )
+      $('#lawyer-assistant #addedOption').html(
+        template('lawyer-added-template', {
           addedOptions: addedOptions
         })
       )
@@ -118,6 +199,7 @@ var userCenter = (function() {
 
     var subOptionHandeler = function(e) {
       e.stopPropagation()
+      console.log(e)
       var pickedValue = e.target.id ? e.target.id : e.target.parentNode.id
       console.log(pickedValue)
       searchOptions.push(
@@ -127,10 +209,20 @@ var userCenter = (function() {
       )
       addedOptions = addedOptions.filter(function(option) {
         return option.value !== pickedValue
-      })
-      $('#lawyer-assistant .options-block').html(
+      })       
+      // $('#lawyer-assistant .options-block').html(
+      //   template('lawyer-assistant-template', {
+      //     options: searchOptions,
+      //     addedOptions: addedOptions
+      //   })
+      // )
+      $('#lawyer-assistant .resource-options').html(
         template('lawyer-assistant-template', {
-          options: searchOptions,
+          options: searchOptions
+        })
+      )
+      $('#lawyer-assistant #addedOption').html(
+        template('lawyer-added-template', {
           addedOptions: addedOptions
         })
       )
@@ -235,14 +327,33 @@ var userCenter = (function() {
       mylawChart.setOption(lawOption)
     })
   })
+
+
+
   return {
     init: function() {
-      $('#lawyer-assistant .options-block').html(
+      // $('#lawyer-assistant .options-block').html(
+      //   template('lawyer-assistant-template', {
+      //     options: searchOptions,
+      //     addedOptions: addedOptions
+      //   })
+      // )
+
+
+      $('#lawyer-assistant .resource-options').html(
         template('lawyer-assistant-template', {
-          options: searchOptions,
+          options: searchOptions
+        })
+      )
+      $('#lawyer-assistant #addedOption').html(
+        template('lawyer-added-template', {
           addedOptions: addedOptions
         })
       )
+      $(document).on("click","#searchBtn",function(){
+        searchHigt();
+      })
+
       $('#lawyer-assistant .result-page').html(
         template('lawyer-assistant-result-template', {
           count: 301,

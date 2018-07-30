@@ -67,7 +67,7 @@ $('#my-cases .pager').tablePager({
   }
   $(function() {
    
-   
+    $("#my-message").addClass("active");
     $('aside .right-icon').click(function(e) { 
       e.stopPropagation()
       if (e.target.classList.contains('fa-chevron-down')) {

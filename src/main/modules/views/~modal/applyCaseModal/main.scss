@@ -1,0 +1,98 @@
+#applycase-modal,#updateCase-modal{
+
+        border-radius:8px;
+        .login-res-row{
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                 .getService-title-btn{ 
+                         width: 100%;
+                         height: 44px;
+                        cursor:pointer;
+                        line-height: 44px;
+                        text-align: center;
+                        font-size: 16px;
+                        border-top-left-radius: 3px;
+                        border-top-right-radius: 3px;
+                        font-size:18px;
+                        font-weight: 600;
+                        margin-top:20px;
+                }
+        }
+        .remodal-content{
+               
+                margin: 0 auto;
+                margin-top:40px;
+                .form-group{
+                        margin-bottom: 0;
+                        label{
+                       
+                                height: 40px;
+                                line-height: 40px;
+                                text-align: right;
+                                span.required {
+                                        padding-right: 5px;
+                                        color: #f00;
+                                }
+                        
+                                       
+                                        
+                                .error-div{
+                                        margin-left: 110px;
+                                        line-height: 22px;
+                                        color:#ff0000;
+                                        font-size: 12px;
+                                        margin-right: 20px;
+                                        label{
+                                                font-size: 12px;
+                                                
+                                        }
+                                }
+                               
+                }
+                
+                      
+                }
+  
+        }
+        .remodal-footer{
+                width: 433px;
+                 margin: 0 auto;
+                 margin-top:20px;
+                .remodal-confirm{
+                        margin-left: 100px;
+                        width: 140px;
+                        height: 40px;
+                        line-height: 40px;
+                        padding:0;
+                        float:left;
+                        border-radius: 5px;
+                        background: #ed7a39;
+                        border:none;
+                        margin-bottom:10px;
+                        &:hover{
+                          background: #da5f1a; 
+                          color:#fff;     
+                        } 
+                }
+                .remodal-close-btn{
+                        margin-left: 30px;
+                        width: 140px;
+                        height: 40px;
+                        line-height: 40px;
+                        padding:0;
+                        float:left;
+                        text-align: center;
+                        border:1px solid #9d9d9d;
+                        border-radius: 5px;
+                        margin-bottom:10px;
+                        cursor: pointer; 
+                        &:hover{
+                            background: #ed7a39;
+                            color:#fff;
+                            border:none;
+                        }
+                }
+        }
+}

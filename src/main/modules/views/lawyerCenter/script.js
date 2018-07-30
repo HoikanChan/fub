@@ -5,6 +5,7 @@ var userCenter = (function() {
 
   $(function() {
    // $('#calendar').fullCalendar({})
+   $("#indexpage").addClass("active");
     $('.fc-widget-header .fc-sun span').html('星期天')
     $('.fc-widget-header .fc-mon span').html('星期一')
     $('.fc-widget-header .fc-tue span').html('星期二')
@@ -30,17 +31,7 @@ var userCenter = (function() {
           .addClass('fa-chevron-down')
       }
     })
-    $('.nav-link').click(function(e) {
-      $('.nav-link').removeClass('active')
-      $(e.target).addClass('active')
-      var title = e.target.text
-      $('.page-title').html(title)
-      $('.page').removeClass('pageNow')
-      // if(e.target.id ==='')
-      $('#' + e.target.id + '.page').addClass('pageNow')
-      return false
-    })
-    
+  
     var assetsChart = echarts.init(document.getElementById('my-assets-chart'))
     var assetsOption = {
       color: ['#3398DB'],

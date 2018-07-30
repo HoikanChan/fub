@@ -661,6 +661,7 @@ function infoJumpTo() {
  
  var clientId =  sessionStorage.getItem("clientid");
  var lawyerId =  sessionStorage.getItem("lawyerId");
+ var officeId =  sessionStorage.getItem("officeId");
  var usertype = sessionStorage.getItem("userType");
  var userid = sessionStorage.getItem("userid");
  var phone = window.sessionStorage.getItem("mobile");

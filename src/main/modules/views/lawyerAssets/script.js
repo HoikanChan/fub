@@ -23,33 +23,9 @@ var userCenter = (function() {
       }
     })
 
-    //   $('#my-cases .mycasepage .pager').tablePager({
-    //     url: "order/queryOrderList",
-    //     searchParam:params,
-    //     success: function (result) {
-    //        if(result.code == 0){
-    //          console.log(result.data)
-    //           // var html1 = template('my-cases-template', result.data);
-    //           // $(".my-cases-box").html(html1);
-    //           var html = template('search-result-templete', result.data);
-    //           $(".my-case-box").html(html);
-
-    //         if(result.data.totalCount<10){
-    //             $(".page-row").hide()
-    //         }else{
-    //             $(".page-row").show()
-    //         }
-    //         if(result.data.totalCount==0){
-    //             $(".my-cases-box").html("<P class='noresult'>抱歉，没有相关案件</P>")
-    //         }
-    //        }else{
-    //             toastr.warning(result.msg);
-    //        }
-    //       $(".my-cases-content .totalNum").text(result.data.totalCount);
-    //     }
-    // })
   }
   $(function() {
+    $("#my-assets").addClass("active");
     $('aside .right-icon').click(function(e) {
       e.stopPropagation()
       if (e.target.classList.contains('fa-chevron-down')) {
