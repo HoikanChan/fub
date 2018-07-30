@@ -154,13 +154,18 @@ var lawyerCertification = (function() {
       },
       errorElement: 'div',
   });
-  function queryTeams() {
+  function queryAllOffice() {
       $({})._Ajax({
-          url: 'team/queryTeams',
+          url: 'office/queryAll',
           success: function(result) {
               if (result.code == 0) {
-                  lawyerCertification.Teams = result.data
-                  $('#selectOfficeId').html(template("lawyer-select-template",lawyerCertification.Teams));
+                  lawyerCertification.Offices = result.list;
+                  var data = {};
+                  data['list'] = result.list;
+                  if(/^[0-9]*[1-9][0-9]*$/.test(lawyerId)){
+                      data.officeId = lawyerCertification.lawyerInfo.officeId;
+                  }
+                  $('#selectOfficeId').html(template("lawyer-select-office-template",data));
               }else{
                 toastr.warning(result.msg)
               }
@@ -173,8 +178,13 @@ var lawyerCertification = (function() {
             url: 'language/queryLanguage',
             success: function(result) {
                 if (result.code == 0) {
-                    lawyerCertification.Language = result.data
-                    $('#selectLanguages').html(template("lawyer-select-template",lawyerCertification.Language));
+                    lawyerCertification.Language = result.data;
+                    var data = {};
+                    data['list'] = result.data;
+                    if(/^[0-9]*[1-9][0-9]*$/.test(lawyerId)){
+                        data.languages = lawyerCertification.lawyerInfo.languages;
+                    }
+                    $('#selectLanguages').html(template("lawyer-select-template",data));
                 }else{
                     toastr.warning(result.msg)
                 }
@@ -186,25 +196,48 @@ var lawyerCertification = (function() {
             url: 'professional/queryProfessional',
             success: function(result) {
                 if (result.code == 0) {
-                    lawyerCertification.Professional = result.data
-                    $('#selectProfessions').html(template("lawyer-select-template",lawyerCertification.Professional));
+                    lawyerCertification.Professional = result.data;
+                    var data = {};
+                    data['list'] = result.data;
+                    if(/^[0-9]*[1-9][0-9]*$/.test(lawyerId)){
+                        data.professions = lawyerCertification.lawyerInfo.professions;
+                    }
+                    $('#selectProfessions').html(template("lawyer-select-template",data));
                 }else{
                     toastr.warning(result.msg)
                 }
             }
         })
     }
-    //http://120.24.181.248:8080/lvswbao-admin/client/queryByMobile?mobile=15920683372
-
-    //http://120.24.181.248:8080/lvswbao-admin/lawyer/queryMyTeam?mobile=13537086079
-
-    const hander = {
-        set:function (target, key, value, proxy) {
-            console.log(target[key],key)
-        },
-        get:function (target, key, value, proxy) {
-            console.log(target[key],key)
-        }
+    function queryRecommendByMobile(mobile) {
+        $({mobile:mobile})._Ajax({
+            url: 'client/queryByMobile',
+            success: function(result) {
+                if (result.code == 0) {
+                    $('#selectRecommendId').html('<option value="'+result.client.clientId+'">'+result.client.realname+'</option>');
+                }else{
+                    toastr.warning(result.msg)
+                }
+            }
+        })
+        $({mobile:mobile})._Ajax({
+            url: 'lawyer/queryMyTeam',
+            success: function(result) {
+                if (result.code == 0) {
+                    var data = {};
+                    data['list'] = result.data;
+                    if(/^[0-9]*[1-9][0-9]*$/.test(lawyerId)){
+                        data.teamId = lawyerCertification.lawyerInfo.teamId;
+                    }
+                    $('#selectTeamId').html(template("lawyer-select-team-template",data));
+                }else{
+                    toastr.warning(result.msg)
+                }
+            }
+        })
+    }
+    function openAgreement() {
+        alert("法律事务宝律师入驻协议")
     }
   return {
       init: function() {
@@ -225,7 +258,18 @@ var lawyerCertification = (function() {
                       url:'lawyer/api/info',
                       success:function (result) {
                           if(result.code==0){
-                              $('#my-certification').html(template("lawyer-read-template",result.data));
+                              lawyerCertification.lawyerInfo = result.data;
+                              if(result.data.status == -2){
+                                  $('#my-certification').html(template("lawyer-edit-template",result.data));
+                              }else {
+                                  $('#my-certification').html(template("lawyer-read-template",result.data));
+                              }
+                              $('.auth-process').html(template("lawyer-authprocess-template",result.data));
+                              $('#startTime').jeDate(start);
+                              queryAllOffice();
+                              queryLanguage();
+                              queryProfessional();
+                              queryRecommendByMobile(lawyerCertification.lawyerInfo.recommendMobile);
                           }else{
                               toastr.warning(result.msg)
                           }
@@ -233,40 +277,23 @@ var lawyerCertification = (function() {
                   })
               }else{
                   $('#my-certification').html(template("lawyer-add-template"));
+                  $('.auth-process').html(template("lawyer-authprocess-template"));
+                  $('#startTime').jeDate(start);
+                  queryAllOffice();
+                  queryLanguage();
+                  queryProfessional();
               }
-              $('#startTime').jeDate(start);
-              queryTeams();
-              queryLanguage();
-              queryProfessional();
+          })
+          //上传执业证
+          $(document).on('click','#my-certification .open-agreement',function (e) {
+              e.stopPropagation();
+              openAgreement()
           })
           //上传执业证
           $(document).on('blur','#inputMobile',function (e) {
               e.stopPropagation();
               if(regexs.mobile.test($(this).val())){
-                  $({mobile:$(this).val()})._Ajax({
-                      url: 'client/queryByMobile',
-                      success: function(result) {
-                          if (result.code == 0) {
-                              $('#selectRecommendId').html('<option value="'+result.client.clientId+'">'+result.client.realname+'</option>');
-                          }else{
-                              toastr.warning(result.msg)
-                          }
-                      }
-                  })
-                  $({mobile:$(this).val()})._Ajax({
-                      url: 'lawyer/queryMyTeam',
-                      success: function(result) {
-                          if (result.code == 0) {
-                              var html = '';
-                              result.data.forEach(function (t) {
-                                  html += '<option value="'+t.teamId+'">'+t.teamName+'</option>';
-                              })
-                              $('#selectTeamId').html(html);
-                          }else{
-                              toastr.warning(result.msg)
-                          }
-                      }
-                  })
+                  queryRecommendByMobile($(this).val())
               }else{
                   toastr.warning("请输入正确的手机号")
               }
@@ -324,9 +351,10 @@ var lawyerCertification = (function() {
               }
           })
       },
-      Teams:[],//团队信息
+      Offices:[],//团队信息
       Language:[],//掌握语言
-      Professional:[]//擅长领域
+      Professional:[],//擅长领域
+      lawyerInfo:null
   }
 })()
 lawyerCertification.init()
