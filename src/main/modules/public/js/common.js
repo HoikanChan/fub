@@ -294,6 +294,14 @@ template.defaults.imports.getSubSting = function (data) {
 template.defaults.imports.getSubStingLength = function (data) {
     return  data.substring(0,60);
 };
+//判断数据是否在逗号隔开的字符串中
+template.defaults.imports.isInArray = function(data, arrString){
+    var index = $.inArray(data,arrString.split(','));
+    if(index >= 0){
+        return true;
+    }
+    return false;
+};
 /*
   *封装插件
 */
@@ -810,7 +818,7 @@ function change_main_current_class(indexPage) {
 }
 
 //点击上传文件
-function fileAjaxUpload(fileInputObj, paramInputObj, type, fileShowObj, validataType) {
+function fileAjaxUpload(fileInputObj, paramInputObj, type, fileShowObj, validataType, urlType) {
     var form = fileInputObj.closest('form')[0];
     var imageType = ['jpg', 'jpeg', 'png', 'tiff', 'tif', 'gif'];
     var fileType = ['txt', 'doc', 'docx', 'xls', 'xlsx', 'pdf', 'rar', 'zip', 'text'];
@@ -845,13 +853,19 @@ function fileAjaxUpload(fileInputObj, paramInputObj, type, fileShowObj, validata
             return false
         }
     }
+    var uploadUrl = api.host + "/lawyer/uploadLawyerFile";
+    if(urlType==1){//上传律师证件
+        uploadUrl = api.host + "/lawyer/uploadLawyerFile";
+    }else if(urlType==2){//上传律所证件
+        uploadUrl = api.host + "/office/uploadOfficeFile";
+    }
     if (navigator.appName == "Microsoft Internet Explorer"&&parseInt(navigator.appVersion.split(";")[1].replace(/[ ]/g, "").replace("MSIE",""))<=9) {
         var formData = {};
         formData["uploadFile"] = $(fileInputObj)[0].files[0];
         formData["type"] = type;
         $(form).ajaxSubmit({
             type: "post",
-            url: api.host + "/lawyer/uploadLawyerFile",
+            url: uploadUrl,
             dataType:"json",
             data: {
                 "uploadFile": $(fileInputObj)[0].files[0],
@@ -879,7 +893,7 @@ function fileAjaxUpload(fileInputObj, paramInputObj, type, fileShowObj, validata
         formData.append("uploadFile", $(fileInputObj)[0].files[0]);
         formData.append('type',type);
         $.ajax({
-            url : api.host + "/lawyer/uploadLawyerFile",
+            url : uploadUrl,
             data : formData,
             type : "post",
             dataType : "json",
@@ -907,3 +921,20 @@ function fileAjaxUpload(fileInputObj, paramInputObj, type, fileShowObj, validata
 
 }
 
+//表单转换成jsonObject
+$.fn.serializeObject = function()
+{
+    var o = {};
+    var a = this.serializeArray();
+    $.each(a, function() {
+        if (o[this.name]) {
+            if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || '');
+        } else {
+            o[this.name] = this.value || '';
+        }
+    });
+    return o;
+}

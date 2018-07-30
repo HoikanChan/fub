@@ -102,24 +102,24 @@
       <div class="form-group">
         <label for="selectTeamId" class="col-sm-2 control-label">所属团队：</label>
         <div class="col-sm-10">
-          <select class="form-control" id="selectTeamId" name="teamId"></select>
+            <ul id="selectTeamId"></ul>
           <div class="error-div"></div>
         </div>
       </div>
       <h3 class="title">其他资料</h3>
       <div class="form-group">
-        <label for="selectLanguages" class="col-sm-2 control-label">掌握语言：</label>
-        <div class="col-sm-10">
-          <select class="form-control" id="selectLanguages" name="languages"></select>
-          <div class="error-div"></div>
-        </div>
+          <label for="selectLanguages" class="col-sm-2 control-label">掌握语言：</label>
+          <div class="col-sm-10">
+              <ul id="selectLanguages"></ul>
+              <div class="error-div"></div>
+          </div>
       </div>
       <div class="form-group">
-        <label for="selectProfessions" class="col-sm-2 control-label">擅长领域：</label>
-        <div class="col-sm-10">
-          <select class="form-control" id="selectProfessions" name="professions"></select>
-          <div class="error-div"></div>
-        </div>
+          <label for="selectProfessions" class="col-sm-2 control-label">擅长领域：</label>
+          <div class="col-sm-10">
+              <ul id="selectProfessions"></ul>
+              <div class="error-div"></div>
+          </div>
       </div>
       <div class="form-group">
         <label for="inputIntroduction" class="col-sm-2 control-label">个人简介：</label>
@@ -276,7 +276,7 @@
       <div class="form-group">
         <label for="selectTeamId" class="col-sm-2 control-label">所属团队：</label>
         <div class="col-sm-10">
-          <select class="form-control" id="selectTeamId" name="teamId"></select>
+            <ul id="selectTeamId"></ul>
           <div class="error-div"></div>
         </div>
       </div>
@@ -284,14 +284,14 @@
       <div class="form-group">
         <label for="selectLanguages" class="col-sm-2 control-label">掌握语言：</label>
         <div class="col-sm-10">
-          <select class="form-control" id="selectLanguages" name="languages"></select>
+            <ul id="selectLanguages"></ul>
           <div class="error-div"></div>
         </div>
       </div>
       <div class="form-group">
         <label for="selectProfessions" class="col-sm-2 control-label">擅长领域：</label>
         <div class="col-sm-10">
-          <select class="form-control" id="selectProfessions" name="professions"></select>
+            <ul id="selectProfessions"></ul>
           <div class="error-div"></div>
         </div>
       </div>
@@ -441,21 +441,21 @@
       <div class="form-group">
         <label for="selectTeamId" class="col-sm-2 control-label">所属团队：</label>
         <div class="col-sm-10">
-          <select class="form-control" id="selectTeamId" name="teamId" disabled></select>
+            <input type="text" class="form-control " id="selectTeamId" rows="5" value="{% teamName | convertNull %}" readonly>
         </div>
       </div>
       <h3 class="title">其他资料</h3>
       <div class="form-group">
-        <label for="selectLanguages" class="col-sm-2 control-label">掌握语言：</label>
-        <div class="col-sm-10">
-          <select class="form-control" id="selectLanguages" name="languages" disabled></select>
-        </div>
+          <label for="selectLanguages" class="col-sm-2 control-label">掌握语言：</label>
+          <div class="col-sm-10">
+              <input type="text" class="form-control " id="selectLanguages" rows="5" value="{% languageName | convertNull %}" readonly>
+          </div>
       </div>
       <div class="form-group">
-        <label for="selectProfessions" class="col-sm-2 control-label">擅长领域：</label>
-        <div class="col-sm-10">
-          <select class="form-control" id="selectProfessions" name="professions" disabled></select>
-        </div>
+          <label for="selectProfessions" class="col-sm-2 control-label">擅长领域：</label>
+          <div class="col-sm-10">
+              <input type="text" class="form-control " id="selectProfessions" rows="5" value="{% professionalName | convertNull %}" readonly>
+          </div>
       </div>
       <div class="form-group">
         <label for="inputIntroduction" class="col-sm-2 control-label">个人简介：</label>
@@ -488,21 +488,56 @@
         </div>
       </div>
 </script>
-<script type="text/html" id="lawyer-select-template">
+<script type="text/html" id="lawyer-select-languages-template">
    {% each list %}
       {% if languages %}
-        <option value="{% $value.id %}" {% if languages==$value.id %} selected {% /if %}>{% $value.name %}</option>
-      {% else if professions %}
-        <option value="{% $value.id %}" {% if professions==$value.id %} selected {% /if %}>{% $value.name %}</option>
+           <li class="checkbox">
+               <label for="languages{% $value.id %}">
+                   <input type="checkbox" {% if isInArray($value.id,languageIdArray) %} checked {% /if %} id="languages{% $value.id %}" name="languages[]" value="{% $value.id %}"/><span>{% $value.name %}</span>
+               </label>
+           </li>
       {% else %}
-        <option value="{% $value.id %}">{% $value.name %}</option>
+           <li class="checkbox">
+               <label for="languages{% $value.id %}">
+                   <input type="checkbox" id="languages{% $value.id %}" name="languages[]" value="{% $value.id %}"/><span>{% $value.name %}</span>
+               </label>
+           </li>
       {% /if %}
    {% /each %}
 </script >
+<script type="text/html" id="lawyer-select-professions-template">
+    {% each list %}
+    {% if professions %}
+    <li class="checkbox">
+        <label for="professions{% $value.id %}">
+            <input type="checkbox" {% if isInArray($value.id,professionalIdArray) %} checked {% /if %} id="professions{% $value.id %}" name="professions[]" value="{% $value.id %}"/><span>{% $value.name %}</span>
+        </label>
+    </li>
+    {% else %}
+    <li class="checkbox">
+        <label for="professions{% $value.id %}">
+            <input type="checkbox" id="professions{% $value.id %}" name="professions[]" value="{% $value.id %}"/><span>{% $value.name %}</span>
+        </label>
+    </li>
+    {% /if %}
+    {% /each %}
+</script >
 <script type="text/html" id="lawyer-select-team-template">
-  {% each list %}
-  <option value="{% $value.teamId %}" {% if teamId==$value.teamId %} selected {% /if %}>{% $value.teamName %}</option>
-  {% /each %}
+    {% each list %}
+    {% if teamId %}
+    <li class="checkbox">
+        <label for="teamId{% $value.teamId %}">
+            <input type="checkbox" {% if isInArray($value.teamId,teamIdArray) %} checked {% /if %} id="teamId{% $value.teamId %}" name="teamId[]" value="{% $value.teamId %}"/><span>{% $value.teamName %}</span>
+        </label>
+    </li>
+    {% else %}
+    <li class="checkbox">
+        <label for="teamId{% $value.teamId %}">
+            <input type="checkbox" id="teamId{% $value.teamId %}" name="teamId[]" value="{% $value.teamId %}"/><span>{% $value.teamName %}</span>
+        </label>
+    </li>
+    {% /if %}
+    {% /each %}
 </script >
 <script type="text/html" id="lawyer-select-office-template">
   {% each list %}
@@ -531,7 +566,7 @@
           </span>
         </div>
         <div class="step step-last {% if lawyerId&&status==1 %}step-action{% /if %}">
-          <span class="step-text">完成</span>
+          <span class="step-text">完成认证</span>
         </div>
         <div class="clear"></div>
         </div>

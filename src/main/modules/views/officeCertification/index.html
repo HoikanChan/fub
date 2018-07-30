@@ -1,262 +1,522 @@
 <div class="clearfix officeCenter">
   <div class="title-bar">
     <img src="dist/assets/image/usercenter_bg.png" alt="" style="width: 100%;">
-    <span class="page-title">我的财富</span>
+    <span class="page-title">律所认证</span>
   </div>
   <div class="container">
     <div class="col-sm-1"></div>
-
-    {{ include '../~modal/officeNav/main'}}
+    {{ include '../~modal/lawyerNav/main'}}
     <div class="col-sm-8">
       <div class="content-container">
+        <div class="auth-process">
+
+        </div>
         <div class="page " id="my-certification">
           <div class="my-certification-content">
-            <h3 class="title">基本资料</h3>
-            <form class="form-horizontal" id="recommend-form">
-              <div class="form-group">
-                <label for="name" class="col-sm-2 control-label">姓名：</label>
-                <div class="col-sm-10">
-                  <input type="resours" class="form-control" id="caseresours" placeholder="请输入">
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="inputPassword3" class="col-sm-2 control-label">身份证号码：</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control " id="inputPassword3" placeholder="请输入">
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="inputPassword3" class="col-sm-2 control-label">性别：</label>
-                <div class="col-sm-10">
-                  <select class="form-control">
-                    <option>男</option>
-                    <option>女</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="inputPassword3" class="col-sm-2 control-label">邮箱：</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control " id="inputPassword3" placeholder="请输入">
-                </div>
-              </div>
-              <h3 class="title">证书资料</h3>
-              <div class="form-group">
-                <label for="inputPassword3" class="col-sm-2 control-label">执业律所：</label>
-                <div class="col-sm-10">
-                  <select class="form-control">
-                    <option>初中及以下</option>
-                    <option>高中</option>
-                    <option>中技</option>
-                    <option>中专</option>
-                    <option>大专</option>
-                    <option>本科</option>
-                    <option>硕士</option>
-                    <option>博士</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="inputPassword3" class="col-sm-2 control-label">律师证号：</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control " id="inputPassword3" rows="5" placeholder="请输入">
-                  </textarea>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="inputPassword3" class="col-sm-2 control-label">证书起始时间：</label>
-                <div class="col-sm-10">
-                  <select class="form-control">
-                    <option>未婚</option>
-                    <option>已婚</option>
-                  </select>
-                </div>
-              </div>
-              <h3 class="title">引荐人资料</h3>
-              <div class="form-group">
-                <label for="inputPassword3" class="col-sm-2 control-label">手机号：</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control " id="inputPassword3" rows="5" placeholder="请输入">
-                  </input>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="inputPassword3" class="col-sm-2 control-label">姓名：</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control " id="inputPassword3" rows="5" placeholder="请输入">
-                  </input>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="inputPassword3" class="col-sm-2 control-label">所属团队：</label>
-                <div class="col-sm-10">
-                  <select class="form-control">
-                    <option>未婚</option>
-                    <option>已婚</option>
-                  </select>
-                </div>
-              </div>
-              <h3 class="title">其他资料</h3>
-              <div class="form-group">
-                <label for="inputPassword3" class="col-sm-2 control-label">掌握语言：</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control " id="inputPassword3" placeholder="请输入">
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="inputPassword3" class="col-sm-2 control-label">擅长领域：</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control " id="inputPassword3" placeholder="请输入">
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="inputPassword3" class="col-sm-2 control-label">个人简介：</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control " id="inputPassword3" placeholder="请输入">
-                </div>
-              </div>
-              <div>
-                <div class="col-sm-2"></div>
-                <div class="col-sm-10">
-                  <img src="dist/assets/image/lawyercenter_icon_information.png" alt="">
-                  <span class="font-gray">温馨提示：请依据图示上传身份证和律师执业证件照，请勿涂改或打码，确保要素齐全，字迹清晰</span>
-                </div>
-              </div>
-              <div class="clearfix"></div>
-              <br>
-              <div class="form-group">
-                <label for="inputPassword3" class="col-sm-2 control-label">上传身份证：</label>
-                <div class="col-sm-10">
-                  <div class="col-sm-3 upload-btn">
-                    <span class="fa fa-plus"></span>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="inputPassword3" class="col-sm-2 control-label">上传执业证书：</label>
-                <div class="col-sm-10">
-                  <div class="col-sm-3 upload-btn">
-                    <span class="fa fa-plus"></span>
-                  </div>
-                </div>
-              </div>
-              <div class="clearfix"></div>
-              <div class="footer">
-                <button class="primary-btn">提交</button>
-              </div>
+            <form class="form-horizontal" id="certification-form">
+
             </form>
           </div>
+        </div>
         </div>
       </div>
     </div>
     <div class="col-sm-1"></div>
   </div>
 </div>
-
-<script type="text/html" id="assets-template">
-  <div class="title-bar">
-    <h4>当前可提取余额<strong class="font-theme">{% balance%}</strong></h4>
-    <button class="primary-btn">提现申请</button>
-    <div class="clearfix"></div>
-    <div class="col-sm-4 card-item-wrapper">
-      <div class="card-item">
-        <div class="icon" id="icon-1">
-          <img src="dist/assets/image/lawyercenter_icon_wealth.png" alt="">
-        </div>
-        <div class="card-item-content">
-          <h5>累计总收益</h5>
-          <h3 class="font-theme">￥{% total %}</h3>
-          <p class="font-gray"><span class="font-theme"><span class="fa fa-arrow-alt-up"></span>10%</span> 同比上月</p>
+{{ include '../~modal/openAgreement/main'}}
+{{ include '../~modal/imagePreview/main'}}
+<script type="text/html" id="lawyer-add-template">
+      <h3 class="title">基本资料</h3>
+      <div class="form-group">
+        <label for="inputRealname" class="col-sm-2 control-label">律所名称：</label>
+        <div class="col-sm-10">
+          <input type="resours" class="form-control" id="inputRealname" name="realname" placeholder="请输入律所名称">
+          <div class="error-div"></div>
         </div>
       </div>
-    </div>
-    <div class="col-sm-4 card-item-wrapper">
-      <div class="card-item">
-        <div class="icon" id="icon-2">
-          <img src="dist/assets/image/lawyercenter_icon_wealth.png" alt="">
-        </div>
-        <div class="card-item-content">
-          <h5>累计个人收益</h5>
-          <h3 class="font-theme">￥{% total %}</h3>
-          <p class="font-gray"><span class="font-theme"><span class="fa fa-arrow-alt-up"></span>10%</span> 同比上月</p>
+      <div class="form-group">
+        <label for="inputPrincipal" class="col-sm-2 control-label">律所负责人：</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control " id="inputPrincipal" name="principal" placeholder="请输入律所负责人">
+          <div class="error-div"></div>
         </div>
       </div>
-    </div>
-    <div class="col-sm-4 card-item-wrapper">
-      <div class="card-item">
-        <div class="icon" id="icon-3">
-          <img src="dist/assets/image/lawyercenter_icon_wealth.png" alt="">
-        </div>
-        <div class="card-item-content">
-          <h5>累计团队收益</h5>
-          <h3 class="font-theme">￥{% total %}</h3>
-          <p class="font-gray"><span class="font-theme"><span class="fa fa-arrow-alt-up"></span>10%</span> 同比上月</p>
+      <div class="form-group">
+          <label for="inputMobile" class="col-sm-2 control-label">负责人手机号：</label>
+          <div class="col-sm-10">
+              <input type="text" class="form-control " id="inputMobile" name="mobile" placeholder="请输入负责人手机号">
+              <div class="error-div"></div>
+          </div>
+      </div>
+      <div class="form-group">
+        <label for="inputEmail" class="col-sm-2 control-label">邮箱：</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control " id="inputEmail" name="email" placeholder="请输入邮箱">
+          <div class="error-div"></div>
         </div>
       </div>
-    </div>
-    <div class="clearfix"></div>
-    <div class="searchbar">
-      <p>共为你搜索到 <span>{% count %}</span> 条数据</p>
+      <div class="form-group">
+          <label for="inputIdcard" class="col-sm-2 control-label">地址：</label>
+          <div class="col-sm-10">
+              <input type="hidden" id="inputProvinceId" name="provinceId">
+              <input type="hidden" id="inputCityId" name="cityId">
+              <input type="text" class="form-control " id="inputAddress" name="address" placeholder="请输入地址">
+              <div class="error-div"></div>
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="inputOfficeMobile" class="col-sm-2 control-label">律所联系电话：</label>
+          <div class="col-sm-10">
+              <input type="text" class="form-control " id="inputOfficeMobile" name="officeMobile" placeholder="请输入律所联系电话">
+              <div class="error-div"></div>
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="inputAdminPrincipal" class="col-sm-2 control-label">行政负责人：</label>
+          <div class="col-sm-10">
+              <input type="text" class="form-control " id="inputAdminPrincipal" name="adminPrincipal" placeholder="请输入行政负责人">
+              <div class="error-div"></div>
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="inputAdminMobile" class="col-sm-2 control-label">行政负责人：</label>
+          <div class="col-sm-10">
+              <input type="text" class="form-control " id="inputAdminMobile" name="adminMobile" placeholder="请输入行政负责人">
+              <div class="error-div"></div>
+          </div>
+      </div>
+      <div class="form-group">
+        <label for="inputLicenseNo" class="col-sm-2 control-label">营业执证号：</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control " id="inputLicenseNo" rows="5" name="licenseNo" placeholder="请输入营业执证号">
+          </input>
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputIntroduction" class="col-sm-2 control-label">律所简介：</label>
+        <div class="col-sm-10">
+          <textarea  rows="4" class="form-control " id="inputIntroduction" name="introduction" placeholder="请输入个人简介"></textarea>
+          <div class="error-div"></div>
+        </div>
+      </div>
       <div>
-        <input type="text" class="input" placeholder="请输入关键词"></input>
-        <button class="primary-btn">搜索</button>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-10">
+          <img src="dist/assets/image/lawyercenter_icon_information.png" alt="">
+          <span class="font-gray">温馨提示：请依据图示上传营业执照，请勿涂改或打码，确保要素齐全，字迹清晰</span>
+        </div>
       </div>
-    </div>
-    <div class="info-bar">
-      <span class="time">{% info.time %}</span>
-      <span>
-        <span class="info-item">总计：<span class="font-theme">{% info.total%}</span> 元</span>
-        <span class="info-item"> |</span>
-        <span class="info-item">总交易笔数：<span class="font-theme">{% info.counts%}</span> 笔</span>
-        <span class="info-item">|</span>
-        <span class="info-item">个人：<span class="font-theme">{% info.personal%}</span>  元</span>
-        <span class="info-item">|</span>
-        <span class="info-item">团队：<span class="font-theme">{% info.team%}</span>  元</span>
-      </span>
-    </div>
-
-    <!-- 我的财富每月图表 --- echarts -->
-    <div id="my-assets-chart"></div>
-    <br>
-    <div class="table-responsive table-bordered table-hover">
-        <table class="table table-striped jambo_table bulk_action">
-          <thead>
-            <tr class="headings">
-              <th class="column-title">订单编号 </th>
-              <th class="column-title">来源 </th>
-              <th class="column-title">事务类型</th>
-              <th class="column-title">收益 </th>
-              <th class="column-title">结算日期 </th>
-              <th class="column-title"><span class="nobr">操作</span>
-              </th>
-            </tr>
-          </thead>
-  
-          <tbody>
-            {% each bills  data%}
-              <tr class="even pointer">
-                <td class=" column-content">{%data.no%}</td>
-                <td class="column-content ">{%data.region%} </td>
-                <td class="column-content ">{%data.type%} </td>
-                <td class=" column-content">{%data.amount%} </td>
-                <td class="a-right a-right ">{% data.time %}</td>
-                <td class=" last">
-                  <a href="#">更多</a>
-                  <span class="fa fa-chevron-down"></span>
-                </td>
-              </tr>
-  
-            {% /each %}
-  
-          </tbody>
-        </table>
+      <div class="clearfix"></div>
+      <br>
+      <div class="form-group">
+        <label for="upload-text-businessUrl" class="col-sm-2 control-label">上传营业执照：</label>
+        <div class="col-sm-10">
+          <div class="col-sm-3 upload-btn upload-btn-businessUrl">
+            <span class="fa fa-plus"></span>
+          </div>
+          <input type="text" id="upload-text-businessUrl" name="businessUrl">
+          <input type="file" style="display: none" id="upload-file-businessUrl">
+          <img src="" height="70" id="upload-show-businessUrl" data-remodal-target="imagePreview-modal">
+          <div class="error-div"></div>
+        </div>
       </div>
-    <div class="pagination">
-      <span>共{% pages %}页，当前第<span id="current-page">1</span>页</span>
-      <button class="prev ghost-border-btn ">上一页</button>
-      <button class="next ghost-border-btn ">下一页</button>
-      <input type="text"></input>
-      <button class="jumpto border-btn">跳转</button>
-    </div>
-  </div>
+      <div class="form-group">
+        <label for="upload-text-zhiyezheng" class="col-sm-2 control-label">上传律师事务所执业许可证：</label>
+        <div class="col-sm-10">
+          <div class="col-sm-3 upload-btn upload-btn-zhiyezheng">
+            <span class="fa fa-plus"></span>
+          </div>
+          <input type="text" id="upload-text-zhiyezheng" name="licenseUrl">
+          <input type="file" style="display: none" id="upload-file-zhiyezheng">
+          <img src="" height="70" id="upload-show-zhiyezheng" data-remodal-target="imagePreview-modal">
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label"></label>
+        <div class="col-sm-10">
+          <p class="checkbox">
+            <input type="checkbox" class="agreement-checkbox" id="agreement-checkbox"> 阅读并同意
+              <span class="open-agreement" data-remodal-target="openAgreement-modal">《用户须知》</span>
+          </p>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="footer">
+        <div class="col-sm-2"></div><div class="primary-btn">提交</div>
+      </div>
+</script>
+<script type="text/html" id="lawyer-edit-template">
+      <h3 class="title">基本资料</h3>
+      <input type="hidden" name="id" value="{% lawyerId | convertNull %}">
+      <div class="form-group">
+        <label for="inputRealname" class="col-sm-2 control-label">姓名：</label>
+        <div class="col-sm-10">
+          <input type="resours" class="form-control" id="inputRealname" name="realname" placeholder="请输入姓名" value="{% realname | convertNull %}">
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputIdcard" class="col-sm-2 control-label">身份证号码：</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control " id="inputIdcard" name="idcard" placeholder="请输入身份证号码" value="{% idcard | convertNull %}">
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="selectSex" class="col-sm-2 control-label">性别：</label>
+        <div class="col-sm-10">
+          <select class="form-control" id="selectSex" name="sex">
+            <option value="1" {% if sex==1 %}selected{% /if %}>男</option>
+            <option value="2" {% if sex==2 %}selected{% /if %}>女</option>
+          </select>
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputEmail" class="col-sm-2 control-label">邮箱：</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control " id="inputEmail" name="email" placeholder="请输入邮箱" value="{% email | convertNull %}">
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <h3 class="title">证书资料</h3>
+      <div class="form-group">
+        <label for="selectOfficeId" class="col-sm-2 control-label">执业律所：</label>
+        <div class="col-sm-10">
+          <select class="form-control" id="selectOfficeId" name="officeId"></select>
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputLicenseNo" class="col-sm-2 control-label">律师证号：</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control " id="inputLicenseNo" rows="5" name="licenseNo" placeholder="请输入律师证号" value="{% licenseNo | convertNull %}">
+          </input>
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputWorkBaginDate" class="col-sm-2 control-label">证书起始时间：</label>
+        <div class="col-sm-6">
+          <input type="text" id="startTime" class="form-control " id="inputWorkBaginDate" rows="5" name="workBaginDate" value="{% workBaginDate | convertNull %}" placeholder="请选择时间">
+          </input>
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <h3 class="title">引荐人资料</h3>
+      <div class="form-group">
+        <label for="inputMobile" class="col-sm-2 control-label">手机号：</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control " id="inputMobile" rows="5" name="recommendMobile" placeholder="请输入引荐人手机号" value="{% recommendMobile | convertNull %}">
+          </input>
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="selectRecommendId" class="col-sm-2 control-label">姓名：</label>
+        <div class="col-sm-10">
+          <select class="form-control" id="selectRecommendId" name="recommendId"></select>
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="selectTeamId" class="col-sm-2 control-label">所属团队：</label>
+        <div class="col-sm-10">
+            <ul id="selectTeamId"></ul>
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <h3 class="title">其他资料</h3>
+      <div class="form-group">
+        <label for="selectLanguages" class="col-sm-2 control-label">掌握语言：</label>
+        <div class="col-sm-10">
+            <ul id="selectLanguages"></ul>
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="selectProfessions" class="col-sm-2 control-label">擅长领域：</label>
+        <div class="col-sm-10">
+            <ul id="selectProfessions"></ul>
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputIntroduction" class="col-sm-2 control-label">个人简介：</label>
+        <div class="col-sm-10">
+          <textarea  rows="4" class="form-control " id="inputIntroduction" name="introduction" placeholder="请输入个人简介">{% introduction | convertNull %}</textarea>
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-10">
+          <img src="dist/assets/image/lawyercenter_icon_information.png" alt="">
+          <span class="font-gray">温馨提示：请依据图示上传身份证和律师执业证件照，请勿涂改或打码，确保要素齐全，字迹清晰</span>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <br>
+      <div class="form-group">
+        <label for="upload-text-shenfenzheng" class="col-sm-2 control-label">上传身份证正面照：</label>
+        <div class="col-sm-10">
+          <div class="col-sm-3 upload-btn upload-btn-shenfenzheng">
+            <span class="fa fa-plus"></span>
+          </div>
+          <input type="text" id="upload-text-shenfenzheng" name="idcardUrl" value="{% idcardUrl | convertNull %}">
+          <input type="file" style="display: none" id="upload-file-shenfenzheng">
+          <img src="{% idcardUrl | convertNull %}" height="70" id="upload-show-shenfenzheng" data-remodal-target="imagePreview-modal">
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="upload-text-shenfenzheng" class="col-sm-2 control-label">上传身份证背面照：</label>
+        <div class="col-sm-10">
+          <div class="col-sm-3 upload-btn upload-btn-shenfenzhengBack">
+            <span class="fa fa-plus"></span>
+          </div>
+          <input type="text" id="upload-text-shenfenzhengBack" name="idcardUrlBack" value="{% idcardUrlBack | convertNull %}">
+          <input type="file" style="display: none" id="upload-file-shenfenzhengBack">
+          <img src="{% idcardUrlBack | convertNull %}" height="70" id="upload-show-shenfenzhengBack" data-remodal-target="imagePreview-modal">
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="upload-text-zhiyezheng" class="col-sm-2 control-label">上传执业证书正面照：</label>
+        <div class="col-sm-10">
+          <div class="col-sm-3 upload-btn upload-btn-zhiyezheng">
+            <span class="fa fa-plus"></span>
+          </div>
+          <input type="text" id="upload-text-zhiyezheng" name="licenseUrl" value="{% licenseUrl | convertNull %}">
+          <input type="file" style="display: none" id="upload-file-zhiyezheng">
+          <img src="{% licenseUrl | convertNull %}" height="70" id="upload-show-zhiyezheng" data-remodal-target="imagePreview-modal">
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="upload-text-zhiyezhengBack" class="col-sm-2 control-label">上传执业证书背面照：</label>
+        <div class="col-sm-10">
+          <div class="col-sm-3 upload-btn upload-btn-zhiyezhengBack">
+            <span class="fa fa-plus"></span>
+          </div>
+          <input type="text" id="upload-text-zhiyezhengBack" name="licenseUrlBack" value="{% licenseUrlBack | convertNull %}">
+          <input type="file" style="display: none" id="upload-file-zhiyezhengBack">
+          <img src="{% licenseUrlBack | convertNull %}" height="70" id="upload-show-zhiyezhengBack" data-remodal-target="imagePreview-modal">
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label"></label>
+        <div class="col-sm-10">
+          <p class="checkbox">
+            <input type="checkbox" class="agreement-checkbox" id="checkbox"> 阅读并同意
+            <span class="open-agreement" data-remodal-target="openAgreement-modal">《法律事务宝律师入驻协议》</span>
+          </p>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="footer">
+        <div class="col-sm-2"></div><div class="primary-btn">提交</div>
+      </div>
+</script>
+<script type="text/html" id="lawyer-read-template">
+      <h3 class="title">基本资料</h3>
+      <div class="form-group">
+        <label for="inputRealname" class="col-sm-2 control-label">姓名：</label>
+        <div class="col-sm-10">
+          <input type="resours" class="form-control" id="inputRealname" value="{% realname | convertNull %}" readonly />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputIdcard" class="col-sm-2 control-label">身份证号码：</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control " id="inputIdcard" value="{% idcard | convertNull %}" readonly />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="selectSex" class="col-sm-2 control-label">性别：</label>
+        <div class="col-sm-10">
+          <select class="form-control" id="selectSex" name="sex" readonly disabled>
+            <option value="1" {% if sex==1 %}selected{% /if %}>男</option>
+            <option value="2" {% if sex==2 %}selected{% /if %}>女</option>
+          </select>
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputEmail" class="col-sm-2 control-label">邮箱：</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control " id="inputEmail" value="{% email | convertNull %}" readonly />
+        </div>
+      </div>
+      <h3 class="title">证书资料</h3>
+      <div class="form-group">
+        <label for="selectOfficeId" class="col-sm-2 control-label">执业律所：</label>
+        <div class="col-sm-10">
+          <select class="form-control" id="selectOfficeId" name="officeId" disabled></select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputLicenseNo" class="col-sm-2 control-label">律师证号：</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control " id="inputLicenseNo" rows="5" value="{% licenseNo | convertNull %}" readonly>
+          </input>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputWorkBaginDate" class="col-sm-2 control-label">证书起始时间：</label>
+        <div class="col-sm-6">
+          <input type="text" id="startTime" class="form-control " id="inputWorkBaginDate" rows="5" value="{% workBaginDate | convertNull %}" readonly>
+          </input>
+        </div>
+      </div>
+      <h3 class="title">引荐人资料</h3>
+      <div class="form-group">
+        <label for="inputMobile" class="col-sm-2 control-label">手机号：</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control " id="inputMobileRead" rows="5" value="{% recommendMobile | convertNull %}" readonly>
+          </input>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="selectRecommendId" class="col-sm-2 control-label">姓名：</label>
+        <div class="col-sm-10">
+          <select class="form-control" id="selectRecommendId" name="recommendId" disabled></select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="selectTeamId" class="col-sm-2 control-label">所属团队：</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control " id="selectTeamId" rows="5" value="{% teamName | convertNull %}" readonly>
+        </div>
+      </div>
+      <h3 class="title">其他资料</h3>
+      <div class="form-group">
+          <label for="selectLanguages" class="col-sm-2 control-label">掌握语言：</label>
+          <div class="col-sm-10">
+              <input type="text" class="form-control " id="selectLanguages" rows="5" value="{% languageName | convertNull %}" readonly>
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="selectProfessions" class="col-sm-2 control-label">擅长领域：</label>
+          <div class="col-sm-10">
+              <input type="text" class="form-control " id="selectProfessions" rows="5" value="{% professionalName | convertNull %}" readonly>
+          </div>
+      </div>
+      <div class="form-group">
+        <label for="inputIntroduction" class="col-sm-2 control-label">个人简介：</label>
+        <div class="col-sm-10">
+          <textarea  rows="4" class="form-control " id="inputIntroduction" readonly>{% introduction | convertNull %}</textarea>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="upload-text-shenfenzheng" class="col-sm-2 control-label">身份证正面照：</label>
+        <div class="col-sm-10">
+          <img src="{% idcardUrl %}" height="70" id="upload-show-shenfenzheng" data-remodal-target="imagePreview-modal">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="upload-text-shenfenzheng" class="col-sm-2 control-label">身份证背面照：</label>
+        <div class="col-sm-10">
+          <img src="{% idcardUrlBack %}" height="70" id="upload-show-shenfenzhengBack" data-remodal-target="imagePreview-modal">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="upload-text-zhiyezheng" class="col-sm-2 control-label">执业证书正面照：</label>
+        <div class="col-sm-10">
+          <img src="{% licenseUrl %}" height="70" id="upload-show-zhiyezheng" data-remodal-target="imagePreview-modal">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="upload-text-zhiyezhengBack" class="col-sm-2 control-label">执业证书背面照：</label>
+        <div class="col-sm-10">
+          <img src="{% licenseUrlBack %}" height="70" id="upload-show-zhiyezhengBack" data-remodal-target="imagePreview-modal">
+        </div>
+      </div>
+</script>
+<script type="text/html" id="lawyer-select-languages-template">
+   {% each list %}
+      {% if languages %}
+           <li class="checkbox">
+               <label for="languages{% $value.id %}">
+                   <input type="checkbox" {% if isInArray($value.id,languageIdArray) %} checked {% /if %} id="languages{% $value.id %}" name="languages[]" value="{% $value.id %}"/><span>{% $value.name %}</span>
+               </label>
+           </li>
+      {% else %}
+           <li class="checkbox">
+               <label for="languages{% $value.id %}">
+                   <input type="checkbox" id="languages{% $value.id %}" name="languages[]" value="{% $value.id %}"/><span>{% $value.name %}</span>
+               </label>
+           </li>
+      {% /if %}
+   {% /each %}
+</script >
+<script type="text/html" id="lawyer-select-professions-template">
+    {% each list %}
+    {% if professions %}
+    <li class="checkbox">
+        <label for="professions{% $value.id %}">
+            <input type="checkbox" {% if isInArray($value.id,professionalIdArray) %} checked {% /if %} id="professions{% $value.id %}" name="professions[]" value="{% $value.id %}"/><span>{% $value.name %}</span>
+        </label>
+    </li>
+    {% else %}
+    <li class="checkbox">
+        <label for="professions{% $value.id %}">
+            <input type="checkbox" id="professions{% $value.id %}" name="professions[]" value="{% $value.id %}"/><span>{% $value.name %}</span>
+        </label>
+    </li>
+    {% /if %}
+    {% /each %}
+</script >
+<script type="text/html" id="lawyer-select-team-template">
+    {% each list %}
+    {% if teamId %}
+    <li class="checkbox">
+        <label for="teamId{% $value.teamId %}">
+            <input type="checkbox" {% if isInArray($value.teamId,teamIdArray) %} checked {% /if %} id="teamId{% $value.teamId %}" name="teamId[]" value="{% $value.teamId %}"/><span>{% $value.teamName %}</span>
+        </label>
+    </li>
+    {% else %}
+    <li class="checkbox">
+        <label for="teamId{% $value.teamId %}">
+            <input type="checkbox" id="teamId{% $value.teamId %}" name="teamId[]" value="{% $value.teamId %}"/><span>{% $value.teamName %}</span>
+        </label>
+    </li>
+    {% /if %}
+    {% /each %}
+</script >
+<script type="text/html" id="lawyer-select-office-template">
+  {% each list %}
+  <option value="{% $value.officeId %}" {% if officeId==$value.officeId %} selected {% /if %}>{% $value.realname %}</option>
+  {% /each %}
+</script >
+<script type="text/html" id="lawyer-authprocess-template">
+    <div class="center">
+        <div class="step step-action">
+          <span class="step-text">提交资料</span>
+        </div>
+        <div class="step {% if lawyerId %}step-action{% /if %}">
+          <span class="step-text">等待审核</span>
+        </div>
+        <div class="step {% if lawyerId&&status==1 %}step-action{% else if lawyerId&&(status==0||status==-2) %}step-fail{% /if %}">
+          <span class="step-text">
+            {% if lawyerId&&status==1 %}
+              审核通过
+            {% else if lawyerId&&status==0 %}
+              审核失效
+            {% else if lawyerId&&status==-2 %}
+              审核失败
+            {% else %}
+              审核通过
+            {% /if %}
+          </span>
+        </div>
+        <div class="step step-last {% if lawyerId&&status==1 %}step-action{% /if %}">
+          <span class="step-text">完成认证</span>
+        </div>
+        <div class="clear"></div>
+        </div>
 </script>

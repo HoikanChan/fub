@@ -184,7 +184,7 @@ var lawyerCertification = (function() {
                     if(/^[0-9]*[1-9][0-9]*$/.test(lawyerId)){
                         data.languages = lawyerCertification.lawyerInfo.languages;
                     }
-                    $('#selectLanguages').html(template("lawyer-select-template",data));
+                    $('#selectLanguages').html(template("lawyer-select-languages-template",data));
                 }else{
                     toastr.warning(result.msg)
                 }
@@ -202,7 +202,7 @@ var lawyerCertification = (function() {
                     if(/^[0-9]*[1-9][0-9]*$/.test(lawyerId)){
                         data.professions = lawyerCertification.lawyerInfo.professions;
                     }
-                    $('#selectProfessions').html(template("lawyer-select-template",data));
+                    $('#selectProfessions').html(template("lawyer-select-professions-template",data));
                 }else{
                     toastr.warning(result.msg)
                 }
@@ -302,7 +302,7 @@ var lawyerCertification = (function() {
               e.stopPropagation();
               $('#upload-file-shenfenzheng').click();
               $('#upload-file-shenfenzheng').change(function () {
-                  fileAjaxUpload($('#upload-file-shenfenzheng'),$('#upload-text-shenfenzheng'),1,$('#upload-show-shenfenzheng'))
+                  fileAjaxUpload($('#upload-file-shenfenzheng'),$('#upload-text-shenfenzheng'),1,$('#upload-show-shenfenzheng'),null,1)
               })
           })
           //上传身份证背
@@ -310,7 +310,7 @@ var lawyerCertification = (function() {
               e.stopPropagation();
               $('#upload-file-shenfenzhengBack').click();
               $('#upload-file-shenfenzhengBack').change(function () {
-                  fileAjaxUpload($('#upload-file-shenfenzhengBack'),$('#upload-text-shenfenzhengBack'),1,$('#upload-show-shenfenzhengBack'))
+                  fileAjaxUpload($('#upload-file-shenfenzhengBack'),$('#upload-text-shenfenzhengBack'),1,$('#upload-show-shenfenzhengBack'),null,1)
               })
           })
           //上传执业证正
@@ -318,7 +318,7 @@ var lawyerCertification = (function() {
               e.stopPropagation();
               $('#upload-file-zhiyezheng').click();
               $('#upload-file-zhiyezheng').change(function () {
-                  fileAjaxUpload($('#upload-file-zhiyezheng'),$('#upload-text-zhiyezheng'),1,$('#upload-show-zhiyezheng'))
+                  fileAjaxUpload($('#upload-file-zhiyezheng'),$('#upload-text-zhiyezheng'),1,$('#upload-show-zhiyezheng'),null,1)
               })
           })
           //上传执业证背
@@ -326,7 +326,7 @@ var lawyerCertification = (function() {
               e.stopPropagation();
               $('#upload-file-zhiyezhengBack').click();
               $('#upload-file-zhiyezhengBack').change(function () {
-                  fileAjaxUpload($('#upload-file-zhiyezhengBack'),$('#upload-text-zhiyezhengBack'),1,$('#upload-show-zhiyezhengBack'))
+                  fileAjaxUpload($('#upload-file-zhiyezhengBack'),$('#upload-text-zhiyezhengBack'),1,$('#upload-show-zhiyezhengBack'),null,1)
               })
           })
             //提交认证
@@ -334,7 +334,11 @@ var lawyerCertification = (function() {
               e.stopPropagation();
               if($("#agreement-checkbox").is(':checked')){
                   if(validate.form()){
-                      $('#certification-form')._Ajax({
+                      var formData = $('#certification-form').serializeObject();
+                      formData.languages = formData['languages[]'].toString();
+                      formData.professions = formData['professions[]'].toString();
+                      formData.teamId = formData['teamId[]'].toString();
+                      $(formData)._Ajax({
                           url: "lawyer/saveLawyerInformationBySite",
                           type:"post",
                           dataType:"json",
