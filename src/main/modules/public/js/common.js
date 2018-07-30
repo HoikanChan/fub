@@ -862,6 +862,7 @@ function fileAjaxUpload(fileInputObj, paramInputObj, type, fileShowObj, validata
                     var filepath = api.host + '/file/' + data.fileList[0].filePath + data.fileList[0].fileName;
                     console.log(filepath)
                     $(paramInputObj).val(filepath);
+                    $(paramInputObj).siblings('.error-div').html('')
                     if(fileShowObj){
                         $(fileShowObj).attr('src',filepath);
                     }
@@ -890,6 +891,7 @@ function fileAjaxUpload(fileInputObj, paramInputObj, type, fileShowObj, validata
                     var filepath = api.host + '/file/' + data.fileList[0].filePath + data.fileList[0].fileName;
                     console.log(filepath)
                     $(paramInputObj).val(filepath);
+                    $(paramInputObj).siblings('.error-div').html('')
                     if(fileShowObj){
                         $(fileShowObj).attr('src',filepath);
                     }

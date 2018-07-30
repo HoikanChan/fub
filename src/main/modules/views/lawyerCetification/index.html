@@ -5,7 +5,6 @@
   </div>
   <div class="container">
     <div class="col-sm-1"></div>
-
     {{ include '../~modal/lawyerNav/main'}}
     <div class="col-sm-8">
       <div class="content-container">
@@ -13,7 +12,11 @@
 
         </div>
         <div class="page " id="my-certification">
+          <div class="my-certification-content">
+            <form class="form-horizontal" id="certification-form">
 
+            </form>
+          </div>
         </div>
         </div>
       </div>
@@ -21,9 +24,9 @@
     <div class="col-sm-1"></div>
   </div>
 </div>
+{{ include '../~modal/openAgreement/main'}}
+{{ include '../~modal/imagePreview/main'}}
 <script type="text/html" id="lawyer-add-template">
-  <div class="my-certification-content">
-    <form class="form-horizontal" id="certification-form">
       <h3 class="title">基本资料</h3>
       <div class="form-group">
         <label for="inputRealname" class="col-sm-2 control-label">姓名：</label>
@@ -142,7 +145,7 @@
           </div>
           <input type="text" id="upload-text-shenfenzheng" name="idcardUrl">
           <input type="file" style="display: none" id="upload-file-shenfenzheng">
-          <img src="" height="70" id="upload-show-shenfenzheng">
+          <img src="" height="70" id="upload-show-shenfenzheng" data-remodal-target="imagePreview-modal">
           <div class="error-div"></div>
         </div>
       </div>
@@ -154,7 +157,7 @@
           </div>
           <input type="text" id="upload-text-shenfenzhengBack" name="idcardUrlBack">
           <input type="file" style="display: none" id="upload-file-shenfenzhengBack">
-          <img src="" height="70" id="upload-show-shenfenzhengBack">
+          <img src="" height="70" id="upload-show-shenfenzhengBack" data-remodal-target="imagePreview-modal">
           <div class="error-div"></div>
         </div>
       </div>
@@ -166,7 +169,7 @@
           </div>
           <input type="text" id="upload-text-zhiyezheng" name="licenseUrl">
           <input type="file" style="display: none" id="upload-file-zhiyezheng">
-          <img src="" height="70" id="upload-show-zhiyezheng">
+          <img src="" height="70" id="upload-show-zhiyezheng" data-remodal-target="imagePreview-modal">
           <div class="error-div"></div>
         </div>
       </div>
@@ -178,7 +181,7 @@
           </div>
           <input type="text" id="upload-text-zhiyezhengBack" name="licenseUrlBack">
           <input type="file" style="display: none" id="upload-file-zhiyezhengBack">
-          <img src="" height="70" id="upload-show-zhiyezhengBack">
+          <img src="" height="70" id="upload-show-zhiyezhengBack" data-remodal-target="imagePreview-modal">
           <div class="error-div"></div>
         </div>
       </div>
@@ -186,8 +189,8 @@
         <label class="col-sm-2 control-label"></label>
         <div class="col-sm-10">
           <p class="checkbox">
-            <input type="checkbox" class="agreement-checkbox" id="checkbox"> 阅读并同意
-            <span class="open-agreement">《法律事务宝律师入驻协议》</span>
+            <input type="checkbox" class="agreement-checkbox" id="agreement-checkbox"> 阅读并同意
+              <span class="open-agreement" data-remodal-target="openAgreement-modal">《法律事务宝律师入驻协议》</span>
           </p>
         </div>
       </div>
@@ -195,13 +198,10 @@
       <div class="footer">
         <div class="col-sm-2"></div><div class="primary-btn">提交</div>
       </div>
-    </form>
-  </div>
 </script>
 <script type="text/html" id="lawyer-edit-template">
-  <div class="my-certification-content">
-    <form class="form-horizontal" id="certification-form">
       <h3 class="title">基本资料</h3>
+      <input type="hidden" name="id" value="{% lawyerId | convertNull %}">
       <div class="form-group">
         <label for="inputRealname" class="col-sm-2 control-label">姓名：</label>
         <div class="col-sm-10">
@@ -319,7 +319,7 @@
           </div>
           <input type="text" id="upload-text-shenfenzheng" name="idcardUrl" value="{% idcardUrl | convertNull %}">
           <input type="file" style="display: none" id="upload-file-shenfenzheng">
-          <img src="{% idcardUrl | convertNull %}" height="70" id="upload-show-shenfenzheng">
+          <img src="{% idcardUrl | convertNull %}" height="70" id="upload-show-shenfenzheng" data-remodal-target="imagePreview-modal">
           <div class="error-div"></div>
         </div>
       </div>
@@ -331,7 +331,7 @@
           </div>
           <input type="text" id="upload-text-shenfenzhengBack" name="idcardUrlBack" value="{% idcardUrlBack | convertNull %}">
           <input type="file" style="display: none" id="upload-file-shenfenzhengBack">
-          <img src="{% idcardUrlBack | convertNull %}" height="70" id="upload-show-shenfenzhengBack">
+          <img src="{% idcardUrlBack | convertNull %}" height="70" id="upload-show-shenfenzhengBack" data-remodal-target="imagePreview-modal">
           <div class="error-div"></div>
         </div>
       </div>
@@ -343,7 +343,7 @@
           </div>
           <input type="text" id="upload-text-zhiyezheng" name="licenseUrl" value="{% licenseUrl | convertNull %}">
           <input type="file" style="display: none" id="upload-file-zhiyezheng">
-          <img src="{% licenseUrl | convertNull %}" height="70" id="upload-show-zhiyezheng">
+          <img src="{% licenseUrl | convertNull %}" height="70" id="upload-show-zhiyezheng" data-remodal-target="imagePreview-modal">
           <div class="error-div"></div>
         </div>
       </div>
@@ -355,7 +355,7 @@
           </div>
           <input type="text" id="upload-text-zhiyezhengBack" name="licenseUrlBack" value="{% licenseUrlBack | convertNull %}">
           <input type="file" style="display: none" id="upload-file-zhiyezhengBack">
-          <img src="{% licenseUrlBack | convertNull %}" height="70" id="upload-show-zhiyezhengBack">
+          <img src="{% licenseUrlBack | convertNull %}" height="70" id="upload-show-zhiyezhengBack" data-remodal-target="imagePreview-modal">
           <div class="error-div"></div>
         </div>
       </div>
@@ -364,7 +364,7 @@
         <div class="col-sm-10">
           <p class="checkbox">
             <input type="checkbox" class="agreement-checkbox" id="checkbox"> 阅读并同意
-            <span class="open-agreement">《法律事务宝律师入驻协议》</span>
+            <span class="open-agreement" data-remodal-target="openAgreement-modal">《法律事务宝律师入驻协议》</span>
           </p>
         </div>
       </div>
@@ -372,12 +372,8 @@
       <div class="footer">
         <div class="col-sm-2"></div><div class="primary-btn">提交</div>
       </div>
-    </form>
-  </div>
 </script>
 <script type="text/html" id="lawyer-read-template">
-  <div class="my-certification-content">
-    <form class="form-horizontal" id="certification-form">
       <h3 class="title">基本资料</h3>
       <div class="form-group">
         <label for="inputRealname" class="col-sm-2 control-label">姓名：</label>
@@ -470,29 +466,27 @@
       <div class="form-group">
         <label for="upload-text-shenfenzheng" class="col-sm-2 control-label">身份证正面照：</label>
         <div class="col-sm-10">
-          <img src="{% idcardUrl %}" height="70" id="upload-show-shenfenzheng">
+          <img src="{% idcardUrl %}" height="70" id="upload-show-shenfenzheng" data-remodal-target="imagePreview-modal">
         </div>
       </div>
       <div class="form-group">
         <label for="upload-text-shenfenzheng" class="col-sm-2 control-label">身份证背面照：</label>
         <div class="col-sm-10">
-          <img src="{% idcardUrlBack %}" height="70" id="upload-show-shenfenzhengBack">
+          <img src="{% idcardUrlBack %}" height="70" id="upload-show-shenfenzhengBack" data-remodal-target="imagePreview-modal">
         </div>
       </div>
       <div class="form-group">
         <label for="upload-text-zhiyezheng" class="col-sm-2 control-label">执业证书正面照：</label>
         <div class="col-sm-10">
-          <img src="{% licenseUrl %}" height="70" id="upload-show-zhiyezheng">
+          <img src="{% licenseUrl %}" height="70" id="upload-show-zhiyezheng" data-remodal-target="imagePreview-modal">
         </div>
       </div>
       <div class="form-group">
         <label for="upload-text-zhiyezhengBack" class="col-sm-2 control-label">执业证书背面照：</label>
         <div class="col-sm-10">
-          <img src="{% licenseUrlBack %}" height="70" id="upload-show-zhiyezhengBack">
+          <img src="{% licenseUrlBack %}" height="70" id="upload-show-zhiyezhengBack" data-remodal-target="imagePreview-modal">
         </div>
       </div>
-    </form>
-  </div>
 </script>
 <script type="text/html" id="lawyer-select-template">
    {% each list %}

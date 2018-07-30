@@ -236,9 +236,7 @@ var lawyerCertification = (function() {
             }
         })
     }
-    function openAgreement() {
-        alert("法律事务宝律师入驻协议")
-    }
+
   return {
       init: function() {
           var start = {
@@ -260,9 +258,9 @@ var lawyerCertification = (function() {
                           if(result.code==0){
                               lawyerCertification.lawyerInfo = result.data;
                               if(result.data.status == -2){
-                                  $('#my-certification').html(template("lawyer-edit-template",result.data));
+                                  $('#certification-form').html(template("lawyer-edit-template",result.data));
                               }else {
-                                  $('#my-certification').html(template("lawyer-read-template",result.data));
+                                  $('#certification-form').html(template("lawyer-read-template",result.data));
                               }
                               $('.auth-process').html(template("lawyer-authprocess-template",result.data));
                               $('#startTime').jeDate(start);
@@ -276,18 +274,13 @@ var lawyerCertification = (function() {
                       }
                   })
               }else{
-                  $('#my-certification').html(template("lawyer-add-template"));
+                  $('#certification-form').html(template("lawyer-add-template"));
                   $('.auth-process').html(template("lawyer-authprocess-template"));
                   $('#startTime').jeDate(start);
                   queryAllOffice();
                   queryLanguage();
                   queryProfessional();
               }
-          })
-          //上传执业证
-          $(document).on('click','#my-certification .open-agreement',function (e) {
-              e.stopPropagation();
-              openAgreement()
           })
           //上传执业证
           $(document).on('blur','#inputMobile',function (e) {
@@ -298,6 +291,11 @@ var lawyerCertification = (function() {
                   toastr.warning("请输入正确的手机号")
               }
 
+          })
+          //图片预览
+          $(document).on('click','#certification-form img',function (e) {
+              e.stopPropagation();
+              imagePreview.showDataDetailDialog2($(this).attr('src'));
           })
           //上传身份证正
           $(document).on('click','#my-certification .upload-btn-shenfenzheng',function (e) {
@@ -334,20 +332,26 @@ var lawyerCertification = (function() {
             //提交认证
           $(document).on('click','#my-certification .primary-btn',function (e) {
               e.stopPropagation();
-              if(validate.form()){
-                  $('#certification-form')._Ajax({
-                      url: "lawyer/saveLawyerInformationBySite",
-                      type:"post",
-                      dataType:"json",
-                      success: function (result) {
-                          if (result.code == '0') {
-                              toastr.success(result.msg);
-                          }else{
-                              toastr.error(result.msg);
-                          }
+              if($("#agreement-checkbox").is(':checked')){
+                  if(validate.form()){
+                      $('#certification-form')._Ajax({
+                          url: "lawyer/saveLawyerInformationBySite",
+                          type:"post",
+                          dataType:"json",
+                          success: function (result) {
+                              if (result.code == '0') {
+                                  toastr.success(result.msg);
+                              }else{
+                                  toastr.error(result.msg);
+                              }
 
-                      }
-                  })
+                          }
+                      })
+                  }else {
+                      toastr.warning("请填写完整资料");
+                  }
+              }else{
+                  toastr.warning("先同意《法律事务宝律师入驻协议》");
               }
           })
       },
