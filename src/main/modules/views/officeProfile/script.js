@@ -50,6 +50,7 @@ var userCenter = (function() {
     // })
   }
   $(function() {
+    $('#office-profile').addClass('active')
 
     $('aside .right-icon').click(function(e) {
       e.stopPropagation()
@@ -72,6 +73,7 @@ var userCenter = (function() {
   })
   return {
     init: function() {
+      $('#my-profile').addClass('active')
     }
   }
 })()

@@ -51,6 +51,7 @@ var userCenter = (function() {
   }
   $(function() {
 
+    $('#office-certificaition').addClass('active')
 
     $('aside .right-icon').click(function(e) {
       e.stopPropagation()

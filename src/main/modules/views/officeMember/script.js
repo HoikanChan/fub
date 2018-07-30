@@ -71,6 +71,8 @@ var userCenter = (function() {
   })
   return {
     init: function() {
+      $('#office-member').addClass('active')
+
       $('#member-manage .member-manage-content').html(
         template('member-manage-template', {
           delegations: [

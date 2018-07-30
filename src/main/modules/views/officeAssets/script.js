@@ -112,7 +112,9 @@ var userCenter = (function() {
   })
   return {
     init: function() {
+      $('#office-assets').addClass('active')
        $('.assets-content').html(
+
         template('assets-template', {
           balance: 21,
           total: '1,200.00',

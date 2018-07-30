@@ -29,22 +29,14 @@ var userCenter = (function() {
           .addClass('fa-chevron-down')
       }
     })
-    $('.nav-link').click(function(e) {
-      $('.nav-link').removeClass('active')
-      $(e.target).addClass('active')
-      var title = e.target.text
-      $('.page-title').html(title)
-      $('.page').removeClass('pageNow')
-      // if(e.target.id ==='')
-      $('#' + e.target.id + '.page').addClass('pageNow')
-      return false
-    })
    
   })
 
   return {
     init: function() {
       //  satelliteApplication();
+      $('#office-indexpage').addClass('active')
+
       $('.user-info').html(
         template('userinfo-template', {
           user: {
