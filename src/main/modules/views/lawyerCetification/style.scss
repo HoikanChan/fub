@@ -50,6 +50,41 @@ $content-size: 16px;
   background: $white-color;
   padding: 24px;
   width: 100%;
+  .auth-process{
+    width: 100%;
+    .center{
+      width: 460px;
+      margin: auto;
+      .step{
+        background-image: url(../../assets/image/process-line.png);
+        background-repeat: no-repeat;
+        background-position: 0px 0px;
+        width: 145px;
+        margin: auto;
+        height: 50px;
+        float: left;
+        position: relative;
+        .step-text{
+          height: 25px;
+          line-height: 25px;
+          color: $font-gray-color;
+          position: absolute;
+          bottom: 0;
+          left:0;
+          width: 100px;
+        }
+        &.step-last{
+          width: 25px;
+        }
+        &.step-action{
+          background-image: url(../../assets/image/process-active.png);
+          .step-text{
+            color: $theme-color;
+          }
+        }
+      }
+    }
+  }
   #my-certification {
     .my-certification-content {
       padding: 0 42px;
@@ -59,11 +94,13 @@ $content-size: 16px;
       .footer {
         display: flex;
         justify-content: flex-end;
-        button {
+        .primary-btn{
+          cursor: pointer;
           padding: 8px 64px;
         }
       }
       .upload-btn {
+        cursor: pointer;
         span.fa {
           background: #f2f2f2;
           border: 1px solid $font-gray-color;
@@ -95,6 +132,18 @@ $content-size: 16px;
         position: absolute;
         left: 0;
         top: 0;
+      }
+      .open-agreement{
+        color: $theme-color;
+        cursor: pointer;
+      }
+      .form-group{
+        .error-div{
+          color: red;
+        }
+        img{
+          cursor: pointer;
+        }
       }
       .form-control[readonly],.form-control[disabled]{
         border: none;
