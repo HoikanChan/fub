@@ -28,6 +28,7 @@ var end = {
   function getMycase(){ 
     var params = {
       lawyerId:lawyerId,
+      clientId:clientId,
       sidx : "createTime",
       order : "desc"
     }
