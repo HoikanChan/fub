@@ -425,38 +425,12 @@ $({})._Ajax({
       })
 
       
-    $(document).on("click",".slider-result",function(){
-      $(".options-block-hide").trigger("click");
-      var sonid =  $(this).attr("data-id");
-      console.log(sonid)
-      var params = {
-       caseQueryLogId:sonid,
-       isGroupCategory:true,
-       offset:0
-   }
-      $('.case-list-page .pager').tablePager({
-       url: "case/lawyerRecommendCaseList",
-       searchParam:params,
-       success: function (result) {     
-        // result.data.host=  api.host+"caseDetail?";          
-         $(".result-count").text(result.data.totalCount);
-         var html = template('lawyer-list-templete', result.data); 
-         $(".case-list").html(html);
-        
-       if(result.data.totalCount<10){
-           $(".page-row").hide()
-       }else{
-           $(".page-row").show()
-       }
-       }
-   })
-   location.reload();
-   }) 
+   
 
    $(document).on("click",".search-options span",function(){
     var keywords = $(this).text();
    
-    $(".options-block-hide").trigger("click");
+   
     var params = {
         offset:0,
         keyword : keywords,
@@ -468,12 +442,14 @@ $({})._Ajax({
         searchParam:params,
         success: function (result) {
            if(result.code == 0){
+            $(".page-result").show();
+            $(".options-block-hide").trigger("click");
             result.data.host=  api.host+"caseDetail?";          
             $(".result-count").text(result.data.totalCount);
             var html = template('lawyer-list-templete', result.data); 
             $(".case-list").html(html);
 
-            result.data.hosts=  api.host+"lawyerDetail";
+            result.data.hosts=  api.link+"lawyerDetail";
             var html2 = template('lawyer-slider-templete', result.data); 
             $(".sidenav-menu").html(html2);
 
@@ -507,7 +483,7 @@ $({})._Ajax({
           var dataid = $(this).attr("data-id");
      //   var parent = $(this).attr("parent-name");
          $("#reasonslect .reaseontext").text(data);
-          $("#reasonslect .reaseontext").text(parent+"-"+data);
+        //  $("#reasonslect .reaseontext").text(parent+"-"+data);
         //  $("#reasonslect .reaseontext").attr("data-id",dataid);
           $("#navbar-menu").hide();
         })

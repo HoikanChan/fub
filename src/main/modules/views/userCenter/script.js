@@ -4,6 +4,10 @@ var userCenter = (function() {
 
   $(function() {
   //  $('#calendar').fullCalendar({})
+    $(".user-info-block h4 span").text(phone);
+    $(".user-info-block span.count").text(userZH);
+    $(".user-info-block span.regtime").text(registerTime);
+
     $('.fc-widget-header .fc-sun span').html('星期天')
     $('.fc-widget-header .fc-mon span').html('星期一')
     $('.fc-widget-header .fc-tue span').html('星期二')
@@ -36,15 +40,7 @@ var userCenter = (function() {
     init: function() {
       //  satelliteApplication();
       $("#indexpage").addClass("active");
-      $('.user-info').html(
-        template('userinfo-template', {
-          user: {
-            name: '13264444444',
-            user: 'user',
-            created: '2015-06-05 15:33:30'
-          }
-        })
-      )
+     
       $('.applications').html(
         template('application-template', {
           application: {

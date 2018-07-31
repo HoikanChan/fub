@@ -122,7 +122,7 @@ var _applycase = function () {
                     $(document).on("click",function(event){
                         $("#navbar-menu").hide();
                     });
-                    $(document).on("click", ".remodal-confirm", function () {
+                    $(document).on("click", "#applycase-modal .remodal-confirm", function () {
                         if (applycase_validate.form()) {
                             applyCase();
                         }    

@@ -80,6 +80,9 @@ input:focus {
   background: $theme-color;
   padding: 8px 16px;
   border-radius: 3px;
+  a{
+    color:#fff;
+  }
   &:hover {
     background: $theme-hover-color;
   }
@@ -143,7 +146,17 @@ input:focus {
     border-right: solid 1px #dfdfdf;
     &:last-child {
       border-right: none;
+      a{
+        color:#108ee9;
+      }
+      span.showmore{
+        color:#108ee9;
+        i{
+          color:#108ee9;
+        }
+      }
     }
+
   }
   .checkbox {
     background: none;

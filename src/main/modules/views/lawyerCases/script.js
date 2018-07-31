@@ -172,7 +172,7 @@ var end = {
       })
       $(document).on("click",".updatebtn",function(){
                 
-        _updateCase.updateCaseDialog($(this).attr("data-name"),$(this).attr("data-id"));
+        _updateCase.updateCaseDialog($(this).attr("data-name"),$(this).attr("data-id"),$(this).attr("data-ids"));
        
    
 })

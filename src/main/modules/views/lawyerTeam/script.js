@@ -50,6 +50,7 @@ var userCenter = (function() {
     // })
   }
   $(function() {
+    $("#my-team").addClass("active");
     $(document).on('click','#create-team-btn',function(){
       createTeamModal.showModal()
     })

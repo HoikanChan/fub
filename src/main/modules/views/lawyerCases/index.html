@@ -119,7 +119,12 @@
         <td class="column-content">{% da.trialRound %}</td>
         <td class="a-right a-right ">{% da.createTime | dateFormat 'yyyy'%}-{% da.createTime | dateFormat 'MM'%}-{% da.createTime | dateFormat 'dd'%}</td>
         <td class=" last">
-          <a href="#" data-name="{% da.caseName %}" data-id="{% da.caseNo %}"  class="updatebtn" data-remodal-target="updateCase-modal">更新</a>
+            {% if da.trialRound == '结案' %}
+            <span class="mychart">评价</span>
+            {% else %}
+            {% /if %}
+          <a href="#" data-name="{% da.caseName %}" data-id="{% da.caseNo %}" data-ids="{% da.id %}" data-ids="{% da.id %}"   class="updatebtn" data-remodal-target="updateCase-modal">更新</a>
+        
           <span class="showmore" data-id="{% da.id %}" data-status="{% da.id %}">更多
           <span class="fa fa-chevron-down"></span></span>
         </td>

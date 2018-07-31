@@ -684,8 +684,10 @@ function infoJumpTo() {
  var clientId =  sessionStorage.getItem("clientid");
  var lawyerId =  sessionStorage.getItem("lawyerId");
  var officeId =  sessionStorage.getItem("officeId");
+ var userZH = sessionStorage.getItem("userTpyeZH");
  var usertype = sessionStorage.getItem("userType");
  var userid = sessionStorage.getItem("userid");
+ var registerTime = sessionStorage.getItem("registerTime");
  var phone = window.sessionStorage.getItem("mobile");
  $({mobile:phone})._Ajax({
      url:"client/queryByMobile",
