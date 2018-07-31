@@ -54,7 +54,6 @@ function init_city_select($inputE) {
 		var name =$(".province-comfime span").attr("title");
 		$("#area-select").attr("area-id",id);
 		$("#area-select").val(name)
-		console.log("123")
 });
 
 	$inputE.on("click", function(event){

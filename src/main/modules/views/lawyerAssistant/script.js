@@ -1,21 +1,23 @@
 var userCenter = (function() {
   var page = 1
-  var inquery_validate
+  var inquery_validate;
+  var lawyerName,trialRound,judge,trialYear,court,legalBases,appellors,courtLevel,docType,officeName,area
+  
+
   var searchOptions = [
-    // { name: '全文检索', value: 'global' },
-    // { name: '标题', value: 'title' },
+   
     { name: '被告人', value: 'defendant' },
-    { name: '原告人', value: 'appellors' },
     { name: '代理律师', value: 'lawyerName' },
     { name: '律师事务所', value: 'officeName' },
     { name: '法院名称', value: 'court' },
+    { name: '地区', value: 'courtCityId' },
+    { name: '所属年份', value: 'trialYear' },
     { name: '法院层级', value: 'courtLevel' },
-    // { name: '裁判时间', value: 'judgingtime' },
-    // { name: '案由', value: 'route' },
     { name: '裁判人员', value: 'judge' },
     { name: '文书类型', value: 'docType' },
     { name: '审判程序', value: 'trialRound' },
-    { name: '法律依据', value: 'legalBases' },
+    { name: '法律依据', value: 'legalBases' }
+
   ]
   var addedOptions = []
   var start = {
@@ -42,6 +44,17 @@ var end = {
             start.maxDate = elem.val.replace(/\//g,"-"); //将结束日的初始值设定为开始日的最大日期
     }
 };
+
+$({})._Ajax({
+  url: "casetype/apiTree",
+  success: function (result) {
+          if (result.code==0) {
+              var html = template("search-reason-templete",result)
+              $("#navbar-menu").html(html);
+          }
+      }
+});
+
   function getMycase() {
     var params = {
       clientId: clientId,
@@ -66,54 +79,66 @@ var end = {
   }
 
   function searchHigt(){
+    $(".page-result .sidenav-menu").html("");
+    $(".page-result .case-list").html("");
     var searhKey = $("#alltext").val();
     var defendant = $("#defendant").val();
     var starttime = $("#starttime").val();
     var endtime = $("#endtime").val();
-    var reason = $("#resources").attr("data-id");
-    var lawyerName = $("#lawyerName").val();
-    var officeName = $("#officeName").val();
-    var lawyerName = $("#lawyerName").val();
-    var lawyerName = $("#lawyerName").val();
-    var lawyerName = $("#lawyerName").val();
-    var lawyerName = $("#lawyerName").val();
-    var lawyerName = $("#lawyerName").val();
-    var lawyerName = $("#lawyerName").val();
-    var lawyerName = $("#lawyerName").val();
-    var lawyerName = $("#lawyerName").val();
+    var reason = $("#reasonslect .reaseontext").text();
+    lawyerName = $("#lawyerName1").val()?$("#lawyerName1").val():"";
+    trialRound = $("#trialRound1").val()?$("#trialRound1").val():"";
+    judge = $("#judge1").val()?$("#judge1").val():"";
+    trialYear = $("#trialYear1").find("option:selected").val()?$("#trialYear1").find("option:selected").val():"";
+    court = $("#court1").val()?$("#court1").val():"";
+    legalBases = $("#legalBases1").val()?$("#legalBases1").val():"";
+    appellors = $("#appellors1").val()?$("#appellors1").val():"";
+    courtLevel = $("#courtLevel1").find("option:selected").val()?$("#courtLevel1").find("option:selected").val():"";
+    docType = $("#docType1").find("option:selected").val()?$("#docType1").find("option:selected").val():"";
+    officeName = $("#officeName1").val()?$("#officeName1").val():"";
+    area = $("#area-select").attr("data-id")?$("#area-select").attr("data-id"):"";
+   if(reason == "全部"){
+    reason = "";
+   }
     var params = {
-      keywork:searhKey,
-      defendant:defendant,
-      trialDateBegin:starttime,
-      trialDateEnd:endtime,
-      reason:reason,
-      isGroupCategory:true,
-      lawyerName:lawyerName
+      keywork : searhKey,
+      defendant : defendant,
+      trialDateBegin : starttime,
+      trialDateEnd : endtime,
+      reason : reason,
+      isGroupCategory : true,
+      lawyerName : lawyerName,
+      courtCityId : area,
+      trialRound : trialRound,
+      trialYear : trialYear,
+      appellors : appellors,
+      officeName : officeName,
+      court : court,
+      courtLevel : courtLevel,
+      judge : judge,
+      docType : docType,
+      legalBases : legalBases,
+
     }
-    $('.result-contents .pager').tablePagerOne({
+    $('.result-contents .pager').tablePager({
         
       url: "case/lawyerRecommendCaseList",
       searchParam:params,
       success: function (result) {
          if(result.code == 0){
-    
-            result.data.host=  api.link+"caseDetail?";
+           $(".page-result").show();
+           $(".options-block-hide").trigger("click");
+            result.data.host=  api.host+"caseDetail?";
             $(".result-count").text(result.data.totalCount);
             var html = template('lawyer-list-templete', result.data); 
             $(".case-list").html(html);
        //     result.data.hosts=  api.link+"lawyerDetail?name="+codename;
-            result.data.hosts=  api.link+"lawyerDetail";
+            result.data.hosts=  api.host+"lawyerDetail";
             var html2 = template('lawyer-slider-templete', result.data); 
             $(".sidenav-menu").html(html2);
 
 
 
-
-            if(result.data.totalCount<10){
-                $(".page-row").hide()
-            }else{
-               $(".page-row").show()
-            }
 
           if(result.data.totalCount>10){
               $(".page-row").hide()
@@ -136,6 +161,9 @@ var end = {
     $("#my-assistant").addClass("active");
     $("#starttime").jeDate(start);
     $("#endtime").jeDate(end);
+    init_city_select($("#area-select"));
+    $('[data-sidenav]').sidenav(); 
+
     $('aside .right-icon').click(function(e) {
       e.stopPropagation()
       if (e.target.classList.contains('fa-chevron-down')) {
@@ -169,8 +197,9 @@ var end = {
           return option.value === pickedValue
         })[0]
       )
-      searchOptions = searchOptions.filter(function(option) {
+      searchOptions = searchOptions.filter(function(option){
         return option.value !== pickedValue
+ 
       })
       // $('#lawyer-assistant .options-block').html(
       //   template('lawyer-assistant-template', {
@@ -188,12 +217,14 @@ var end = {
           addedOptions: addedOptions
         })
       )
+     
     }
     $('#lawyer-assistant .options-block').on(
       'click',
       '.topick-option',
       function(e) {
         addOptionHandeler(e)
+       
       }
     )
 
@@ -233,8 +264,46 @@ var end = {
       subOptionHandeler(e)
     })
     $('#lawyer-assistant .search-page .search-btn').click(function() {
-      $('#lawyer-assistant .search-page').removeClass('pageNow')
-      $('#lawyer-assistant .result-page').addClass('pageNow')
+      // $('#lawyer-assistant .search-page').removeClass('pageNow')
+      // $('#lawyer-assistant .result-page').addClass('pageNow')
+      var keywords = $("#top-keyword").val();
+   
+     
+      var params = {
+          offset:0,
+          keyword : keywords,
+          isGroupCategory : true,
+      }
+      $('.page-result .pager').tablePager({
+      
+          url: "case/lawyerRecommendCaseList",
+          searchParam:params,
+          success: function (result) {
+             if(result.code == 0){
+              $(".page-result").show();
+              $(".options-block-hide").trigger("click");
+              result.data.host=  api.host+"caseDetail?";          
+              $(".result-count").text(result.data.totalCount);
+              var html = template('lawyer-list-templete', result.data); 
+              $(".case-list").html(html);
+  
+              result.data.hosts=  api.host+"lawyerDetail";
+              var html2 = template('lawyer-slider-templete', result.data); 
+              $(".sidenav-menu").html(html2);
+  
+              if(result.data.totalCount>10){
+                  $(".page-row").show()
+              }else{
+                  $(".page-row").show()
+              }
+  
+             }else{
+                  toastr.warning(result.msg);
+             }
+            
+          }
+      })
+
     })
     $('#lawyer-assistant .result-page .visualization-btn').click(function() {
       $('#lawyer-assistant .result-page').removeClass('pageNow')
@@ -351,8 +420,110 @@ var end = {
         })
       )
       $(document).on("click","#searchBtn",function(){
+        $(".options-block-hide").trigger("click");
         searchHigt();
       })
+
+      
+    $(document).on("click",".slider-result",function(){
+      $(".options-block-hide").trigger("click");
+      var sonid =  $(this).attr("data-id");
+      console.log(sonid)
+      var params = {
+       caseQueryLogId:sonid,
+       isGroupCategory:true,
+       offset:0
+   }
+      $('.case-list-page .pager').tablePager({
+       url: "case/lawyerRecommendCaseList",
+       searchParam:params,
+       success: function (result) {     
+        // result.data.host=  api.host+"caseDetail?";          
+         $(".result-count").text(result.data.totalCount);
+         var html = template('lawyer-list-templete', result.data); 
+         $(".case-list").html(html);
+        
+       if(result.data.totalCount<10){
+           $(".page-row").hide()
+       }else{
+           $(".page-row").show()
+       }
+       }
+   })
+   location.reload();
+   }) 
+
+   $(document).on("click",".search-options span",function(){
+    var keywords = $(this).text();
+   
+    $(".options-block-hide").trigger("click");
+    var params = {
+        offset:0,
+        keyword : keywords,
+        isGroupCategory : true
+    }
+    $('.page-result .pager').tablePager({
+    
+        url: "case/lawyerRecommendCaseList",
+        searchParam:params,
+        success: function (result) {
+           if(result.code == 0){
+            result.data.host=  api.host+"caseDetail?";          
+            $(".result-count").text(result.data.totalCount);
+            var html = template('lawyer-list-templete', result.data); 
+            $(".case-list").html(html);
+
+            result.data.hosts=  api.host+"lawyerDetail";
+            var html2 = template('lawyer-slider-templete', result.data); 
+            $(".sidenav-menu").html(html2);
+
+            if(result.data.totalCount>10){
+                $(".page-row").show()
+            }else{
+                $(".page-row").show()
+            }
+
+           }else{
+                toastr.warning(result.msg);
+           }
+          
+        }
+    })
+})
+        $(document).on("click","#reasonslect .reaseontext",function(event){
+          $("#navbar-menu").toggle()
+          event.stopPropagation();
+        })
+        $(document).on("click",".first-val",function(){
+          var data = $(this).text();
+          var dataid = $(this).attr("data-id");
+          $("#reasonslect .reaseontext").text(data);
+          $("#reasonslect .reaseontext").attr("data-id",dataid);
+          $("#navbar-menu").hide();
+          
+        })
+        $(document).on("click",".second-val",function(){
+          var data = $(this).text();
+          var dataid = $(this).attr("data-id");
+     //   var parent = $(this).attr("parent-name");
+         $("#reasonslect .reaseontext").text(data);
+          $("#reasonslect .reaseontext").text(parent+"-"+data);
+        //  $("#reasonslect .reaseontext").attr("data-id",dataid);
+          $("#navbar-menu").hide();
+        })
+        $(document).on("click",".last-val",function(){
+          var data = $(this).text();
+          var dataid = $(this).attr("data-id");
+    //      var parentname = $(this).attr("parent-name");
+    //      var parent = $(this).attr("parent");
+         $("#reasonslect .reaseontext").text(data);
+          $("#reasonslect .reaseontext").attr("data-id",dataid);
+      //    $("#reasonslect .reaseontext").text(parent+" - "+parentname+" - "+data);
+          $("#navbar-menu").hide();
+        })
+        $(document).on("click",function(event){
+          $("#navbar-menu").hide();
+        });
 
       $('#lawyer-assistant .result-page').html(
         template('lawyer-assistant-result-template', {

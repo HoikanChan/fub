@@ -18,7 +18,7 @@
               </div>
               <div class="searchbar clearfix">
                 <div class="col-sm-9">
-                  <input class="input" type="text" placeholder="请输入搜索内容">
+                  <input class="input" type="text"  id="top-keyword" placeholder="请输入搜索内容">
                   <span class="options-block-show">
                     选项
                     <i class="fa fa-chevron-down right-icon"></i>
@@ -50,9 +50,9 @@
                       </div>
                     </div>
                     <div class="form-group">
-                      <label for="defendant" class="col-sm-3 control-label">当事人：</label>
+                      <label for="defendant" class="col-sm-3 control-label">原告：</label>
                       <div class="col-sm-9">
-                        <input type="area" class="form-control" id="defendant" name="defendant" placeholder="请输入">
+                        <input type="area" class="form-control" id="appellors" name="appellors" placeholder="请输入">
                       </div>
                     </div>
                     <div class="form-group">
@@ -68,12 +68,15 @@
                       </div>
                     </div>
                     <div class="form-group">
-                      <label  class="col-sm-3 control-label" id="resources" data-id="1">案由：</label>
+                      <label  class="col-sm-3 control-label" id="resources" data-id="">案由：</label>
                       <div class="col-sm-9">
-                        <select class="form-control">
-                          <option>提供虚假财会报告</option>
-                          <option>提供虚假财会报告</option>
-                        </select>
+                          <div id="reasonslect" >
+                              <span class="reaseontext form-control">全部</span>
+                              <div class="error-div"></div>
+                      <div  id="navbar-menu" style="display:none;">
+
+                      </div>   
+                 </div>
                       </div>
                     </div>
                   </form>
@@ -100,7 +103,7 @@
                 </div>
               </div>
             </div>
-            <div class="page-result"> 
+            <div class="page-result" style="display:none;"> 
                 <div class="row">
                     <div class="col-md-3 col-sm-4">
                         <nav class="sidenav" data-sidenav>
@@ -186,7 +189,41 @@
     <div class="form-group col-md-11">
       <label for="trialDateEnd" class="col-sm-3 control-label">{% data.name %}：</label>
       <div class="col-sm-9">
-        <input type="text" class="form-control "   name="lawyerName" id="lawyerName" >
+        {% if data.value == 'courtLevel'%}
+        <select id="{%data.value %}1" class="form-control">
+          <option value="最高法院">最高法院</option>
+          <option value="高级法院">高级法院</option>
+          <option value="中级法院">中级法院</option>
+          <option value="基层法院">基层法院</option>
+        </select>
+        {% else if data.value == 'trialYear'%}
+        <select id="{%data.value %}1" class="form-control">
+        
+          <option value="2018">2018</option>
+          <option value="2017">2017</option>
+          <option value="2016">2016</option>
+          <option value="2015">2015</option>
+          <option value="2014">2014</option>
+          <option value="2013">2013</option>
+          <option value="2012">2012</option>
+          <option value="2011">2011</option>
+          <option value="2010">2010</option>
+          <option value="2009">2009</option>
+          <option value="2008">2008</option>
+        </select>
+        {% else if data.value == 'docType' %}
+        <select id="{%data.value %}1" class="form-control">
+            <option value="决定书">决定书</option>
+            <option value="判决书">判决书</option>
+            <option value="裁定书">裁定书</option>
+            <option value="调解书">调解书</option>
+            <option value="调解书">调解书</option>
+          </select>
+          {% else if data.value == 'courtCityId' %}  
+          <input type="area" name="courtCityId" class="form-control city_input"  id="area-select" area-id="0" value="全部" placeholder="地区">
+          {% else %}
+        <input type="text" class="form-control "   name="{%data.value %}" id="{%data.value %}1" >
+          {% /if %}
       </div>
     </div>
   {% /each %}
@@ -210,7 +247,7 @@
 <script type="text/html" id="lawyer-list-templete">
   {% each list das %}
   {% each das.caseVoList da %}
- <a class="case-hover" href="{% host %}id={% da.id %}&name={% da.lawyerName %}"><div class="case-list-box" >
+ <a class="case-hover" href="{% host %}id={% da.id %}&name={% da.lawyerName %}" target="_blank"><div class="case-list-box" >
           <div class="case-title">
               <div class="row">
                   <p class="title col-md-9 col-sm-8">{% da.title %}</p>
@@ -231,14 +268,14 @@
   {% each das.groupMenu da %}  
 <li class="oneLevel">
      
-      <a href="javascript:;" onclick="changeicon()" data-sidenav-dropdown-toggle class="active">
+      <a href="javascript:;" data-sidenav-dropdown-toggle class="active">
              <i class="material-icons">{% da.categoryName %}</i><span class="glyphicon glyphicon-menu-down"></span>
       </a>
       <ul class="sidenav-dropdown threelevel" data-sidenav-dropdown>
            
                   {% each da.sonCategoryList data %}  
 
-                  <li><p class="slider-result"  data-id="{% data.sonCategoryQueryLogId %}"> <a href="{% hosts %}&caseQueryLogId={% data.sonCategoryQueryLogId %}">{% data.sonCategoryName %}</a></p></li>
+                  <li><p class="slider-result"  data-id="{% data.sonCategoryQueryLogId %}"> <a href="#">{% data.sonCategoryName %}</a></p></li>
 
                   {% /each %}   
                   </ul>
@@ -249,5 +286,51 @@
       {% /each %}
       {% /each %}
 </script> 
+<script type="text/html" id="search-reason-templete">
+  <ul class="reason-ul">
+  {% each data da %}
+ 
+  <li class="dropdown">
+          <a href="javascript:;" class="dropdown-toggle first-val" data-toggle="dropdown" data-id="{% da.id %}" >{% da.name %} <span class="glyphicon glyphicon-menu-right"></span></a>
+          {%  if da.children %} 
+          
+      <ul class="dropdown-menu secondul">
+           <li class="lipostion">
+              <ul>
+                          {% each da.children val  %}
+          
+                          <li class="dropdown">
+
+                          {%  if val.children %}    
+                          <a href="javascript:;" class="dropdown-toggle second-val" parent-name="{% da.name  %}" data-id="{% val.id %}" data-toggle="dropdown" >{% val.name %}<span class="glyphicon glyphicon-menu-right"></span></a>
+                          {% else %}
+                          <a href="javascript:;" class="dropdown-toggle second-val" parent-name="{%  da.name  %}" data-id="{% val.id %}"   data-toggle="dropdown" >{% val.name %}</a>
+                          {% /if %}
+
+                          {%  if val.children %} 
+                                  <ul class="dropdown-menu thirdul">        
+                                          {% each val.children va  %}     
+                                  <li>
+                                          <a href="javascript:;" parent="{% da.name  %}" parent-name="{%  val.name %}" data-id="{% va.id %}"  class="last-val" >{% va.name %}</a>
+                                          
+                                  </li>
+                                          {% /each %}
+                                  
+                                  </ul>
+                          {% /if %}
+                          </li>
+                        
+          
+                   {% /each %}
+                  </ul>
+          </li>
+           </ul>
+          {% /if %}
+      </li>
+
+    {% /each %}            
+  </ul>
+
+</script>
 <script type="text/html" id="lawyer-assistant-visual-result-template">
 </script>
