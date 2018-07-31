@@ -68,9 +68,18 @@ var _persone = function () {
             },
         
     })
+    $({})._Ajax({
+        url: "casetype/apiTree",
+        success: function (result) {
+                if (result.code==0) {
+                    var html = template("search-reason-templete",result)
+                    $("#navbar-menu").html(html);
+                }
+             }
+    });
 
     function highSeachSumbit(){
-        var reason =$(".caseresours").find("option:selected").val();
+        var reason =$("#reasonslect .reaseontext").text();
         var areaid = $("input[name='courtCityId']").attr("area-id");
         var appellors = $("input[name='appellors']").val()
         var defendant = $("input[name='defendant']").val();
@@ -203,33 +212,7 @@ var _persone = function () {
         })
     }
 
-    function reasonclick(){
-        $({})._Ajax({
-            url: "casetype/apiListByParentId/0",
-            success: function (result) {
-                    if (result.code==0) {
-                        var html = template("search-reason-templete",result)
-                        $("#navbar-menu").html(html);
-                    }
-                 }
-                });
-
-    }
-function viewcaseone(caseoneid){
-    $({})._Ajax({
-        url: "casetype/apiListByParentId/"+caseoneid,
-        success: function (result) {
-                if (result.code==0) {
-                    var html = template("search-lidrop-templete",result)
-                    $("##navbar-menu li.oneli").append(html);
-                }
-             }
-            });
-    var title =  $("#one"+caseoneid).attr("title");
-            $("#reasonslect").text(title);
-}
-
-
+  
 
     function seachSumbit(){
         if($(".recommend-form").hasClass("show")){
@@ -347,10 +330,35 @@ function viewcaseone(caseoneid){
                     seachSumbit();
                 }
             });
-            $(document).on("click","#reasonslect",function(){
+            $(document).on("click","#reasonslect .reaseontext",function(event){
                 $("#navbar-menu").toggle()
-                reasonclick();
+                event.stopPropagation();
             })
+            $(document).on("click",".first-val",function(){
+                var data = $(this).text();
+                $("#reasonslect .reaseontext").text(data);
+                $("#navbar-menu").hide();
+                
+            })
+            $(document).on("click",".second-val",function(){
+                var data = $(this).text();
+                // var parent = $(this).attr("parent-name");
+                // $("#reasonslect .reaseontext").text(parent+"-"+data);
+                $("#reasonslect .reaseontext").text(data);
+                $("#navbar-menu").hide();
+            })
+            $(document).on("click",".last-val",function(){
+                var data = $(this).text();
+                $("#reasonslect .reaseontext").text(data);
+                // var parentname = $(this).attr("parent-name");
+                // var parent = $(this).attr("parent");
+                // $("#reasonslect .reaseontext").text(parent+" - "+parentname+" - "+data);
+                $("#navbar-menu").hide();
+            })
+            $(document).on("click",function(event){
+                $("#navbar-menu").hide();
+            });
+            
         }
     }
 } ();

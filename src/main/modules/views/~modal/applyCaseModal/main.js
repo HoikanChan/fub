@@ -1,22 +1,50 @@
-var _myarting = function () {
-    var myarting_validate, myarting_modal;
+var _applycase = function () {
+    var applycase_validate, applycase_modal;
     var jude = true;
-    $(function () {
-           
 
-            _myarting.myarting_modal =myarting_modal= $("#myarting-modal").remodal();
+    $(function () {
+               $({})._Ajax({
+                url: "casetype/apiTree",
+                success: function (result) {
+                        if (result.code==0) {
+                            var html = template("search-reason-templete",result)
+                            $("#navbar-menu").html(html);
+                        }
+                    }
+            });
+
+            _applycase.applycase_modal =applycase_modal= $("#applycase-modal").remodal();
             //表单验证
-            myarting_validate = $("#myarting-form").validate({
+            applycase_validate = $("#applycase-form").validate({
                     rules: {
                        
-                        remarks : {
+                        mobile : {
+                            required: true,
+                        },
+                        name : {
+                            required: true,
+                        },
+                        caseType : {
+                            required: true,
+                        },
+                        lawyerFeeLimit : {
                             required: true,
                         }
+
                     },
                     messages: {
-                        remarks: {
-                            required: "请输入您的评价",
-                           
+                        mobile : {
+                            required: "请输入您的姓名",
+                            account:"请输入正确的手机号码以13X 15X 18X 14X 17X号段开头"
+                        },
+                        name : {
+                            required: "请输入案件名称",
+                        },
+                        caseType : {
+                            required: "请选择案件类型",
+                        },
+                        lawyerFeeLimit : {
+                            required: "请输入律师费用",
                         }
                       
                     },
@@ -26,60 +54,83 @@ var _myarting = function () {
             });
         })
           
-        //登录请求
-        function myartingAjax() {
-            var params = {
-                content:$("#myarting-form textarea[name='content']").val()
-            }
-            $.ajax({
-                url: api.host+"web/appraise/save",
-                type:"post",
-                contentType:"application/json",
-                dataType:"json",
-                data:JSON.stringify(params),
-                    success: function (result) {
-                            if (result.code==1) {
-                                
-                                toastr.success("提交成功")
-                                $(".remodal-close").trigger("click");
-                            } else {
-                                toastr.warning(result.msg)
-                            }
-                    }
-            })
-        };
-    
+        $.validator.addMethod("account",function(value,element,params){  
+            var account = regexs.mobile    // 密码验证
+                return (account.test(value));  
+        });    
+        function applyCase(){
+           
+            var mobile = $("#mobile").val();
+            var name = $("#name").val();
+            var caseType = $("#reasonslect .reaseontext").attr("data-id")?$("#reasonslect .reaseontext").attr("data-id"):"";
+            var lawyerFeeLimit = $("#lawyerFeeLimit").val();
+            var marks = $("#marks").val();
         
+            var params = {
+                mobile : mobile,
+                name : name,
+                caseType : caseType,
+                lawyerFeeLimit : lawyerFeeLimit,
+                marks : marks
+            }
+            $(params)._Ajax({
+                url: "casesource/saveNewCaseSource",
+                success: function (result) {
+                        if (result.code==0) {
+                            toastr.success(result.msg);
+                            $(".remodal-close-btn").trigger("click");
+                        }else{
+                            toastr.error(result.msg);
+                 
+                        }
+                     }
+            });
+        } 
     return {
         init: function () {
-                    $(document).on("click", ".table-title .myRating", function () {
-                            $(this).addClass("current").siblings(".current").removeClass("current");
-                       //     $("#getService_modal #registered-form").hide();
-                            $("#myarting-modal #myarting-form").show();
-                            
-                    });
-                  
-                $(document).on("closing", "myarting-modal", function () {
-                    var pathName = window.location.pathname.substring(window.location.pathname.lastIndexOf("/") + 1).replace(/.httl\S*/, "").replace(/.httl\S*/, "");
-                        if (pathName == "userCenter"&&jude) {
-                            window.location = "index";
-                        }
-                    });
-                $(document).on("confirmation", "#myarting-modal", function () {
-                        jude=false
-                        if (!$("#myarting-modal #myarting-form").is(":hidden")) { 
-                          
-                            if (myarting_validate.form()) {
-                                checkLogin(function(){
-                                    myartingAjax();
-                                })
-                                    }
-                            }
-                    });
+             
                 
+                    $(document).on("click","#reasonslect .reaseontext",function(event){
+                        $("#navbar-menu").toggle()
+                        event.stopPropagation();
+                    })
+                    $(document).on("click",".first-val",function(){
+                        var data = $(this).text();
+                        var dataid = $(this).attr("data-id");
+                        $("#reasonslect .reaseontext").text(data);
+                        $("#reasonslect .reaseontext").attr("data-id",dataid);
+                        $("#navbar-menu").hide();
+                        
+                    })
+                    $(document).on("click",".second-val",function(){
+                        var data = $(this).text();
+                        var dataid = $(this).attr("data-id");
+                        var parent = $(this).attr("parent-name");
+                        $("#reasonslect .reaseontext").text(parent+"-"+data);
+                        $("#reasonslect .reaseontext").attr("data-id",dataid);
+                        $("#navbar-menu").hide();
+                    })
+                    $(document).on("click",".last-val",function(){
+                        var data = $(this).text();
+                        var dataid = $(this).attr("data-id");
+                        var parentname = $(this).attr("parent-name");
+                        var parent = $(this).attr("parent");
+                        $("#reasonslect .reaseontext").attr("data-id",dataid);
+                        $("#reasonslect .reaseontext").text(parent+" - "+parentname+" - "+data);
+                        $("#navbar-menu").hide();
+                    })
+                    $(document).on("click",function(event){
+                        $("#navbar-menu").hide();
+                    });
+                    $(document).on("click", ".remodal-confirm", function () {
+                        if (applycase_validate.form()) {
+                            applyCase();
+                        }    
+                                
+                        });
                   
             },
-            myarting_modal: null,
+            applycase_modal: null,
     }
 } ();
-_myarting.init();
+_applycase.init();

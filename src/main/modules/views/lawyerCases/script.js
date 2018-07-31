@@ -34,7 +34,7 @@ var end = {
 
   $('#my-cases .pager').tablePager({
     
-      url: "order/queryOrderList",
+      url: "order/queryLawyerOrderList",
       searchParam:params,
       success: function (result) {
               if (result.code==0) {
@@ -72,7 +72,7 @@ var end = {
 
   $('#my-cases .pager').tablePager({
     
-      url: "order/queryOrderList",
+      url: "order/queryLawyerOrderList",
       searchParam:params,
       success: function (result) {
               if (result.code==0) {
@@ -129,7 +129,7 @@ var end = {
   return {
     init: function() {
       getMycase()
-      $(document).on("click",".primary-btn",function(){
+      $(document).on("click","#search-case",function(){
         searchMycase();
       })
       $(document).on("click",".showmore",function(){

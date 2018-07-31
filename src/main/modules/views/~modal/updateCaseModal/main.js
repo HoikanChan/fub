@@ -1,17 +1,17 @@
 
 var _updateCase = function () {
-    var myarting_validate, updateCase_modal;
+    var updateCase_validate, updateCase_modal;
     var jude = true;
 
     function updateCaseDialog(obj,objid){
         $("#casename").val(obj);
-        $("#caseno").val();
+        $("#caseno").val(objid);
         $("#handlecront").val();
         $("#handlepro").val();
         $("#updatemarks").val();
         var objid = objid;
         $({caseTypeId:objid})._Ajax({
-            url: "scasetype/queryTrialRoundByCaseType",
+            url: "casetype/queryTrialRoundByCaseType",
             success: function (result) {
                     if (result.code==0) {
                         
@@ -31,9 +31,9 @@ var _updateCase = function () {
         updateCase_modal= $("#updateCase-modal").remodal();
           
             //表单验证
-            myarting_validate = $("#myarting-form").validate({
+            updateCase_validate = $("#updateCase-form").validate({
                     rules: {
-                       
+
                         remarks : {
                             required: true,
                         }

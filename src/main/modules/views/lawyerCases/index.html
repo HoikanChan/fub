@@ -25,7 +25,7 @@
                     </div>
                     <div class="col-md-5">
                       <input type="text" class="input" placeholder="请输入关键词"></input>
-                      <button class="primary-btn">搜索</button>
+                      <button class="primary-btn" id="search-case">搜索</button>
                       <button class="primary-btn" id="apply-case" data-remodal-target="applycase-modal">申请案件</button>
                     </div>
                 </div>
@@ -119,12 +119,12 @@
         <td class="column-content">{% da.trialRound %}</td>
         <td class="a-right a-right ">{% da.createTime | dateFormat 'yyyy'%}-{% da.createTime | dateFormat 'MM'%}-{% da.createTime | dateFormat 'dd'%}</td>
         <td class=" last">
-          <a href="#" data-name="{% da.caseName %}" data-id="{% da.sourceId %}"  class="updatebtn" data-remodal-target="updateCase-modal">更新</a>
-          <span class="showmore" data-id="{% da.sourceId %}" data-status="{% da.sourceId %}">更多
+          <a href="#" data-name="{% da.caseName %}" data-id="{% da.caseNo %}"  class="updatebtn" data-remodal-target="updateCase-modal">更新</a>
+          <span class="showmore" data-id="{% da.id %}" data-status="{% da.id %}">更多
           <span class="fa fa-chevron-down"></span></span>
         </td>
       </tr>
-      <tr class="detail" id="tr{% da.sourceId %}">
+      <tr class="detail" id="tr{% da.id %}">
        <td colspan="9">
             <div class="process-box">
                 <div class="process-line col-sm-offset-2">

@@ -8,36 +8,45 @@
         </div>
         <div class="remodal-content">
              
-                <form id="myarting-form">
+                <form id="applycase-form">
                        
                         <div class="form-group clear">
                                 <label for="appellors" class="col-sm-3 control-label">当事人手机号：</label>
                                 <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="appellors" id="appellors">
+                                        <input type="text" class="form-control" name="mobile" id="mobile">
+                                        <div class="error-div"></div>
                                 </div>
                         </div>
                         <div class="form-group clear">
                                 <label for="appellors" class="col-sm-3 control-label">案件名称：</label>
                                 <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="appellors" id="appellors">
+                                        <input type="text" class="form-control" name="name" id="name">
+                                        <div class="error-div"></div>
                                 </div>
                         </div>
                         <div class="form-group clear">
                                 <label for="appellors" class="col-sm-3 control-label">案件类型：</label>
                                 <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="appellors" id="appellors" >
+                                        <div id="reasonslect" >
+                                                        <span class="reaseontext form-control">全部</span>
+                                                        <div class="error-div"></div>
+                                                <div  id="navbar-menu" style="display:none;">
+        
+                                                </div>   
+                                        </div>
                                 </div>
                         </div>
                         <div class="form-group clear">
                                 <label for="appellors" class="col-sm-3 control-label">律师费：</label>
                                 <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="appellors" id="appellors" >
+                                        <input type="text" class="form-control" name="lawyerFeeLimit" id="lawyerFeeLimit" >
+                                        <div class="error-div"></div>
                                 </div>
                         </div>
                         <div class="form-group clear">
                                 <label for="appellors" class="col-sm-3 control-label">备注：</label>
                                 <div class="col-sm-9">
-                                        <textarea type="text" class="form-control" name="appellors" rows=4 id="appellors"></textarea>
+                                        <textarea type="text" class="form-control" name="marks" rows=4 id="marks"></textarea>
                                 </div>
                         </div>
     
@@ -48,3 +57,49 @@
         </div>
         </div>
 </div>
+<script type="text/html" id="search-reason-templete">
+        <ul class="reason-ul">
+        {% each data da %}
+       
+        <li class="dropdown">
+                <a href="javascript:;" class="dropdown-toggle first-val" data-toggle="dropdown" data-id="{% da.id %}" >{% da.name %} <span class="glyphicon glyphicon-menu-right"></span></a>
+                {%  if da.children %} 
+                
+            <ul class="dropdown-menu secondul">
+                 <li class="lipostion">
+                    <ul>
+                                {% each da.children val  %}
+                
+                                <li class="dropdown">
+
+                                {%  if val.children %}    
+                                <a href="javascript:;" class="dropdown-toggle second-val" parent-name="{% da.name  %}" data-id="{% val.id %}" data-toggle="dropdown" >{% val.name %}<span class="glyphicon glyphicon-menu-right"></span></a>
+                                {% else %}
+                                <a href="javascript:;" class="dropdown-toggle second-val" parent-name="{%  da.name  %}" data-id="{% val.id %}"   data-toggle="dropdown" >{% val.name %}</a>
+                                {% /if %}
+
+                                {%  if val.children %} 
+                                        <ul class="dropdown-menu thirdul">        
+                                                {% each val.children va  %}     
+                                        <li>
+                                                <a href="javascript:;" parent="{% da.name  %}" parent-name="{%  val.name %}" data-id="{% va.id %}"  class="last-val" >{% va.name %}</a>
+                                                
+                                        </li>
+                                                {% /each %}
+                                        
+                                        </ul>
+                                {% /if %}
+                                </li>
+                              
+                
+                         {% /each %}
+                        </ul>
+                </li>
+                 </ul>
+                {% /if %}
+            </li>
+
+          {% /each %}            
+        </ul>
+
+</script>

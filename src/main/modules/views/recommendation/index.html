@@ -193,23 +193,16 @@
                                 <div class="form-group  col-md-6 ">
                                         <label for="caseresours" class="col-sm-3 control-label">案由：</label>
                                         <div class="col-sm-9">
-                                                        <select class="form-control caseresours" name="caseresours">
-                                                                        <option value="全部">全部</option>
-                                                                        <option value="刑事案件">刑事案件</option>
-                                                                        <option value="民事案件">民事案件</option>
-                                                                        <option value="行政案件">行政案件</option>
-                                                                        <option value="赔偿案件">赔偿案件</option>
-                                                                        <option value="执行案件">执行案件</option>
-                                                                </select>       
-                                <!-- <div class="reason-select">
-                                                 <div id="reasonslect" name="caseresours"><span>点击 </span>
-                                              
-                                               <div class="collapse navbar-collapse" id="navbar-menu" style="display:none;">
+                                                        
+                                         <div class="reason-select">
+                                        <div id="reasonslect" name="caseresours">
+                                                <span class="reaseontext form-control">全部</span> 
+                                               <div  id="navbar-menu" style="display:none;">
 
                                                 </div>   
-                                                </div>
-                                        </div> -->
                                         </div>
+                                </div>
+                                </div>
                                 </div>
                                 <div class="form-group  col-md-6">
                                                 <label for="courtCityId" class="col-sm-3 control-label">地区：</label>
@@ -257,25 +250,49 @@
         {% /each %}
 </script>
 <script type="text/html" id="search-reason-templete">
-
-                <ul>
-        {% each data da %}
+                <ul class="reason-ul">
+                {% each data da %}
                
-                <li class="oneli dropdown">
-                        <a href="javascript:;" onclick="viewcaseone({% da.id %})" id="one{% da.id %}" title="{% da.name %}">{% da.name %}</a>
+                <li class="dropdown">
+                        <a href="javascript:;" class="dropdown-toggle first-val" data-toggle="dropdown" data-id="{% da.id %}" >{% da.name %} <span class="glyphicon glyphicon-menu-right"></span></a>
+                        {%  if da.children %} 
+                        
+                    <ul class="dropdown-menu secondul">
+                         <li class="lipostion">
+                            <ul>
+                                        {% each da.children val  %}
+                        
+                                        <li class="dropdown">
 
-                </li>
-            {% /each %}            
+                                        {%  if val.children %}    
+                                        <a href="javascript:;" class="dropdown-toggle second-val" parent-name="{% da.name  %}" data-id="{% val.id %}" data-toggle="dropdown" >{% val.name %}<span class="glyphicon glyphicon-menu-right"></span></a>
+                                        {% else %}
+                                        <a href="javascript:;" class="dropdown-toggle second-val" parent-name="{%  da.name  %}" data-id="{% val.id %}"   data-toggle="dropdown" >{% val.name %}</a>
+                                        {% /if %}
+
+                                        {%  if val.children %} 
+                                                <ul class="dropdown-menu thirdul">        
+                                                        {% each val.children va  %}     
+                                                <li>
+                                                        <a href="javascript:;" parent="{% da.name  %}" parent-name="{%  val.name %}" data-id="{% va.id %}"  class="last-val" >{% va.name %}</a>
+                                                        
+                                                </li>
+                                                        {% /each %}
+                                                
+                                                </ul>
+                                        {% /if %}
+                                        </li>
+                                      
+                        
+                                 {% /each %}
+                                </ul>
+                        </li>
+                         </ul>
+                        {% /if %}
+                    </li>
+
+                  {% /each %}            
                 </ul>
 
 </script>
-<script type="text/html" id="search-lidrop-templete">
-                {% each data da %}
-                <li class="twoli dropdown">
-                         <a href="javascript:;" onclick="viewcasetwo({% da.id %})" class="dropdown-toggle" data-toggle="dropdown" title="{% da.name %}" >{% da.name %}</a>
-                  </li>      
-       
 
-            {% /each %}            
-
-</script>
