@@ -1,0 +1,144 @@
+<div id="createTeamModal" class="remodal" data-remodal-id="createTeamModal">
+  <div class="remodal-header">
+    <div class="login-res-row">
+      <div class="title getService-title-btn" style="font-size: 20px;font-weight: bold;margin-bottom: 24px;">创建团队</div>
+    </div>
+    <button class="remodal-close closeModal" data-remodal-action="close" aria-label="Close"></button>
+  </div>
+  <div class="remodal-content" style="text-align: center;">
+    <div class="step-contents">
+      <div class="step-content stepNow" id="step1"></div>
+      <div class="step-content" id="step2"></div>
+      <div class="step-content" id="step3"></div>
+    </div>
+  </div>
+  <div class="remodal-footer">
+    <button class="border-btn" id="cancel-btn" data-remodal-action="cancel">取消</button>
+    <button class="primary-btn" id="next-step-btn" data-remodal-action="confirm">下一步</button>
+  </div>
+</div>
+<script type="text/html" id="step1-template">
+  <div class="steps-box">
+      <div class="step active-step">
+        <i>1</i>
+        <span>选择类别</span>
+      </div>
+      <div class="step">
+        <i>2</i>
+        <span>填写信息</span>
+      </div>
+      <div class="step">
+        <i>3</i>
+        <span>邀请成员</span>
+      </div>
+      <span class="tips">限选五项</span>
+  </div>
+  <div class="step1-container clearfix">
+    
+    {% each data item%}
+    <div class="step-row clearfix">
+
+      <div class="title ">{%item.name%}:</div>
+        <div class="options">
+          {% each item.sub subItem%}
+          <span class="col-sm-3 step-cell">  
+            <div class="step-option" data-id={% subItem.id%}>
+              {% subItem.name%}
+            </div>
+          </span>
+          {% /each%}
+        </div>
+    </div>
+    {% /each%}
+  </div>
+</script>
+<script type="text/html" id="step2-template">
+  <div class="steps-box">
+      <div class="step ">
+        <i>1</i>
+        <span>选择类别</span>
+      </div>
+      <div class="step active-step">
+        <i>2</i>
+        <span>填写信息</span>
+      </div>
+      <div class="step">
+        <i>3</i>
+        <span>邀请成员</span>
+      </div>
+  </div>
+  <form class="form-horizontal" id="info-form">
+    <div class="form-group">
+      <label for="teamName" class="col-sm-2 control-label">团队名称：</label>
+      <div class="col-sm-10">
+        <input type="resours" name="teamName" class="form-control" id="caseresours" placeholder="请输入">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="geo" class="col-sm-2 control-label">地理位置：</label>
+      <div class="col-sm-10">
+        <input type="area" name="courtCityId" class="form-control city_input"  id="area-select" area-id="0" value="全部" placeholder="地区">
+      </div>
+    </div>
+    <div class="form-group">
+        <label for="upload-text-shenfenzheng" class="col-sm-2 control-label">显示图标：</label>
+        <div class="col-sm-10">
+          <div class="col-sm-3 upload-btn upload-btn-shenfenzheng border-btn">
+            <span class="fa fa-arrow-up"></span>
+            <span>上传图标</span>
+          </div>
+          <span class="col-sm-5 font-gray" style="line-height: 32px;">支持扩展名 .jpg .png .jpeg</span>
+          <input type="text" id="upload-text-shenfenzheng" name="avatar">
+          <input type="file" style="display: none" id="upload-file-shenfenzheng">
+          <img   src="" height="70" id="upload-show-shenfenzheng" data-remodal-target="imagePreview-modal">
+          <div class="error-div"></div>
+        </div>
+      </div>
+      <div class="form-group">
+          <label for="teamSlogan" class="col-sm-2 control-label">描述：</label>
+          <div class="col-sm-10">
+            <textarea type="area" name="teamSlogan" class="form-control"  id="teamSlogan" placeholder="请输入"></textarea>
+          </div>
+        </div>
+  </form>
+</script>
+<script type="text/html" id="step3-template">
+  <div class="steps-box">
+      <div class="step ">
+        <i>1</i>
+        <span>选择类别</span>
+      </div>
+      <div class="step ">
+        <i>2</i>
+        <span>填写信息</span>
+      </div>
+      <div class="step active-step">
+        <i>3</i>
+        <span>邀请成员</span>
+      </div>
+  </div>
+  <div class="step3-content clearfix">
+    <div class="col-sm-6">
+      <div class="form-group">
+      <input type="text" class="search-lawyer form-control">
+    </div>
+<br>
+      <div class="members-wrapper">
+        <h4>我的好友<i class="fa fa-sort-down"></i></h4>
+        {% each list data %}
+        <div class="member" member-id={% data.lawyer_id %}>
+          {% data.realname %}
+        </div>
+        {% /each%}
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="member-count-wrappper">
+        <span>已选成员：</span>
+        <span><span class="member-count"></span>/200</span>
+      </div>
+      <br>
+      <div class="picked-member"></div>
+    </div>
+  </div>
+</script>

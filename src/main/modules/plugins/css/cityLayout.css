@@ -271,7 +271,8 @@
 	width: 307px;
 	position: absolute;
 	background: #FFF;
-	display: none
+	display: none;
+	z-index: 999999;
 }
 
 .provinceCityAll .tabs {
@@ -426,10 +427,6 @@
 .provinceCityAll .countyAll li a.current,.provinceCityAll .cityAll li a.current:visited
 	{
 	color: #ff6c00
-}
-
-.provinceCityAll {
-	z-index: 2
 }
 
 .provinceCityAll .cityAll .pre a,.provinceCityAll .cityAll .pre a:visited

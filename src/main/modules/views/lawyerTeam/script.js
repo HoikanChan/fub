@@ -50,7 +50,9 @@ var userCenter = (function() {
     // })
   }
   $(function() {
-
+    $(document).on('click','#create-team-btn',function(){
+      createTeamModal.showModal()
+    })
     $('aside .right-icon').click(function(e) {
       e.stopPropagation()
       if (e.target.classList.contains('fa-chevron-down')) {
