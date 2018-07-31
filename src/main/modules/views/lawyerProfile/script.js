@@ -1,108 +1,100 @@
 var userCenter = (function() {
-  var page = 1
-  var inquery_validate
-
-  function getMycase() {
-    var params = {
-      clientId: clientId,
-      sidx: 'createTime',
-      order: 'desc'
+  function getParams(params) {
+    var paramStr = ''
+    for (var key in params) {
+      if (params[key]) {
+        paramStr += key + '=' + params[key] + '&'
+      }
     }
-
-    $('#my-cases .pager').tablePager({
-      url: 'order/queryOrderList',
-      searchParam: params,
-      success: function(result) {
-        if (result.code == 0) {
-          if (result) {
-            var html = template('case-result-templete', result.data)
-
-            $('.my-case-box').html(html)
-          }
-        }
-      }
-    })
-
-    //   $('#my-cases .mycasepage .pager').tablePager({
-    //     url: "order/queryOrderList",
-    //     searchParam:params,
-    //     success: function (result) {
-    //        if(result.code == 0){
-    //          console.log(result.data)
-    //           // var html1 = template('my-cases-template', result.data);
-    //           // $(".my-cases-box").html(html1);
-    //           var html = template('search-result-templete', result.data);
-    //           $(".my-case-box").html(html);
-
-    //         if(result.data.totalCount<10){
-    //             $(".page-row").hide()
-    //         }else{
-    //             $(".page-row").show()
-    //         }
-    //         if(result.data.totalCount==0){
-    //             $(".my-cases-box").html("<P class='noresult'>抱歉，没有相关案件</P>")
-    //         }
-    //        }else{
-    //             toastr.warning(result.msg);
-    //        }
-    //       $(".my-cases-content .totalNum").text(result.data.totalCount);
-    //     }
-    // })
+    return paramStr.slice(0, -1)
   }
-  $(function() {
-    $("#my-profile").addClass("active");
-    $('aside .right-icon').click(function(e) {
-      e.stopPropagation()
-      if (e.target.classList.contains('fa-chevron-down')) {
-        $(e.target)
-          .siblings('div.dropdown-menu')
-          .show()
-        $(e.target)
-          .addClass('fa-chevron-up')
-          .removeClass('fa-chevron-down')
-      } else if (e.target.classList.contains('fa-chevron-up')) {
-        $(e.target)
-          .siblings('div.dropdown-menu')
-          .hide()
-        $(e.target)
-          .removeClass('fa-chevron-up')
-          .addClass('fa-chevron-down')
+  function updateProfile() {
+    var paramsObj = {}
+    //遍历input
+    $('.form-group input')
+      .serializeArray()
+      .forEach(input => {
+        paramsObj[input.name] = input.value
+      })
+    //遍历select
+    $('.form-group select')
+      .serializeArray()
+      .forEach(input => {
+        paramsObj[input.name] = input.value
+      })
+    console.log(profile_validate.form())
+    $({})._Ajax({
+      url:
+        'lawyer/api/update?lawyerId=' +
+        lawyerId +
+        '&' +
+        getParams(paramsObj)
+    })
+  }
+  function initForm() {
+    if (!lawyerId) {
+      console.error('该用户未完善信息没有lawyerId')
+    }
+    $({})._Ajax({
+      url: 'lawyer/api/info?id=' + lawyerId,
+      success: function(result) {
+        console.log(result)
+        $('.my-profile-content').html(template('profile-template', result))
+        //自定义正则表达示验证方法
+        $.validator.addMethod('idcard', function(value, element, params) {
+          // 身份证验证
+          var idcard = regexs.idcard
+          return idcard.test(value)
+        })
+        $.validator.addMethod('mobile', function(value, element, params) {
+          var mobile = regexs.mobile // 密码验证
+          return mobile.test(value)
+        })
+        //表单验证
+        profile_validate = $('#profile-form').validate({
+          rules: {
+            mobile: {
+              mobile: true
+            },
+            email: {
+              email: true
+            },
+            idcard: {
+              idcard: true
+            }
+          },
+          messages: {
+            mobile: {
+              required: '请输入有效的手机号码',
+              mobile: '请输入正确的手机号码以13X 15X 18X 14X 17X号段开头'
+            },
+            email: {
+              email: '请输入正确的邮箱地址'
+            },
+            idcard: {
+              idcard: '请输入正确的身份证号码'
+            }
+          },
+          errorPlacement: function(error, element) {
+            element.siblings('.error-div').html(error)
+            element.focus()
+          }
+        })
+        $('#submit-btn').click(function(e) {
+          e.stopPropagation()
+          if (profile_validate.form()) {
+            updateProfile()
+          }
+        })
       }
     })
-  })
+  }
+
+  $(function() {})
   return {
     init: function() {
-      $('.lawyer-loan-content').html(
-        template('lawyer-loan-template', {
-          loans: {},
-          bills: [
-            {
-              no: '1123234256532',
-              amount: '250.00',
-              lawyer: '仗义飞',
-              phone: '12345671223',
-              state: '平台审批中',
-              time: '2015-06-05 15:33:30'
-            },
-            {
-              no: '1123234256532',
-              amount: '250.00',
-              lawyer: '仗义飞',
-              phone: '12345671223',
-              state: '平台审批中',
-              time: '2015-06-05 15:33:30'
-            },
-            {
-              no: '1123234256532',
-              amount: '250.00',
-              lawyer: '仗义飞',
-              phone: '12345671223',
-              state: '平台审批中',
-              time: '2015-06-05 15:33:30'
-            }
-          ]
-        })
-      )
+    $("#my-profile").addClass("active");
+      initForm()
     }
   }
 })()
