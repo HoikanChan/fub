@@ -3,6 +3,7 @@
     <img src="dist/assets/image/usercenter_bg.png" alt="" style="width: 100%;">
     <span class="page-title">成员管理</span>
   </div>
+  {{ include '../~modal/officeMemberAddModal/main'}}
   {{ include '../~modal/officeMemberDisableModal/main'}}
   {{ include '../~modal/officeMemberDeleteModal/main'}}
   {{ include '../~modal/officeMemberDetailModal/main'}}
@@ -27,7 +28,7 @@
                     <option>全部</option>
                     <option>已完成</option>
                   </select>
-                <button class="primary-btn">添加</button>
+                <button class="primary-btn" data-remodal-target="officeMemberAddModal">添加</button>
                 <button class="primary-btn">导入</button>
               </div>
             </div>

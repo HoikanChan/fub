@@ -1,0 +1,52 @@
+#createTeamModal {
+  width: 800px;
+  border-radius: 8px;
+  position: relative;
+  .remodal-header {
+    .title {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 24px;
+    }
+  }
+  // .remodal-content {
+  // }
+  .remodal-footer {
+    width: 433px;
+    margin: 0 auto;
+    .remodal-confirm {
+      margin-left: 100px;
+      width: 140px;
+      height: 40px;
+      line-height: 40px;
+      padding: 0;
+      float: left;
+      border-radius: 5px;
+      background: #009bd5;
+      border: none;
+      margin-bottom: 10px;
+      &:hover {
+        background: #007dac;
+        color: #fff;
+      }
+    }
+    .remodal-close-btn {
+      margin-left: 30px;
+      width: 140px;
+      height: 40px;
+      line-height: 40px;
+      padding: 0;
+      float: left;
+      text-align: center;
+      border: 1px solid #9d9d9d;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      &:hover {
+        background: #009bd5;
+        color: #fff;
+        border: none;
+      }
+    }
+  }
+}

@@ -3,7 +3,7 @@ var openAgreement = function () {
     /*拇指图弹出*/
     showDataDetailDialog2()
     function showDataDetailDialog2(obj){
-        $(".openAgreement-form").html("aaaaaaaaaaaaaa");
+        // $(".openAgreement-form").html(obj);
          
         var infoByCaseId = obj;
         // $({})._Ajax({

@@ -1,4 +1,5 @@
 <div class="clearfix officeCenter">
+    {{ include '../~modal/createTeamModal/main'}}
   <div class="title-bar">
     <img src="dist/assets/image/usercenter_bg.png" alt="" style="width: 100%;">
     <span class="page-title">我的财富</span>
@@ -25,7 +26,7 @@
   <div class="col-sm-9 my-team-block">
     <div class="btns">
       <div class="border-btn">加入团队</div>
-      <div class="border-btn">创建团队</div>
+      <div class="border-btn" data-remodal-target="createTeamModal" id="create-team-btn">创建团队</div>
     </div>
     <h3 class="title">我的团队</h3>
     <br>
@@ -59,18 +60,6 @@
       </table>
     </div>
   </div>
-  <div class="col-sm-3">
-    <div class="ranking-block">
-      <div class="title"><strong>贡献排名</strong></div>
-      {% each ranking  data%}
-      <div class="ranking-item">
-        <span class="ranking-no">{% data.rank %}</span>
-        <span class="ranking-name">{% data.name %}</span>
-        <span class="ranking-vist font-gray"><i class="fa fa-eye"></i>{% data.visit %}</span>
-      </div>
-      {%/each %}
-    </div>
-  </div>
   <div class="col-sm-12 teams-block">
     <h3 class="title">加入的团队</h3>
     <br>
@@ -79,11 +68,7 @@
         <label for="team-tab1" class="label-left">母队</label>
       
         <input class="subtab2" id="team-tab2" type="radio" name="team-subtabs">
-        <label for="team-tab2" >专业团队1</label>
-        <input class="subtab3" id="team-tab3" type="radio" name="team-subtabs">
-        <label for="team-tab3" >专业团队2</label>
-        <input class="subtab4" id="team-tab4" type="radio" name="team-subtabs">
-        <label for="team-tab4" class="label-right">专业团队3</label>
+        <label for="team-tab2" class="label-right">专业团队3</label>
 
         <section id="content1">
           <div class="table-responsive table-bordered table-hover">
@@ -146,12 +131,6 @@
                     </tbody>
                 </table>
               </div>
-        </section>
-        <section  id="content3">
-           3
-        </section>
-        <section  id="content4">
-           4
         </section>
       </div>
       <div class="pagination">

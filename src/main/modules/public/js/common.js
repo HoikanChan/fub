@@ -294,6 +294,14 @@ template.defaults.imports.getSubSting = function (data) {
 template.defaults.imports.getSubStingLength = function (data) {
     return  data.substring(0,60);
 };
+//判断数据是否在逗号隔开的字符串中
+template.defaults.imports.isInArray = function(data, arrString){
+    var index = $.inArray(data,arrString.split(','));
+    if(index >= 0){
+        return true;
+    }
+    return false;
+};
 /*
   *封装插件
 */
@@ -417,13 +425,15 @@ if($.fn.dataTable!=undefined){
 var regexs = {
     account:/^(?!_)(?!.*?_$)(?![0-9]+$)[\u4e00-\u9fa5a-zA-Z0-9_]{4,16}$/, // 长度为4-16位(半角)，由字母、数字、下划线(不能以下划线开头、结尾)组合，区分大小写，不能为纯数字。
     // password: /^(?!_)(?!.*?_$)(?![0-9]+$)[\u4e00-\u9fa5a-zA-Z0-9_]{6,16}$/,
-    password: /^(?!_)(?!.*?_$)(?![0-9]+$)[\u4e00-\u9fa5a-zA-Z0-9]{6,16}$/,
+    password: /^(?!_)(?!.*?_$)(?![0-9]+$)[a-zA-Z0-9]{6,16}$/,//非数字开头的字母与数字组合
     mobile: /(^0{0,1}1[3|4|5|7|8][0-9]{9}$)/, // mobile 手机号码 包括13X 15X 18X 14X 17X号段
+    telephone: /0\d{2,3}[-]{0,1}\d{7,8}/,//座机号验证
     chinese:/^[\u4e00-\u9fa5]+$/,    //中文
     email:/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/, //邮箱
     trim : /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, //表单前后空格验证
     idcard: /(^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$)|(^[1-9]\d{5}\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{2}$)/, // 15/18位身份证号码验证的正则表达式
-    licenseNo: /(^0{0,1}1[1-9]{1}\d{3}(18|19|([23]\d))\d{2}[1-9]{1}(0|1)\d{6}$)/ // 律师证件号17位 1开头 + 省市代码4位 + 年份4位 + 类别1位 + 性别1位 + 序列号6位
+    licenseNo: /(^0{0,1}1[1-9]{1}\d{3}(18|19|([23]\d))\d{2}[1-9]{1}(0|1)\d{6}$)/, // 律师证件号17位 1开头 + 省市代码4位 + 年份4位 + 类别1位 + 性别1位 + 序列号6位
+    bankNo:/^([1-9]{1})(\d{14}|\d{18})$/ //银行卡账号
 };
 
 //添加validate的通用表单
@@ -440,11 +450,19 @@ $(function () {
                 return false
             }
         });
+        //添加密码的验证
+        $.validator.addMethod("password", function (value, element, params) {
+            return regexs.password.test(value)
+        });
         //添加手机号的验证
         $.validator.addMethod("mobile", function (value, element, params) {
             return regexs.mobile.test(value)
         });
-        //添加手机号的验证
+        //添加座机号的验证
+        $.validator.addMethod("telephone", function (value, element, params) {
+            return regexs.telephone.test(value)
+        });
+        //添加邮箱的验证
         $.validator.addMethod("email", function (value, element, params) {
             return regexs.email.test(value)
         });
@@ -455,6 +473,10 @@ $(function () {
         //添加律师证件号的验证
         $.validator.addMethod("licenseNo", function (value, element, params) {
             return regexs.licenseNo.test(value)
+        });
+        //添加银行卡号的验证
+        $.validator.addMethod("bankNo", function (value, element, params) {
+            return regexs.bankNo.test(value)
         });
     }
 })
@@ -811,7 +833,7 @@ function change_main_current_class(indexPage) {
 }
 
 //点击上传文件
-function fileAjaxUpload(fileInputObj, paramInputObj, type, fileShowObj, validataType) {
+function fileAjaxUpload(fileInputObj, paramInputObj, type, fileShowObj, validataType, urlType) {
     var form = fileInputObj.closest('form')[0];
     var imageType = ['jpg', 'jpeg', 'png', 'tiff', 'tif', 'gif'];
     var fileType = ['txt', 'doc', 'docx', 'xls', 'xlsx', 'pdf', 'rar', 'zip', 'text'];
@@ -846,13 +868,19 @@ function fileAjaxUpload(fileInputObj, paramInputObj, type, fileShowObj, validata
             return false
         }
     }
+    var uploadUrl = api.host + "/lawyer/uploadLawyerFile";
+    if(urlType==1){//上传律师证件
+        uploadUrl = api.host + "/lawyer/uploadLawyerFile";
+    }else if(urlType==2){//上传律所证件
+        uploadUrl = api.host + "/office/uploadOfficeFile";
+    }
     if (navigator.appName == "Microsoft Internet Explorer"&&parseInt(navigator.appVersion.split(";")[1].replace(/[ ]/g, "").replace("MSIE",""))<=9) {
         var formData = {};
         formData["uploadFile"] = $(fileInputObj)[0].files[0];
         formData["type"] = type;
         $(form).ajaxSubmit({
             type: "post",
-            url: api.host + "/lawyer/uploadLawyerFile",
+            url: uploadUrl,
             dataType:"json",
             data: {
                 "uploadFile": $(fileInputObj)[0].files[0],
@@ -880,7 +908,7 @@ function fileAjaxUpload(fileInputObj, paramInputObj, type, fileShowObj, validata
         formData.append("uploadFile", $(fileInputObj)[0].files[0]);
         formData.append('type',type);
         $.ajax({
-            url : api.host + "/lawyer/uploadLawyerFile",
+            url : uploadUrl,
             data : formData,
             type : "post",
             dataType : "json",
@@ -908,3 +936,20 @@ function fileAjaxUpload(fileInputObj, paramInputObj, type, fileShowObj, validata
 
 }
 
+//表单转换成jsonObject
+$.fn.serializeObject = function()
+{
+    var o = {};
+    var a = this.serializeArray();
+    $.each(a, function() {
+        if (o[this.name]) {
+            if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || '');
+        } else {
+            o[this.name] = this.value || '';
+        }
+    });
+    return o;
+}

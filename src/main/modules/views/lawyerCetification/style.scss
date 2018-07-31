@@ -141,6 +141,14 @@ $content-size: 16px;
         .error-div{
           color: red;
         }
+        ul{
+          li{
+            &.checkbox{
+              width: 25%;
+              float: left;
+            }
+          }
+        }
         img{
           cursor: pointer;
         }

@@ -1,0 +1,210 @@
+<div id="officeMemberAddModal" class="remodal" data-remodal-id="officeMemberAddModal">
+  <div class="remodal-header">
+    <div class="login-res-row">
+      <div class="title getService-title-btn" style="font-size: 20px;font-weight: bold;margin-bottom: 24px;">添加成员</div>
+    </div>
+    <button class="remodal-close closeModal" data-remodal-action="close" aria-label="Close"></button>
+  </div>
+  <div class="remodal-content">
+    <form class="form-horizontal" id="officeMemberAdd-form">
+
+    </form>
+  </div>
+</div>
+<script type="text/html" id="officeMemberAdd-form-template">
+  <h3 class="title">基本资料</h3>
+  <div class="form-group">
+    <label for="inputRealname" class="col-sm-2 control-label">姓名：</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="inputRealname" name="realname" placeholder="请输入姓名">
+      <div class="error-div"></div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputNickname" class="col-sm-2 control-label">昵称：</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="inputNickname" name="nickname" placeholder="请输入昵称">
+      <div class="error-div"></div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputPassword" class="col-sm-2 control-label">设置密码：</label>
+    <div class="col-sm-10">
+      <input type="password" class="form-control" id="inputPassword" name="password" placeholder="请设置密码">
+      <div class="error-div"></div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputIdcard" class="col-sm-2 control-label">身份证号码：</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control " id="inputIdcard" name="idcard" placeholder="请输入身份证号码">
+      <div class="error-div"></div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="selectSex" class="col-sm-2 control-label">性别：</label>
+    <div class="col-sm-10">
+      <select class="form-control" id="selectSex" name="sex">
+        <option value="1">男</option>
+        <option value="2">女</option>
+      </select>
+      <div class="error-div"></div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputMobile" class="col-sm-2 control-label">手机号：</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control " id="inputMobile" name="mobile" placeholder="请输入手机号">
+      <div class="error-div"></div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputEmail" class="col-sm-2 control-label">邮箱：</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control " id="inputEmail" name="email" placeholder="请输入邮箱">
+      <div class="error-div"></div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="selectEducation" class="col-sm-2 control-label">最高学历：</label>
+    <div class="col-sm-10">
+      <select class="form-control" id="selectEducation" name="education">
+        <option value="0">其他</option>
+        <option value="1">小学</option>
+        <option value="2">初中</option>
+        <option value="3">高中</option>
+        <option value="4">大专</option>
+        <option value="5">本科</option>
+        <option value="6">硕士</option>
+        <option value="7">博士</option>
+      </select>
+      <div class="error-div"></div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputSchool" class="col-sm-2 control-label">毕业院校：</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control " id="inputSchool" name="school" placeholder="请输入毕业院校">
+      <div class="error-div"></div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="selectIsMarried" class="col-sm-2 control-label">婚姻状况：</label>
+    <div class="col-sm-10">
+      <select class="form-control" id="selectIsMarried" name="isMarried">
+        <option value="0">未婚</option>
+        <option value="1">已婚</option>
+      </select>
+      <div class="error-div"></div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputAddress" class="col-sm-2 control-label">居住地址：</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control " id="inputAddress" name="address" placeholder="请输入居住地址">
+      <div class="error-div"></div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputBankNo" class="col-sm-2 control-label">银行账号：</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control " id="inputBankNo" name="bankNo" placeholder="请输入银行账号">
+      <div class="error-div"></div>
+    </div>
+  </div>
+  <h3 class="title">证书资料</h3>
+  <div class="form-group">
+    <label for="selectOfficeId" class="col-sm-2 control-label">执业律所：</label>
+    <div class="col-sm-10">
+      <select class="form-control" id="selectOfficeId" name="officeId" disabled></select>
+      <div class="error-div"></div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputLicenseNo" class="col-sm-2 control-label">律师证号：</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control " id="inputLicenseNo" rows="5" name="licenseNo" placeholder="请输入律师证号">
+      </input>
+      <div class="error-div"></div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputWorkBaginDate" class="col-sm-2 control-label">证书起始时间：</label>
+    <div class="col-sm-6">
+      <input type="text" id="startTime" class="form-control " id="inputWorkBaginDate" rows="5" name="workBaginDate" placeholder="请选择时间">
+      </input>
+      <div class="error-div"></div>
+    </div>
+  </div>
+  <h3 class="title">其他资料</h3>
+  <div class="form-group">
+    <label for="selectLanguages" class="col-sm-2 control-label">掌握语言：</label>
+    <div class="col-sm-10">
+      <ul id="selectLanguages"></ul>
+      <div class="error-div"></div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="selectProfessions" class="col-sm-2 control-label">擅长领域：</label>
+    <div class="col-sm-10">
+      <ul id="selectProfessions"></ul>
+      <div class="error-div"></div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputIntroduction" class="col-sm-2 control-label">个人简介：</label>
+    <div class="col-sm-10">
+      <textarea  rows="4" class="form-control " id="inputIntroduction" name="introduction" placeholder="请输入个人简介"></textarea>
+      <div class="error-div"></div>
+    </div>
+  </div>
+  <div>
+    <div class="col-sm-2"></div>
+    <div class="col-sm-10">
+      <img src="dist/assets/image/lawyercenter_icon_information.png" alt="">
+      <span class="font-gray">温馨提示：请依据图示上传律师执业证件照，请勿涂改或打码，确保要素齐全，字迹清晰</span>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <br>
+  <div class="form-group">
+    <label for="upload-text-zhiyezheng" class="col-sm-2 control-label">上传执业证书：</label>
+    <div class="col-sm-10">
+      <div class="col-sm-3 upload-btn upload-btn-zhiyezheng">
+        <span class="fa fa-plus"></span>
+      </div>
+      <input type="text" id="upload-text-zhiyezheng" name="licenseUrl">
+      <input type="file" style="display: none" id="upload-file-zhiyezheng">
+      <img src="" height="70" id="upload-show-zhiyezheng">
+      <div class="error-div"></div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div class="footer">
+    <div class="col-sm-2"></div><div class="btn back-btn" data-remodal-action="close" aria-label="Close">取消</div>
+    <div class="primary-btn">确定</div>
+  </div>
+</script>
+<script type="text/html" id="lawyer-select-languages-template">
+  {% each list %}
+  <li class="checkbox">
+    <label for="languages{% $value.id %}">
+      <input type="checkbox" id="languages{% $value.id %}" name="languages[]" value="{% $value.id %}"/><span>{% $value.name %}</span>
+    </label>
+  </li>
+  {% /each %}
+</script >
+<script type="text/html" id="lawyer-select-professions-template">
+  {% each list %}
+  <li class="checkbox">
+    <label for="professions{% $value.id %}">
+      <input type="checkbox" id="professions{% $value.id %}" name="professions[]" value="{% $value.id %}"/><span>{% $value.name %}</span>
+    </label>
+  </li>
+  {% /each %}
+</script >
+<script type="text/html" id="lawyer-select-office-template">
+  {% each list %}
+  <option value="{% $value.officeId %}" {% if officeId&&officeId==$value.officeId %} selected {% /if %}>{% $value.realname %}</option>
+  {% /each %}
+</script >

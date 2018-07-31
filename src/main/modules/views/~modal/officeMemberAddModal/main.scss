@@ -1,0 +1,142 @@
+$font-color: #666;
+$secondary-color: #9a9a9a;
+
+$plus-icon-color: #108ee9;
+$theme-color: #ed7a39;
+$theme-hover-color: #e35c10;
+$title-color: #333333;
+$white-color: #fff;
+$border-color: #eaeaea;
+$gray-color: #f5f5f5;
+$font-gray-color: #999;
+#officeMemberAddModal {
+  width: 700px;
+  border-radius: 8px;
+  position: relative;
+  max-height: 500px;
+  overflow: auto;
+  .login-res-row {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    .getService-title-btn {
+      width: 100%;
+      height: 44px;
+      cursor: pointer;
+      line-height: 44px;
+      text-align: center;
+      font-size: 16px;
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+      font-size: 18px;
+      font-weight: 600;
+      margin-top: 20px;
+    }
+  }
+  .remodal-header {
+    .title {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 24px;
+    }
+  }
+  .remodal-content {
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 20px;
+    label{
+      margin: 0;
+    }
+    h3{
+      font-size: 16px;
+      text-align: left;
+      margin-bottom: 24px;
+    }
+    #officeMemberAdd-form {
+        padding: 0 42px;
+        h3 {
+          margin-bottom: 42px;
+        }
+        .footer {
+          display: flex;
+          justify-content: flex-end;
+          .primary-btn{
+            cursor: pointer;
+            padding: 8px 64px;
+          }
+          .back-btn{
+            cursor: pointer;
+            padding: 8px 64px;
+            margin: 0 5px;
+            border: 1px solid $font-gray-color;
+          }
+        }
+        .upload-btn {
+          cursor: pointer;
+          span.fa {
+            background: #f2f2f2;
+            border: 1px solid $font-gray-color;
+            border-radius: 5px;
+            font-size: 24px;
+            line-height: 58px;
+            height: 72px;
+            width: 72px;
+            text-align: center;
+            position: relative;
+            &::after {
+              content: '上传';
+              line-height: 14px;
+              font-size: 14px;
+              position: absolute;
+              bottom: 8px;
+              left: 36px;
+              transform: translateX(-50%);
+            }
+          }
+          div {
+            text-align: center;
+          }
+        }
+        #upload-text-shenfenzheng,#upload-text-zhiyezheng,#upload-text-shenfenzhengBack,#upload-text-zhiyezhengBack{
+          width: 0;
+          height: 0;
+          border: none;
+          position: absolute;
+          left: 0;
+          top: 0;
+        }
+        .open-agreement{
+          color: $theme-color;
+          cursor: pointer;
+        }
+        .form-group{
+          .error-div{
+            color: red;
+          }
+          ul{
+            li{
+              &.checkbox{
+                width: 25%;
+                float: left;
+              }
+            }
+          }
+          img{
+            cursor: pointer;
+          }
+        }
+        .form-control[readonly],.form-control[disabled]{
+          border: none;
+          box-shadow: none;
+          -webkit-box-shadow: none;
+          -moz-box-shadow: none;
+          background-color: #fff;
+          appearance:none;
+          appearance: none;
+          -moz-appearance: none;
+          -webkit-appearance: none;
+        }
+    }
+  }
+}
