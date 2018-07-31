@@ -361,7 +361,7 @@ var lawyerCertification = (function() {
               }
           })
       },
-      Offices:[],//团队信息
+      Offices:[],//律所信息
       Language:[],//掌握语言
       Professional:[],//擅长领域
       lawyerInfo:null
