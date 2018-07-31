@@ -119,6 +119,12 @@ var createTeamModal = (function() {
         params.cityName = geoArray[1]
         delete params.courtCityId
       }
+      //如果图片路径有host就去掉
+      if(params.avatar.includes(api.host)){
+        debugger
+        console.log(step2Form.avatar.split(api.host).join(''));
+        params.avatar = step2Form.avatar.split(api.host).join('')
+      }
       params.profession = pickedOptions.join(',')
       params.lawyers = pickedMembers.join(',')
       params.owner = lawyerId

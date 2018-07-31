@@ -19,7 +19,6 @@ var teamMemberDeleteModal = (function() {
             id = ''
             if (result.code == 0) {
               toastr.success(result.msg)
-              console.log(userCenter)
               userCenter.fetchData()
             } else {
               toastr.warning(result.msg)

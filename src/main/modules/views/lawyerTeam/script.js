@@ -1,7 +1,12 @@
 var userCenter = (function() {
   var page = 1
   var inquery_validate
+  $(document).on('closing', '#joinTeamModal', function (e) {
 
+    // Reason: 'confirmation', 'cancellation'
+    fetchData()
+    console.log('Modal is closing' + (e.reason ? ', reason: ' + e.reason : ''));
+  });
   function fetchData() {
     getMyTeams()
     getParentTeam()

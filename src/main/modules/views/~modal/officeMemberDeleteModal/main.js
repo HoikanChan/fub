@@ -6,7 +6,6 @@ var officeMemberDeleteModal = (function() {
   function showModal(id) {
     id = id
 
-    console.log(modal)
     $(document).on('click', '#officeMemberDeleteModal #confirm-btn', e => {
       e.stopPropagation()
       if (id) {
@@ -17,7 +16,6 @@ var officeMemberDeleteModal = (function() {
             id = ''
             if (result.code == 0) {
               toastr.success(result.msg)
-              console.log(userCenter)
               userCenter.getList()
             } else {
               toastr.warning(result.msg)
