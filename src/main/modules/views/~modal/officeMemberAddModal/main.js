@@ -1,9 +1,13 @@
 var officeMemberAddModal = (function() {
   var modal = $('#officeMemberAddModal').remodal()
 
-  $(document).on('click',".license-img",function(){
-    window.open($(this).attr('src'))
-  })
+      $(document).on('click',"#upload-show-zhiyezheng",function(){
+        window.open($(this).attr('src'))
+      })
+    function showModal() {
+        $('#officeMemberAdd-form').html(template("officeMemberAdd-form-template"));
+    }
+    showModal()
     var validate = $("#officeMemberAdd-form").validate({
         rules: {
             realname: {
@@ -182,8 +186,8 @@ var officeMemberAddModal = (function() {
             url: 'office/queryAll',
             success: function(result) {
                 if (result.code == 0) {
-                    lawyerCertification.Offices = result.list;
-                    $('#selectOfficeId').html(template("lawyer-select-office-template",{list:result.data}));
+                    //officeMemberAddModal.Offices = result.list;
+                    $('#selectOfficeId').html(template("lawyer-select-office-template",{list:result.list,officeId:officeId}));
                 }else{
                     toastr.warning(result.msg)
                 }
@@ -196,7 +200,7 @@ var officeMemberAddModal = (function() {
             url: 'language/queryLanguage',
             success: function(result) {
                 if (result.code == 0) {
-                    lawyerCertification.Language = result.data;
+                    //officeMemberAddModal.Language = result.data;
                     $('#selectLanguages').html(template("lawyer-select-languages-template",{list:result.data}));
                 }else{
                     toastr.warning(result.msg)
@@ -209,7 +213,7 @@ var officeMemberAddModal = (function() {
             url: 'professional/queryProfessional',
             success: function(result) {
                 if (result.code == 0) {
-                    lawyerCertification.Professional = result.data;
+                    //officeMemberAddModal.Professional = result.data;
                     $('#selectProfessions').html(template("lawyer-select-professions-template",{list:result.data}));
                 }else{
                     toastr.warning(result.msg)
@@ -238,12 +242,6 @@ var officeMemberAddModal = (function() {
             queryProfessional();
         })
 
-        //图片预览
-        $(document).on('click','#officeMemberAdd-form img',function (e) {
-            e.stopPropagation();
-            imagePreview.showDataDetailDialog2($(this).attr('src'));
-        })
-
         //上传执业证正
         $(document).on('click','#officeMemberAdd-form .upload-btn-zhiyezheng',function (e) {
             e.stopPropagation();
@@ -260,12 +258,14 @@ var officeMemberAddModal = (function() {
                 formData.languages = formData['languages[]'].toString();
                 formData.professions = formData['professions[]'].toString();
                 $(formData)._Ajax({
-                    url: "lawyer/saveLawyerInformationBySite",
+                    url: "office/addLawyerByOffice",
                     type:"post",
                     dataType:"json",
                     success: function (result) {
                         if (result.code == '0') {
                             toastr.success(result.msg);
+                            $('#officeMemberAddModal button[data-remodal-action="close"]').trigger('click');
+                            userCenter.getList();
                         }else{
                             toastr.error(result.msg);
                         }
@@ -277,10 +277,10 @@ var officeMemberAddModal = (function() {
             }
         })
     },
-    showModal: showModal,
-    Offices:[],//律所信息
-    Language:[],//掌握语言
-    Professional:[]//擅长领域
+    showModal:showModal
+    // Offices:[],//律所信息
+    // Language:[],//掌握语言
+    // Professional:[]//擅长领域
   }
 })()
 officeMemberAddModal.init()
