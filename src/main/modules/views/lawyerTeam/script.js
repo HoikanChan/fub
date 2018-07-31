@@ -2,56 +2,126 @@ var userCenter = (function() {
   var page = 1
   var inquery_validate
 
-  function getMycase() {
+  function fetchData() {
+    getMyTeams()
+    getParentTeam()
+    getProfessionTeam()
+  }
+  function getMyTeams() {
     var params = {
-      clientId: clientId,
-      sidx: 'createTime',
-      order: 'desc'
+      createLawyerId: lawyerId
     }
-
-    $('#my-cases .pager').tablePager({
-      url: 'order/queryOrderList',
+    // $('#my-team .my-team-pager').tablePagerThree ({
+    $(params)._Ajax({
+      url: 'team/queryTeamLawyerList',
       searchParam: params,
       success: function(result) {
         if (result.code == 0) {
           if (result) {
-            var html = template('case-result-templete', result.data)
-
-            $('.my-case-box').html(html)
+            var html = template('my-team-template', result.page)
+            // listData = result.data.list
+            // $('.totalNum').html(result.data.totalCount)
+            console.log(html)
+            $('#my-team-list').html(html)
+            if (result.page.totalCount < 10) {
+              $('.my-team-page-row').hide()
+            } else {
+              $('.my-team-page-row').show()
+            }
+            if (result.page.totalCount == 0) {
+              $('.my-team-list').html(
+                "<P class='noresult'>抱歉，没有相关成员</P>"
+              )
+            }
+          } else {
+            toastr.warning(result.msg)
           }
+          // $('.my-loans-content .totalNum').text(result.data.totalCount)
         }
       }
     })
-
-    //   $('#my-cases .mycasepage .pager').tablePager({
-    //     url: "order/queryOrderList",
-    //     searchParam:params,
-    //     success: function (result) {
-    //        if(result.code == 0){
-    //          console.log(result.data)
-    //           // var html1 = template('my-cases-template', result.data);
-    //           // $(".my-cases-box").html(html1);
-    //           var html = template('search-result-templete', result.data);
-    //           $(".my-case-box").html(html);
-
-    //         if(result.data.totalCount<10){
-    //             $(".page-row").hide()
-    //         }else{
-    //             $(".page-row").show()
-    //         }
-    //         if(result.data.totalCount==0){
-    //             $(".my-cases-box").html("<P class='noresult'>抱歉，没有相关案件</P>")
-    //         }
-    //        }else{
-    //             toastr.warning(result.msg);
-    //        }
-    //       $(".my-cases-content .totalNum").text(result.data.totalCount);
-    //     }
-    // })
+  }
+  function getParentTeam() {
+    var params = {
+      lawyerId: lawyerId,
+      memberType: 0
+    }
+    // $('#my-team .parent-team-pager').tablePagerThree ({
+    $({params})._Ajax({
+      url: 'team/queryTeamLawyerList',
+      searchParam: params,
+      success: function(result) {
+        if (result.code == 0) {
+          if (result) {
+            var html = template('parent-team-template', result.page)
+            // listData = result.data.list
+            // $('.totalNum').html(result.data.totalCount)
+            console.log("parent",html)
+            $('#parent-team-list').html(html)
+            if (result.page.totalCount < 10) {
+              $('.parent-team-page-row').hide()
+            } else {
+              $('.parent-team-page-row').show()
+            }
+            if (result.page.totalCount == 0) {
+              $('.parent-team-list').html(
+                "<P class='noresult'>抱歉，没有相关成员</P>"
+              )
+            }
+          } else {
+            toastr.warning(result.msg)
+          }
+          // $('.my-loans-content .totalNum').text(result.data.totalCount)
+        }
+      }
+    })
+  }
+  function getProfessionTeam() {
+    var params = {
+      lawyerId: lawyerId,
+      memberType: 1
+    }
+    // $('#my-team .profession-team-pager').tablePagerThree ({
+    $({params})._Ajax({
+      url: 'team/queryTeamLawyerList',
+      searchParam: params,
+      success: function(result) {
+        if (result.code == 0) {
+          if (result) {
+            var html = template('profession-team-template', result.page)
+            // listData = result.data.list
+            // $('.totalNum').html(result.data.totalCount)
+            console.log("profession",html)
+            $('#profession-team-list').html(html)
+            if (result.page.totalCount < 10) {
+              $('.profession-team-page-row').hide()
+            } else {
+              $('.profession-team-page-row').show()
+            }
+            if (result.page.totalCount == 0) {
+              $('.profession-team-list').html(
+                "<P class='noresult'>抱歉，没有相关成员</P>"
+              )
+            }
+          } else {
+            toastr.warning(result.msg)
+          }
+          // $('.my-loans-content .totalNum').text(result.data.totalCount)
+        }
+      }
+    })
   }
   $(function() {
-    $(document).on('click','#create-team-btn',function(){
+    $(document).on('click', '#create-team-btn', function() {
       createTeamModal.showModal()
+    })
+    $(document).on('click', '#join-team-btn', function() {
+      joinTeamModal.showModal()
+    })
+    $(document).on('click', '#delete-btn', function() {
+      console.log($(this).attr('data-id'))
+      teamMemberDeleteModal.showModal($(this).attr('data-id'))
+      return false
     })
     $('aside .right-icon').click(function(e) {
       e.stopPropagation()
@@ -74,41 +144,9 @@ var userCenter = (function() {
   })
   return {
     init: function() {
-      $('#my-team .my-team-content').html(
-        template('my-team-template', {
-          myTeams: [
-            {
-              name: 'issac',
-              office: '杭州市西湖区古荡湾',
-              contribution: '692',
-              lastOnlineTime: '2015-06-05 15:33:30'
-            },
-            {
-              name: 'leon',
-              office: '杭州市西湖区古荡湾',
-              contribution: '692',
-              lastOnlineTime: '2015-06-05 15:33:30'
-            },
-            {
-              name: 'mei',
-              office: '杭州市西湖区古荡湾',
-              contribution: '125',
-              lastOnlineTime: '2015-06-05 15:33:30'
-            }
-          ],
-          ranking:[
-            {rank:1,name:'张三',visit:789},
-            {rank:2,name:'张三',visit:789},
-            {rank:3,name:'张三',visit:789},
-            {rank:4,name:'张三',visit:789},
-            {rank:5,name:'张三',visit:789},
-            {rank:6,name:'张三',visit:789}
-          ],
-          messages:{},
-          pages:20
-        })
-      )
-    }
+      fetchData()
+    },
+    fetchData: fetchData
   }
 })()
 userCenter.init()

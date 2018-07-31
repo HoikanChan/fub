@@ -47,7 +47,6 @@ var createTeamModal = (function() {
   $(document).on('click', '#createTeamModal #next-step-btn', e => {
     e.stopPropagation()
     step++
-    console.log(2)
     if (step === 2) {
       $('.step-content').each(function(index) {
         if (index + 1 === 2) {
@@ -113,7 +112,6 @@ var createTeamModal = (function() {
       })
     }
     if (step === 4) {
-      console.log(step2Form, pickedMembers, pickedOptions)
       var params = Object.assign({}, step2Form)
       if (step2Form.courtCityId) {
         geoArray = step2Form.courtCityId.split('-')

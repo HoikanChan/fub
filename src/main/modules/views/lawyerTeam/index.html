@@ -1,5 +1,5 @@
 <div class="clearfix officeCenter">
-    {{ include '../~modal/createTeamModal/main'}}
+  {{ include '../~modal/createTeamModal/main'}} {{ include '../~modal/joinTeamModal/main'}} {{ include '../~modal/teamMemberDeleteModal/main'}}
   <div class="title-bar">
     <img src="dist/assets/image/usercenter_bg.png" alt="" style="width: 100%;">
     <span class="page-title">我的财富</span>
@@ -12,133 +12,159 @@
       <div class="content-container">
         <div class="page" id="my-team">
           <div class="my-team-content clearfix">
-            <!-- my-team-templapte -->
-          </div>
-        </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-1"></div>
-  </div>
-</div>
-
-<script type="text/html" id="my-team-template">
-  <div class="col-sm-9 my-team-block">
-    <div class="btns">
-      <div class="border-btn">加入团队</div>
-      <div class="border-btn" data-remodal-target="createTeamModal" id="create-team-btn">创建团队</div>
-    </div>
-    <h3 class="title">我的团队</h3>
-    <br>
-    <div class="table-responsive table-bordered table-hover">
-      <table class="table table-striped jambo_table bulk_action">
-        <thead>
-          <tr class="headings">
-            <th class="column-title">姓名 </th>
-            <th class="column-title">律所 </th>
-            <th class="column-title">贡献值</th>
-            <th class="column-title">最后登陆时间 </th>
-            <th class="column-title"><span class="nobr">操作</span>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-            {% each myTeams  data%}
-              <tr class="even pointer">
-                <td class="column-content ">{% data.name %} </td>
-                <td class="column-content ">{% data.office %} </td>
-                <td class=" column-content">{% data.contribution %} </td>
-                <td class="a-right a-right ">{% data.lastOnlineTime %}</td>
-                <td class=" last">
-                  <a href="#">删除</a>
-                  <a href="#">消息</a>
-                  <a href="#">查看</a>
-                </td>
-              </tr>
-            {%/each %}
-          </tbody>
-      </table>
-    </div>
-  </div>
-  <div class="col-sm-12 teams-block">
-    <h3 class="title">加入的团队</h3>
-    <br>
-    <div class="subtab">
-        <input class="subtab1" id="team-tab1" type="radio" name="team-subtabs" checked>
-        <label for="team-tab1" class="label-left">母队</label>
-      
-        <input class="subtab2" id="team-tab2" type="radio" name="team-subtabs">
-        <label for="team-tab2" class="label-right">专业团队3</label>
-
-        <section id="content1">
-          <div class="table-responsive table-bordered table-hover">
-              <table class="table table-striped jambo_table bulk_action">
-                <thead>
-                  <tr class="headings">
-                    <th class="column-title">姓名 </th>
-                    <th class="column-title">律所 </th>
-                    <th class="column-title">贡献值</th>
-                    <th class="column-title">最后登陆时间 </th>
-                    <th class="column-title"><span class="nobr">操作</span>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                    {% each myTeams  data%}
-                      <tr class="even pointer">
-                        <td class="column-content ">{% data.name %} </td>
-                        <td class="column-content ">{% data.office %} </td>
-                        <td class=" column-content">{% data.contribution %} </td>
-                        <td class="a-right a-right ">{% data.lastOnlineTime %}</td>
-                        <td class=" last">
-                          <a href="#">删除</a>
-                          <a href="#">消息</a>
-                          <a href="#">查看</a>
-                        </td>
-                      </tr>
-                    {%/each %}
-                  </tbody>
-              </table>
-            </div>
-        </section>
-        <section  id="content2">
-            <div class="table-responsive table-bordered table-hover">
+            <div class="col-sm-12 my-team-block">
+              <div class="btns">
+                <div class="border-btn" data-remodal-target="joinTeamModal" id="join-team-btn">加入团队</div>
+                <div class="border-btn" data-remodal-target="createTeamModal" id="create-team-btn">创建团队</div>
+              </div>
+              <h3 class="title">我的团队</h3>
+              <br>
+              <div class="table-responsive table-bordered table-hover">
                 <table class="table table-striped jambo_table bulk_action">
                   <thead>
                     <tr class="headings">
                       <th class="column-title">姓名 </th>
                       <th class="column-title">律所 </th>
-                      <th class="column-title">贡献值</th>
+                      <th class="column-title">加入时间</th>
                       <th class="column-title">最后登陆时间 </th>
-                      <th class="column-title"><span class="nobr">操作</span>
+                      <th class="column-title">
+                        <span class="nobr">操作</span>
                       </th>
                     </tr>
                   </thead>
-                  <tbody>
-                      {% each myTeams  data%}
-                        <tr class="even pointer">
-                          <td class="column-content ">{% data.name %} </td>
-                          <td class="column-content ">{% data.office %} </td>
-                          <td class=" column-content">{% data.contribution %} </td>
-                          <td class="a-right a-right ">{% data.lastOnlineTime %}</td>
-                          <td class=" last">
-                            <a href="#">删除</a>
-                            <a href="#">消息</a>
-                            <a href="#">查看</a>
-                          </td>
-                        </tr>
-                      {%/each %}
-                    </tbody>
+                  <tbody id="my-team-list">
+
+                  </tbody>
                 </table>
+                <div class="my-team-page-row clear">
+                  <div class="my-team-pager pager pull-right">
+
+                  </div>
+                </div </div>
               </div>
-        </section>
+              <div class="col-sm-12 teams-block">
+                <h3 class="title">加入的团队</h3>
+                <br>
+                <div class="subtab">
+                  <input class="subtab1" id="team-tab1" type="radio" name="team-subtabs" checked>
+                  <label for="team-tab1" class="label-left">母队</label>
+
+                  <input class="subtab2" id="team-tab2" type="radio" name="team-subtabs">
+                  <label for="team-tab2" class="label-right">专业团队</label>
+
+                  <section id="content1">
+                    <div class="table-responsive table-bordered table-hover">
+                      <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                          <tr class="headings">
+                            <th class="column-title">姓名 </th>
+                            <th class="column-title">律所 </th>
+                            <th class="column-title">加入时间</th>
+                            <th class="column-title">最后登陆时间 </th>
+                            <th class="column-title">
+                              <span class="nobr">操作</span>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody id="parent-team-list">
+
+                        </tbody>
+                      </table>
+                      <!-- my-team-templapte -->
+                      <div class="parent-team-page-row clear">
+                        <div class="parent-team-page pager pull-right">
+
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                  <section id="content2">
+                    <div class="table-responsive table-bordered table-hover">
+                      <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                          <tr class="headings">
+                            <th class="column-title">姓名 </th>
+                            <th class="column-title">律所 </th>
+                            <th class="column-title">加入时间</th>
+                            <th class="column-title">最后登陆时间 </th>
+                            <th class="column-title">
+                              <span class="nobr">操作</span>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody id="profession-team-list">
+
+                        </tbody>
+                      </table>
+                      <div class="profession-team-page-row clear">
+                          <div class="profession-team-page pager pull-right">
+  
+                          </div>
+                        </div>
+                    </div>
+                  </section>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="pagination">
-        <span>共{% pages %}页，当前第<span id="current-page">1</span>页</span>
-        <button class="prev ghost-border-btn ">上一页</button>
-        <button class="next ghost-border-btn ">下一页</button>
-        <input type="text"></input>
-        <button class="jumpto border-btn">跳转</button>
-      </div>
+      <div class="col-sm-1"></div>
+    </div>
   </div>
+
+  <script type="text/html" id="my-team-template">
+  {% each list data%}
+  {% if  i%2==0 %}
+  <tr class="even pointer">
+  {% else %}    
+    <tr class = "odd pointer">  
+  {% /if %}    
+    <td class="column-content ">{% data.lawyerName | convertNull %} </td>
+    <td class="column-content ">{% data.officeName | convertNull %} </td>
+    <td class=" column-content">{% data.joinTime | convertNull %} </td>
+    <td class="a-right a-right ">{% data.lastLoginTime | convertNull%}</td>
+    <td class=" last">
+      <a data-id="{% data.teamLawyerId %}" href="#" data-remodal-target="teamMemberDeleteModal" id="delete-btn">删除</a>
+      <a data-id="{% data.teamLawyerId %}" href="#">查看</a>
+    </td>
+  </tr>
+  {%/each %}
+  
+</script>
+  <script type="text/html" id="parent-team-template">
+    {% each list data%}
+    {% if  i%2==0 %}
+    <tr class="even pointer">
+    {% else %}    
+      <tr class = "odd pointer">  
+    {% /if %}    
+    <td class="column-content ">{% data.lawyerName | convertNull %} </td>
+    <td class="column-content ">{% data.officeName | convertNull %} </td>
+    <td class=" column-content">{% data.joinTime | convertNull %} </td>
+    <td class="a-right a-right ">{% data.lastLoginTime | convertNull%}</td>
+      <td class=" last">
+        <a data-id="{% data.teamLawyerId %}" href="#" data-remodal-target="teamMemberDeleteModal" id="delete-btn">删除</a>
+        <a href="#">查看</a>
+      </td>
+    </tr>
+    {%/each %}
+</script>
+  <script type="text/html" id="profession-team-template">
+  {% each list data%}
+  {% if  i%2==0 %}
+  <tr class="even pointer">
+  {% else %}    
+    <tr class = "odd pointer">  
+  {% /if %}    
+  <td class="column-content ">{% data.lawyerName | convertNull %} </td>
+  <td class="column-content ">{% data.officeName | convertNull %} </td>
+  <td class=" column-content">{% data.joinTime | convertNull %} </td>
+  <td class="a-right a-right ">{% data.lastLoginTime | convertNull%}</td>
+    <td class=" last">
+      <a href="#"  data-id="{% data.teamLawyerId %}" data-remodal-target="teamMemberDeleteModal" id="delete-btn">删除</a>
+      <a href="#">查看</a>
+    </td>
+  </tr>
+  {%/each %}
 </script>
