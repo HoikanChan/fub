@@ -13,25 +13,31 @@
                         <div class="form-group clear">
                                 <label for="appellors" class="col-sm-3 control-label">案件名称：</label>
                                 <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="appellors" id="casename">
+                                        <input type="text" class="form-control" name="caseName" id="casename">
                                 </div>
                         </div>
                         <div class="form-group clear">
                                 <label for="appellors" class="col-sm-3 control-label">案号：</label>
                                 <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="appellors" id="caseno">
+                                        <input type="text" class="form-control" name="caseNo" id="caseno" >
                                 </div>
                         </div>
                         <div class="form-group clear">
                                 <label for="appellors" class="col-sm-3 control-label">受理法院：</label>
                                 <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="appellors" id="handlecront" >
+                                        <div id="reasonslect11" >
+                                                        <span class="reaseontext form-control">请选择受理法院</span>
+                                                        <div class="error-div"></div>
+                                                <div  id="navbar-menu11" style="display:none;">
+        
+                                                </div>   
+                                        </div>
                                 </div>
                         </div>
                         <div class="form-group clear">
                                 <label for="appellors" class="col-sm-3 control-label">审理进度：</label>
                                 <div class="col-sm-9">
-                                        <select class="case-process form-control">
+                                        <select class="trialRound case-process form-control" name="trialRound">
                                                 
                                         </select>
                                 </div>
@@ -54,5 +60,51 @@
         {% each data da %}
         <option value="{% da.id %}">{% da.name%}</option>
         {% /each %} 
+</script>
+<script type="text/html" id="search-court-templete">
+        <ul class="reason-ul">
+        {% each data da %}
+       
+        <li class="dropdown">
+                <a href="javascript:;" class="dropdown-toggle first-val" data-toggle="dropdown" data-id="{% da.id %}" >{% da.name %} <span class="glyphicon glyphicon-menu-right"></span></a>
+                {%  if da.children %} 
+                
+            <ul class="dropdown-menu secondul">
+                 <li class="lipostion">
+                    <ul>
+                                {% each da.children val  %}
+                
+                                <li class="dropdown">
+
+                                {%  if val.children %}    
+                                <a href="javascript:;" class="dropdown-toggle second-val" parent-name="{% da.name  %}" data-id="{% val.id %}" data-toggle="dropdown" >{% val.name %}<span class="glyphicon glyphicon-menu-right"></span></a>
+                                {% else %}
+                                <a href="javascript:;" class="dropdown-toggle second-val" parent-name="{%  da.name  %}" data-id="{% val.id %}"   data-toggle="dropdown" >{% val.name %}</a>
+                                {% /if %}
+
+                                {%  if val.children %} 
+                                        <ul class="dropdown-menu thirdul">        
+                                                {% each val.children va  %}     
+                                        <li>
+                                                <a href="javascript:;" parent="{% da.name  %}" parent-name="{%  val.name %}" data-id="{% va.id %}"  class="last-val" >{% va.name %}</a>
+                                                
+                                        </li>
+                                                {% /each %}
+                                        
+                                        </ul>
+                                {% /if %}
+                                </li>
+                              
+                
+                         {% /each %}
+                        </ul>
+                </li>
+                 </ul>
+                {% /if %}
+            </li>
+
+          {% /each %}            
+        </ul>
+
 </script>
     

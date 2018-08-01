@@ -11,7 +11,7 @@
 <meta content="" name="description" />
 <meta content="" name="author" />
 <link rel="stylesheet" href="${host}/public/basic-a300c0880e.css">
-<link rel="stylesheet" href="${host}/views/officeBills/main-cdcc84c610.css">
+<link rel="stylesheet" href="${host}/views/officeBills/main-1a55f00d9d.css">
 <script>
 var api = {
     //  host:"http://120.24.181.248:8080/",
@@ -92,7 +92,7 @@ function createXMLHTTPRequest()
     return xmlHttpRequest;
 }
 </script>
-<script src="${host}/public/basic-09c2e4dbf6.js"></script>
+<script src="${host}/public/basic-29d842e787.js"></script>
 </head>
 <body>
 <!-- header -->
@@ -106,14 +106,6 @@ function createXMLHTTPRequest()
 </div>
 <div class="user-operating pull-right" style="display:none;">
 <a class="user-center" href="${host}/userCenter">【个人中心】</a>
-<a class="user-logout">【退出】</a>
-</div>
-<div class="lawer-operating" pull-right style="display:none;">
-<a class="lawer-center" href="${host}/lawyerCenter">【个人中心】</a>
-<a class="user-logout">【退出】</a>
-</div>
-<div class="office-operating" pull-right style="display:none;">
-<a class="lawer-center" href="${host}/officeCenter">【个人中心】</a>
 <a class="user-logout">【退出】</a>
 </div>
 </div>
@@ -150,7 +142,7 @@ function createXMLHTTPRequest()
 <div class="clearfix officeCenter">
 <div class="title-bar">
 <img src="${host}/assets/image/usercenter_bg.png" alt="" style="width: 100%;">
-<span class="page-title">我的财富</span>
+<span class="page-title">账单记录</span>
 </div>
 <div class="container">
 <div class="col-sm-1"></div>
@@ -158,14 +150,14 @@ function createXMLHTTPRequest()
 <nav class="card">
 <ul class="navbar-nav mr-auto">
 <li class="nav-item">
-<a class="nav-link nav-item-head active" id="indexpage" href="${host}/officeCenter">账户首页 </a>
+<a class="nav-link nav-item-head" id="indexpage" href="${host}/officeCenter">账户首页 </a>
 </li>
 <li class="nav-item">
 <a class="nav-item-head" href="#">查询中心</a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 <div class="dropdown-content">
-<a class="dropdown-item nav-link" href="${host}/officeAssets">我的财富</a>
-<a class="dropdown-item nav-link" id="my-bills" href="${host}/officeBills">账单记录</a>
+<!-- <a class="dropdown-item nav-link" href="${host}/officeAssets" id="my-assets">我的财富</a> -->
+<a class="dropdown-item nav-link" href="${host}/officeBills" id="my-bills">账单记录</a>
 </div>
 </div>
 <span class="fa fa-chevron-up right-icon"></span>
@@ -174,10 +166,10 @@ function createXMLHTTPRequest()
 <a class="nav-item-head" href="#">个人设置</a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 <div class="dropdown-content">
-<a class="dropdown-item nav-link" id="" href="${host}/officeProfile">资料管理</a>
-<a class="dropdown-item nav-link" id="" href="${host}/officeCertification">律所认证</a>
-<a class="dropdown-item nav-link" id="" href="${host}/officeMember">成员管理</a>
-<a class="dropdown-item nav-link" id="" href="${host}/officeMessage">消息中心</a>
+<a class="dropdown-item nav-link" href="${host}/officeProfile" id="my-profile">资料管理</a>
+<a class="dropdown-item nav-link" href="${host}/officeCertification" id="my-certification">律所认证</a>
+<a class="dropdown-item nav-link" href="${host}/officeMember" id="my-member">成员管理</a>
+<a class="dropdown-item nav-link" href="${host}/officeMessage" id="my-message">消息中心</a>
 </div>
 </div>
 <span class="fa fa-chevron-up right-icon"></span>
@@ -282,7 +274,7 @@ function createXMLHTTPRequest()
 </div>
 </div>
 <!-- footer end -->
-<script src="${host}/views/officeBills/main-98f523635c.js"></script>
+<script src="${host}/views/officeBills/main-0f65ca7b2f.js"></script>
 <!--登录注册模态框-->
 </body>
 </html>

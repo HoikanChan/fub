@@ -30,7 +30,7 @@
               <div class="col-md-6 clearfix" style="text-align: right;">
                 <input type="text" class="input" placeholder="请输入关键词"></input>
                 <button class="primary-btn">搜索</button>
-                <button class="primary-btn">申请法务贷</button>
+                <button class="primary-btn"><a href="{{ $imports.globalVariable }}/legalLoan">申请法务贷</a></button>
               </div>
             </div>
             <div class="info-bar">
@@ -115,7 +115,7 @@
       <td class="a-right a-right ">{% da.createTime | dateFormat 'yyyy'%}-{% da.createTime | dateFormat 'MM'%}-{% da.createTime | dateFormat 'dd'%}</td>
       <td class=" last">
         <a  data-remodal-target="download-modal" data-id="{% da.id %}" class="check-file-btn">文件 </a>
-        <a href="#">评价 </a>
+        <!-- <a href="#">评价 </a> -->
         <span class="showmore" data-id="{% da.id %}" data-status="{% da.id %}">更多<i class="fa fa-chevron-down"></i></span>
       </td>
     </tr>

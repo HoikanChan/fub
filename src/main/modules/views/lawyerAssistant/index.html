@@ -275,7 +275,7 @@
            
                   {% each da.sonCategoryList data %}  
 
-                  <li><p class="slider-result"  data-id="{% data.sonCategoryQueryLogId %}"> <a href="#">{% data.sonCategoryName %}</a></p></li>
+                  <li><p class="slider-result"  data-id="{% data.sonCategoryQueryLogId %}"> <a href="{% hosts %}?caseQueryLogId={% data.sonCategoryQueryLogId %}" target="_blank">{% data.sonCategoryName %}</a></p></li>
 
                   {% /each %}   
                   </ul>

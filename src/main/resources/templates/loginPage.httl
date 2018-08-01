@@ -11,7 +11,7 @@
 <meta content="" name="description" />
 <meta content="" name="author" />
 <link rel="stylesheet" href="${host}/public/basic-a300c0880e.css">
-<link rel="stylesheet" href="${host}/views/loginPage/main-8a245a1815.css">
+<link rel="stylesheet" href="${host}/views/loginPage/main-6e733ff971.css">
 <script>
 var api = {
     //  host:"http://120.24.181.248:8080/",
@@ -92,7 +92,7 @@ function createXMLHTTPRequest()
     return xmlHttpRequest;
 }
 </script>
-<script src="${host}/public/basic-09c2e4dbf6.js"></script>
+<script src="${host}/public/basic-29d842e787.js"></script>
 </head>
 <body>
 <!-- header -->
@@ -106,14 +106,6 @@ function createXMLHTTPRequest()
 </div>
 <div class="user-operating pull-right" style="display:none;">
 <a class="user-center" href="${host}/userCenter">【个人中心】</a>
-<a class="user-logout">【退出】</a>
-</div>
-<div class="lawer-operating" pull-right style="display:none;">
-<a class="lawer-center" href="${host}/lawyerCenter">【个人中心】</a>
-<a class="user-logout">【退出】</a>
-</div>
-<div class="office-operating" pull-right style="display:none;">
-<a class="lawer-center" href="${host}/officeCenter">【个人中心】</a>
 <a class="user-logout">【退出】</a>
 </div>
 </div>
@@ -240,7 +232,7 @@ function createXMLHTTPRequest()
 </div>
 </div>
 <!-- footer end -->
-<script src="${host}/views/loginPage/main-d44acd17ff.js"></script>
+<script src="${host}/views/loginPage/main-1e88b23a19.js"></script>
 <!--登录注册模态框-->
 </body>
 </html>

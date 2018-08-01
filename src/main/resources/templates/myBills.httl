@@ -11,7 +11,7 @@
 <meta content="" name="description" />
 <meta content="" name="author" />
 <link rel="stylesheet" href="${host}/public/basic-a300c0880e.css">
-<link rel="stylesheet" href="${host}/views/myBills/main-f7407ab0bd.css">
+<link rel="stylesheet" href="${host}/views/myBills/main-35e3232376.css">
 <script>
 var api = {
     //  host:"http://120.24.181.248:8080/",
@@ -92,7 +92,7 @@ function createXMLHTTPRequest()
     return xmlHttpRequest;
 }
 </script>
-<script src="${host}/public/basic-09c2e4dbf6.js"></script>
+<script src="${host}/public/basic-29d842e787.js"></script>
 </head>
 <body>
 <!-- header -->
@@ -106,14 +106,6 @@ function createXMLHTTPRequest()
 </div>
 <div class="user-operating pull-right" style="display:none;">
 <a class="user-center" href="${host}/userCenter">【个人中心】</a>
-<a class="user-logout">【退出】</a>
-</div>
-<div class="lawer-operating" pull-right style="display:none;">
-<a class="lawer-center" href="${host}/lawyerCenter">【个人中心】</a>
-<a class="user-logout">【退出】</a>
-</div>
-<div class="office-operating" pull-right style="display:none;">
-<a class="lawer-center" href="${host}/officeCenter">【个人中心】</a>
 <a class="user-logout">【退出】</a>
 </div>
 </div>
@@ -158,7 +150,7 @@ function createXMLHTTPRequest()
 <nav class="card">
 <ul class="navbar-nav mr-auto">
 <li class="nav-item">
-<a class="nav-link nav-item-head active" id="indexpage" href="${host}/userCenter">账户首页 </a>
+<a class="nav-link nav-item-head" id="indexpage" href="${host}/userCenter">账户首页 </a>
 </li>
 <li class="nav-item dropdown">
 <a class=" nav-item-head" href="#"> 我的事务 </a>

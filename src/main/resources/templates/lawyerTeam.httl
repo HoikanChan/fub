@@ -11,7 +11,7 @@
 <meta content="" name="description" />
 <meta content="" name="author" />
 <link rel="stylesheet" href="${host}/public/basic-a300c0880e.css">
-<link rel="stylesheet" href="${host}/views/lawyerTeam/main-cdcc84c610.css">
+<link rel="stylesheet" href="${host}/views/lawyerTeam/main-d51384ab06.css">
 <script>
 var api = {
     //  host:"http://120.24.181.248:8080/",
@@ -92,7 +92,7 @@ function createXMLHTTPRequest()
     return xmlHttpRequest;
 }
 </script>
-<script src="${host}/public/basic-09c2e4dbf6.js"></script>
+<script src="${host}/public/basic-29d842e787.js"></script>
 </head>
 <body>
 <!-- header -->
@@ -106,14 +106,6 @@ function createXMLHTTPRequest()
 </div>
 <div class="user-operating pull-right" style="display:none;">
 <a class="user-center" href="${host}/userCenter">【个人中心】</a>
-<a class="user-logout">【退出】</a>
-</div>
-<div class="lawer-operating" pull-right style="display:none;">
-<a class="lawer-center" href="${host}/lawyerCenter">【个人中心】</a>
-<a class="user-logout">【退出】</a>
-</div>
-<div class="office-operating" pull-right style="display:none;">
-<a class="lawer-center" href="${host}/officeCenter">【个人中心】</a>
 <a class="user-logout">【退出】</a>
 </div>
 </div>
@@ -148,6 +140,135 @@ function createXMLHTTPRequest()
 <!-- header end -->
 <!-- container -->
 <div class="clearfix officeCenter">
+<div id="createTeamModal" class="remodal" data-remodal-id="createTeamModal">
+<div class="remodal-header">
+<div class="login-res-row">
+<div class="title getService-title-btn" style="font-size: 20px;font-weight: bold;margin-bottom: 24px;">创建团队</div>
+</div>
+<button class="remodal-close closeModal" data-remodal-action="close" aria-label="Close"></button>
+</div>
+<div class="remodal-content" style="text-align: center;">
+<div class="step-contents">
+<div class="step-content stepNow" id="step1"></div>
+<div class="step-content" id="step2"></div>
+<div class="step-content" id="step3"></div>
+</div>
+</div>
+<div class="remodal-footer">
+<button class="border-btn" id="cancel-btn" data-remodal-action="cancel">取消</button>
+<button class="primary-btn" id="next-step-btn" data-remodal-action="confirm">下一步</button>
+</div>
+</div>
+<script type="text/html" id="step1-template">
+<div class="steps-box">
+<div class="step active-step">
+<i>1</i>
+<span>选择类别</span>
+</div>
+<div class="step">
+<i>2</i>
+<span>填写信息</span>
+</div>
+<div class="step">
+<i>3</i>
+<span>邀请成员</span>
+</div>
+<span class="tips">限选五项</span>
+</div>
+<div class="step1-container clearfix"> {% each data item%}
+<div class="step-row clearfix">
+<div class="title ">{%item.name%}:</div>
+<div class="options"> {% each item.sub subItem%}
+<span class="col-sm-3 step-cell">
+<div class="step-option" data-id={% subItem.id%}> {% subItem.name%} </div>
+</span> {% /each%} </div>
+</div> {% /each%} </div>
+</script>
+<script type="text/html" id="step2-template">
+<div class="steps-box">
+<div class="step ">
+<i>1</i>
+<span>选择类别</span>
+</div>
+<div class="step active-step">
+<i>2</i>
+<span>填写信息</span>
+</div>
+<div class="step">
+<i>3</i>
+<span>邀请成员</span>
+</div>
+</div>
+<form class="form-horizontal" id="info-form">
+<div class="form-group">
+<label for="teamName" class="col-sm-2 control-label">团队名称：</label>
+<div class="col-sm-10">
+<input type="resours" name="teamName" class="form-control" id="caseresours" placeholder="请输入"> </div>
+</div>
+<div class="form-group">
+<label for="geo" class="col-sm-2 control-label">地理位置：</label>
+<div class="col-sm-10">
+<input type="area" name="courtCityId" class="form-control city_input" id="area-select" area-id="0" value="全部" placeholder="地区"> </div>
+</div>
+<div class="form-group">
+<label for="upload-text-shenfenzheng" class="col-sm-2 control-label">显示图标：</label>
+<div class="col-sm-10">
+<div class="col-sm-3 upload-btn upload-btn-shenfenzheng border-btn">
+<span class="fa fa-arrow-up"></span>
+<span>上传图标</span>
+</div>
+<span class="col-sm-5 font-gray" style="line-height: 32px;">支持扩展名 .jpg .png .jpeg</span>
+<input type="text" id="upload-text-shenfenzheng" name="avatar">
+<input type="file" style="display: none" id="upload-file-shenfenzheng">
+<img src="" height="70" id="upload-show-shenfenzheng" data-remodal-target="imagePreview-modal">
+<div class="error-div"></div>
+</div>
+</div>
+<div class="form-group">
+<label for="teamSlogan" class="col-sm-2 control-label">描述：</label>
+<div class="col-sm-10">
+<textarea type="area" name="teamSlogan" class="form-control" id="teamSlogan" placeholder="请输入"></textarea>
+</div>
+</div>
+</form>
+</script>
+<script type="text/html" id="step3-template">
+<div class="steps-box">
+<div class="step ">
+<i>1</i>
+<span>选择类别</span>
+</div>
+<div class="step ">
+<i>2</i>
+<span>填写信息</span>
+</div>
+<div class="step active-step">
+<i>3</i>
+<span>邀请成员</span>
+</div>
+</div>
+<div class="step3-content clearfix">
+<div class="col-sm-6">
+<div class="form-group">
+<input type="text" class="search-lawyer form-control"> </div>
+<br>
+<div class="members-wrapper">
+<h4>我的好友
+<i class="fa fa-sort-down"></i>
+</h4> {% each list data %}
+<div class="member" member-id={% data.lawyer_id %}> {% data.realname %} </div> {% /each%} </div>
+</div>
+<div class="col-sm-6">
+<div class="member-count-wrappper">
+<span>已选成员：</span>
+<span>
+<span class="member-count"></span>/200</span>
+</div>
+<br>
+<div class="picked-member"></div>
+</div>
+</div>
+</script>
 <div class="title-bar">
 <img src="${host}/assets/image/usercenter_bg.png" alt="" style="width: 100%;">
 <span class="page-title">我的财富</span>
@@ -158,16 +279,16 @@ function createXMLHTTPRequest()
 <nav class="card">
 <ul class="navbar-nav mr-auto">
 <li class="nav-item">
-<a class="nav-link nav-item-head active" id="indexpage" href="${host}/lawyerCenter">账户首页 </a>
+<a class="nav-link nav-item-head" id="indexpage" href="${host}/lawyerCenter">账户首页 </a>
 </li>
 <li class="nav-item dropdown">
 <a class=" nav-item-head" href="#"> 我的事务 </a>
 <div class="dropdown-menu collapse" aria-labelledby="navbarDropdown">
 <div class="dropdown-content">
-<a class="dropdown-item nav-link" href="${host}/lawyerLawLoan">法务贷</a>
-<a class="dropdown-item nav-link" href="${host}/lawyerCases">我的案件</a>
-<a class="dropdown-item nav-link" href="${host}/lawyerTeam">我的团队</a>
-<a class="dropdown-item nav-link" href="${host}/lawyerAssistant">律师助手</a>
+<a class="dropdown-item nav-link" href="${host}/lawyerLawLoan" id="my-loan">法务贷</a>
+<a class="dropdown-item nav-link" href="${host}/lawyerCases" id="my-cases">我的案件</a>
+<a class="dropdown-item nav-link" href="${host}/lawyerTeam" id="my-team">我的团队</a>
+<a class="dropdown-item nav-link" href="${host}/lawyerAssistant" id="my-assistant">律师助手</a>
 </div>
 </div>
 <span class="fa fa-chevron-up right-icon"></span>
@@ -176,8 +297,8 @@ function createXMLHTTPRequest()
 <a class="nav-item-head" href="#">查询中心</a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 <div class="dropdown-content">
-<a class="dropdown-item nav-link" href="${host}/lawyerAssets" id="my-assets">我的财富</a>
-<a class="dropdown-item nav-link" href="${host}/lawyerBills">账单记录</a>
+<!-- <a class="dropdown-item nav-link" href="${host}/lawyerAssets" id="my-assets">我的财富</a> -->
+<a class="dropdown-item nav-link" href="${host}/lawyerBills" id="my-bills">账单记录</a>
 </div>
 </div>
 <span class="fa fa-chevron-up right-icon"></span>
@@ -186,11 +307,10 @@ function createXMLHTTPRequest()
 <a class="nav-item-head" href="#">个人设置</a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 <div class="dropdown-content">
-<a class="dropdown-item nav-link" href="${host}/lawyerProfile">资料管理</a>
-<a class="dropdown-item nav-link" href="${host}/lawyerCetification">律师认证</a>
-<a class="dropdown-item nav-link" href="#">律所认证</a>
-<a class="dropdown-item nav-link" href="${host}/lawyerDelegation">事务委派</a>
-<a class="dropdown-item nav-link" href="${host}/lawyerMessage">消息中心</a>
+<a class="dropdown-item nav-link" href="${host}/lawyerProfile" id="my-profile">资料管理</a>
+<a class="dropdown-item nav-link" href="${host}/lawyerCetification" id="my-certification">律师认证</a>
+<!-- <a class="dropdown-item nav-link"  href="${host}/lawyerDelegation" id="my-delegation">事务委派</a> -->
+<a class="dropdown-item nav-link" href="${host}/lawyerMessage" id="my-message">消息中心</a>
 </div>
 </div>
 <span class="fa fa-chevron-up right-icon"></span>
@@ -215,7 +335,7 @@ function createXMLHTTPRequest()
 <div class="col-sm-9 my-team-block">
 <div class="btns">
 <div class="border-btn">加入团队</div>
-<div class="border-btn">创建团队</div>
+<div class="border-btn" data-remodal-target="createTeamModal" id="create-team-btn">创建团队</div>
 </div>
 <h3 class="title">我的团队</h3>
 <br>
@@ -247,18 +367,6 @@ function createXMLHTTPRequest()
 </table>
 </div>
 </div>
-<div class="col-sm-3">
-<div class="ranking-block">
-<div class="title">
-<strong>贡献排名</strong>
-</div> {% each ranking data%}
-<div class="ranking-item">
-<span class="ranking-no">{% data.rank %}</span>
-<span class="ranking-name">{% data.name %}</span>
-<span class="ranking-vist font-gray">
-<i class="fa fa-eye"></i>{% data.visit %}</span>
-</div> {%/each %} </div>
-</div>
 <div class="col-sm-12 teams-block">
 <h3 class="title">加入的团队</h3>
 <br>
@@ -266,11 +374,7 @@ function createXMLHTTPRequest()
 <input class="subtab1" id="team-tab1" type="radio" name="team-subtabs" checked>
 <label for="team-tab1" class="label-left">母队</label>
 <input class="subtab2" id="team-tab2" type="radio" name="team-subtabs">
-<label for="team-tab2">专业团队1</label>
-<input class="subtab3" id="team-tab3" type="radio" name="team-subtabs">
-<label for="team-tab3">专业团队2</label>
-<input class="subtab4" id="team-tab4" type="radio" name="team-subtabs">
-<label for="team-tab4" class="label-right">专业团队3</label>
+<label for="team-tab2" class="label-right">专业团队3</label>
 <section id="content1">
 <div class="table-responsive table-bordered table-hover">
 <table class="table table-striped jambo_table bulk_action">
@@ -329,8 +433,6 @@ function createXMLHTTPRequest()
 </table>
 </div>
 </section>
-<section id="content3"> 3 </section>
-<section id="content4"> 4 </section>
 </div>
 <div class="pagination">
 <span>共{% pages %}页，当前第
@@ -355,7 +457,7 @@ function createXMLHTTPRequest()
 </div>
 </div>
 <!-- footer end -->
-<script src="${host}/views/lawyerTeam/main-1357de94d3.js"></script>
+<script src="${host}/views/lawyerTeam/main-a72d3e9002.js"></script>
 <!--登录注册模态框-->
 </body>
 </html>

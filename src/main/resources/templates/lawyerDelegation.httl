@@ -11,7 +11,7 @@
 <meta content="" name="description" />
 <meta content="" name="author" />
 <link rel="stylesheet" href="${host}/public/basic-a300c0880e.css">
-<link rel="stylesheet" href="${host}/views/lawyerDelegation/main-cdcc84c610.css">
+<link rel="stylesheet" href="${host}/views/lawyerDelegation/main-1a55f00d9d.css">
 <script>
 var api = {
     //  host:"http://120.24.181.248:8080/",
@@ -92,7 +92,7 @@ function createXMLHTTPRequest()
     return xmlHttpRequest;
 }
 </script>
-<script src="${host}/public/basic-09c2e4dbf6.js"></script>
+<script src="${host}/public/basic-29d842e787.js"></script>
 </head>
 <body>
 <!-- header -->
@@ -106,14 +106,6 @@ function createXMLHTTPRequest()
 </div>
 <div class="user-operating pull-right" style="display:none;">
 <a class="user-center" href="${host}/userCenter">【个人中心】</a>
-<a class="user-logout">【退出】</a>
-</div>
-<div class="lawer-operating" pull-right style="display:none;">
-<a class="lawer-center" href="${host}/lawyerCenter">【个人中心】</a>
-<a class="user-logout">【退出】</a>
-</div>
-<div class="office-operating" pull-right style="display:none;">
-<a class="lawer-center" href="${host}/officeCenter">【个人中心】</a>
 <a class="user-logout">【退出】</a>
 </div>
 </div>
@@ -158,16 +150,16 @@ function createXMLHTTPRequest()
 <nav class="card">
 <ul class="navbar-nav mr-auto">
 <li class="nav-item">
-<a class="nav-link nav-item-head active" id="indexpage" href="${host}/lawyerCenter">账户首页 </a>
+<a class="nav-link nav-item-head" id="indexpage" href="${host}/lawyerCenter">账户首页 </a>
 </li>
 <li class="nav-item dropdown">
 <a class=" nav-item-head" href="#"> 我的事务 </a>
 <div class="dropdown-menu collapse" aria-labelledby="navbarDropdown">
 <div class="dropdown-content">
-<a class="dropdown-item nav-link" href="${host}/lawyerLawLoan">法务贷</a>
-<a class="dropdown-item nav-link" href="${host}/lawyerCases">我的案件</a>
-<a class="dropdown-item nav-link" href="${host}/lawyerTeam">我的团队</a>
-<a class="dropdown-item nav-link" href="${host}/lawyerAssistant">律师助手</a>
+<a class="dropdown-item nav-link" href="${host}/lawyerLawLoan" id="my-loan">法务贷</a>
+<a class="dropdown-item nav-link" href="${host}/lawyerCases" id="my-cases">我的案件</a>
+<a class="dropdown-item nav-link" href="${host}/lawyerTeam" id="my-team">我的团队</a>
+<a class="dropdown-item nav-link" href="${host}/lawyerAssistant" id="my-assistant">律师助手</a>
 </div>
 </div>
 <span class="fa fa-chevron-up right-icon"></span>
@@ -176,8 +168,8 @@ function createXMLHTTPRequest()
 <a class="nav-item-head" href="#">查询中心</a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 <div class="dropdown-content">
-<a class="dropdown-item nav-link" href="${host}/lawyerAssets" id="my-assets">我的财富</a>
-<a class="dropdown-item nav-link" href="${host}/lawyerBills">账单记录</a>
+<!-- <a class="dropdown-item nav-link" href="${host}/lawyerAssets" id="my-assets">我的财富</a> -->
+<a class="dropdown-item nav-link" href="${host}/lawyerBills" id="my-bills">账单记录</a>
 </div>
 </div>
 <span class="fa fa-chevron-up right-icon"></span>
@@ -186,11 +178,10 @@ function createXMLHTTPRequest()
 <a class="nav-item-head" href="#">个人设置</a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 <div class="dropdown-content">
-<a class="dropdown-item nav-link" href="${host}/lawyerProfile">资料管理</a>
-<a class="dropdown-item nav-link" href="${host}/lawyerCetification">律师认证</a>
-<a class="dropdown-item nav-link" href="#">律所认证</a>
-<a class="dropdown-item nav-link" href="${host}/lawyerDelegation">事务委派</a>
-<a class="dropdown-item nav-link" href="${host}/lawyerMessage">消息中心</a>
+<a class="dropdown-item nav-link" href="${host}/lawyerProfile" id="my-profile">资料管理</a>
+<a class="dropdown-item nav-link" href="${host}/lawyerCetification" id="my-certification">律师认证</a>
+<!-- <a class="dropdown-item nav-link"  href="${host}/lawyerDelegation" id="my-delegation">事务委派</a> -->
+<a class="dropdown-item nav-link" href="${host}/lawyerMessage" id="my-message">消息中心</a>
 </div>
 </div>
 <span class="fa fa-chevron-up right-icon"></span>
@@ -312,7 +303,7 @@ function createXMLHTTPRequest()
 </div>
 </div>
 <!-- footer end -->
-<script src="${host}/views/lawyerDelegation/main-30a480d50c.js"></script>
+<script src="${host}/views/lawyerDelegation/main-c06d1e454a.js"></script>
 <!--登录注册模态框-->
 </body>
 </html>

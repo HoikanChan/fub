@@ -11,7 +11,7 @@
 <meta content="" name="description" />
 <meta content="" name="author" />
 <link rel="stylesheet" href="${host}/public/basic-a300c0880e.css">
-<link rel="stylesheet" href="${host}/views/myCase/main-41fae4d481.css">
+<link rel="stylesheet" href="${host}/views/myCase/main-858a282548.css">
 <script>
 var api = {
     //  host:"http://120.24.181.248:8080/",
@@ -92,7 +92,7 @@ function createXMLHTTPRequest()
     return xmlHttpRequest;
 }
 </script>
-<script src="${host}/public/basic-09c2e4dbf6.js"></script>
+<script src="${host}/public/basic-29d842e787.js"></script>
 </head>
 <body>
 <!-- header -->
@@ -106,14 +106,6 @@ function createXMLHTTPRequest()
 </div>
 <div class="user-operating pull-right" style="display:none;">
 <a class="user-center" href="${host}/userCenter">【个人中心】</a>
-<a class="user-logout">【退出】</a>
-</div>
-<div class="lawer-operating" pull-right style="display:none;">
-<a class="lawer-center" href="${host}/lawyerCenter">【个人中心】</a>
-<a class="user-logout">【退出】</a>
-</div>
-<div class="office-operating" pull-right style="display:none;">
-<a class="lawer-center" href="${host}/officeCenter">【个人中心】</a>
 <a class="user-logout">【退出】</a>
 </div>
 </div>
@@ -158,7 +150,7 @@ function createXMLHTTPRequest()
 <nav class="card">
 <ul class="navbar-nav mr-auto">
 <li class="nav-item">
-<a class="nav-link nav-item-head active" id="indexpage" href="${host}/userCenter">账户首页 </a>
+<a class="nav-link nav-item-head" id="indexpage" href="${host}/userCenter">账户首页 </a>
 </li>
 <li class="nav-item dropdown">
 <a class=" nav-item-head" href="#"> 我的事务 </a>
@@ -284,11 +276,11 @@ function createXMLHTTPRequest()
 <td class=" last">
 <a href="#">详情 </a>
 <a href="#">下载 </a>
-<span class="showmore" data-id="{% da.sourceId %}" data-status="{% da.sourceId %}">更多</span>
+<span class="showmore" data-id="{% da.id %}" data-status="{% da.id %}">更多</span>
 <span class="fa fa-chevron-down"></span>
 </td>
 </tr>
-<tr class="detail" id="tr{% da.sourceId %}">
+<tr class="detail" id="tr{% da.id %}">
 <td colspan="9">
 <div class="process-box">
 <div class="process-line col-sm-offset-2"> </div>
@@ -309,7 +301,7 @@ function createXMLHTTPRequest()
 </div>
 </div>
 <!-- footer end -->
-<script src="${host}/views/myCase/main-9d35938646.js"></script>
+<script src="${host}/views/myCase/main-b12b122d15.js"></script>
 <!--登录注册模态框-->
 </body>
 </html>

@@ -117,7 +117,8 @@ var userCenter = (function() {
     })
   }
   $(function() {
-    $(document).on('click', '#create-team-btn', function() {
+    $("#my-team").addClass("active");
+    $(document).on('click','#create-team-btn',function(){
       createTeamModal.showModal()
     })
     $(document).on('click', '#join-team-btn', function() {

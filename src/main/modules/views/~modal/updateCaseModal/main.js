@@ -2,10 +2,19 @@
 var _updateCase = function () {
     var updateCase_validate, updateCase_modal;
     var jude = true;
-
-    function updateCaseDialog(obj,objid){
+    // $({})._Ajax({
+    //     url: "court/apiTree",
+    //     success: function (result) {
+    //             if (result.code==0) {
+    //                 var html = template("search-court-templete",result)
+    //                 $("#navbar-menu11").html(html);
+    //             }
+    //         }
+    // });
+    function updateCaseDialog(obj,objid,caseSourceId){
         $("#casename").val(obj);
         $("#caseno").val(objid);
+        $("#caseno").attr("data-sourceid",caseSourceId);
         $("#handlecront").val();
         $("#handlepro").val();
         $("#updatemarks").val();
@@ -28,63 +37,82 @@ var _updateCase = function () {
 
     $(function () {
         
-        updateCase_modal= $("#updateCase-modal").remodal();
-          
-            //表单验证
-            updateCase_validate = $("#updateCase-form").validate({
-                    rules: {
 
-                        remarks : {
-                            required: true,
-                        }
-                    },
-                    messages: {
-                        remarks: {
-                            required: "请输入您的评价",
-                           
-                        }
-                      
-                    },
-                    errorPlacement: function (error, element) {
-                        element.siblings(".error-div").html(error)
-                    },
-            });
+        updateCase_modal= $("#updateCase-modal").remodal();
+    
+     
+})
+        function updateCase(){
            
-        })
-          
-        //登录请求
-        function myartingAjax() {
+        
+            var caseSourceId = $("#caseno").attr("data-sourceid");
+            var caseNo = $("#caseno").val();
+            var courtId = $("#reasonslect11 .reaseontext").attr("data-id")?$("#reasonslect11 .reaseontext").attr("data-id"):"";
+            var trialRound = $("select[name='trialRound']").find("option:selected").val();
+            var desc = $("#marks").val();
+            
+        
             var params = {
-                content:$("#myarting-form textarea[name='content']").val()
+                trialRound : trialRound,
+                courtId : courtId,
+                caseNo : caseNo,
+                caseSourceId : caseSourceId,
+                desc : desc
             }
-            $.ajax({
-                url: api.host+"web/appraise/save",
-                type:"post",
-                contentType:"application/json",
-                dataType:"json",
-                data:JSON.stringify(params),
-                    success: function (result) {
-                            if (result.code==1) {
-                                
-                                toastr.success("提交成功")
-                                $(".remodal-close").trigger("click");
-                            } else {
-                                toastr.warning(result.msg)
-                            }
-                    }
-            })
-        };
+            $(params)._Ajax({
+                url: "casetrial/saveCaseTrial",
+                success: function (result) {
+                        if (result.code==0) {
+                            toastr.success(result.msg);
+                            $(".remodal-close-btn").trigger("click");
+                        }else{
+                            toastr.error(result.msg);
+                 
+                        }
+                     }
+            });
+        } 
     
         
     return {
         init: function () {
-              
-                $(document).on("confirmation", ".updateCase-modal", function () {
-                        jude=false
-                       
-                         myartingAjax();
-                              
+
+               $(document).on("click","#reasonslect11 .reaseontext",function(event){
+                        $("#navbar-menu11").toggle()
+                        event.stopPropagation();
+                    })
+                    $(document).on("click","#reasonslect11 .first-val",function(){
+                        var data = $(this).text();
+                        var dataid = $(this).attr("data-id");
+                        $("#reasonslect11 .reaseontext").text(data);
+                        $("#navbar-menu11").hide();
+                        
+                    })
+                    $(document).on("click","#reasonslect11 .second-val",function(){
+                        var data = $(this).text();
+                        var dataid = $(this).attr("data-id");
+                        $("#reasonslect11 .reaseontext").text(data);
+                        $("#reasonslect11 .reaseontext").attr("data-id",dataid);
+                        $("#navbar-menu11").hide();
+                    })
+                    $(document).on("click","#reasonslect11 .last-val",function(){
+                        var data = $(this).text();
+                        var dataid = $(this).attr("data-id");
+                        $("#reasonslect11 .reaseontext").text(data);
+                        $("#reasonslect11 .reaseontext").attr("data-id",dataid);
+               
+                        $("#navbar-menu11").hide();
+                    })
+                    $(document).on("click",function(event){
+                        $("#navbar-menu11").hide();
                     });
+                    $(document).on("click", "#updateCase-modal .remodal-confirm", function () {
+                      
+                            updateCase();
+                       
+                                
+                        });
+               
                 
                   
             },
