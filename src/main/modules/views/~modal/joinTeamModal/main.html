@@ -1,0 +1,60 @@
+<div id="joinTeamModal" class="remodal" data-remodal-id="joinTeamModal">
+  <div class="remodal-header">
+    <div class="login-res-row">
+      <div class="title getService-title-btn" style="font-size: 20px;font-weight: bold;margin-bottom: 24px;">加入团队</div>
+    </div>
+    <button class="remodal-close closeModal" data-remodal-action="close" aria-label="Close"></button>
+  </div>
+  <div class="remodal-content" style="text-align: center;">
+    <form class="form-horizontal clearfix" id="search-form">
+      <div class="form-group col-sm-5 search-bar">
+        <div >
+          <input type="resours" name="key" class="form-control" id="key" placeholder="请输入">
+        </div>
+        <div class="primary-btn" id="search-btn">搜索</div>
+      </div>
+      <div class="col-sm-1"></div>
+      <div class="form-group col-sm-3">
+        <div class="">
+          <input type="area" name="cityId" class="form-control city_input"  id="area-select" area-id="0" value="全部" placeholder="地区">
+        </div>
+      </div>
+      <div class="col-sm-1"></div>
+      <div class="form-group col-sm-3">
+        <div class="">
+          <select type="resours" name="profession" class="form-control" id="profession-select" placeholder="请输入"></select>
+        </div>
+      </div>
+      <div class="col-sm-1"></div>
+
+    </form>
+    <div class="teams-wrapper clearfix">
+    </div>
+  </div>
+</div>
+
+<script type="text/html" id="teams-template">
+  {% each data team%}
+    <div class="team-item col-sm-4">
+      <div class="team-card">
+        <div class="content">
+            <img src="{% host +'file/'+ team.avatar %}" alt="">
+            <div class="text-content">
+              <h5>{% team.teamName%}</h5>
+              <div class="font-gray">{% team.teamSlogan%}</div>
+            </div>
+        </div>
+        
+        <div class="footer">
+          <div class="team-geo">
+            <span><i class="fa fa-map-marker-alt"></i>{% team.provinceName + team.cityName %}</span>
+          </div>
+          <div class="buttons">
+            <button class="footer-btn" team-id={% team.id %}>查看</button>
+            <button class="footer-btn" team-id={% team.id %} id="join-btn">加入</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% /each%}
+</script>

@@ -1,22 +1,25 @@
-var officeMemberDeleteModal = (function() {
-  var modal = $('#officeMemberDeleteModal').remodal()
+var teamMemberDeleteModal = (function() {
+  var modal = $('#teamMemberDeleteModal').remodal()
   console.log(modal)
   var id = ''
   /*拇指图弹出*/
   function showModal(id) {
     id = id
 
-    $(document).on('click', '#officeMemberDeleteModal #confirm-btn', e => {
+    console.log(modal)
+    $(document).on('click', '#teamMemberDeleteModal #confirm-btn', e => {
       e.stopPropagation()
+      console.log(e);
+      console.log(id);
       if (id) {
         $({})._Ajax({
-          url: 'lawyer/api/removeOffice?lawyerId=' + id,
+          url: 'teamlawyer/api/delete?id=' + id,
           success: function(result) {
             modal.close()
             id = ''
             if (result.code == 0) {
               toastr.success(result.msg)
-              userCenter.getList()
+              userCenter.fetchData()
             } else {
               toastr.warning(result.msg)
             }

@@ -2,7 +2,7 @@
   {{ include '../~modal/downloadModal/main'}}
   <div class="title-bar">
     <img src="dist/assets/image/usercenter_bg.png" alt="" style="width: 100%;">
-    <span class="page-title">我的财富</span>
+    <span class="page-title">法务贷</span>
   </div>
   <div class="container">
     <div class="col-sm-1"></div>
@@ -68,7 +68,7 @@
                     </th>
                     <th class="column-title">订单编号 </th>
                     <th class="column-title">贷款金额 </th>
-                    <th class="column-title">委托律师 </th>
+                    <th class="column-title">当事人 </th>
                     <th class="column-title">联系电话 </th>
                     <th class="column-title">状态 </th>
                     <th class="column-title">订单时间 </th>
@@ -107,10 +107,10 @@
       <td class="a-center ">
         <input type="checkbox" class="flat checkbox" name="table_records">
       </td>
-      <td class="column-content">{% da.orderSn %}</td>
-      <td class="column-content ">{% da.loanPrice %} </td>
-      <td class="column-content ">{% da.lawyerName %} </td>
-      <td class="column-content">{% da.lawyerMobile %} </td>
+      <td class="column-content">{% da.orderSn |convertNull %}</td>
+      <td class="column-content ">{% da.loanPrice |convertNull %}</td>
+      <td class="column-content ">{% da.clientName |convertNull %}</td>
+      <td class="column-content">{% da.clinetMobile |convertNull %} </td>
       <td class="column-content">{% da.loanStatus | loanType %}</td>
       <td class="a-right a-right ">{% da.createTime | dateFormat 'yyyy'%}-{% da.createTime | dateFormat 'MM'%}-{% da.createTime | dateFormat 'dd'%}</td>
       <td class=" last">
