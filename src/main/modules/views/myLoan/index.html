@@ -106,10 +106,11 @@
         <td class="a-center ">
           <input type="checkbox" class="flat checkbox" name="table_records">
         </td>
-        <td class="column-content">{% da.orderSn | convertNull%}</td>
-        <td class="column-content ">{% da.loanPrice | convertNull%}</td>
-        <td class="column-content ">{% da.lawyerName | convertNull%}</td>
-        <td class="column-content">{% da.mobile | convertNull%}</td>
+
+        <td class="column-content">{% da.orderSn |convertNull%}</td>
+        <td class="column-content ">{% da.loanPrice |convertNull%}</td>
+        <td class="column-content ">{% da.lawyerName |convertNull%}</td>
+        <td class="column-content">{% da.mobile |convertNull%}</td>
         <td class="column-content">{% da.loanStatus | loanType %}</td>
         <td class="a-right a-right ">{% da.createTime | dateFormat 'yyyy'%}-{% da.createTime | dateFormat 'MM'%}-{% da.createTime | dateFormat 'dd'%}</td>
         <td class=" last">

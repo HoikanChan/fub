@@ -275,7 +275,7 @@
         <div class="col-sm-2"></div><div class="primary-btn">提交</div>
     </div>
 </script>
-<script type="text/html" id="lawyer-read-template">
+<script type="text/html" id="office-read-template">
     <h3 class="title">基本资料</h3>
     <div class="form-group">
         <label for="inputRealname" class="col-sm-2 control-label">律所名称：</label>
@@ -369,23 +369,23 @@
         <div class="step step-action">
           <span class="step-text">提交资料</span>
         </div>
-        <div class="step {% if lawyerId %}step-action{% /if %}">
+        <div class="step {% if officeId %}step-action{% /if %}">
           <span class="step-text">等待审核</span>
         </div>
-        <div class="step {% if lawyerId&&status==1 %}step-action{% else if lawyerId&&(status==0||status==-2) %}step-fail{% /if %}">
+        <div class="step {% if officeId&&status==1 %}step-action{% else if officeId&&(status==0||status==-2) %}step-fail{% /if %}">
           <span class="step-text">
-            {% if lawyerId&&status==1 %}
+            {% if officeId&&status==1 %}
               审核通过
-            {% else if lawyerId&&status==0 %}
+            {% else if officeId&&status==0 %}
               审核失效
-            {% else if lawyerId&&status==-2 %}
+            {% else if officeId&&status==-2 %}
               审核失败
             {% else %}
               审核通过
             {% /if %}
           </span>
         </div>
-        <div class="step step-last {% if lawyerId&&status==1 %}step-action{% /if %}">
+        <div class="step step-last {% if officeId&&status==1 %}step-action{% /if %}">
           <span class="step-text">完成认证</span>
         </div>
         <div class="clear"></div>

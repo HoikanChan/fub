@@ -689,17 +689,17 @@ function infoJumpTo() {
  var userid = sessionStorage.getItem("userid");
  var registerTime = sessionStorage.getItem("registerTime");
  var phone = window.sessionStorage.getItem("mobile");
- $({mobile:phone})._Ajax({
-     url:"client/queryByMobile",
-     success:function(result){
-        if(result.code == 0){
-         
-         sessionStorage.setItem("clientid",result.client.clientId)
-        
-        }else{
-        }
-     }
- })
+ // $({mobile:phone})._Ajax({
+ //     url:"client/queryByMobile",
+ //     success:function(result){
+ //        if(result.code == 0){
+ //
+ //         sessionStorage.setItem("clientid",result.client.clientId)
+ //
+ //        }else{
+ //        }
+ //     }
+ // })
 
 //获取url中参数值
  function GetRequest() {
