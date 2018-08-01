@@ -12,10 +12,6 @@
       <div class="step-content" id="step3"></div>
     </div>
   </div>
-  <div class="remodal-footer">
-    <button class="border-btn" id="cancel-btn" data-remodal-action="cancel">取消</button>
-    <button class="primary-btn" id="next-step-btn" data-remodal-action="confirm">下一步</button>
-  </div>
 </div>
 <script type="text/html" id="step1-template">
   <div class="steps-box">
@@ -51,6 +47,9 @@
     </div>
     {% /each%}
   </div>
+  <div class="remodal-footer">
+      <button class="primary-btn" id="next-step-btn" data-remodal-action="confirm">下一步</button>
+    </div>
 </script>
 <script type="text/html" id="step2-template">
   <div class="steps-box">
@@ -101,6 +100,10 @@
           </div>
         </div>
   </form>
+  <div class="remodal-footer">
+      <button class="border-btn" id="step-back-btn" >上一步</button>
+      <button class="primary-btn" id="next-step-btn" data-remodal-action="confirm">下一步</button>
+    </div>
 </script>
 <script type="text/html" id="step3-template">
   <div class="steps-box">
@@ -141,4 +144,8 @@
       <div class="picked-member"></div>
     </div>
   </div>
+  <div class="remodal-footer">
+      <button class="border-btn" id="step-back-btn">上一步</button>
+      <button class="primary-btn" id="next-step-btn" data-remodal-action="confirm">提交</button>
+    </div>
 </script>
