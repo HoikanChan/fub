@@ -77,7 +77,7 @@ var _persone = function () {
                 }
              }
     });
-
+   
     function highSeachSumbit(){
         var reason =$("#reasonslect .reaseontext").text();
         var areaid = $("input[name='courtCityId']").attr("area-id");
@@ -94,6 +94,7 @@ var _persone = function () {
         var lawyerCaseCount = $("select[name='lawyerCaseCount']").find("option:selected").val();
         var lawyerLanguage = $("select[name='lawyerLanguage']").find("option:selected").val();
         var lawyerOther = $("textarea[name='lawyerOther']").val();
+        
         if(reason == "全部" ){
             reason = "";
         }
@@ -169,7 +170,7 @@ var _persone = function () {
 
     function keywordSumbit(){
         var keywords = $("input[name='keyword']").val()
-        var reason =$(".caseresours").find("option:selected").val();
+        var reason =$("#reasonslect .reaseontext").text();
         var areaid = $("input[name='courtCityId']").attr("area-id");
         if(reason == "全部" ){
             reason = "";
@@ -225,15 +226,14 @@ var _persone = function () {
 
             }
         }else{
-            // $("#keyword-form").bootstrapValidator('validate');//提交验证
-            //     if ($("#keyword-form").data('bootstrapValidator').isValid()){//获取验证结果，如果成功，执行下面代码
+            $("#keyword-form").bootstrapValidator('validate');//提交验证
+                if ($("#keyword-form").data('bootstrapValidator').isValid()){//获取验证结果，如果成功，执行下面代码
                   
-            //         keywordSumbit();
-            //         $(".search-result").show();
+                    keywordSumbit();
+                    $(".search-result").show();
                       
-            //     }
-                 keywordSumbit();
-                 $(".search-result").show();
+                }
+
         }
     }
   

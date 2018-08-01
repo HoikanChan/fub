@@ -2,24 +2,25 @@
 var _updateCase = function () {
     var updateCase_validate, updateCase_modal;
     var jude = true;
-    // $({})._Ajax({
-    //     url: "court/apiTree",
-    //     success: function (result) {
-    //             if (result.code==0) {
-    //                 var html = template("search-court-templete",result)
-    //                 $("#navbar-menu11").html(html);
-    //             }
-    //         }
-    // });
-    function updateCaseDialog(obj,objid,caseSourceId){
-        $("#casename").val(obj);
-        $("#caseno").val(objid);
-        $("#caseno").attr("data-sourceid",caseSourceId);
+    $({})._Ajax({
+        url: "court/apiTree",
+        success: function (result) {
+                if (result.code==0) {
+                    var html = template("search-court-templete",result)
+                    $("#navbar-menu11").html(html);
+                }
+            }
+    });
+    function updateCaseDialog(name,no,id,idtype){
+        $("#casename").val(name);
+        $("#caseno").val(no);
+        $("#caseno").attr("data-sourceid",id);
+
         $("#handlecront").val();
         $("#handlepro").val();
         $("#updatemarks").val();
-        var objid = objid;
-        $({caseTypeId:objid})._Ajax({
+       
+        $({caseTypeId:idtype})._Ajax({
             url: "casetype/queryTrialRoundByCaseType",
             success: function (result) {
                     if (result.code==0) {

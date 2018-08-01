@@ -96,3 +96,94 @@
                 }
         }
 }
+#navbar-menu11 ul>li.dropdown>a{
+
+        color:#333;
+        display: block;
+        padding:5px 15px;
+        line-height: 26px;
+      }
+      #navbar-menu11  ul > li > a:hover{
+        background: #ed7a39;
+        color:#fff;
+       
+      }
+      ul.dropdown-menu.secondul {
+        display: none;
+        position: absolute;
+        left: 150px;
+        top: 0;
+        margin:0;
+        height: 220px;
+        padding:7px 0;
+      }
+      ul.dropdown-menu.secondul li.lipostion a.dropdown-toggle{
+        width:220px;
+      }
+      
+      li.lipostion {
+        position: relative;
+      
+      }
+      
+      ul.dropdown-menu.thirdul {
+        display: none;
+        left: 215px;
+        height: 220px;
+        overflow: auto;
+        top: 0;
+        margin:0;
+        z-index: 9999;
+      }
+      ul.dropdown-menu.secondul li.lipostion ul li:hover ul,
+      #navbar-menu11  ul > li.dropdown:hover > ul.dropdown-menu.secondul{
+        display: block;
+      }
+      #navbar-menu11 ul.dropdown-menu.thirdul li a {
+        color: #333;
+      }
+      #navbar-menu11 ul.dropdown-menu.thirdul li a:hover{
+        color:#fff;
+      }
+      
+      #navbar-menu11 ul>li>a>span {
+        float: right;
+        padding-top: 9px;
+      }
+      ul.dropdown-menu.secondul li.lipostion {
+        height: 220px;
+        overflow: auto;
+      }
+      #navbar-menu11 .reason-ul{
+        height: 220px;
+        overflow: auto;
+        border: 1px solid #ddd;
+      }
+      
+      
+      div#reasonslect11 {
+        position: relative;
+      }
+      #reasonslect11 span.reaseontext{
+        display: block;
+      
+      }
+      
+      div#navbar-menu11 {
+        position: absolute;
+        top:33px;
+        left: 0;
+        width: 180px;
+        background: #fff;
+        padding:0;
+        z-index: 999;
+        .reason-ul{ 
+          li{
+            text-align: left;
+            position: initial;
+          }
+        }
+      }
+      .error-div label{
+              color:#ff0000;
+      }

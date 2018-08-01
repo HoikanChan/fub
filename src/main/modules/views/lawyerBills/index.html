@@ -26,7 +26,7 @@
                     <div class="col-md-5">
                       <input type="text" class="input" placeholder="请输入关键词"></input>
                       <button class="primary-btn">搜索</button>
-                      <button class="primary-btn">申请法务贷</button>
+                    
                     </div>
                 </div>
                 <div class="info-bar">
@@ -117,8 +117,8 @@
         <td class="column-content">{% da.systemPrice |convertNull%}</td>
         <td class="a-right a-right ">{% da.createTime | dateFormat 'yyyy'%}-{% da.createTime | dateFormat 'MM'%}-{% da.createTime | dateFormat 'dd'%}</td>
         <td class=" last">
-          <span class="showmore" data-id="{% da.sourceId %}" data-status="{% da.sourceId %}">更多</span>
-          <span class="fa fa-chevron-down"></span>
+          <span class="showmore" data-id="{% da.sourceId %}" data-status="{% da.sourceId %}">更多<span class="fa fa-chevron-down"></span></span>
+          
         </td>
       </tr>
     {% /each %} 

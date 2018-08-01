@@ -92,17 +92,7 @@ input:focus {
   border: 1px $font-color solid;
   margin-right: 8px;
 }
-.pagination {
-  padding-top: 32px;
-  float: right;
-  input {
-    width: 48px;
-    padding: 4px;
-    border-radius: 3px;
-    border: 1px solid $secondary-color;
-    margin: 0 8px;
-  }
-}
+
 .table {
   margin-bottom: 0;
   .headings {
@@ -194,170 +184,12 @@ aside {
     }
   }
 }
+
 .content-container {
   background: $white-color;
   padding: 24px;
   width: 100%;
-  #indexpage {
-    .user-info {
-      .avatar-block {
-        text-align: center;
-        #avatar {
-          width: 112px;
-          height: 112px;
-        }
-        .btn-group {
-          display: flex;
-          margin-top: 12px;
-          justify-content: space-between;
-          button {
-            color: $theme-color;
-            background: none;
-            width: 64px;
-            height: 24px;
-            border-radius: 3px;
-            border: 1.5px solid $theme-color;
-          }
-        }
-      }
-      .user-info-block {
-        padding: 24px 0 24px 12px;
-        h4 {
-          span {
-            color: $theme-color;
-            font-size: 18px;
-          }
-        }
-        p {
-          color: $secondary-color;
-          font-size: 16px;
-        }
-      }
-      button {
-        width: 42px;
-        height: 42px;
-        border: none;
-      }
-      button#discuss-btn {
-        background: url('../../assets/image/usercenter_icon2.png');
-      }
-      button#headphone-btn {
-        background: url('../../assets/image/usercenter_icon3.png');
-        margin-left: 12px;
-      }
-    }
-    .applications {
-      div {
-        margin: 8px 0;
-        span {
-          color: $secondary-color;
-        }
-      }
-    }
-    .affairs {
-      .header {
-        margin: 24px 0;
-        span {
-          margin-right: 52px;
-          padding-left: 50px;
-          line-height: 24px;
-          position: relative;
-          &::before {
-            width: 40px;
-            height: 22px;
-            position: absolute;
-            top: 0;
-            left: 0;
-            content: '';
-          }
-          &:nth-child(1)::before {
-            background: #35a9ce;
-          }
-          &:nth-child(2)::before {
-            background: #fe99ff;
-          }
-          &:nth-child(3)::before {
-            background: #66cc9a;
-          }
-        }
-      }
-      #calendar {
-        .fc-day-header {
-          padding: 8px;
-          background: $border-color;
-        }
-      }
-    }
-  }
-  #my-reports {
-    .reports-content {
-      .searchbar {
-        display: flex;
-        align-items: center;
-        padding: 12px 0;
-        justify-content: space-between;
-        border-bottom: 1px solid $border-color;
-        p {
-          font-size: 16px;
-          span {
-            color: #ed7a39;
-            padding:0 5px;
-          }
-        }
-      }
-      .content {
-        .content-item {
-          border-bottom: solid 1px $border-color;
-          &:last-child {
-            border-bottom: none;
-          }
-          .case-title {
-            font-weight: bold;
-            font-size: $subtitle-size;
-            padding: 20px 0;
-          }
-          .case-content {
-            margin-bottom: 12px;
-            font-size: $content-size;
-          }
-          .case-time {
-            color: $secondary-color;
-          }
-        }
-      }
-    }
-  }
-  #my-bills {
-    .my-bills-content {
-      .table-footer {
-        strong {
-          float: right;
-          font-size: 1.1em;
-          span {
-            font-size: 1.1em;
-          }
-        }
-        text-align: right;
-        padding: 32px 0;
-      }
-    }
-  }
-  #my-profile {
-    .my-profile-content {
-      h3 {
-        margin-bottom: 36px;
-      }
-      .footer {
-        display: flex;
-        justify-content: flex-end;
-        button {
-          padding: 8px 64px;
-        }
-      }
-    }
-  }
-  #message-center {
-  }
+
 }
 
 //法物贷 我的案件通用样式
@@ -416,189 +248,19 @@ aside {
     }
   }
 }
-//消息中心通用样式
-.message-center-template {
-  text-align: center;
-  .setReaded {
-    float: right;
-    padding-top: 12px;
-    cursor: pointer;
-    &:hover {
-      color: $theme-color;
-    }
-  }
-  .messages-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 24px;
-    &:nth-child(2n + 1) {
-      background: #f6f6f6;
-    }
-    .message-title {
-      font-size: $content-size;
-      img {
-        margin-right: 12px;
-      }
-    }
-    .aside-bar {
-      .time {
-        color: $secondary-color;
-        margin-right: 42px;
-      }
-      .actions {
-        a {
-          color: #149cd3;
-          margin: 0 8px;
-          position: relative;
-          &:hover {
-            color: $theme-color;
-          }
-          .showdiv{
-            display: none;
-            position: absolute;
-            top:20px;
-            left:-25px;
-            background: #fff;
-            width:90px;
-            padding:5px;
-            z-index: 9999;
-            border:1px solid #ddd;
-            p{
-              line-height: 18px;
-              color:#149cd3;
-            
-              &:hover{
-                color:#ed7a39;
-              }
-            }
-          }
-          &:hover .showdiv{
-              display: block;
-          }
-        }
-      }
-    }
-  }
+#starRating .photo span .nohigh,#starRating2 .photo span .nohigh {
+  position: absolute;
+  width: 32px;
+  height: 31px;
+  top: 0;
+  left: 0;
+  background: url("../../assets/image/star.png");
 }
-//tab 通用样式
-.tab {
-  & > section {
-    display: none;
-    padding: 20px 0 0;
-    border-top: 1px solid #ddd;
-  }
-
-  & > input {
-    display: none;
-  }
-
-  & > label {
-    display: inline-block;
-    margin: 0 0 -1px;
-    padding: 15px 34px;
-    font-size: $subtitle-size;
-    font-weight: 700;
-    text-align: center;
-    color: #bbb;
-    border: 1px solid transparent;
-  }
-
-  & > label:before {
-    font-family: fontawesome;
-    font-weight: normal;
-    margin-right: 10px;
-  }
-
-  & > label:hover {
-    color: #888;
-    cursor: pointer;
-  }
-
-  & > input:checked + label {
-    color: #555;
-    border-bottom: 2px solid $theme-color;
-  }
-
-  #tab1:checked ~ #content1,
-  #tab2:checked ~ #content2,
-  #tab3:checked ~ #content3,
-  #tab4:checked ~ #content4 {
-    display: block;
-  }
-
-  @media screen and (max-width: 650px) {
-    & > label {
-      font-size: 0;
-    }
-    & > label:before {
-      margin: 0;
-      font-size: 18px;
-    }
-  }
-
-  @media screen and (max-width: 400px) {
-    & > label {
-      padding: 15px;
-    }
-  }
-}
-//subtab
-.subtab {
-  //subtab
-  & > section {
-    display: none;
-    padding: 20px 0 0;
-  }
-
-  & > input {
-    display: none;
-  }
-
-  & > label {
-    display: inline-block;
-    padding: 2px 32px;
-    font-size: 16px;
-    font-weight: 500;
-    color: $theme-color;
-    border: 1px solid $theme-color;
-  }
-  label.label-right {
-    margin-left: -4px;
-    border-radius: 0px 5px 5px 0px;
-  }
-  label.label-left {
-    border-radius: 5px 0px 0px 5px;
-  }
-
-  & > label:hover {
-    color: $theme-hover-color;
-    cursor: pointer;
-  }
-
-  & > input:checked + label {
-    color: $white-color;
-    background: $theme-color;
-  }
-
-  .subtab1:checked ~ #content1,
-  .subtab2:checked ~ #content2 {
-    display: block;
-  }
-
-  @media screen and (max-width: 650px) {
-    & > label {
-      font-size: 0;
-    }
-    & > label:before {
-      margin: 0;
-      font-size: 18px;
-    }
-  }
-
-  @media screen and (max-width: 400px) {
-    & > label {
-      padding: 15px;
-    }
-  }
+#starRating .photo span .high,#starRating2 .photo span .high {
+  position: absolute;
+  width: 32px;
+  height: 31px;
+  top: 0;
+  left: 0;
+  background: url("../../assets/image/star1.png");
 }

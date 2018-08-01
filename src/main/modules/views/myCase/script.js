@@ -132,6 +132,11 @@ var end = {
       $(document).on("click",".primary-btn",function(){
         searchMycase();
       })
+      $(document).on("click",".mychart",function(){
+        var orderid = $(this).attr("data-order");
+        var clientid = $(this).attr("client-id");
+        rating.showratingDialog(orderid,clientid);
+      })
       $(document).on("click",".showmore",function(){
           var caseid = $(this).attr("data-id");
           $({caseId:caseid,caseDesc:"time"})._Ajax({

@@ -1,0 +1,120 @@
+#rating-modal{
+        width: 500px;
+        border-radius:8px;
+        .login-res-row{
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                 .getService-title-btn{ 
+                         width: 100%;
+                         height: 44px;
+                        cursor:pointer;
+                        line-height: 44px;
+                        text-align: center;
+                        font-size: 16px;
+                        border-top-left-radius: 3px;
+                        border-top-right-radius: 3px;
+                        font-size:18px;
+                        font-weight: 600;
+                        margin-top:20px;
+                }
+        }
+        
+        .remodal-footer{
+                width: 433px;
+                margin: 0 auto;
+                margin-top:30px;
+                .remodal-confirm{
+                        margin-left: 60px;
+                        width: 140px;
+                        height: 40px;
+                        line-height: 40px;
+                        padding:0;
+                        float:left;
+                        border-radius: 5px;
+                        background: #ed7a39;
+                        border:none;
+                        margin-bottom:10px;
+                        &:hover{
+                          background: #e35c10; 
+                          color:#fff;     
+                        } 
+                }
+                .remodal-close-btn{
+                        margin-left: 30px;
+                        width: 140px;
+                        height: 40px;
+                        line-height: 40px;
+                        padding:0;
+                        float:left;
+                        text-align: center;
+                        border:1px solid #9d9d9d;
+                        border-radius: 5px;
+                        margin-bottom:10px;
+                        cursor: pointer; 
+                        &:hover{
+                            background: #ed7a39;
+                            color:#fff;
+                            border:none;
+                        }
+                }
+        }
+}
+        #starRating2 .photo span, #starRating .photo span {
+        position: relative;
+        display: inline-block;
+        width: 32px;
+        height: 31px;
+        overflow: hidden;
+        margin-right: 15px;
+        cursor: pointer;
+    }
+    #starRating2 .photo span:last-child,#starRating .photo span:last-child {
+        margin-right: 0px;
+    }
+
+    #starRating2 .starNum ,#starRating .starNum{
+        font-size: 26px;
+        color: #de4414;
+        margin-top: 4px;
+        margin-bottom: 10px;
+        display: none;
+    }
+    #starRating2 .bottoms,#starRating .bottoms {
+        height: 54px;
+        border-top: 1px solid #d8d8d8;
+    }
+    #starRating2 .photo,#starRating .photo {
+        margin-top: 10px;
+    }
+    #starRating2 .bottoms a,#starRating .bottoms a {
+        margin-bottom: 0;
+    }
+    #starRating2 .bottoms .garyBtn,#starRating .bottoms .garyBtn {
+        margin-right: 57px!important;
+    }
+    #starRating2 .bottoms a ,#starRating .bottoms a{
+        width: 130px;
+        height: 35px;
+        line-height: 35px;
+        border-radius: 3px;
+        display: inline-block;
+        font-size: 16px;
+        transition: all 0.2s linear;
+        margin: 16px 0 22px;
+        text-align: center;
+        cursor: pointer;
+    }
+    .garyBtn {
+        margin-right: 60px!important;
+        background-color: #e1e1e1;
+        color: #999999;
+    }
+    .blueBtn {
+        background-color: #1968b1;
+        color: #fff;
+    }
+    .blueBtn:hover {
+        background: #0e73d0;
+    }

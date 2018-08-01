@@ -349,7 +349,7 @@
 ul.dropdown-menu.secondul {
   display: none;
   position: absolute;
-  left: 170px;
+  left: 165px;
   top: 0;
   margin:0;
   height: 198px;
@@ -410,6 +410,8 @@ div#navbar-menu {
   width: 170px;
   background: #fff;
   padding:0;
+  border:1px solid #ddd;
+  z-index: 99;
   .reason-ul{ 
     li{
       text-align: left;

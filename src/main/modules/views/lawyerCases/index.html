@@ -93,6 +93,7 @@
   </div>
   {{ include '../~modal/applyCaseModal/main'}}
   {{ include '../~modal/updateCaseModal/main'}}
+
   <script type="text/html" id="case-result-templete">
     {% each list da i %}
     {% if  i%2==0 %}
@@ -119,11 +120,8 @@
         <td class="column-content">{% da.trialRound %}</td>
         <td class="a-right a-right ">{% da.createTime | dateFormat 'yyyy'%}-{% da.createTime | dateFormat 'MM'%}-{% da.createTime | dateFormat 'dd'%}</td>
         <td class=" last">
-            {% if da.trialRound == '结案' %}
-            <span class="mychart">评价</span>
-            {% else %}
-            {% /if %}
-          <a href="#" data-name="{% da.caseName %}" data-id="{% da.caseNo %}" data-ids="{% da.id %}" data-ids="{% da.id %}"   class="updatebtn" data-remodal-target="updateCase-modal">更新</a>
+           
+          <a href="#" data-name="{% da.caseName %}" data-no="{% da.caseNo %}" data-ids="{% da.id %}" data-caseTypeId="{% da.caseTypeId %}"   class="updatebtn" data-remodal-target="updateCase-modal">更新</a>
         
           <span class="showmore" data-id="{% da.id %}" data-status="{% da.id %}">更多
           <span class="fa fa-chevron-down"></span></span>

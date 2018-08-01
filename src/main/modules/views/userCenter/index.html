@@ -53,24 +53,25 @@
 <script type="text/html" id="application-template">
   <h3 class="title">最近申请</h3>
   <div class="col-sm-4">
-    <span>申请项目：</span>{% application.project%}
+    <span>申请项目：</span>{% caseName %}
   </div>
   <div class="col-sm-4">
-    <span>委托律师：</span>{% application.laywer %}
+    <span>委托律师：</span>{% lawyerName %}
   </div>
   <div class="col-sm-4">
-    <span>联系方式：</span>{% application.contact %}
+    <span>联系方式：</span>{% lawyerMobile %}
   </div>
   <div class="col-sm-4">
-    <span>费用：</span>{% application.bill %}
+    <span>费用：</span>{% lawyerPrice %}
   </div>
   <div class="col-sm-4">
-    <span>订单时间：</span>{% application.time %}
+    <span>订单时间：</span>{% createTime %}
   </div>
   <div class="col-sm-4">
-    <span>所属律所：</span>{% application.office %}
+    <span>所属律所：</span>{% officeName %}
   </div>
   <div class="col-sm-12">
-    <span>描述：</span>{% application.decription %}
+    <span>描述：</span>{% orderType %}：{% if introduction %} {% introduction %} {% else %}{% /if %}
   </div>
+  
 </script>

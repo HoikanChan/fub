@@ -52,7 +52,7 @@
         var officeid = $(".bootstrap-select button").attr("officeid");;
         var type = $("#legalloan-form #checkbox").prop("checked")?2:"";
         var company = $("input[name='company']").val();
-    if(company){
+    if(company !=null || company != ""){
         var params = {
             clientId:clientId,
             realname:realname,
@@ -77,8 +77,8 @@
     
 
         $(params)._Ajax({
-         //   url:"lvswbao/loan/saveLoanOrder",
-         url:"order/save",
+           url:"lvswbao/loan/saveLoanOrder",
+    //     url:"order/save",
             success:function(result){
                if(result.code == 0){
                 toastr.success(result.msg);

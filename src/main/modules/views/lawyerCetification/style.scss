@@ -4,48 +4,7 @@
 * @Last Modified by:   anchen
 * @Last Modified time: 2017-06-22 18:04:27
 */
-@import '../../public/css/common.scss';
-$font-color: #666;
-$secondary-color: #9a9a9a;
 
-$plus-icon-color: #108ee9;
-$theme-color: #ed7a39;
-$theme-hover-color: #e35c10;
-$title-color: #333333;
-$white-color: #fff;
-$border-color: #eaeaea;
-$gray-color: #f5f5f5;
-$font-gray-color: #999;
-// dimension
-$title-size: 24px;
-$subtitle-size: 18px;
-$content-size: 16px;
-//outer
-.officeCenter {
-  background: $gray-color;
-  .title-bar {
-    position: relative;
-    .page-title {
-      color: $white-color;
-      font-weight: bold;
-      font-size: $title-size;
-      position: absolute;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      left: 50%;
-    }
-  }
-  .container {
-    margin: 32px 0;
-    width: 100%;
-    .page {
-
-    }
-    .pageNow {
-      display: inline;
-    }
-  }
-}
 .content-container {
   background: $white-color;
   padding: 24px;
@@ -70,7 +29,7 @@ $content-size: 16px;
           color: $font-gray-color;
           position: absolute;
           bottom: 0;
-          left:0;
+          left:-15px;;
           width: 100px;
         }
         &.step-last{

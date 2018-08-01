@@ -64,14 +64,14 @@ var _applycase = function () {
             var name = $("#name").val();
             var caseType = $("#reasonslect .reaseontext").attr("data-id")?$("#reasonslect .reaseontext").attr("data-id"):"";
             var lawyerFeeLimit = $("#lawyerFeeLimit").val();
-            var marks = $("#marks").val();
+            var introduction = $("#marks").val();
         
             var params = {
                 mobile : mobile,
                 name : name,
                 caseType : caseType,
                 lawyerFeeLimit : lawyerFeeLimit,
-                marks : marks
+                introduction : introduction
             }
             $(params)._Ajax({
                 url: "casesource/saveNewCaseSource",

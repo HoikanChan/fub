@@ -173,7 +173,7 @@ var end = {
       })
       $(document).on("click",".updatebtn",function(){
                 
-        _updateCase.updateCaseDialog($(this).attr("data-name"),$(this).attr("data-id"),$(this).attr("data-ids"));
+        _updateCase.updateCaseDialog($(this).attr("data-name"),$(this).attr("data-no"),$(this).attr("data-id"),$(this).attr("data-caseTypeId"));
        
    
 })

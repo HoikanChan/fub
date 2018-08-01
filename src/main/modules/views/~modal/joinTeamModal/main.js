@@ -4,6 +4,7 @@ var joinTeamModal = (function() {
   var id = ''
 
   function getTeams(params) {
+    $(".createTeamModal").html();
     $(params ? params : {})._Ajax({
       url: 'team/queryAllTeams',
       success: function(result) {
@@ -51,6 +52,8 @@ var joinTeamModal = (function() {
   /*拇指图弹出*/
   function showModal() {
     getTeams()
+    
+    step = 1;
     init_city_select($('#area-select'))
 
     $({})._Ajax({

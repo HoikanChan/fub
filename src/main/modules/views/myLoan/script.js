@@ -33,7 +33,7 @@ var userCenter = (function() {
       order: 'desc'
     }
 
-    $('#my-loans .pager').tablePager({
+    $('.myloanpage .pager').tablePager({
       url: 'loan/queryClientLoanOrderList',
       searchParam: params,
       success: function(result) {

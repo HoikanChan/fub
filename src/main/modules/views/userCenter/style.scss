@@ -69,6 +69,12 @@ input:focus {
   background: $theme-color;
   padding: 8px 10px;
   border-radius: 3px;
+  a{
+    color:#fff;
+  }
+  &:hover{
+    background: $theme-hover-color;
+  }
 }
 .border-btn {
   border: solid 1px $theme-color;

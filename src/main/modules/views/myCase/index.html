@@ -26,7 +26,6 @@
                     <div class="col-md-5">
                       <input type="text" class="input" placeholder="请输入关键词"></input>
                       <button class="primary-btn">搜索</button>
-                      <button class="primary-btn">申请法务贷</button>
                     </div>
                 </div>
                 <div class="info-bar">
@@ -91,7 +90,7 @@
       <div class="col-sm-1"></div>
     </div>
   </div>
-  
+  {{ include '../~modal/ratingModal/main'}}
   <script type="text/html" id="case-result-templete">
     {% each list da i %}
     {% if  i%2==0 %}
@@ -115,7 +114,7 @@
         <td class="a-right a-right ">{% da.createTime | dateFormat 'yyyy'%}-{% da.createTime | dateFormat 'MM'%}-{% da.createTime | dateFormat 'dd'%}</td>
         <td class="last">
           {% if da.trialRound == '结案' %}
-          <span class="mychart">评价</span>
+          <span class="mychart" data-order="{% da.orderId %}" client-id="{% da.clientId %}"  data-remodal-target="rating-modal">评价</span>
           {% else %}
           {% /if %}
           <span class="showmore" data-id="{% da.id %}" data-status="{% da.id %}">更多</span>

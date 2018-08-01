@@ -40,21 +40,20 @@ var userCenter = (function() {
     init: function() {
       //  satelliteApplication();
       $("#indexpage").addClass("active");
-     
-      $('.applications').html(
-        template('application-template', {
-          application: {
-            project: '法务贷/案件委托',
-            laywer: '张三',
-            contact: '15622542221',
-            bill: '贷款费用/律师费',
-            time: '2015-06-05 15:33:30',
-            office: '广东东莞A律师事务所',
-            decription:
-              '法务贷：XX时间申请法务贷款XX金额，还歀期XXX，本息总计XXX；案件委托：律师的案件描述'
-          }
-        })
-      )
+
+
+      $({clientId:clientId})._Ajax({
+        url: "client/latestOrder",
+        success: function (result) {
+                if (result.code==0) {
+                    var html = template("application-template",result)
+                    $(".applications").html(html);
+                }
+             }
+    });
+
+
+
 
     }
   }
