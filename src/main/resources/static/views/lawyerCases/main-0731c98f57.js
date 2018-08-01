@@ -1816,7 +1816,7 @@
 
     var tablePagerThree = window.tablePager2 = {
         opts: {
-            length: 3,
+            length: 10,
             preText: "上一页",
             nextText: "下一页",
             firstText: "",
@@ -1881,7 +1881,7 @@
                     success: function (data) {
                         _self.opts.success(data);
                         //后台返回数据格式
-                        _self.opts.totalCount = data.data.totalCount;
+                        _self.opts.totalCount = data.page.totalCount;
                         _self.getTotalPage();
                         if (_self.opts.totalCount > 0 && _self.opts.page > 0) {
                             var pageTextArr = new Array;
@@ -1912,7 +1912,7 @@
                         _self.opts.success(data);
 
                         //后台返回数据格式
-                        _self.opts.totalCount = data.data.totalCount;
+                        _self.opts.totalCount = data.page.totalCount;
                         _self.getTotalPage();
                         if (_self.opts.totalCount > 0 && _self.opts.page > 0) {
                             var pageTextArr = new Array;
@@ -2311,33 +2311,370 @@
 
 
 })(window, jQuery);
-var caseDetail = function () {
-   
+var _applycase = function () {
+    var applycase_validate, applycase_modal;
+    var jude = true;
+
+    $(function () {
+               $({})._Ajax({
+                url: "casetype/apiTree",
+                success: function (result) {
+                        if (result.code==0) {
+                            var html = template("search-reason-templete",result)
+                            $("#navbar-menu").html(html);
+                        }
+                    }
+            });
+
+            _applycase.applycase_modal =applycase_modal= $("#applycase-modal").remodal();
+            //表单验证
+            applycase_validate = $("#applycase-form").validate({
+                    rules: {
+                       
+                        mobile : {
+                            required: true,
+                        },
+                        name : {
+                            required: true,
+                        },
+                        caseType : {
+                            required: true,
+                        },
+                        lawyerFeeLimit : {
+                            required: true,
+                        }
+
+                    },
+                    messages: {
+                        mobile : {
+                            required: "请输入您的姓名",
+                            account:"请输入正确的手机号码以13X 15X 18X 14X 17X号段开头"
+                        },
+                        name : {
+                            required: "请输入案件名称",
+                        },
+                        caseType : {
+                            required: "请选择案件类型",
+                        },
+                        lawyerFeeLimit : {
+                            required: "请输入律师费用",
+                        }
+                      
+                    },
+                    errorPlacement: function (error, element) {
+                        element.siblings(".error-div").html(error)
+                    },
+            });
+        })
+          
+        $.validator.addMethod("account",function(value,element,params){  
+            var account = regexs.mobile    // 密码验证
+                return (account.test(value));  
+        });    
+        function applyCase(){
+           
+            var mobile = $("#mobile").val();
+            var name = $("#name").val();
+            var caseType = $("#reasonslect .reaseontext").attr("data-id")?$("#reasonslect .reaseontext").attr("data-id"):"";
+            var lawyerFeeLimit = $("#lawyerFeeLimit").val();
+            var marks = $("#marks").val();
+        
+            var params = {
+                mobile : mobile,
+                name : name,
+                caseType : caseType,
+                lawyerFeeLimit : lawyerFeeLimit,
+                marks : marks
+            }
+            $(params)._Ajax({
+                url: "casesource/saveNewCaseSource",
+                success: function (result) {
+                        if (result.code==0) {
+                            toastr.success(result.msg);
+                            $(".remodal-close-btn").trigger("click");
+                        }else{
+                            toastr.error(result.msg);
+                 
+                        }
+                     }
+            });
+        } 
     return {
         init: function () {
-           
-        }
+             
+                
+                    $(document).on("click","#reasonslect .reaseontext",function(event){
+                        $("#navbar-menu").toggle()
+                        event.stopPropagation();
+                    })
+                    $(document).on("click",".first-val",function(){
+                        var data = $(this).text();
+                        var dataid = $(this).attr("data-id");
+                        $("#reasonslect .reaseontext").text(data);
+                        $("#reasonslect .reaseontext").attr("data-id",dataid);
+                        $("#navbar-menu").hide();
+                        
+                    })
+                    $(document).on("click",".second-val",function(){
+                        var data = $(this).text();
+                        var dataid = $(this).attr("data-id");
+                        var parent = $(this).attr("parent-name");
+                        $("#reasonslect .reaseontext").text(parent+"-"+data);
+                        $("#reasonslect .reaseontext").attr("data-id",dataid);
+                        $("#navbar-menu").hide();
+                    })
+                    $(document).on("click",".last-val",function(){
+                        var data = $(this).text();
+                        var dataid = $(this).attr("data-id");
+                        var parentname = $(this).attr("parent-name");
+                        var parent = $(this).attr("parent");
+                        $("#reasonslect .reaseontext").attr("data-id",dataid);
+                        $("#reasonslect .reaseontext").text(parent+" - "+parentname+" - "+data);
+                        $("#navbar-menu").hide();
+                    })
+                    $(document).on("click",function(event){
+                        $("#navbar-menu").hide();
+                    });
+                    $(document).on("click", "#applycase-modal .remodal-confirm", function () {
+                        if (applycase_validate.form()) {
+                            applyCase();
+                        }    
+                                
+                        });
+                  
+            },
+            applycase_modal: null,
     }
 } ();
-caseDetail.init();
+_applycase.init();
+
+var _updateCase = function () {
+    var updateCase_validate, updateCase_modal;
+    var jude = true;
+    // $({})._Ajax({
+    //     url: "court/apiTree",
+    //     success: function (result) {
+    //             if (result.code==0) {
+    //                 var html = template("search-court-templete",result)
+    //                 $("#navbar-menu11").html(html);
+    //             }
+    //         }
+    // });
+    function updateCaseDialog(obj,objid,caseSourceId){
+        $("#casename").val(obj);
+        $("#caseno").val(objid);
+        $("#caseno").attr("data-sourceid",caseSourceId);
+        $("#handlecront").val();
+        $("#handlepro").val();
+        $("#updatemarks").val();
+        var objid = objid;
+        $({caseTypeId:objid})._Ajax({
+            url: "casetype/queryTrialRoundByCaseType",
+            success: function (result) {
+                    if (result.code==0) {
+                        
+                        var html = template("case-process-templete",result)
+                        $(".case-process").html(html);
+                    }
+                 }
+        });
+    }
+
+   
+       
+   
+
+    $(function () {
+        
+
+        updateCase_modal= $("#updateCase-modal").remodal();
+    
+     
+})
+        function updateCase(){
+           
+        
+            var caseSourceId = $("#caseno").attr("data-sourceid");
+            var caseNo = $("#caseno").val();
+            var courtId = $("#reasonslect11 .reaseontext").attr("data-id")?$("#reasonslect11 .reaseontext").attr("data-id"):"";
+            var trialRound = $("select[name='trialRound']").find("option:selected").val();
+            var desc = $("#marks").val();
+            
+        
+            var params = {
+                trialRound : trialRound,
+                courtId : courtId,
+                caseNo : caseNo,
+                caseSourceId : caseSourceId,
+                desc : desc
+            }
+            $(params)._Ajax({
+                url: "casetrial/saveCaseTrial",
+                success: function (result) {
+                        if (result.code==0) {
+                            toastr.success(result.msg);
+                            $(".remodal-close-btn").trigger("click");
+                        }else{
+                            toastr.error(result.msg);
+                 
+                        }
+                     }
+            });
+        } 
+    
+        
+    return {
+        init: function () {
+
+               $(document).on("click","#reasonslect11 .reaseontext",function(event){
+                        $("#navbar-menu11").toggle()
+                        event.stopPropagation();
+                    })
+                    $(document).on("click","#reasonslect11 .first-val",function(){
+                        var data = $(this).text();
+                        var dataid = $(this).attr("data-id");
+                        $("#reasonslect11 .reaseontext").text(data);
+                        $("#navbar-menu11").hide();
+                        
+                    })
+                    $(document).on("click","#reasonslect11 .second-val",function(){
+                        var data = $(this).text();
+                        var dataid = $(this).attr("data-id");
+                        $("#reasonslect11 .reaseontext").text(data);
+                        $("#reasonslect11 .reaseontext").attr("data-id",dataid);
+                        $("#navbar-menu11").hide();
+                    })
+                    $(document).on("click","#reasonslect11 .last-val",function(){
+                        var data = $(this).text();
+                        var dataid = $(this).attr("data-id");
+                        $("#reasonslect11 .reaseontext").text(data);
+                        $("#reasonslect11 .reaseontext").attr("data-id",dataid);
+               
+                        $("#navbar-menu11").hide();
+                    })
+                    $(document).on("click",function(event){
+                        $("#navbar-menu11").hide();
+                    });
+                    $(document).on("click", "#updateCase-modal .remodal-confirm", function () {
+                      
+                            updateCase();
+                       
+                                
+                        });
+               
+                
+                  
+            },
+            updateCase_modal:null,
+            updateCaseDialog:updateCaseDialog
+    }
+} ();
+_updateCase.init();
 var userCenter = (function() {
   var page = 1
   var inquery_validate
+  var start = {
+    isinitVal: true,
+    initDate:[{DD:"-7"},true],
+    format: "YYYY-MM-DD",
+    maxDate: $.nowDate({DD:0}), //最大日期
+    zIndex: 99999,
+    isClear:false,
+    isok:false,
+    okfun: function (elem, date) {
+            end.minDate = elem.val.replace(/\//g,"-"); //开始日选好后，重置结束日的最小日期
+         //   endDates();
+    },
+};
+var end = {
+    isinitVal: true,
+    isok: false,
+    isClear:false,
+    zIndex: 99999,
+    maxDate: $.nowDate({DD:0}), //最大日期
+    format: "YYYY-MM-DD",
+    okfun: function (elem, date) {
+            start.maxDate = elem.val.replace(/\//g,"-"); //将结束日的初始值设定为开始日的最大日期
+    }
+};
+  function getMycase(){ 
+    var params = {
+      lawyerId:lawyerId,
+      clientId:clientId,
+      sidx : "createTime",
+      order : "desc"
+    }
 
+  $('#my-cases .pager').tablePager({
+    
+      url: "order/queryLawyerOrderList",
+      searchParam:params,
+      success: function (result) {
+              if (result.code==0) {
+             
+                      if (result) {
+                       
+                          var html = template("case-result-templete",result.data)
+                 
+                         $(".my-case-box").html(html); 
+                         if(result.data.totalCount<10){
+                          $(".page-row").hide()
+                          }else{
+                              $(".page-row").show()
+                          }
+                          if(result.data.totalCount==0){
+                              $(".my-cases-box").html("<P class='noresult'>抱歉，没有相关案件</P>")
+                          }
+                          }else{
+                              toastr.warning(result.msg);
+                          }
+                        $(".my-cases-content .totalNum").text(result.data.totalCount);
+                      }
+      }
+ })
+  }
+  function searchMycase(){ 
+
+    var params = {
+      clientId:clientId,
+      sidx : "createTime",
+      order : "desc",
+      beginDate:$("#start-date").val(),
+      endDate:$("#end-date").val()
+    }
+
+  $('#my-cases .pager').tablePager({
+    
+      url: "order/queryLawyerOrderList",
+      searchParam:params,
+      success: function (result) {
+              if (result.code==0) {
+             
+                      if (result) {
+                       
+                          var html = template("case-result-templete",result.data)
+                 
+                         $(".my-case-box").html(html); 
+                         if(result.data.totalCount<10){
+                          $(".page-row").hide()
+                          }else{
+                              $(".page-row").show()
+                          }
+                          if(result.data.totalCount==0){
+                              $(".my-cases-box").html("<P class='noresult'>抱歉，没有相关案件</P>")
+                          }
+                          }else{
+                              toastr.warning(result.msg);
+                          }
+                        $(".my-cases-content .totalNum").text(result.data.totalCount);
+                      }
+      }
+ })
+
+  } 
   $(function() {
-  //  $('#calendar').fullCalendar({})
-    $(".user-info-block h4 span").text(phone);
-    $(".user-info-block span.count").text(userZH);
-    $(".user-info-block span.regtime").text(registerTime);
-
-    $('.fc-widget-header .fc-sun span').html('星期天')
-    $('.fc-widget-header .fc-mon span').html('星期一')
-    $('.fc-widget-header .fc-tue span').html('星期二')
-    $('.fc-widget-header .fc-wed span').html('星期三')
-    $('.fc-widget-header .fc-thu span').html('星期四')
-    $('.fc-widget-header .fc-fri span').html('星期五')
-    $('.fc-widget-header .fc-sat span').html('星期六')
-    $('.right-icon').click(function(e) {
+   $("#my-cases").addClass("active");
+    $('aside .right-icon').click(function(e) {
       e.stopPropagation()
       if (e.target.classList.contains('fa-chevron-down')) {
         $(e.target)
@@ -2355,29 +2692,63 @@ var userCenter = (function() {
           .addClass('fa-chevron-down')
       }
     })
-
+     //时间选择 
+     $("#start-date").jeDate(start);
+     $("#end-date").jeDate(end);
+    $(".all-status").on("change",function(){
+      var select = $("select[name='status']").find("option:selected").val();
+    })
   })
-
   return {
     init: function() {
-      //  satelliteApplication();
-      $("#indexpage").addClass("active");
-     
-      $('.applications').html(
-        template('application-template', {
-          application: {
-            project: '法务贷/案件委托',
-            laywer: '张三',
-            contact: '15622542221',
-            bill: '贷款费用/律师费',
-            time: '2015-06-05 15:33:30',
-            office: '广东东莞A律师事务所',
-            decription:
-              '法务贷：XX时间申请法务贷款XX金额，还歀期XXX，本息总计XXX；案件委托：律师的案件描述'
-          }
-        })
-      )
-
+      getMycase()
+      $(document).on("click","#search-case",function(){
+        searchMycase();
+      })
+      $(document).on("click",".showmore",function(){
+          var caseid = $(this).attr("data-id");
+          $({caseId:caseid,caseDesc:"time"})._Ajax({
+            url: "casetrial/queryCaseTrial",
+            success: function (result) {
+              var html=[],html2=[],html3=[],html4=[];
+                    if (result.code==0) {
+                    var data = result.trialList;
+                      html  = "<div class='process-img'>"
+                                    + "<div class='grap-bg'>"
+                                        +"<div class='org-bg-one'>"
+                                        +"</div>"
+                                        +"<div class='org-bg-two'>"
+                                        +"</div>"
+                                        +"<div class='org-bg-three'>"
+                                        +"</div>"
+                                        +"<div class='org-bg-four'>"
+                                        +"</div>"
+                                        +"<div class='org-bg-five'>"
+                                        +"</div>"
+                                      +"</div>"
+                                      +"<div>"
+                        for(var i=0;i<data.length;i++){
+                          if(data[i].caseDesc){
+                            html2 += "<div class='pro-tex'>"+ data[i].trialRound  +"（"+data[i].caseDesc +"）<span>"+data[i].time+"</span></div>"
+                          }else{
+                            html2 += "<div class='pro-tex'>"+ data[i].trialRound  +"<span>"+data[i].time+"</span></div>"
+                          }
+                         
+                        }
+                      
+                         
+                        $("#tr"+caseid+" .process-text").html(html2);
+                        $("#tr"+caseid).toggle();
+                    }
+                 }
+                });
+      })
+      $(document).on("click",".updatebtn",function(){
+                
+        _updateCase.updateCaseDialog($(this).attr("data-name"),$(this).attr("data-id"),$(this).attr("data-ids"));
+       
+   
+})
     }
   }
 })()

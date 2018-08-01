@@ -1816,7 +1816,7 @@
 
     var tablePagerThree = window.tablePager2 = {
         opts: {
-            length: 3,
+            length: 10,
             preText: "上一页",
             nextText: "下一页",
             firstText: "",
@@ -1881,7 +1881,7 @@
                     success: function (data) {
                         _self.opts.success(data);
                         //后台返回数据格式
-                        _self.opts.totalCount = data.data.totalCount;
+                        _self.opts.totalCount = data.page.totalCount;
                         _self.getTotalPage();
                         if (_self.opts.totalCount > 0 && _self.opts.page > 0) {
                             var pageTextArr = new Array;
@@ -1912,7 +1912,7 @@
                         _self.opts.success(data);
 
                         //后台返回数据格式
-                        _self.opts.totalCount = data.data.totalCount;
+                        _self.opts.totalCount = data.page.totalCount;
                         _self.getTotalPage();
                         if (_self.opts.totalCount > 0 && _self.opts.page > 0) {
                             var pageTextArr = new Array;
@@ -2312,102 +2312,177 @@
 
 })(window, jQuery);
 var userCenter = (function() {
-  function getParams(params) {
-    var paramStr = ''
-    for (var key in params) {
-      if (params[key]) {
-        paramStr += key + '=' + params[key] + '&'
-      }
+  var page = 1
+  var inquery_validate
+  var start = {
+    isinitVal: true,
+    initDate:[{DD:"-7"},true],
+    format: "YYYY-MM-DD",
+    maxDate: $.nowDate({DD:0}), //最大日期
+    zIndex: 99999,
+    isClear:false,
+    isok:false,
+    okfun: function (elem, date) {
+            end.minDate = elem.val.replace(/\//g,"-"); //开始日选好后，重置结束日的最小日期
+         //   endDates();
+    },
+};
+var end = {
+    isinitVal: true,
+    isok: false,
+    isClear:false,
+    zIndex: 99999,
+    maxDate: $.nowDate({DD:0}), //最大日期
+    format: "YYYY-MM-DD",
+    okfun: function (elem, date) {
+            start.maxDate = elem.val.replace(/\//g,"-"); //将结束日的初始值设定为开始日的最大日期
     }
-    return paramStr.slice(0, -1)
-  }
-  function updateProfile() {
-    var paramsObj = {}
-    //遍历input
-    $('.form-group input')
-      .serializeArray()
-      .forEach(input => {
-        paramsObj[input.name] = input.value
-      })
-    //遍历select
-    $('.form-group select')
-      .serializeArray()
-      .forEach(input => {
-        paramsObj[input.name] = input.value
-      })
-    console.log(profile_validate.form())
-    $({})._Ajax({
-      url:
-        '/client/updateClientAndCompany?clientId=' +
-        clientId +
-        '&' +
-        getParams(paramsObj)
-    })
-  }
-  function initForm() {
-    if (!clientId) {
-      console.error('该用户未完善信息没有clientId')
+};
+  function getMycase(){ 
+    var params = {
+      clientId:clientId,
+      sidx : "createTime",
+      order : "desc"
     }
-    $({})._Ajax({
-      url: '/client/queryClientAndCompany?clientId=' + clientId,
-      success: function(result) {
-        console.log(result)
-        $('.my-profile-content').html(template('profile-template', result))
-        //自定义正则表达示验证方法
-        $.validator.addMethod('idcard', function(value, element, params) {
-          // 身份证验证
-          var idcard = regexs.idcard
-          return idcard.test(value)
-        })
-        $.validator.addMethod('mobile', function(value, element, params) {
-          var mobile = regexs.mobile // 密码验证
-          return mobile.test(value)
-        })
-        //表单验证
-        profile_validate = $('#profile-form').validate({
-          rules: {
-            mobile: {
-              mobile: true
-            },
-            email: {
-              email: true
-            },
-            idcard: {
-              idcard: true
-            }
-          },
-          messages: {
-            mobile: {
-              required: '请输入有效的手机号码',
-              mobile: '请输入正确的手机号码以13X 15X 18X 14X 17X号段开头'
-            },
-            email: {
-              email: '请输入正确的邮箱地址'
-            },
-            idcard: {
-              idcard: '请输入正确的身份证号码'
-            }
-          },
-          errorPlacement: function(error, element) {
-            element.siblings('.error-div').html(error)
-            element.focus()
-          }
-        })
-        $('#submit-btn').click(function(e) {
-          e.stopPropagation()
-          if (profile_validate.form()) {
-            updateProfile()
-          }
-        })
-      }
-    })
-  }
 
-  $(function() {})
+  $('#my-cases .pager').tablePager({
+    
+      url: "order/queryClientOrderList",
+      searchParam:params,
+      success: function (result) {
+              if (result.code==0) {
+             
+                      if (result) {
+                       
+                          var html = template("case-result-templete",result.data)
+                 
+                         $(".my-case-box").html(html); 
+                         if(result.data.totalCount<10){
+                          $(".page-row").hide()
+                          }else{
+                              $(".page-row").show()
+                          }
+                          if(result.data.totalCount==0){
+                              $(".my-cases-box").html("<P class='noresult'>抱歉，没有相关案件</P>")
+                          }
+                          }else{
+                              toastr.warning(result.msg);
+                          }
+                        $(".my-cases-content .totalNum").text(result.data.totalCount);
+                      }
+      }
+ })
+  }
+  function searchMycase(){ 
+
+    var params = {
+      clientId:clientId,
+      sidx : "createTime",
+      order : "desc",
+      beginDate:$("#start-date").val(),
+      endDate:$("#end-date").val()
+    }
+
+  $('#my-cases .pager').tablePager({
+    
+      url: "order/queryClientOrderList",
+      searchParam:params,
+      success: function (result) {
+              if (result.code==0) {
+             
+                      if (result) {
+                       
+                          var html = template("case-result-templete",result.data)
+                 
+                         $(".my-case-box").html(html); 
+                         if(result.data.totalCount<10){
+                          $(".page-row").hide()
+                          }else{
+                              $(".page-row").show()
+                          }
+                          if(result.data.totalCount==0){
+                              $(".my-cases-box").html("<P class='noresult'>抱歉，没有相关案件</P>")
+                          }
+                          }else{
+                              toastr.warning(result.msg);
+                          }
+                        $(".my-cases-content .totalNum").text(result.data.totalCount);
+                      }
+      }
+ })
+
+  } 
+  $(function() {
+   $("#my-cases-nav").addClass("active");
+    $('aside .right-icon').click(function(e) {
+      e.stopPropagation()
+      if (e.target.classList.contains('fa-chevron-down')) {
+        $(e.target)
+          .siblings('div.dropdown-menu')
+          .show()
+        $(e.target)
+          .addClass('fa-chevron-up')
+          .removeClass('fa-chevron-down')
+      } else if (e.target.classList.contains('fa-chevron-up')) {
+        $(e.target)
+          .siblings('div.dropdown-menu')
+          .hide()
+        $(e.target)
+          .removeClass('fa-chevron-up')
+          .addClass('fa-chevron-down')
+      }
+    })
+     //时间选择 
+     $("#start-date").jeDate(start);
+     $("#end-date").jeDate(end);
+    $(".all-status").on("change",function(){
+      var select = $("select[name='status']").find("option:selected").val();
+    })
+  })
   return {
     init: function() {
-    $("#my-profile").addClass("active");
-      initForm()
+      getMycase()
+      $(document).on("click",".primary-btn",function(){
+        searchMycase();
+      })
+      $(document).on("click",".showmore",function(){
+          var caseid = $(this).attr("data-id");
+          $({caseId:caseid,caseDesc:"time"})._Ajax({
+            url: "casetrial/queryCaseTrial",
+            success: function (result) {
+              var html=[],html2=[],html3=[],html4=[];
+                    if (result.code==0) {
+                    var data = result.trialList;
+                      html  = "<div class='process-img'>"
+                                    + "<div class='grap-bg'>"
+                                        +"<div class='org-bg-one'>"
+                                        +"</div>"
+                                        +"<div class='org-bg-two'>"
+                                        +"</div>"
+                                        +"<div class='org-bg-three'>"
+                                        +"</div>"
+                                        +"<div class='org-bg-four'>"
+                                        +"</div>"
+                                        +"<div class='org-bg-five'>"
+                                        +"</div>"
+                                      +"</div>"
+                                      +"<div>"
+                        for(var i=0;i<data.length;i++){
+                          if(data[i].caseDesc){
+                            html2 += "<div class='pro-tex'>"+ data[i].trialRound  +"（"+data[i].caseDesc +"）<span>"+data[i].time+"</span></div>"
+                          }else{
+                            html2 += "<div class='pro-tex'>"+ data[i].trialRound  +"<span>"+data[i].time+"</span></div>"
+                          }
+                         
+                        }
+                      
+                         
+                        $("#tr"+caseid+" .process-text").html(html2);
+                        $("#tr"+caseid).toggle();
+                    }
+                 }
+                });
+      })
     }
   }
 })()

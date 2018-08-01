@@ -1816,7 +1816,7 @@
 
     var tablePagerThree = window.tablePager2 = {
         opts: {
-            length: 3,
+            length: 10,
             preText: "上一页",
             nextText: "下一页",
             firstText: "",
@@ -1881,7 +1881,7 @@
                     success: function (data) {
                         _self.opts.success(data);
                         //后台返回数据格式
-                        _self.opts.totalCount = data.data.totalCount;
+                        _self.opts.totalCount = data.page.totalCount;
                         _self.getTotalPage();
                         if (_self.opts.totalCount > 0 && _self.opts.page > 0) {
                             var pageTextArr = new Array;
@@ -1912,7 +1912,7 @@
                         _self.opts.success(data);
 
                         //后台返回数据格式
-                        _self.opts.totalCount = data.data.totalCount;
+                        _self.opts.totalCount = data.page.totalCount;
                         _self.getTotalPage();
                         if (_self.opts.totalCount > 0 && _self.opts.page > 0) {
                             var pageTextArr = new Array;
@@ -2311,28 +2311,28 @@
 
 
 })(window, jQuery);
-var userCenter = (function() {
-  var page = 1
-  function getReports() {
-    var params = {
-      clientId: clientId
-    }
-
-    $('#my-cases .pager').tablePager({
-      url: 'report/api/list',
-      searchParam: params,
+var downloadModal = (function() {
+  $('#getcaseDeatil-modal').remodal()
+  /*拇指图弹出*/
+  function showModal(loanId) {
+    console.log(loanId)
+    $('.getcaseDeatil-form').html('')
+    $({})._Ajax({
+      url: 'loan/queryLoanDeatilAndFiles?loanId=' + loanId,
       success: function(result) {
         if (result.code == 0) {
           if (result) {
-            $('.reports-content .reports-list').html(template('report-template', result.data))
-            if (result.data.totalCount < 10) {
-              $('.page-row').hide()
+            result.data.host = api.host
+            $('.file-table').html(template('file-table-template', result.data))
+
+            if (result.data.files.length < 10) {
+              $('#download-modal .page-row').hide()
             } else {
-              $('.page-row').show()
+              $('#download-modal .page-row').show()
             }
-            if (result.data.totalCount == 0) {
-              $('.reports-content').html(
-                "<p class='noresult'>抱歉，没有相关报告</p>"
+            if (result.data.files.length == 0) {
+              $('.file-table').html(
+                "<p class='noresult' style='text-align:center;padding:24px 0'>抱歉，该订单没有文件</p>"
               )
             }
           } else {
@@ -2342,20 +2342,84 @@ var userCenter = (function() {
       }
     })
   }
-  //查询报告详情
+  return {
+    init: function() {
+      $(document).on('click', '#preview', function(e) {
+        e.stopPropagation()
+        window.open(api.host + $(this).attr('data-path'))
+        return false
+      })
+    },
+    showModal: showModal
+  }
+})()
+downloadModal.init()
 
-  function getCaseDetail(id) {
-    $({})._Ajax({
-      url: 'report/api/info/' + id,
+var userCenter = (function() {
+  var page = 1
+  var inquery_validate
+  var listData
+  var start = {
+    isinitVal: true,
+    initDate: [{ DD: '-7' }, true],
+    format: 'YYYY-MM-DD',
+    maxDate: $.nowDate({ DD: 0 }), //最大日期
+    zIndex: 99999,
+    isClear: false,
+    isok: false,
+    okfun: function(elem, date) {
+      end.minDate = elem.val.replace(/\//g, '-') //开始日选好后，重置结束日的最小日期
+      //   endDates();
+    }
+  }
+  var end = {
+    isinitVal: true,
+    isok: false,
+    isClear: false,
+    zIndex: 99999,
+    maxDate: $.nowDate({ DD: 0 }), //最大日期
+    format: 'YYYY-MM-DD',
+    okfun: function(elem, date) {
+      start.maxDate = elem.val.replace(/\//g, '-') //将结束日的初始值设定为开始日的最大日期
+    }
+  }
+  function getMyloan() {
+    var params = {
+      clientId: clientId,
+      sidx: 'createTime',
+      order: 'desc'
+    }
+
+    $('#my-loans .pager').tablePager({
+      url: 'loan/queryClientLoanOrderList',
+      searchParam: params,
       success: function(result) {
-        $('.reports-list').hide()
-        $('.reports-detail').show()
-        $('.reports-content .reports-detail').html(template('report-detail-template', result.data))
+        if (result.code == 0) {
+          if (result) {
+            var html = template('loan-result-templete', result.data)
+            listData = result.data.list
+            $('.totalNum').html(result.data.totalCount)
+            $('.my-loan-box').html(html)
+            if (result.data.totalCount < 10) {
+              $('.page-row').hide()
+            } else {
+              $('.page-row').show()
+            }
+            if (result.data.totalCount == 0) {
+              $('.my-loans-box').html(
+                "<P class='noresult'>抱歉，没有相关案件</P>"
+              )
+            }
+          } else {
+            toastr.warning(result.msg)
+          }
+          $('.my-loans-content .totalNum').text(result.data.totalCount)
+        }
       }
     })
   }
   $(function() {
-    $('#my-reports').addClass('active')
+    $('#lawyer-loan').addClass('active')
     $('aside .right-icon').click(function(e) {
       e.stopPropagation()
       if (e.target.classList.contains('fa-chevron-down')) {
@@ -2374,16 +2438,51 @@ var userCenter = (function() {
           .addClass('fa-chevron-down')
       }
     })
+    //时间选择
+    $('#start-date').jeDate(start)
+    $('#end-date').jeDate(end)
+    $('.all-status').on('change', function() {
+      var select = $("select[name='status']")
+        .find('option:selected')
+        .val()
+    })
   })
   return {
     init: function() {
-      //  satelliteApplication();
-      getReports()
-      $(document).on('click', '.content-item a', function(e) {
-        e.stopPropagation()
-        //查询报告详情
-        getCaseDetail($(this).attr('to'))
-        return false
+      getMyloan()
+      $(document).on('click', '.showmore', function() {
+        var loanid = $(this).attr('data-id')
+        // 根据loanid在loan列表查找loanStatus
+        var loanStatus = listData.filter(function(loan) {
+          return Number(loanid) === Number(loan.id)
+        })[0].loanStatus
+        $({ loanId: loanid })._Ajax({
+          url: 'loanauditlog/AuditLogByLoanId',
+          success: function(result) {
+            var html = []
+            if (result.code == 0) {
+              var data = result.list
+              for (var i = 0; i < data.length; i++) {
+                html +=
+                  "<div class='pro-tex'>" +
+                  data[i].desc +
+                  '<span>' +
+                  data[i].createTime +
+                  '</span></div>'
+              }
+              $('#tr' + loanid + ' .steps-box .step').each(function(index) {
+                if (index < loanStatus + 1) {
+                  $(this).addClass('active-step')
+                }
+              })
+              $('#tr' + loanid + ' .process-text').html(html)
+              $('#tr' + loanid).toggle()
+            }
+          }
+        })
+      })
+      $(document).on('click', '.check-file-btn', function() {
+        downloadModal.showModal($(this).attr('data-id'))
       })
     }
   }

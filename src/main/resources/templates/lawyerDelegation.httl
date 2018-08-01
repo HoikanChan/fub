@@ -303,7 +303,7 @@ function createXMLHTTPRequest()
 </div>
 </div>
 <!-- footer end -->
-<script src="${host}/views/lawyerDelegation/main-c06d1e454a.js"></script>
+<script src="${host}/views/lawyerDelegation/main-c3d7e0306f.js"></script>
 <!--登录注册模态框-->
 </body>
 </html>

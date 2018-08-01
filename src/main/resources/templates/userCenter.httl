@@ -262,7 +262,7 @@ function createXMLHTTPRequest()
 </div>
 </div>
 <!-- footer end -->
-<script src="${host}/views/userCenter/main-a18164a956.js"></script>
+<script src="${host}/views/userCenter/main-6200bf4624.js"></script>
 <!--登录注册模态框-->
 </body>
 </html>

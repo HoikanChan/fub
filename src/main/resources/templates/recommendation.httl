@@ -405,7 +405,7 @@ function createXMLHTTPRequest()
 </div>
 </div>
 <!-- footer end -->
-<script src="${host}/views/recommendation/main-2c00a5c224.js"></script>
+<script src="${host}/views/recommendation/main-c4cd2d8f47.js"></script>
 <!--登录注册模态框-->
 </body>
 </html>

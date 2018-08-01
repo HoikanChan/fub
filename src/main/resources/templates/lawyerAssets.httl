@@ -326,7 +326,7 @@ function createXMLHTTPRequest()
 </div>
 </div>
 <!-- footer end -->
-<script src="${host}/views/lawyerAssets/main-452af385a6.js"></script>
+<script src="${host}/views/lawyerAssets/main-dff4cc8af8.js"></script>
 <!--登录注册模态框-->
 </body>
 </html>

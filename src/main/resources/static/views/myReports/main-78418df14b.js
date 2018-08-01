@@ -1816,7 +1816,7 @@
 
     var tablePagerThree = window.tablePager2 = {
         opts: {
-            length: 3,
+            length: 10,
             preText: "上一页",
             nextText: "下一页",
             firstText: "",
@@ -1881,7 +1881,7 @@
                     success: function (data) {
                         _self.opts.success(data);
                         //后台返回数据格式
-                        _self.opts.totalCount = data.data.totalCount;
+                        _self.opts.totalCount = data.page.totalCount;
                         _self.getTotalPage();
                         if (_self.opts.totalCount > 0 && _self.opts.page > 0) {
                             var pageTextArr = new Array;
@@ -1912,7 +1912,7 @@
                         _self.opts.success(data);
 
                         //后台返回数据格式
-                        _self.opts.totalCount = data.data.totalCount;
+                        _self.opts.totalCount = data.page.totalCount;
                         _self.getTotalPage();
                         if (_self.opts.totalCount > 0 && _self.opts.page > 0) {
                             var pageTextArr = new Array;
@@ -2313,69 +2313,49 @@
 })(window, jQuery);
 var userCenter = (function() {
   var page = 1
-  var inquery_validate
-  var start = {
-    isinitVal: true,
-    initDate:[{DD:"-7"},true],
-    format: "YYYY-MM-DD",
-    maxDate: $.nowDate({DD:0}), //最大日期
-    zIndex: 99999,
-    isClear:false,
-    isok:false,
-    okfun: function (elem, date) {
-            end.minDate = elem.val.replace(/\//g,"-"); //开始日选好后，重置结束日的最小日期
-         //   endDates();
-    },
-};
-var end = {
-    isinitVal: true,
-    isok: false,
-    isClear:false,
-    zIndex: 99999,
-    maxDate: $.nowDate({DD:0}), //最大日期
-    format: "YYYY-MM-DD",
-    okfun: function (elem, date) {
-            start.maxDate = elem.val.replace(/\//g,"-"); //将结束日的初始值设定为开始日的最大日期
-    }
-};
-  function getMycase(){ 
+  function getReports() {
     var params = {
-      clientId:clientId,
-      sidx : "createTime",
-      order : "desc"
+      clientId: clientId
     }
 
-  $('#my-cases .pager').tablePager({
-    
-      url: "order/queryOrderList",
-      searchParam:params,
-      success: function (result) {
-              if (result.code==0) {
-             
-                      if (result) {
-                       
-                          var html = template("case-result-templete",result.data)
-                 
-                         $(".my-case-box").html(html); 
-                         if(result.data.totalCount<10){
-                          $(".page-row").hide()
-                          }else{
-                              $(".page-row").show()
-                          }
-                          if(result.data.totalCount==0){
-                              $(".my-cases-box").html("<P class='noresult'>抱歉，没有相关案件</P>")
-                          }
-                          }else{
-                              toastr.warning(result.msg);
-                          }
-                        $(".my-cases-content .totalNum").text(result.data.totalCount);
-                      }
+    $('#my-cases .pager').tablePager({
+      url: 'report/api/list',
+      searchParam: params,
+      success: function(result) {
+        if (result.code == 0) {
+          if (result) {
+            $('.reports-content .reports-list').html(template('report-template', result.data))
+            if (result.data.totalCount < 10) {
+              $('.page-row').hide()
+            } else {
+              $('.page-row').show()
+            }
+            if (result.data.totalCount == 0) {
+              $('.reports-content').html(
+                "<p class='noresult'>抱歉，没有相关报告</p>"
+              )
+            }
+          } else {
+            toastr.warning(result.msg)
+          }
+        }
       }
- })
+    })
+  }
+  //查询报告详情
 
+  function getCaseDetail(id) {
+    $({})._Ajax({
+      url: 'report/api/info/' + id,
+      success: function(result) {
+        $('.reports-list').hide()
+        $('.reports-detail').show()
+        $('.reports-content .reports-detail').html(template('report-detail-template', result.data))
+      }
+    })
   }
   $(function() {
-   $("#my-bills").addClass("active");
+    $('#my-reports').addClass('active')
     $('aside .right-icon').click(function(e) {
       e.stopPropagation()
       if (e.target.classList.contains('fa-chevron-down')) {
@@ -2394,48 +2374,16 @@ var end = {
           .addClass('fa-chevron-down')
       }
     })
-     //时间选择 
-     $("#start-date").jeDate(start);
-     $("#end-date").jeDate(end);
-    $(".all-status").on("change",function(){
-      var select = $("select[name='status']").find("option:selected").val();
-    })
   })
   return {
     init: function() {
-      getMycase()
-      $(document).on("click",".showmore",function(){
-          var caseid = $(this).attr("data-id");
-          $({caseId:caseid})._Ajax({
-            url: "casetrial/queryCaseTrial",
-            success: function (result) {
-              var html=[],html2=[],html3=[],html4=[];
-                    if (result.code==0) {
-                    var data = result.trialList;
-                      html  = "<div class='process-img'>"
-                                    + "<div class='grap-bg'>"
-                                        +"<div class='org-bg-one'>"
-                                        +"</div>"
-                                        +"<div class='org-bg-two'>"
-                                        +"</div>"
-                                        +"<div class='org-bg-three'>"
-                                        +"</div>"
-                                        +"<div class='org-bg-four'>"
-                                        +"</div>"
-                                        +"<div class='org-bg-five'>"
-                                        +"</div>"
-                                      +"</div>"
-                                      +"<div>"
-                        for(var i=0;i<data.length;i++){
-                          html2 += "<div class='pro-tex'>"+ data[i].trialRound  +"<span>"+data[i].time+"</span></div>"
-                        }
-                      
-                         
-                        $("#tr"+caseid+" .process-text").html(html2);
-                        $("#tr"+caseid).toggle();
-                    }
-                 }
-                });
+      //  satelliteApplication();
+      getReports()
+      $(document).on('click', '.content-item a', function(e) {
+        e.stopPropagation()
+        //查询报告详情
+        getCaseDetail($(this).attr('to'))
+        return false
       })
     }
   }

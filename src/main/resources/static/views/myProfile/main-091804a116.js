@@ -1816,7 +1816,7 @@
 
     var tablePagerThree = window.tablePager2 = {
         opts: {
-            length: 3,
+            length: 10,
             preText: "上一页",
             nextText: "下一页",
             firstText: "",
@@ -1881,7 +1881,7 @@
                     success: function (data) {
                         _self.opts.success(data);
                         //后台返回数据格式
-                        _self.opts.totalCount = data.data.totalCount;
+                        _self.opts.totalCount = data.page.totalCount;
                         _self.getTotalPage();
                         if (_self.opts.totalCount > 0 && _self.opts.page > 0) {
                             var pageTextArr = new Array;
@@ -1912,7 +1912,7 @@
                         _self.opts.success(data);
 
                         //后台返回数据格式
-                        _self.opts.totalCount = data.data.totalCount;
+                        _self.opts.totalCount = data.page.totalCount;
                         _self.getTotalPage();
                         if (_self.opts.totalCount > 0 && _self.opts.page > 0) {
                             var pageTextArr = new Array;
@@ -2311,415 +2311,103 @@
 
 
 })(window, jQuery);
-var _applycase = function () {
-    var applycase_validate, applycase_modal;
-    var jude = true;
-
-    $(function () {
-               $({})._Ajax({
-                url: "casetype/apiTree",
-                success: function (result) {
-                        if (result.code==0) {
-                            var html = template("search-reason-templete",result)
-                            $("#navbar-menu").html(html);
-                        }
-                    }
-            });
-
-            _applycase.applycase_modal =applycase_modal= $("#applycase-modal").remodal();
-            //表单验证
-            applycase_validate = $("#applycase-form").validate({
-                    rules: {
-                       
-                        mobile : {
-                            required: true,
-                        },
-                        name : {
-                            required: true,
-                        },
-                        caseType : {
-                            required: true,
-                        },
-                        lawyerFeeLimit : {
-                            required: true,
-                        }
-
-                    },
-                    messages: {
-                        mobile : {
-                            required: "请输入您的姓名",
-                            account:"请输入正确的手机号码以13X 15X 18X 14X 17X号段开头"
-                        },
-                        name : {
-                            required: "请输入案件名称",
-                        },
-                        caseType : {
-                            required: "请选择案件类型",
-                        },
-                        lawyerFeeLimit : {
-                            required: "请输入律师费用",
-                        }
-                      
-                    },
-                    errorPlacement: function (error, element) {
-                        element.siblings(".error-div").html(error)
-                    },
-            });
-        })
-          
-        $.validator.addMethod("account",function(value,element,params){  
-            var account = regexs.mobile    // 密码验证
-                return (account.test(value));  
-        });    
-        function applyCase(){
-           
-            var mobile = $("#mobile").val();
-            var name = $("#name").val();
-            var caseType = $("#reasonslect .reaseontext").attr("data-id")?$("#reasonslect .reaseontext").attr("data-id"):"";
-            var lawyerFeeLimit = $("#lawyerFeeLimit").val();
-            var marks = $("#marks").val();
-        
-            var params = {
-                mobile : mobile,
-                name : name,
-                caseType : caseType,
-                lawyerFeeLimit : lawyerFeeLimit,
-                marks : marks
-            }
-            $(params)._Ajax({
-                url: "casesource/saveNewCaseSource",
-                success: function (result) {
-                        if (result.code==0) {
-                            toastr.success(result.msg);
-                            $(".remodal-close-btn").trigger("click");
-                        }else{
-                            toastr.error(result.msg);
-                 
-                        }
-                     }
-            });
-        } 
-    return {
-        init: function () {
-             
-                
-                    $(document).on("click","#reasonslect .reaseontext",function(event){
-                        $("#navbar-menu").toggle()
-                        event.stopPropagation();
-                    })
-                    $(document).on("click",".first-val",function(){
-                        var data = $(this).text();
-                        var dataid = $(this).attr("data-id");
-                        $("#reasonslect .reaseontext").text(data);
-                        $("#reasonslect .reaseontext").attr("data-id",dataid);
-                        $("#navbar-menu").hide();
-                        
-                    })
-                    $(document).on("click",".second-val",function(){
-                        var data = $(this).text();
-                        var dataid = $(this).attr("data-id");
-                        var parent = $(this).attr("parent-name");
-                        $("#reasonslect .reaseontext").text(parent+"-"+data);
-                        $("#reasonslect .reaseontext").attr("data-id",dataid);
-                        $("#navbar-menu").hide();
-                    })
-                    $(document).on("click",".last-val",function(){
-                        var data = $(this).text();
-                        var dataid = $(this).attr("data-id");
-                        var parentname = $(this).attr("parent-name");
-                        var parent = $(this).attr("parent");
-                        $("#reasonslect .reaseontext").attr("data-id",dataid);
-                        $("#reasonslect .reaseontext").text(parent+" - "+parentname+" - "+data);
-                        $("#navbar-menu").hide();
-                    })
-                    $(document).on("click",function(event){
-                        $("#navbar-menu").hide();
-                    });
-                    $(document).on("click", ".remodal-confirm", function () {
-                        if (applycase_validate.form()) {
-                            applyCase();
-                        }    
-                                
-                        });
-                  
-            },
-            applycase_modal: null,
-    }
-} ();
-_applycase.init();
-
-var _updateCase = function () {
-    var updateCase_validate, updateCase_modal;
-    var jude = true;
-
-    function updateCaseDialog(obj,objid){
-        $("#casename").val(obj);
-        $("#caseno").val(objid);
-        $("#handlecront").val();
-        $("#handlepro").val();
-        $("#updatemarks").val();
-        var objid = objid;
-        $({caseTypeId:objid})._Ajax({
-            url: "casetype/queryTrialRoundByCaseType",
-            success: function (result) {
-                    if (result.code==0) {
-                        
-                        var html = template("case-process-templete",result)
-                        $(".case-process").html(html);
-                    }
-                 }
-        });
-    }
-
-   
-       
-   
-
-    $(function () {
-        
-        updateCase_modal= $("#updateCase-modal").remodal();
-          
-            //表单验证
-            updateCase_validate = $("#updateCase-form").validate({
-                    rules: {
-
-                        remarks : {
-                            required: true,
-                        }
-                    },
-                    messages: {
-                        remarks: {
-                            required: "请输入您的评价",
-                           
-                        }
-                      
-                    },
-                    errorPlacement: function (error, element) {
-                        element.siblings(".error-div").html(error)
-                    },
-            });
-           
-        })
-          
-        //登录请求
-        function myartingAjax() {
-            var params = {
-                content:$("#myarting-form textarea[name='content']").val()
-            }
-            $.ajax({
-                url: api.host+"web/appraise/save",
-                type:"post",
-                contentType:"application/json",
-                dataType:"json",
-                data:JSON.stringify(params),
-                    success: function (result) {
-                            if (result.code==1) {
-                                
-                                toastr.success("提交成功")
-                                $(".remodal-close").trigger("click");
-                            } else {
-                                toastr.warning(result.msg)
-                            }
-                    }
-            })
-        };
-    
-        
-    return {
-        init: function () {
-              
-                $(document).on("confirmation", ".updateCase-modal", function () {
-                        jude=false
-                       
-                         myartingAjax();
-                              
-                    });
-                
-                  
-            },
-            updateCase_modal:null,
-            updateCaseDialog:updateCaseDialog
-    }
-} ();
-_updateCase.init();
 var userCenter = (function() {
-  var page = 1
-  var inquery_validate
-  var start = {
-    isinitVal: true,
-    initDate:[{DD:"-7"},true],
-    format: "YYYY-MM-DD",
-    maxDate: $.nowDate({DD:0}), //最大日期
-    zIndex: 99999,
-    isClear:false,
-    isok:false,
-    okfun: function (elem, date) {
-            end.minDate = elem.val.replace(/\//g,"-"); //开始日选好后，重置结束日的最小日期
-         //   endDates();
-    },
-};
-var end = {
-    isinitVal: true,
-    isok: false,
-    isClear:false,
-    zIndex: 99999,
-    maxDate: $.nowDate({DD:0}), //最大日期
-    format: "YYYY-MM-DD",
-    okfun: function (elem, date) {
-            start.maxDate = elem.val.replace(/\//g,"-"); //将结束日的初始值设定为开始日的最大日期
-    }
-};
-  function getMycase(){ 
-    var params = {
-      lawyerId:lawyerId,
-      sidx : "createTime",
-      order : "desc"
-    }
-
-  $('#my-cases .pager').tablePager({
-    
-      url: "order/queryLawyerOrderList",
-      searchParam:params,
-      success: function (result) {
-              if (result.code==0) {
-             
-                      if (result) {
-                       
-                          var html = template("case-result-templete",result.data)
-                 
-                         $(".my-case-box").html(html); 
-                         if(result.data.totalCount<10){
-                          $(".page-row").hide()
-                          }else{
-                              $(".page-row").show()
-                          }
-                          if(result.data.totalCount==0){
-                              $(".my-cases-box").html("<P class='noresult'>抱歉，没有相关案件</P>")
-                          }
-                          }else{
-                              toastr.warning(result.msg);
-                          }
-                        $(".my-cases-content .totalNum").text(result.data.totalCount);
-                      }
+  function getParams(params) {
+    var paramStr = ''
+    for (var key in params) {
+      if (params[key]) {
+        paramStr += key + '=' + params[key] + '&'
       }
- })
+    }
+    return paramStr.slice(0, -1)
   }
-  function searchMycase(){ 
-
-    var params = {
-      clientId:clientId,
-      sidx : "createTime",
-      order : "desc",
-      beginDate:$("#start-date").val(),
-      endDate:$("#end-date").val()
+  function updateProfile() {
+    var paramsObj = {}
+    //遍历input
+    $('.form-group input')
+      .serializeArray()
+      .forEach(input => {
+        paramsObj[input.name] = input.value
+      })
+    //遍历select
+    $('.form-group select')
+      .serializeArray()
+      .forEach(input => {
+        paramsObj[input.name] = input.value
+      })
+    console.log(profile_validate.form())
+    $({})._Ajax({
+      url:
+        '/client/updateClientAndCompany?clientId=' +
+        clientId +
+        '&' +
+        getParams(paramsObj)
+    })
+  }
+  function initForm() {
+    if (!clientId) {
+      console.error('该用户未完善信息没有clientId')
     }
-
-  $('#my-cases .pager').tablePager({
-    
-      url: "order/queryLawyerOrderList",
-      searchParam:params,
-      success: function (result) {
-              if (result.code==0) {
-             
-                      if (result) {
-                       
-                          var html = template("case-result-templete",result.data)
-                 
-                         $(".my-case-box").html(html); 
-                         if(result.data.totalCount<10){
-                          $(".page-row").hide()
-                          }else{
-                              $(".page-row").show()
-                          }
-                          if(result.data.totalCount==0){
-                              $(".my-cases-box").html("<P class='noresult'>抱歉，没有相关案件</P>")
-                          }
-                          }else{
-                              toastr.warning(result.msg);
-                          }
-                        $(".my-cases-content .totalNum").text(result.data.totalCount);
-                      }
-      }
- })
-
-  } 
-  $(function() {
-   $("#my-cases").addClass("active");
-    $('aside .right-icon').click(function(e) {
-      e.stopPropagation()
-      if (e.target.classList.contains('fa-chevron-down')) {
-        $(e.target)
-          .siblings('div.dropdown-menu')
-          .show()
-        $(e.target)
-          .addClass('fa-chevron-up')
-          .removeClass('fa-chevron-down')
-      } else if (e.target.classList.contains('fa-chevron-up')) {
-        $(e.target)
-          .siblings('div.dropdown-menu')
-          .hide()
-        $(e.target)
-          .removeClass('fa-chevron-up')
-          .addClass('fa-chevron-down')
+    $({})._Ajax({
+      url: '/client/queryClientAndCompany?clientId=' + clientId,
+      success: function(result) {
+        console.log(result)
+        $('.my-profile-content').html(template('profile-template', result))
+        //自定义正则表达示验证方法
+        $.validator.addMethod('idcard', function(value, element, params) {
+          // 身份证验证
+          var idcard = regexs.idcard
+          return idcard.test(value)
+        })
+        $.validator.addMethod('mobile', function(value, element, params) {
+          var mobile = regexs.mobile // 密码验证
+          return mobile.test(value)
+        })
+        //表单验证
+        profile_validate = $('#profile-form').validate({
+          rules: {
+            mobile: {
+              mobile: true
+            },
+            email: {
+              email: true
+            },
+            idcard: {
+              idcard: true
+            }
+          },
+          messages: {
+            mobile: {
+              required: '请输入有效的手机号码',
+              mobile: '请输入正确的手机号码以13X 15X 18X 14X 17X号段开头'
+            },
+            email: {
+              email: '请输入正确的邮箱地址'
+            },
+            idcard: {
+              idcard: '请输入正确的身份证号码'
+            }
+          },
+          errorPlacement: function(error, element) {
+            element.siblings('.error-div').html(error)
+            element.focus()
+          }
+        })
+        $('#submit-btn').click(function(e) {
+          e.stopPropagation()
+          if (profile_validate.form()) {
+            updateProfile()
+          }
+        })
       }
     })
-     //时间选择 
-     $("#start-date").jeDate(start);
-     $("#end-date").jeDate(end);
-    $(".all-status").on("change",function(){
-      var select = $("select[name='status']").find("option:selected").val();
-    })
-  })
+  }
+
+  $(function() {})
   return {
     init: function() {
-      getMycase()
-      $(document).on("click","#search-case",function(){
-        searchMycase();
-      })
-      $(document).on("click",".showmore",function(){
-          var caseid = $(this).attr("data-id");
-          $({caseId:caseid,caseDesc:"time"})._Ajax({
-            url: "casetrial/queryCaseTrial",
-            success: function (result) {
-              var html=[],html2=[],html3=[],html4=[];
-                    if (result.code==0) {
-                    var data = result.trialList;
-                      html  = "<div class='process-img'>"
-                                    + "<div class='grap-bg'>"
-                                        +"<div class='org-bg-one'>"
-                                        +"</div>"
-                                        +"<div class='org-bg-two'>"
-                                        +"</div>"
-                                        +"<div class='org-bg-three'>"
-                                        +"</div>"
-                                        +"<div class='org-bg-four'>"
-                                        +"</div>"
-                                        +"<div class='org-bg-five'>"
-                                        +"</div>"
-                                      +"</div>"
-                                      +"<div>"
-                        for(var i=0;i<data.length;i++){
-                          if(data[i].caseDesc){
-                            html2 += "<div class='pro-tex'>"+ data[i].trialRound  +"（"+data[i].caseDesc +"）<span>"+data[i].time+"</span></div>"
-                          }else{
-                            html2 += "<div class='pro-tex'>"+ data[i].trialRound  +"<span>"+data[i].time+"</span></div>"
-                          }
-                         
-                        }
-                      
-                         
-                        $("#tr"+caseid+" .process-text").html(html2);
-                        $("#tr"+caseid).toggle();
-                    }
-                 }
-                });
-      })
-      $(document).on("click",".updatebtn",function(){
-                
-        _updateCase.updateCaseDialog($(this).attr("data-name"),$(this).attr("data-id"));
-       
-   
-})
+    $("#my-profile").addClass("active");
+      initForm()
     }
   }
 })()

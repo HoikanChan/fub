@@ -1816,7 +1816,7 @@
 
     var tablePagerThree = window.tablePager2 = {
         opts: {
-            length: 3,
+            length: 10,
             preText: "上一页",
             nextText: "下一页",
             firstText: "",
@@ -1881,7 +1881,7 @@
                     success: function (data) {
                         _self.opts.success(data);
                         //后台返回数据格式
-                        _self.opts.totalCount = data.data.totalCount;
+                        _self.opts.totalCount = data.page.totalCount;
                         _self.getTotalPage();
                         if (_self.opts.totalCount > 0 && _self.opts.page > 0) {
                             var pageTextArr = new Array;
@@ -1912,7 +1912,7 @@
                         _self.opts.success(data);
 
                         //后台返回数据格式
-                        _self.opts.totalCount = data.data.totalCount;
+                        _self.opts.totalCount = data.page.totalCount;
                         _self.getTotalPage();
                         if (_self.opts.totalCount > 0 && _self.opts.page > 0) {
                             var pageTextArr = new Array;
@@ -2311,116 +2311,33 @@
 
 
 })(window, jQuery);
-var downloadModal = (function() {
-  $('#getcaseDeatil-modal').remodal()
-  /*拇指图弹出*/
-  function showModal(loanId) {
-    console.log(loanId)
-    $('.getcaseDeatil-form').html('')
-    $({})._Ajax({
-      url: 'loan/queryLoanDeatilAndFiles?loanId=' + loanId,
-      success: function(result) {
-        if (result.code == 0) {
-          if (result) {
-            result.data.host = api.host
-            $('.file-table').html(template('file-table-template', result.data))
-
-            if (result.data.files.length < 10) {
-              $('#download-modal .page-row').hide()
-            } else {
-              $('#download-modal .page-row').show()
-            }
-            if (result.data.files.length == 0) {
-              $('.file-table').html(
-                "<p class='noresult' style='text-align:center;padding:24px 0'>抱歉，该订单没有文件</p>"
-              )
-            }
-          } else {
-            toastr.warning(result.msg)
-          }
+var caseDetail = function () {
+   
+    return {
+        init: function () {
+           
         }
-      }
-    })
-  }
-  return {
-    init: function() {
-      $(document).on('click', '#preview', function(e) {
-        e.stopPropagation()
-        window.open(api.host + $(this).attr('data-path'))
-        return false
-      })
-    },
-    showModal: showModal
-  }
-})()
-downloadModal.init()
-
+    }
+} ();
+caseDetail.init();
 var userCenter = (function() {
   var page = 1
   var inquery_validate
-  var listData
-  var start = {
-    isinitVal: true,
-    initDate: [{ DD: '-7' }, true],
-    format: 'YYYY-MM-DD',
-    maxDate: $.nowDate({ DD: 0 }), //最大日期
-    zIndex: 99999,
-    isClear: false,
-    isok: false,
-    okfun: function(elem, date) {
-      end.minDate = elem.val.replace(/\//g, '-') //开始日选好后，重置结束日的最小日期
-      //   endDates();
-    }
-  }
-  var end = {
-    isinitVal: true,
-    isok: false,
-    isClear: false,
-    zIndex: 99999,
-    maxDate: $.nowDate({ DD: 0 }), //最大日期
-    format: 'YYYY-MM-DD',
-    okfun: function(elem, date) {
-      start.maxDate = elem.val.replace(/\//g, '-') //将结束日的初始值设定为开始日的最大日期
-    }
-  }
-  function getMyloan() {
-    var params = {
-      clientId: clientId,
-      sidx: 'createTime',
-      order: 'desc'
-    }
 
-    $('#my-loans .pager').tablePager({
-      url: 'loan/queryClientLoanOrderList',
-      searchParam: params,
-      success: function(result) {
-        if (result.code == 0) {
-          if (result) {
-            var html = template('loan-result-templete', result.data)
-            listData = result.data.list
-            $('.totalNum').html(result.data.totalCount)
-            $('.my-loan-box').html(html)
-            if (result.data.totalCount < 10) {
-              $('.page-row').hide()
-            } else {
-              $('.page-row').show()
-            }
-            if (result.data.totalCount == 0) {
-              $('.my-loans-box').html(
-                "<P class='noresult'>抱歉，没有相关案件</P>"
-              )
-            }
-          } else {
-            toastr.warning(result.msg)
-          }
-          $('.my-loans-content .totalNum').text(result.data.totalCount)
-        }
-      }
-    })
-  }
   $(function() {
-    $('#lawyer-loan').addClass('active')
-    $('aside .right-icon').click(function(e) {
+  //  $('#calendar').fullCalendar({})
+    $(".user-info-block h4 span").text(phone);
+    $(".user-info-block span.count").text(userZH);
+    $(".user-info-block span.regtime").text(registerTime);
+
+    $('.fc-widget-header .fc-sun span').html('星期天')
+    $('.fc-widget-header .fc-mon span').html('星期一')
+    $('.fc-widget-header .fc-tue span').html('星期二')
+    $('.fc-widget-header .fc-wed span').html('星期三')
+    $('.fc-widget-header .fc-thu span').html('星期四')
+    $('.fc-widget-header .fc-fri span').html('星期五')
+    $('.fc-widget-header .fc-sat span').html('星期六')
+    $('.right-icon').click(function(e) {
       e.stopPropagation()
       if (e.target.classList.contains('fa-chevron-down')) {
         $(e.target)
@@ -2438,52 +2355,29 @@ var userCenter = (function() {
           .addClass('fa-chevron-down')
       }
     })
-    //时间选择
-    $('#start-date').jeDate(start)
-    $('#end-date').jeDate(end)
-    $('.all-status').on('change', function() {
-      var select = $("select[name='status']")
-        .find('option:selected')
-        .val()
-    })
+
   })
+
   return {
     init: function() {
-      getMyloan()
-      $(document).on('click', '.showmore', function() {
-        var loanid = $(this).attr('data-id')
-        // 根据loanid在loan列表查找loanStatus
-        var loanStatus = listData.filter(function(loan) {
-          return Number(loanid) === Number(loan.id)
-        })[0].loanStatus
-        $({ loanId: loanid })._Ajax({
-          url: 'loanauditlog/AuditLogByLoanId',
-          success: function(result) {
-            var html = []
-            if (result.code == 0) {
-              var data = result.list
-              for (var i = 0; i < data.length; i++) {
-                html +=
-                  "<div class='pro-tex'>" +
-                  data[i].desc +
-                  '<span>' +
-                  data[i].createTime +
-                  '</span></div>'
-              }
-              $('#tr' + loanid + ' .steps-box .step').each(function(index) {
-                if (index < loanStatus + 1) {
-                  $(this).addClass('active-step')
-                }
-              })
-              $('#tr' + loanid + ' .process-text').html(html)
-              $('#tr' + loanid).toggle()
-            }
+      //  satelliteApplication();
+      $("#indexpage").addClass("active");
+     
+      $('.applications').html(
+        template('application-template', {
+          application: {
+            project: '法务贷/案件委托',
+            laywer: '张三',
+            contact: '15622542221',
+            bill: '贷款费用/律师费',
+            time: '2015-06-05 15:33:30',
+            office: '广东东莞A律师事务所',
+            decription:
+              '法务贷：XX时间申请法务贷款XX金额，还歀期XXX，本息总计XXX；案件委托：律师的案件描述'
           }
         })
-      })
-      $(document).on('click', '.check-file-btn', function() {
-        downloadModal.showModal($(this).attr('data-id'))
-      })
+      )
+
     }
   }
 })()

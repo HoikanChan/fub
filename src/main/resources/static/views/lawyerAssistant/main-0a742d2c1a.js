@@ -1,3 +1,472 @@
+
+var pageSize = 12;
+var $cityInput;
+function init_city_select($inputE) {
+	var html = "";
+	html += '<div class="provinceCityAll">';
+	html += '<div class="tabs clearfix">';
+	html += '<ul>';
+	html += '<li><a tb="provinceAll" id="provinceAll" class="current">省份</a></li>';
+	html += '<li><a tb="cityAll" id="cityAll">城市</a></li>';
+	// html += '<li><a tb="countyAll" id="countyAll">区/县</a></li>';
+	html += '</ul>';
+	html += '</div>';
+	html += '<div class="con">';
+	html += '<div class="provinceAll">';
+	html += '<div class="pre"><a><span class="glyphicon glyphicon-menu-left"></span></a></div>';
+	html += '<div class="list"><ul></ul></div>';
+	html += '<div class="next"><a><span class="glyphicon glyphicon-menu-right"></span></a></div>';
+
+	html += '</div>';
+	html += '<div class="cityAll">';
+	html += '<div class="pre"><a><span class="glyphicon glyphicon-menu-left"></span></a></div>';
+	html += '<div class="list"><ul></ul></div>';
+	html += '<div class="next"><a><span class="glyphicon glyphicon-menu-right"></span></a></div>';
+	html += '</div>';
+	html += '<div class="province-comfime clear"><span>确定</span></div>';
+	// html += '<div class="countyAll">';
+	// html += '<div class="pre"><a></a></div>';
+	// html += '<div class="list"><ul></ul></div>';
+	// html += '<div class="next"><a></a></div>';
+	// html += '</div>';
+	html += '</div>';
+	html += '</div>';
+	$(".provinceCityAll").remove();
+	$("body").append(html);
+	if (!allProvince) {
+		getAllProvince();
+	}
+	if (!allCity) {
+		getAllCity();
+	}
+	if (!allCounty) {
+		getAllCounty();
+	}
+	$(document).on("click",function(event){
+		$(".provinceCityAll").hide();
+	});
+	$(".provinceCityAll").on("click", function(event) {
+			event.stopPropagation();
+	});
+	$(".province-comfime span").on("click", function(event) {
+		$(".provinceCityAll").hide();
+		var id = $(".province-comfime span").attr("id");
+		var name =$(".province-comfime span").attr("title");
+		$("#area-select").attr("area-id",id);
+		$("#area-select").val(name)
+});
+
+	$inputE.on("click", function(event){
+		$cityInput = $(this);
+		$(".provinceCityAll").css({
+			"left": $(this).offset().left + "px",
+			"top": $(this).offset().top + $(this).height() + 3 + "px",
+		}).toggle();
+		getProvinceCityCounty($cityInput);
+		event.stopPropagation();
+	});
+	$(".provinceCityAll .tabs li a").on("click", function(){
+		if ($(this).attr("tb") == "cityAll" && $(".provinceAll .list .current").length < 1) {
+			return;
+		};
+		// if ($(this).attr("tb") == "countyAll" && $(".cityAll .list .current").length < 1) {
+		// 	return;
+		// };
+		$(this).addClass("current").closest("li").siblings("li").find("a").removeClass("current");
+		$(".provinceCityAll .con").find("." + $(this).attr("tb")).show().siblings().hide();
+	});
+
+	var provicelist = [];
+ var citylist = [];
+	$({type:1})._Ajax({
+		url: "sys/region/getAreaByType",
+		success: function (result) {
+						if (result.code==0) {
+							var data = 	result.list
+							for(var i=0;i<data.length;i++){
+								provicelist += '{"id":"' + data[i].agencyId +'","name":"'+ data[i].name +'"},';
+							}
+							provicelist = "["+provicelist+"]";
+							provicelist = provicelist.replace(",]","]");
+					sessionStorage.setItem("province",provicelist)
+						}
+		}
+	
+	}); 
+	$({type:2})._Ajax({
+		url: "sys/region/getAreaByType",
+		success: function (result) {
+						if (result.code==0) {
+							var datas = 	result.list
+							for(var i=0;i<datas.length;i++){
+								citylist += '{"provinceId":"' + datas[i].parentId +'","name":"'+ datas[i].name +'","id":"'+datas[i].id+'"},';
+							}
+							citylist = "["+citylist+"]";
+							citylist = citylist.replace(",]","]");
+					sessionStorage.setItem("city",citylist)
+						}
+		}
+	
+	}); 
+
+}
+
+function getProvinceCityCounty($cityInput) {
+	if ($cityInput) {
+		$(".provinceAll .list ul").empty();
+		$(".cityAll .list ul").empty();
+		// $(".countyAll .list ul").empty();
+		
+		var pccName = $cityInput.val().split("-");
+		if (pccName.length == 3) {
+			var provinceName = pccName[0];
+			var provinceId;
+			var provinceIndex;
+			$.each(allProvince, function(i){
+				if (this.name == provinceName) {
+					provinceId = this.id;
+					provinceIndex = i;
+					return;
+				}
+			});
+			
+			var cityName = pccName[1];
+			var cityId;
+			var cityIndex;
+			if (provinceId) {
+				var prvinceAllCity = allCityMap.get(id);
+				$.each(prvinceAllCity, function(i){
+					if (this.name == cityName) {
+						cityId = this.id;
+						cityIndex = i;
+						return;
+					}
+				});
+			}
+			
+			var countyName = pccName[2];
+			var countyId;
+			var countyIndex;
+			if (cityId) {
+				var cityAllcounty = allCountyMap.get(cityId);
+				$.each(cityAllcounty, function(i){
+					if (this.name == countyName) {
+						countyId = this.id;
+						countyIndex = i;
+						return;
+					}
+				});
+			}
+			
+			if (countyId) {
+				var currentProvincePage = Math.ceil((provinceIndex + 1) / pageSize);
+				var currentCityPage = Math.ceil((cityIndex + 1) / pageSize);
+				var currentCountyPage = Math.ceil((countyIndex + 1) / pageSize);
+				provincePage(currentProvincePage);
+				cityPage(provinceId, currentCityPage);
+				countyPage(cityId, currentCountyPage);
+				var prvinceName = $("#" + provinceId).addClass("current");
+				var cityName = $("#" + cityId).addClass("current");
+				var countyName = $("#" + countyId).addClass("current");
+				// $("#countyAll").addClass("current").closest("li").siblings("li").find("a").removeClass("current");
+				// $(".provinceCityAll .con .countyAll").show().siblings().hide();
+				return;
+			}
+		}
+	}
+	viewProvince();
+}
+
+function viewProvince() {
+	$(".provinceCityAll .con .provinceAll").show().siblings().hide();
+	$("#provinceAll").addClass("current").closest("li").siblings("li").find("a").removeClass("current");
+	provincePage(1);
+}
+
+
+
+function provincePage(currentProvincePage) {
+	$(".provinceAll .pre a, .provinceAll .next a").removeClass("can");
+	var totalPage = Math.ceil(allProvince.length / pageSize);
+	if (totalPage > 1) {
+		if (currentProvincePage == 1) {
+			$(".provinceAll .pre a").removeClass("can").removeAttr("onclick");
+			$(".provinceAll .next a").addClass("can").attr("onclick", "provincePage(" + (currentProvincePage+1) + ");");
+		} else if (currentProvincePage > 1 && currentProvincePage < totalPage) {
+			$(".provinceAll .pre a").addClass("can").attr("onclick", "provincePage(" + (currentProvincePage-1) + ");");
+			$(".provinceAll .next a").addClass("can").attr("onclick", "provincePage(" + (currentProvincePage+1) + ");");
+		} else {
+			$(".provinceAll .pre a").addClass("can").attr("onclick", "provincePage(" + (currentProvincePage-1) + ");");
+			$(".provinceAll .next a").removeClass("can").removeAttr("onclick");
+		}
+	} else {
+		$(".provinceAll .pre a").removeClass("can").removeAttr("onclick");
+		$(".provinceAll .next a").removeClass("can").removeAttr("onclick");
+	}
+	var start = (currentProvincePage - 1) * pageSize;
+	var end = currentProvincePage  * pageSize;
+	if (currentProvincePage == totalPage) {
+		end = allProvince.length;
+	}
+	var html = "";
+	for (var i = start; i < end; i++) {		
+		var provinceName = allProvince[i].name;
+		if (provinceName == '内蒙古自治区') {
+			provinceShortName = '内蒙古';
+		} else if (provinceName == '黑龙江省') {
+			provinceShortName = '黑龙江';
+		} else {
+			provinceShortName = provinceName.substr(0, 2);
+		}
+		var provinceId = allProvince[i].id;
+		html += '<li><a onclick="viewCity(\'' + provinceId + '\');" id="' + provinceId + '" title="' + provinceName + '">' + provinceShortName + '</a></li>';
+	
+	}
+	$(".provinceAll .list ul").html(html);
+	
+}
+
+function viewCity(provinceId) {
+	$("#" + provinceId).addClass("current").closest("li").siblings("li").find("a").removeClass("current");
+	var proname = $("#"+provinceId).attr("title");
+	$(".provinceCityAll .con .cityAll").show().siblings().hide();
+	$("#cityAll").addClass("current").closest("li").siblings("li").find("a").removeClass("current");
+$(".province-comfime span").attr("id",provinceId);
+$(".province-comfime span").attr("title",proname);
+	cityPage(provinceId, 1);
+	$(".province-comfime").show()
+}
+
+
+
+function cityPage(provinceId, currentCityPage) {
+	var provinceAllCity = allCityMap.get(provinceId);
+	var totalPage = Math.ceil(provinceAllCity.length / pageSize);
+	$(".cityAll .pre a, .cityAll .next a").removeClass("can");
+	if (totalPage > 1) {
+		if (currentCityPage == 1) {
+			$(".cityAll .pre a").removeClass("can").removeAttr("onclick");
+			$(".cityAll .next a").addClass("can").attr("onclick", "cityPage('" + provinceId + "'," + (currentCityPage+1) + ");");
+		} else if (currentCityPage > 1 && currentCityPage < totalPage) {
+			$(".cityAll .pre a").addClass("can").attr("onclick", "cityPage('" + provinceId + "'," + (currentCityPage-1) + ");");
+			$(".cityAll .next a").addClass("can").attr("onclick", "cityPage('" + provinceId + "'," + (currentCityPage+1) + ");");
+		} else {
+			$(".cityAll .pre a").addClass("can").attr("onclick", "cityPage('" + provinceId + "'," + (currentCityPage-1) + ");");
+			$(".cityAll .next a").removeClass("can").removeAttr("onclick");
+		}
+	} else {
+		$(".cityAll .pre a").removeClass("can").removeAttr("onclick");
+		$(".cityAll .next a").removeClass("can").removeAttr("onclick");
+	}
+	var start = (currentCityPage - 1) * pageSize;
+	var end = currentCityPage  * pageSize;
+	if (currentCityPage == totalPage) {
+		end = provinceAllCity.length;
+	}
+	var html = "";
+	for (var i = start; i < end; i++) {		
+		var cityName = provinceAllCity[i].name;
+		var cityShortName = cityName.substring(0, 4);
+
+		var cityId = provinceAllCity[i].id;
+		
+		html += '<li><a onclick="viewAll(\'' + cityId + '\');" id="' + cityId + '" title="' + cityName + '">' + cityShortName + '</a></li>';
+	
+	
+	}
+	$(".cityAll .list ul").html(html);
+	
+}
+
+// function viewCounty(cityId) {
+// 	$("#" + cityId).addClass("current").closest("li").siblings("li").find("a").removeClass("current");
+// 	$(".provinceCityAll .con .countyAll").show().siblings().hide();
+// 	$("#countyAll").addClass("current").closest("li").siblings("li").find("a").removeClass("current");
+// 	countyPage(cityId, 1);
+// }
+
+// function countyPage(cityId, currentCountyPage) {
+// 	var cityAllCounty = allCountyMap.get(cityId);
+// 	var totalPage = Math.ceil(cityAllCounty.length / pageSize);
+// 	$(".countyAll .pre a, .countyAll .next a").removeClass("can");
+// 	if (totalPage > 1) {
+// 		if (currentCountyPage == 1) {
+// 			$(".countyAll .pre a").removeClass("can").removeAttr("onclick");
+// 			$(".countyAll .next a").addClass("can").attr("onclick", "countyPage('" + cityId + "'," + (currentCountyPage+1) + ");");
+// 		} else if (currentCountyPage > 1 && currentCountyPage < totalPage) {
+// 			$(".countyAll .pre a").addClass("can").attr("onclick", "countyPage('" + cityId + "'," + (currentCountyPage-1) + ");");
+// 			$(".countyAll .next a").addClass("can").attr("onclick", "countyPage('" + cityId + "'," + (currentCountyPage+1) + ");");
+// 		} else {
+// 			$(".countyAll .pre a").addClass("can").attr("onclick", "countyPage('" + cityId + "'," + (currentCountyPage-1) + ");");
+// 			$(".countyAll .next a").removeClass("can").removeAttr("onclick");
+// 		}
+// 	} else {
+// 		$(".countyAll .pre a").removeClass("can").removeAttr("onclick");
+// 		$(".countyAll .next a").removeClass("can").removeAttr("onclick");
+// 	}
+// 	var start = (currentCountyPage - 1) * pageSize;
+// 	var end = currentCountyPage  * pageSize;
+// 	if (currentCountyPage == totalPage) {
+// 		end = cityAllCounty.length;
+// 	}
+// 	var html = "";
+// 	for (var i = start; i < end; i++) {		
+// 		var countyName = cityAllCounty[i].name;
+// 		var countyShortName = countyName.substring(0, 4);
+// 		var countyId = cityAllCounty[i].id;
+// 		html += '<li><a onclick="viewAll(\'' + countyId + '\');" id="' + countyId + '" title="' + countyName + '">' + countyShortName + '</a></li>';
+// 	}
+// 	$(".countyAll .list ul").html(html);
+// }
+
+function viewAll(countyId) {
+	$("#" + countyId).addClass("current").closest("li").siblings("li").find("a").removeClass("current");
+	$(".provinceCityAll").hide();
+	var prvinceName = $(".provinceAll .list li a.current").attr("title");
+	var cityName = $(".cityAll .list li a.current").attr("title");
+//	var countyName = $(".countyAll .list li a.current").attr("title");
+//	$cityInput.val(prvinceName + "-" + cityName + "-" + countyName);
+$cityInput.val(prvinceName + "-" + cityName);
+ $cityInput.attr("area-id",countyId)
+}
+
+
+
+var allProvince;
+var allCity;
+var allCounty;
+var allCityMap = new Map();
+var allCountyMap = new Map();
+
+function getAllProvince() {
+	
+
+	allProvinces = sessionStorage.getItem("province");
+ allProvince = $.parseJSON(allProvinces)
+
+	
+ }
+
+function getAllCity() {
+	allCitys = sessionStorage.getItem("city");
+	allCity = $.parseJSON(allCitys)
+
+	$.each(allCity, function(){
+		var cityArr = allCityMap.get(this.provinceId);
+		if (!cityArr) {
+			cityArr = [];
+		}
+		cityArr.push({"id": this.id, "name": this.name});
+		allCityMap.put(this.provinceId, cityArr);
+	});
+}
+
+
+function getAllCounty(){
+	allCounty = {}
+	$.each(allCounty, function(){
+		var countyArr = allCountyMap.get(this.cityId);
+		if (!countyArr) {
+			countyArr = [];
+		}
+		countyArr.push({"id": this.id, "name": this.name});
+		allCountyMap.put(this.cityId, countyArr);
+	});
+}
+
+//定义map       
+function Map() {
+	this.container = {};
+}
+// 将key-value放入map中
+Map.prototype.put = function(key, value) {
+	try {
+		if (key != null && key != "")
+			this.container[key] = value;
+	} catch (e) {
+		return e;
+	}
+};
+// 根据key从map中取出对应的value
+Map.prototype.get = function(key) {
+	try {
+		return this.container[key];
+	} catch (e) {
+		return e;
+	}
+};
+// 判断map中是否包含指定的key
+Map.prototype.containsKey = function(key) {
+	try {
+		for ( var p in this.container) {
+			if (p == key)
+				return true;
+		}
+		return false;
+	} catch (e) {
+		return e;
+	}
+}
+// 判断map中是否包含指定的value
+Map.prototype.containsValue = function(value) {
+	try {
+		for ( var p in this.container) {
+			if (this.container[p] === value)
+				return true;
+		}
+		return false;
+	} catch (e) {
+		return e;
+	}
+};
+// 删除map中指定的key
+Map.prototype.remove = function(key) {
+	try {
+		delete this.container[key];
+	} catch (e) {
+		return e;
+	}
+};
+// 清空map
+Map.prototype.clear = function() {
+	try {
+		delete this.container;
+		this.container = {};
+
+	} catch (e) {
+		return e;
+	}
+};
+// 判断map是否为空
+Map.prototype.isEmpty = function() {
+	if (this.keyArray().length == 0)
+		return true;
+	else
+		return false;
+};
+// 获取map的大小
+Map.prototype.size = function() {
+	return this.keyArray().length;
+}
+
+// 返回map中的key值数组
+Map.prototype.keyArray = function() {
+	var keys = new Array();
+	for ( var p in this.container) {
+		keys.push(p);
+	}
+	return keys;
+}
+// 返回map中的value值数组
+Map.prototype.valueArray = function() {
+	var values = new Array();
+	var keys = this.keyArray();
+	for ( var i = 0; i < keys.length; i++) {
+		values.push(this.container[keys[i]]);
+	}
+	return values;
+}
+
 /**
  @Name : jeDate v6.0.2 日期控件
  @Author: chen guojun
@@ -1557,6 +2026,7 @@
     };
     return jeDate;
 });
+!function(a){"use strict";function b(b,d){this.$el=a(b),this.opt=a.extend(!0,{},c,d),this.init(this)}var c={};b.prototype={init:function(a){a.initToggle(a),a.initDropdown(a)},initToggle:function(b){a(document).on("click",function(c){var d=a(c.target);d.closest(b.$el.data("sidenav-toggle"))[0]?(b.$el.toggleClass("show"),a("body").toggleClass("sidenav-no-scroll"),b.toggleOverlay()):d.closest(b.$el)[0]||(b.$el.removeClass("show"),a("body").removeClass("sidenav-no-scroll"),b.hideOverlay())})},initDropdown:function(b){b.$el.on("click","[data-sidenav-dropdown-toggle]",function(b){var c=a(this);c.next("[data-sidenav-dropdown]").slideToggle("fast"),c.find("[data-sidenav-dropdown-icon]").toggleClass("show"),b.preventDefault()})},toggleOverlay:function(){var b=a("[data-sidenav-overlay]");b[0]||(b=a('<div data-sidenav-overlay class="sidenav-overlay"/>'),a("body").append(b)),b.fadeToggle("fast")},hideOverlay:function(){a("[data-sidenav-overlay]").fadeOut("fast")}},a.fn.sidenav=function(c){return this.each(function(){a.data(this,"sidenav")||a.data(this,"sidenav",new b(this,c))})}}(window.jQuery);
 /*
 * Version 1.0
 * 2015-12-20 by sullivan
@@ -1816,7 +2286,7 @@
 
     var tablePagerThree = window.tablePager2 = {
         opts: {
-            length: 3,
+            length: 10,
             preText: "上一页",
             nextText: "下一页",
             firstText: "",
@@ -1881,7 +2351,7 @@
                     success: function (data) {
                         _self.opts.success(data);
                         //后台返回数据格式
-                        _self.opts.totalCount = data.data.totalCount;
+                        _self.opts.totalCount = data.page.totalCount;
                         _self.getTotalPage();
                         if (_self.opts.totalCount > 0 && _self.opts.page > 0) {
                             var pageTextArr = new Array;
@@ -1912,7 +2382,7 @@
                         _self.opts.success(data);
 
                         //后台返回数据格式
-                        _self.opts.totalCount = data.data.totalCount;
+                        _self.opts.totalCount = data.page.totalCount;
                         _self.getTotalPage();
                         if (_self.opts.totalCount > 0 && _self.opts.page > 0) {
                             var pageTextArr = new Array;
@@ -2336,7 +2806,60 @@
 
 var userCenter = (function() {
   var page = 1
-  var inquery_validate
+  var inquery_validate;
+  var lawyerName,trialRound,judge,trialYear,court,legalBases,appellors,courtLevel,docType,officeName,area
+  
+
+  var searchOptions = [
+   
+    { name: '被告人', value: 'defendant' },
+    { name: '代理律师', value: 'lawyerName' },
+    { name: '律师事务所', value: 'officeName' },
+    { name: '法院名称', value: 'court' },
+    { name: '地区', value: 'courtCityId' },
+    { name: '所属年份', value: 'trialYear' },
+    { name: '法院层级', value: 'courtLevel' },
+    { name: '裁判人员', value: 'judge' },
+    { name: '文书类型', value: 'docType' },
+    { name: '审判程序', value: 'trialRound' },
+    { name: '法律依据', value: 'legalBases' }
+
+  ]
+  var addedOptions = []
+  var start = {
+    isinitVal: true,
+    initDate:[{DD:"-7"},true],
+    format: "YYYY-MM-DD",
+    maxDate: $.nowDate({DD:0}), //最大日期
+    zIndex: 99999,
+    isClear:false,
+    isok:false,
+    okfun: function (elem, date) {
+            end.minDate = elem.val.replace(/\//g,"-"); //开始日选好后，重置结束日的最小日期
+         //   endDates();
+    },
+};
+var end = {
+    isinitVal: true,
+    isok: false,
+    isClear:false,
+    zIndex: 99999,
+    maxDate: $.nowDate({DD:0}), //最大日期
+    format: "YYYY-MM-DD",
+    okfun: function (elem, date) {
+            start.maxDate = elem.val.replace(/\//g,"-"); //将结束日的初始值设定为开始日的最大日期
+    }
+};
+
+$({})._Ajax({
+  url: "casetype/apiTree",
+  success: function (result) {
+          if (result.code==0) {
+              var html = template("search-reason-templete",result)
+              $("#navbar-menu").html(html);
+          }
+      }
+});
 
   function getMycase() {
     var params = {
@@ -2360,8 +2883,93 @@ var userCenter = (function() {
     })
 
   }
+
+  function searchHigt(){
+    $(".page-result .sidenav-menu").html("");
+    $(".page-result .case-list").html("");
+    var searhKey = $("#alltext").val();
+    var defendant = $("#defendant").val();
+    var starttime = $("#starttime").val();
+    var endtime = $("#endtime").val();
+    var reason = $("#reasonslect .reaseontext").text();
+    lawyerName = $("#lawyerName1").val()?$("#lawyerName1").val():"";
+    trialRound = $("#trialRound1").val()?$("#trialRound1").val():"";
+    judge = $("#judge1").val()?$("#judge1").val():"";
+    trialYear = $("#trialYear1").find("option:selected").val()?$("#trialYear1").find("option:selected").val():"";
+    court = $("#court1").val()?$("#court1").val():"";
+    legalBases = $("#legalBases1").val()?$("#legalBases1").val():"";
+    appellors = $("#appellors1").val()?$("#appellors1").val():"";
+    courtLevel = $("#courtLevel1").find("option:selected").val()?$("#courtLevel1").find("option:selected").val():"";
+    docType = $("#docType1").find("option:selected").val()?$("#docType1").find("option:selected").val():"";
+    officeName = $("#officeName1").val()?$("#officeName1").val():"";
+    area = $("#area-select").attr("data-id")?$("#area-select").attr("data-id"):"";
+   if(reason == "全部"){
+    reason = "";
+   }
+    var params = {
+      keywork : searhKey,
+      defendant : defendant,
+      trialDateBegin : starttime,
+      trialDateEnd : endtime,
+      reason : reason,
+      isGroupCategory : true,
+      lawyerName : lawyerName,
+      courtCityId : area,
+      trialRound : trialRound,
+      trialYear : trialYear,
+      appellors : appellors,
+      officeName : officeName,
+      court : court,
+      courtLevel : courtLevel,
+      judge : judge,
+      docType : docType,
+      legalBases : legalBases,
+
+    }
+    $('.result-contents .pager').tablePager({
+        
+      url: "case/lawyerRecommendCaseList",
+      searchParam:params,
+      success: function (result) {
+         if(result.code == 0){
+           $(".page-result").show();
+           $(".options-block-hide").trigger("click");
+            result.data.host=  api.host+"caseDetail?";
+            $(".result-count").text(result.data.totalCount);
+            var html = template('lawyer-list-templete', result.data); 
+            $(".case-list").html(html);
+       //     result.data.hosts=  api.link+"lawyerDetail?name="+codename;
+            result.data.hosts=  api.host+"lawyerDetail";
+            var html2 = template('lawyer-slider-templete', result.data); 
+            $(".sidenav-menu").html(html2);
+
+
+
+
+          if(result.data.totalCount>10){
+              $(".page-row").hide()
+          }else{
+              $(".page-row").show()
+          }
+          if(result.data.totalCount==0){
+              $("#search-result").html("<P class='noresult'>抱歉，没有该检索内容数据</P>")
+          }
+         }else{
+              toastr.warning("数据请求失败");
+         }
+        
+      }
+  })
+  }
+
+
   $(function() {
-    $("#my-assets").addClass("active");
+    $("#my-assistant").addClass("active");
+    $("#starttime").jeDate(start);
+    $("#endtime").jeDate(end);
+    init_city_select($("#area-select"));
+    $('[data-sidenav]').sidenav(); 
+
     $('aside .right-icon').click(function(e) {
       e.stopPropagation()
       if (e.target.classList.contains('fa-chevron-down')) {
@@ -2380,45 +2988,355 @@ var userCenter = (function() {
           .addClass('fa-chevron-down')
       }
     })
+    //lawyer assistant
+    $('#lawyer-assistant .options-block-show').click(function() {
+      $('#lawyer-assistant .options-block').show()
+    })
+    $('#lawyer-assistant .options-block-hide').click(function() {
+      $('#lawyer-assistant .options-block').hide()
+    })
+    var addOptionHandeler = function(e) {
+      e.stopPropagation()
+      var pickedValue = e.target.id ? e.target.id : e.target.parentNode.id
+      addedOptions.push(
+        searchOptions.filter(function(option) {
+          return option.value === pickedValue
+        })[0]
+      )
+      searchOptions = searchOptions.filter(function(option){
+        return option.value !== pickedValue
+ 
+      })
+      // $('#lawyer-assistant .options-block').html(
+      //   template('lawyer-assistant-template', {
+      //     options: searchOptions,
+      //     addedOptions: addedOptions
+      //   })
+      // )
+      $('#lawyer-assistant .aside-btns').html(
+        template('lawyer-assistant-template', {
+          options: searchOptions
+        })
+      )
+      $('#lawyer-assistant #addedOption').html(
+        template('lawyer-added-template', {
+          addedOptions: addedOptions
+        })
+      )
+     
+    }
+    $('#lawyer-assistant .options-block').on(
+      'click',
+      '.topick-option',
+      function(e) {
+        addOptionHandeler(e)
+       
+      }
+    )
+
+    var subOptionHandeler = function(e) {
+      e.stopPropagation()
+      console.log(e)
+      var pickedValue = e.target.id ? e.target.id : e.target.parentNode.id
+      console.log(pickedValue)
+      searchOptions.push(
+        addedOptions.filter(function(option) {
+          return option.value === pickedValue
+        })[0]
+      )
+      addedOptions = addedOptions.filter(function(option) {
+        return option.value !== pickedValue
+      })       
+      // $('#lawyer-assistant .options-block').html(
+      //   template('lawyer-assistant-template', {
+      //     options: searchOptions,
+      //     addedOptions: addedOptions
+      //   })
+      // )
+      $('#lawyer-assistant .resource-options').html(
+        template('lawyer-assistant-template', {
+          options: searchOptions
+        })
+      )
+      $('#lawyer-assistant #addedOption').html(
+        template('lawyer-added-template', {
+          addedOptions: addedOptions
+        })
+      )
+    }
+    $('#lawyer-assistant .options-block').on('click', '.added-option', function(
+      e
+    ) {
+      subOptionHandeler(e)
+    })
+    $('#lawyer-assistant .search-page .search-btn').click(function() {
+      // $('#lawyer-assistant .search-page').removeClass('pageNow')
+      // $('#lawyer-assistant .result-page').addClass('pageNow')
+      var keywords = $("#top-keyword").val();
+   
+     
+      var params = {
+          offset:0,
+          keyword : keywords,
+          isGroupCategory : true,
+      }
+      $('.page-result .pager').tablePager({
+      
+          url: "case/lawyerRecommendCaseList",
+          searchParam:params,
+          success: function (result) {
+             if(result.code == 0){
+              $(".page-result").show();
+              $(".options-block-hide").trigger("click");
+              result.data.host=  api.host+"caseDetail?";          
+              $(".result-count").text(result.data.totalCount);
+              var html = template('lawyer-list-templete', result.data); 
+              $(".case-list").html(html);
+  
+              result.data.hosts=  api.host+"lawyerDetail";
+              var html2 = template('lawyer-slider-templete', result.data); 
+              $(".sidenav-menu").html(html2);
+  
+              if(result.data.totalCount>10){
+                  $(".page-row").show()
+              }else{
+                  $(".page-row").show()
+              }
+  
+             }else{
+                  toastr.warning(result.msg);
+             }
+            
+          }
+      })
+
+    })
+    $('#lawyer-assistant .result-page .visualization-btn').click(function() {
+      $('#lawyer-assistant .result-page').removeClass('pageNow')
+      $('#lawyer-assistant .visual-result-page').addClass('pageNow')
+
+      // 基于准备好的dom，初始化echarts实例
+      var myChart = echarts.init(document.getElementById('route-result'))
+      var mylawChart = echarts.init(document.getElementById('law-result'))
+
+      // 指定图表的配置项和数据
+      var option = {
+        dataset: {
+          source: [
+            ['score', 'amount', 'product'],
+            [89.3, 58212, 'Matcha Latte'],
+            [57.1, 78254, 'Milk Tea'],
+            [74.4, 41032, 'Cheese Cocoa'],
+            [50.1, 12755, 'Cheese Brownie'],
+            [89.7, 20145, 'Matcha Cocoa'],
+            [68.1, 79146, 'Tea'],
+            [19.6, 91852, 'Orange Juice'],
+            [10.6, 101852, 'Lemon Juice'],
+            [32.7, 20112, 'Walnut Brownie']
+          ]
+        },
+        grid: { containLabel: true },
+        xAxis: {},
+        yAxis: { type: 'category' },
+        series: [
+          {
+            type: 'bar',
+            encode: {
+              // Map the "amount" column to X axis.
+              x: 'amount',
+              // Map the "product" column to Y axis
+              y: 'product'
+            }
+          }
+        ]
+      }
+      var lawOption = {
+        backgroundColor: '#2c343c',
+        visualMap: {
+          show: false,
+          min: 80,
+          max: 600,
+          inRange: {
+            colorLightness: [0, 1]
+          }
+        },
+        series: [
+          {
+            name: '访问来源',
+            type: 'pie',
+            radius: '55%',
+            data: [
+              { value: 235, name: '视频广告' },
+              { value: 274, name: '联盟广告' },
+              { value: 310, name: '邮件营销' },
+              { value: 335, name: '直接访问' },
+              { value: 400, name: '搜索引擎' }
+            ],
+            roseType: 'angle',
+            label: {
+              normal: {
+                textStyle: {
+                  color: 'rgba(255, 255, 255, 0.3)'
+                }
+              }
+            },
+            labelLine: {
+              normal: {
+                lineStyle: {
+                  color: 'rgba(255, 255, 255, 0.3)'
+                }
+              }
+            },
+            itemStyle: {
+              normal: {
+                color: '#c23531',
+                shadowBlur: 200,
+                shadowColor: 'rgba(0, 0, 0, 0.5)'
+              }
+            }
+          }
+        ]
+      }
+      // 使用刚指定的配置项和数据显示图表。
+      myChart.setOption(option)
+      mylawChart.setOption(lawOption)
+    })
   })
+
+
+
   return {
     init: function() {
-      $('.assets-content').html(
-        template('assets-template', {
-          balance: 21,
-          total: '1,200.00',
-          personal: '1,200.00',
-          team: '1,200.00',
-          count: 12,
-          info: {
-            time: '2018-01 ~ 2018-10',
-            total: '1,200.00',
-            personal: '1,200.00',
-            team: '1,200.00',
-            count: 12
-          },
-          pages: 3,
-          bills: [
+      // $('#lawyer-assistant .options-block').html(
+      //   template('lawyer-assistant-template', {
+      //     options: searchOptions,
+      //     addedOptions: addedOptions
+      //   })
+      // )
+
+
+      $('#lawyer-assistant .resource-options').html(
+        template('lawyer-assistant-template', {
+          options: searchOptions
+        })
+      )
+      $('#lawyer-assistant #addedOption').html(
+        template('lawyer-added-template', {
+          addedOptions: addedOptions
+        })
+      )
+      $(document).on("click","#searchBtn",function(){
+        $(".options-block-hide").trigger("click");
+        searchHigt();
+      })
+
+      
+   
+
+   $(document).on("click",".search-options span",function(){
+    var keywords = $(this).text();
+   
+   
+    var params = {
+        offset:0,
+        keyword : keywords,
+        isGroupCategory : true
+    }
+    $('.page-result .pager').tablePager({
+    
+        url: "case/lawyerRecommendCaseList",
+        searchParam:params,
+        success: function (result) {
+           if(result.code == 0){
+            $(".page-result").show();
+            $(".options-block-hide").trigger("click");
+            result.data.host=  api.host+"caseDetail?";          
+            $(".result-count").text(result.data.totalCount);
+            var html = template('lawyer-list-templete', result.data); 
+            $(".case-list").html(html);
+
+            result.data.hosts=  api.link+"lawyerDetail";
+            var html2 = template('lawyer-slider-templete', result.data); 
+            $(".sidenav-menu").html(html2);
+
+            if(result.data.totalCount>10){
+                $(".page-row").show()
+            }else{
+                $(".page-row").show()
+            }
+
+           }else{
+                toastr.warning(result.msg);
+           }
+          
+        }
+    })
+})
+        $(document).on("click","#reasonslect .reaseontext",function(event){
+          $("#navbar-menu").toggle()
+          event.stopPropagation();
+        })
+        $(document).on("click",".first-val",function(){
+          var data = $(this).text();
+          var dataid = $(this).attr("data-id");
+          $("#reasonslect .reaseontext").text(data);
+          $("#reasonslect .reaseontext").attr("data-id",dataid);
+          $("#navbar-menu").hide();
+          
+        })
+        $(document).on("click",".second-val",function(){
+          var data = $(this).text();
+          var dataid = $(this).attr("data-id");
+     //   var parent = $(this).attr("parent-name");
+         $("#reasonslect .reaseontext").text(data);
+        //  $("#reasonslect .reaseontext").text(parent+"-"+data);
+        //  $("#reasonslect .reaseontext").attr("data-id",dataid);
+          $("#navbar-menu").hide();
+        })
+        $(document).on("click",".last-val",function(){
+          var data = $(this).text();
+          var dataid = $(this).attr("data-id");
+    //      var parentname = $(this).attr("parent-name");
+    //      var parent = $(this).attr("parent");
+         $("#reasonslect .reaseontext").text(data);
+          $("#reasonslect .reaseontext").attr("data-id",dataid);
+      //    $("#reasonslect .reaseontext").text(parent+" - "+parentname+" - "+data);
+          $("#navbar-menu").hide();
+        })
+        $(document).on("click",function(event){
+          $("#navbar-menu").hide();
+        });
+
+      $('#lawyer-assistant .result-page').html(
+        template('lawyer-assistant-result-template', {
+          count: 301,
+          results: [
             {
-              no: '1123234256532',
-              amount: '250.00',
-              type: '事务贷',
-              region: '个人',
-              time: '2015-06-05 15:33:30'
+              title: '张明等于刘燕纯所有权确认纠纷二审民事判决书',
+              court: '北京市第三中级人民法院',
+              no: '（2018）京03号民终6586号',
+              time: '2018-05-31',
+              type: '民事 二审 判决',
+              content:
+                ' 本院认为：张明主张分割其与刘艳春之间的夫妻共同财产，其中其中包括1994年兴建房屋及另行兴建的东厢房三间。关于19'
             },
             {
-              no: '1123234256532',
-              amount: '250.00',
-              type: '事务贷',
-              region: '个人',
-              time: '2015-06-05 15:33:30'
+              title: '张明等于刘燕纯所有权确认纠纷二审民事判决书',
+              court: '北京市第三中级人民法院',
+              no: '（2018）京03号民终6586号',
+              time: '2018-05-31',
+              type: '民事 二审 判决',
+              content:
+                ' 本院认为：张明主张分割其与刘艳春之间的夫妻共同财产，其中其中包括1994年兴建房屋及另行兴建的东厢房三间。关于19'
             },
             {
-              no: '1123234256532',
-              amount: '250.00',
-              type: '事务贷',
-              region: '个人',
-              time: '2015-06-05 15:33:30'
+              title: '张明等于刘燕纯所有权确认纠纷二审民事判决书',
+              court: '北京市第三中级人民法院',
+              no: '（2018）京03号民终6586号',
+              time: '2018-05-31',
+              type: '民事 二审 判决',
+              content:
+                ' 本院认为：张明主张分割其与刘艳春之间的夫妻共同财产，其中其中包括1994年兴建房屋及另行兴建的东厢房三间。关于19'
             }
           ]
         })

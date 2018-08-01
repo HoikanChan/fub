@@ -273,9 +273,8 @@ function createXMLHTTPRequest()
 <td class="column-content">{% da.lawyerMobile %}</td>
 <td class="column-content">{% da.trialRound %}</td>
 <td class="a-right a-right ">{% da.createTime | dateFormat 'yyyy'%}-{% da.createTime | dateFormat 'MM'%}-{% da.createTime | dateFormat 'dd'%}</td>
-<td class=" last">
-<a href="#">详情 </a>
-<a href="#">下载 </a>
+<td class="last"> {% if da.trialRound == '结案' %}
+<span class="mychart">评价</span> {% else %} {% /if %}
 <span class="showmore" data-id="{% da.id %}" data-status="{% da.id %}">更多</span>
 <span class="fa fa-chevron-down"></span>
 </td>
@@ -301,7 +300,7 @@ function createXMLHTTPRequest()
 </div>
 </div>
 <!-- footer end -->
-<script src="${host}/views/myCase/main-b12b122d15.js"></script>
+<script src="${host}/views/myCase/main-b503b76c8b.js"></script>
 <!--登录注册模态框-->
 </body>
 </html>

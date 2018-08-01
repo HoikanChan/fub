@@ -415,7 +415,7 @@ function createXMLHTTPRequest()
 <ul class="sidenav-dropdown threelevel" data-sidenav-dropdown> {% each da.sonCategoryList data %}
 <li>
 <p class="slider-result" data-id="{% data.sonCategoryQueryLogId %}">
-<a href="#">{% data.sonCategoryName %}</a>
+<a href="{% hosts %}?caseQueryLogId={% data.sonCategoryQueryLogId %}" target="_blank">{% data.sonCategoryName %}</a>
 </p>
 </li> {% /each %} </ul>
 </li> {% /each %} {% /each %} </script>
@@ -454,7 +454,7 @@ function createXMLHTTPRequest()
 </div>
 </div>
 <!-- footer end -->
-<script src="${host}/views/lawyerAssistant/main-8f242383f3.js"></script>
+<script src="${host}/views/lawyerAssistant/main-0a742d2c1a.js"></script>
 <!--登录注册模态框-->
 </body>
 </html>

@@ -314,7 +314,7 @@ function createXMLHTTPRequest()
 </div>
 </div>
 <!-- footer end -->
-<script src="${host}/views/officeAssets/main-b13fe4d5b9.js"></script>
+<script src="${host}/views/officeAssets/main-cf9114b826.js"></script>
 <!--登录注册模态框-->
 </body>
 </html>

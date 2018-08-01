@@ -351,22 +351,27 @@ function createXMLHTTPRequest()
 <div class="form-group clear">
 <label for="appellors" class="col-sm-3 control-label">案件名称：</label>
 <div class="col-sm-9">
-<input type="text" class="form-control" name="appellors" id="casename"> </div>
+<input type="text" class="form-control" name="caseName" id="casename"> </div>
 </div>
 <div class="form-group clear">
 <label for="appellors" class="col-sm-3 control-label">案号：</label>
 <div class="col-sm-9">
-<input type="text" class="form-control" name="appellors" id="caseno"> </div>
+<input type="text" class="form-control" name="caseNo" id="caseno"> </div>
 </div>
 <div class="form-group clear">
 <label for="appellors" class="col-sm-3 control-label">受理法院：</label>
 <div class="col-sm-9">
-<input type="text" class="form-control" name="appellors" id="handlecront"> </div>
+<div id="reasonslect11">
+<span class="reaseontext form-control">请选择受理法院</span>
+<div class="error-div"></div>
+<div id="navbar-menu11" style="display:none;"> </div>
+</div>
+</div>
 </div>
 <div class="form-group clear">
 <label for="appellors" class="col-sm-3 control-label">审理进度：</label>
 <div class="col-sm-9">
-<select class="case-process form-control"> </select>
+<select class="trialRound case-process form-control" name="trialRound"> </select>
 </div>
 </div>
 <div class="form-group clear">
@@ -384,6 +389,27 @@ function createXMLHTTPRequest()
 </div>
 <script type="text/html" id="case-process-templete"> {% each data da %}
 <option value="{% da.id %}">{% da.name%}</option> {% /each %} </script>
+<script type="text/html" id="search-court-templete">
+<ul class="reason-ul"> {% each data da %}
+<li class="dropdown">
+<a href="javascript:;" class="dropdown-toggle first-val" data-toggle="dropdown" data-id="{% da.id %}">{% da.name %}
+<span class="glyphicon glyphicon-menu-right"></span>
+</a> {% if da.children %}
+<ul class="dropdown-menu secondul">
+<li class="lipostion">
+<ul> {% each da.children val %}
+<li class="dropdown"> {% if val.children %}
+<a href="javascript:;" class="dropdown-toggle second-val" parent-name="{% da.name  %}" data-id="{% val.id %}" data-toggle="dropdown">{% val.name %}
+<span class="glyphicon glyphicon-menu-right"></span>
+</a> {% else %}
+<a href="javascript:;" class="dropdown-toggle second-val" parent-name="{%  da.name  %}" data-id="{% val.id %}" data-toggle="dropdown">{% val.name %}</a> {% /if %} {% if val.children %}
+<ul class="dropdown-menu thirdul"> {% each val.children va %}
+<li>
+<a href="javascript:;" parent="{% da.name  %}" parent-name="{%  val.name %}" data-id="{% va.id %}" class="last-val">{% va.name %}</a>
+</li> {% /each %} </ul> {% /if %} </li> {% /each %} </ul>
+</li>
+</ul> {% /if %} </li> {% /each %} </ul>
+</script>
 <script type="text/html" id="case-result-templete"> {% each list da i %} {% if i%2==0 %}
 <tr class="even pointer"> {% else %}
 <tr class="odd pointer"> {% /if %}
@@ -398,8 +424,9 @@ function createXMLHTTPRequest()
 <td class="column-content">{% da.lawyerMobile %}</td>
 <td class="column-content">{% da.trialRound %}</td>
 <td class="a-right a-right ">{% da.createTime | dateFormat 'yyyy'%}-{% da.createTime | dateFormat 'MM'%}-{% da.createTime | dateFormat 'dd'%}</td>
-<td class=" last">
-<a href="#" data-name="{% da.caseName %}" data-id="{% da.caseNo %}" class="updatebtn" data-remodal-target="updateCase-modal">更新</a>
+<td class=" last"> {% if da.trialRound == '结案' %}
+<span class="mychart">评价</span> {% else %} {% /if %}
+<a href="#" data-name="{% da.caseName %}" data-id="{% da.caseNo %}" data-ids="{% da.id %}" data-ids="{% da.id %}" class="updatebtn" data-remodal-target="updateCase-modal">更新</a>
 <span class="showmore" data-id="{% da.id %}" data-status="{% da.id %}">更多
 <span class="fa fa-chevron-down"></span>
 </span>
@@ -426,7 +453,7 @@ function createXMLHTTPRequest()
 </div>
 </div>
 <!-- footer end -->
-<script src="${host}/views/lawyerCases/main-5571ba8031.js"></script>
+<script src="${host}/views/lawyerCases/main-0731c98f57.js"></script>
 <!--登录注册模态框-->
 </body>
 </html>

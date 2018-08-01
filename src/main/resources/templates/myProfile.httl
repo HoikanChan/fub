@@ -337,7 +337,7 @@ function createXMLHTTPRequest()
 </div>
 </div>
 <!-- footer end -->
-<script src="${host}/views/myProfile/main-fef8e2f5cf.js"></script>
+<script src="${host}/views/myProfile/main-091804a116.js"></script>
 <!--登录注册模态框-->
 </body>
 </html>

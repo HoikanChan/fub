@@ -247,7 +247,7 @@ function createXMLHTTPRequest()
 </div>
 </div>
 <!-- footer end -->
-<script src="${host}/views/lawyerDetail/main-9dfc96ba83.js"></script>
+<script src="${host}/views/lawyerDetail/main-4583c3e629.js"></script>
 <!--登录注册模态框-->
 </body>
 </html>

@@ -1816,7 +1816,7 @@
 
     var tablePagerThree = window.tablePager2 = {
         opts: {
-            length: 3,
+            length: 10,
             preText: "上一页",
             nextText: "下一页",
             firstText: "",
@@ -1881,7 +1881,7 @@
                     success: function (data) {
                         _self.opts.success(data);
                         //后台返回数据格式
-                        _self.opts.totalCount = data.data.totalCount;
+                        _self.opts.totalCount = data.page.totalCount;
                         _self.getTotalPage();
                         if (_self.opts.totalCount > 0 && _self.opts.page > 0) {
                             var pageTextArr = new Array;
@@ -1912,7 +1912,7 @@
                         _self.opts.success(data);
 
                         //后台返回数据格式
-                        _self.opts.totalCount = data.data.totalCount;
+                        _self.opts.totalCount = data.page.totalCount;
                         _self.getTotalPage();
                         if (_self.opts.totalCount > 0 && _self.opts.page > 0) {
                             var pageTextArr = new Array;
@@ -2359,9 +2359,34 @@ var userCenter = (function() {
       }
     })
 
+    //   $('#my-cases .mycasepage .pager').tablePager({
+    //     url: "order/queryOrderList",
+    //     searchParam:params,
+    //     success: function (result) {
+    //        if(result.code == 0){
+    //          console.log(result.data)
+    //           // var html1 = template('my-cases-template', result.data);
+    //           // $(".my-cases-box").html(html1);
+    //           var html = template('search-result-templete', result.data);
+    //           $(".my-case-box").html(html);
+
+    //         if(result.data.totalCount<10){
+    //             $(".page-row").hide()
+    //         }else{
+    //             $(".page-row").show()
+    //         }
+    //         if(result.data.totalCount==0){
+    //             $(".my-cases-box").html("<P class='noresult'>抱歉，没有相关案件</P>")
+    //         }
+    //        }else{
+    //             toastr.warning(result.msg);
+    //        }
+    //       $(".my-cases-content .totalNum").text(result.data.totalCount);
+    //     }
+    // })
   }
   $(function() {
-    $("#my-bills").addClass("active");
+
     $('aside .right-icon').click(function(e) {
       e.stopPropagation()
       if (e.target.classList.contains('fa-chevron-down')) {
@@ -2383,34 +2408,45 @@ var userCenter = (function() {
   })
   return {
     init: function() {
-      $('#office-bills').addClass('active')
-      $('.my-bills-content').html(
-        template('my-bills-template', {
-          loans: {},
-          bills: [
+      $("#my-delegation").addClass("active");
+      $('#affairs-delegation .my-delegation').html(
+        template('my-delegation-template', {
+          delegations: [
             {
-              no: '1123234256532',
-              name: '某某某抢劫案',
-              loan: '250.00',
-              servicefee: '350.00',
-              state: '平台审批中',
-              time: '2015-06-05 15:33:30'
+              type: '时间',
+              client: '杭州市西湖区古荡湾',
+              validTime: '2015-06-05 15:33:30',
+              invalidTime: '2015-06-05 15:33:30'
             },
             {
-              no: '1123234256532',
-              name: '某某某抢劫案',
-              loan: '250.00',
-              servicefee: '350.00',
-              state: '平台审批中',
-              time: '2015-06-05 15:33:30'
+              type: '时间',
+              client: '杭州市西湖区古荡湾',
+              validTime: '2015-06-05 15:33:30',
+              invalidTime: '2015-06-05 15:33:30'
             },
             {
-              no: '1123234256532',
-              name: '某某某抢劫案',
-              loan: '250.00',
-              servicefee: '350.00',
-              state: '平台审批中',
-              time: '2015-06-05 15:33:30'
+              type: '时间',
+              client: '杭州市西湖区古荡湾',
+              validTime: '2015-06-05 15:33:30',
+              invalidTime: '2015-06-05 15:33:30'
+            }
+          ]
+        })
+      )
+      $('#affairs-delegation .delegation-to-me').html(
+        template('delegation-to-me-template', {
+          delegations: [
+            {
+              type: '时间',
+              client: '张三',
+              validTime: '2015-06-05 15:33:30',
+              invalidTime: '2015-06-05 15:33:30'
+            },
+            {
+              type: '时间',
+              client: '张三',
+              validTime: '2015-06-05 15:33:30',
+              invalidTime: '2015-06-05 15:33:30'
             }
           ]
         })

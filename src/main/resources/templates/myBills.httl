@@ -236,11 +236,11 @@ function createXMLHTTPRequest()
 <tr class="headings">
 <th class="column-title"> </th>
 <th class="column-title">订单编号 </th>
-<th class="column-title">案件名称 </th>
-<th class="column-title">律师费</th>
+<th class="column-title">事务类型 </th>
 <th class="column-title">代理律师 </th>
-<th class="column-title">联系电话 </th>
-<th class="column-title">状态 </th>
+<th class="column-title">银行贷款</th>
+<th class="column-title">律师费</th>
+<th class="column-title">平台服务费 </th>
 <th class="column-title">订单时间 </th>
 <th class="column-title">
 <span class="nobr">操作</span>
@@ -260,22 +260,21 @@ function createXMLHTTPRequest()
 <div class="col-sm-1"></div>
 </div>
 </div>
-<script type="text/html" id="case-result-templete"> {% each list da i %} {% if i%2==0 %}
+<script type="text/html" id="case-result-templete"> {% each data da i %} {% if i%2==0 %}
 <tr class="even pointer"> {% else %}
 <tr class="odd pointer"> {% /if %}
 <td class="a-center ">
 <input type="checkbox" class="flat checkbox" name="table_records"> </td>
-<td class="column-content">{% da.orderSn %}</td>
-<td class="column-content ">{% da.caseName %} </td> {% if da.lawyerPrice %}
-<td class="column-content ">{% da.lawyerPrice %} </td> {% else %}
+<td class="column-content">{% da.orderSN |convertNull%}</td> {% if da.orderType == 1 %}
+<td class="column-content ">法务贷</td> {% else if da.orderType == 0 %}
+<td class="column-content ">案件</td> {% /if %} {% if da.lawyerName %}
+<td class="column-content ">{% da.lawyerName %} </td> {% else %}
 <td class="column-content "></td> {% /if %}
-<td class="column-content">{% da.lawyerName %} </td>
-<td class="column-content">{% da.lawyerMobile %}</td>
-<td class="column-content">{% da.trialRound %}</td>
+<td class="column-content">{% da.totalprice|convertNull %} </td>
+<td class="column-content">{% da.lawyerPrice |convertNull%}</td>
+<td class="column-content">{% da.systemPrice |convertNull%}</td>
 <td class="a-right a-right ">{% da.createTime | dateFormat 'yyyy'%}-{% da.createTime | dateFormat 'MM'%}-{% da.createTime | dateFormat 'dd'%}</td>
 <td class=" last">
-<a href="#">详情 </a>
-<a href="#">下载 </a>
 <span class="showmore" data-id="{% da.sourceId %}" data-status="{% da.sourceId %}">更多</span>
 <span class="fa fa-chevron-down"></span>
 </td>
@@ -301,7 +300,7 @@ function createXMLHTTPRequest()
 </div>
 </div>
 <!-- footer end -->
-<script src="${host}/views/myBills/main-ed0ecc5e34.js"></script>
+<script src="${host}/views/myBills/main-93e273bc65.js"></script>
 <!--登录注册模态框-->
 </body>
 </html>
